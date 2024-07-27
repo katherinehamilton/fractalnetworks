@@ -2,10 +2,14 @@
 
 # Network analysis modules
 from igraph import Graph
+import igraph
 import networkx as nx
 
 # Mathematics modules
 import numpy as np
+import random
+import matplotlib.pyplot as plt
+import math
 
 # Utility modules
 from scipy.io import mmread
@@ -158,3 +162,206 @@ def sum_of_squares_error(y, est_y):
         sum_of_squares += (est_yi - yi) ** 2
     # Return the total sum of the squares.
     return sum_of_squares
+
+
+def swap_edges_at_random(G, number_edges_to_swap):
+    """
+    Swaps edge of a given network at random, to find an uncorrelated network with the same degree distribution.
+    Removes two randomly chosen edges (a,b) and (c,d) and replaces them with edges (a,d) and (c,b).
+
+    Args:
+        G (igraph.Graph): The original network.
+        number_edges_to_swap (int): The number of edges to swap.
+
+    Returns:
+        H (igraph.Graph): The new, uncorrelated network with the same degree distribution as G.
+    """
+    # Iterate number_edges_to_swap times.
+    for i in range(number_edges_to_swap):
+
+        # Create a copy of the graph
+        H = G.copy()
+
+        # There are certain bad swaps we could make, e.g. swapping (a,b), (c,a) would create a self loop and an edge (c,b) might already exist.
+        # Set this flag to False until we find a good swap.
+        good_swap = False
+
+        # Iterate until we find a good swap.
+        while not good_swap:
+            # Choose two edges at random from the network
+            edge1, edge2 = random.sample(list(G.es()), 2)
+
+            # Find the endpoints of the edges.
+            a = edge1.tuple[0]
+            b = edge1.tuple[1]
+            c = edge2.tuple[0]
+            d = edge2.tuple[1]
+
+            # Check if (a,d) or (c,b) are self loops.
+            if a != d and b != c:
+                # Check if (a,d) or (c,b) already exists.
+                if a not in G.neighbors(d) and b not in G.neighbors(c):
+                    # If neither of these are True, then we have found a good swap.
+                    good_swap = True
+
+        # Delete the old edges and add the new ones.
+        H.add_edges([(a, d), (c, b)])
+        H.delete_edges([(a, b), (c, d)])
+
+    # Once number_edges_to_swap edges have been swapped, return the new network
+    return H
+
+
+def plot_scatter_graph(fractal_attribute, non_fractal_attribute, fractal_Ns, non_fractal_Ns, y_label, save_path=None,
+                       plot=True):
+    """
+    Plots a comparison of the properties of fractal and non-fractal networks on a scatter graph.
+
+    Args:
+        fractal_attributes (list): A list of an attribute of fractal networks.
+        non_fractal_attributes (list): A list of an attribute of non-fractal networks.
+        fractal_Ns (list): A list of fractal network orders.
+        non_fractal_Ns (list): A list of non-fractal network orders.
+        y_label (str): Label for the y-axis, i.e. the attribute being plotted.
+        save_path (str) (opt): The file path to save the figure to, if given. Default is None.
+        plot (Bool) (opt): If True, display the network. Default is True.
+    """
+    # Find the median of both sets
+    fractal_median = np.median(fractal_attribute)
+    non_fractal_median = np.median(non_fractal_attribute)
+
+    # The x axis ranges from the smallest network order N to the largest.
+    x = np.linspace(min(min(fractal_Ns), min(non_fractal_Ns)), max(max(fractal_Ns), max(non_fractal_Ns)), 1001)
+
+    # Plot the fractal attribute
+    plt.scatter(fractal_Ns, fractal_attribute, marker="o", facecolors='none', edgecolors='navy', label="Fractal")
+    # Plot the non-fractal attribute
+    plt.scatter(non_fractal_Ns, non_fractal_attribute, marker="^", facecolors='none', edgecolors='crimson',
+                label="Non-fractal")
+
+    # Plot fractal median
+    plt.plot(x, [fractal_median] * len(x), ':', color="navy")
+    # Plot non-fractal median
+    plt.plot(x, [non_fractal_median] * len(x), ':', color="crimson")
+
+    # Label the axes
+    plt.xlabel("$|G|$")
+    plt.ylabel(y_label)
+
+    # Add a legend
+    plt.legend()
+
+    # If a save path is given, then save the file in that location.
+    if save_path:
+        plt.savefig(save_path)
+
+    # If plot is True display the graph
+    if plot:
+        plt.show()
+
+    # Close the figure
+    plt.close()
+
+
+def plot_scatter_graph_random_networks(fractal_attribute, random_attribute, fractal_Ns, random_Ns, y_label,
+                                       save_path=None, plot=True):
+    """
+    Plots a comparison of the properties of fractal networks and their random counterparts on a scatter graph.
+
+    Args:
+        fractal_attributes (list): A list of an attribute of fractal networks.
+        random_attributes (list): A list of an attribute of the random networks.
+        fractal_Ns (list): A list of fractal network orders.
+        random_Ns (list): A list of random network orders.
+        y_label (str): Label for the y-axis, i.e. the attribute being plotted.
+        save_path (str) (opt): The file path to save the figure to, if given. Default is None.
+        plot (Bool) (opt): If True, display the network. Default is True.
+    """
+    # Find the median of both sets
+    fractal_median = np.median(fractal_attribute)
+    random_median = np.median(random_attribute)
+
+    # The x axis ranges from the smallest network order N to the largest.
+    x = np.linspace(min(min(fractal_Ns, random_Ns)), max(max(fractal_Ns, random_Ns)), 1001)
+
+    # Plot the fractal attribute
+    plt.scatter(fractal_Ns, fractal_attribute, marker="o", facecolors='none', edgecolors='navy', label="Fractal")
+    # Plot the non-fractal attribute
+    plt.scatter(random_Ns, random_attribute, marker="x", facecolors='seagreen', label="Random")
+
+    # Plot fractal median
+    plt.plot(x, [fractal_median] * len(x), ':', color="navy")
+    # Plot non-fractal median
+    plt.plot(x, [random_median] * len(x), ':', color="seagreen")
+
+    # Label the axes
+    plt.xlabel("$|G|$")
+    plt.ylabel(y_label)
+
+    # Add a legend
+    plt.legend()
+
+    # If a save path is given, then save the file in that location.
+    if save_path:
+        plt.savefig(save_path)
+
+    # If plot is True display the graph
+    if plot:
+        plt.show()
+
+    # Close the figure
+    plt.close()
+
+
+def clean_lists_of_NaNs(list1, list2):
+    """
+    Cleans lists of NaN values before plotting.
+
+    Args:
+        list1 (list): The list to be plotted on the x-axis.
+        list2 (list): The list to be plotted on the y-axis, to be checked for NaN values.
+
+    Returns:
+        list1_clean (list): A clean version of list1.
+        list2_clean (list): A clean version of list2.
+    """
+
+    # Find a list of indexes where the value in the second list is NaN
+    NaN_indexes = [index for (index, value) in enumerate(list2) if math.isnan(value)]
+
+    # Only take the elements of lists not equal to NaN
+    list1_clean = [list1[i] for i in range(len(list1)) if i not in NaN_indexes]
+    list2_clean = [list2[i] for i in range(len(list2)) if i not in NaN_indexes]
+
+    # Return the cleaned lists.
+    return list1_clean, list2_clean
+
+
+def display_network(G, save_path=None, plot=True):
+    """
+    Displays a given network.
+
+    Args:
+        G (igraph.Graph): The network to be displayed.
+        save_path (str) (opt): The filepath to save the figure to, if given. Default is None.
+        plot (Bool) (opt): If True, the network is displayed inline. Default is True.
+    """
+    # Plot the network
+    fig, ax = plt.subplots()
+    igraph.plot(G,
+                vertex_size=10,
+                vertex_color='black',
+                edge_width=1,
+                edge_color='black',
+                layout="kamada_kawai",
+                target=ax)
+    # If a save path is given, then save the file in that location.
+    if save_path:
+        plt.savefig(save_path)
+
+    # If plot is True display the graph
+    if plot:
+        plt.show()
+
+    # Close the figure
+    plt.close()
