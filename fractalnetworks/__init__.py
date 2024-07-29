@@ -14,6 +14,7 @@ from .greedyalgorithm import *
 from .randomsequential import *
 from .determiningfractality import *
 from .boxrenormalisation import *
+from .calculatingreach import *
 
 
 

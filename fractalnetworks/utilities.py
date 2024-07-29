@@ -750,3 +750,24 @@ def export_to_gephi(G, nodes_to_boxes, file_path):
 
     # Write the graph including the box covering attributes to the file path.
     nx.write_gml(H, file_path)
+
+
+def chi_squared_error(observed_y, expected_y):
+    """
+    Finds the value SSR for the sum of squares regression method using a true and model distribution.
+
+    Args:
+        y (list): The true or measured distribution.
+        est_y (list): The model distribution to be compared.
+
+    Returns:
+        sum_of_squares (float): The sum of squares regression
+    """
+    chi = 0  # Initialise the sum as zero.
+    # Iterate for each pair of values in the true/model distributions.
+    for (observed_yi, expected_yi) in zip(observed_y, expected_y):
+        if expected_yi > 0:
+            # Add to the sum the square of the difference between the two distributions.
+            chi += (((observed_yi - expected_yi) ** 2) / expected_yi)
+    # Return the total sum of the squares.
+    return chi
