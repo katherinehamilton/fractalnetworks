@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fractalnetworks.networkproperties &#8212; Fractal Networks 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=61cd365c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
+    <script src="../../_static/documentation_options.js?v=8d563738"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for fractalnetworks.networkproperties</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;This module contains functions to analyse the properties of networks&quot;&quot;&quot;</span>
+
+<span class="c1"># Mathematics modules</span>
+<span class="kn">from</span> <span class="nn">.hubrepulsion</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<div class="viewcode-block" id="summarise_graph">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.networkproperties.summarise_graph">[docs]</a>
+<span class="k">def</span> <span class="nf">summarise_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">skip_diam</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">skip_aspl</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Summarises the key attributes of a given network.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        skip_diam (Bool) (opt): If True, then do not calculate the diameter of the graph. This is recommended for large graphs. The default is False.</span>
+<span class="sd">        skip_aspl (Bool) (opt): If True, then do not calculate the average shortest path length of the graph. This is recommended for large graphs. The default is False.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Display the size and order of the network.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Network has </span><span class="si">{0}</span><span class="s2"> nodes and </span><span class="si">{1}</span><span class="s2"> edges.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">(),</span> <span class="n">G</span><span class="o">.</span><span class="n">ecount</span><span class="p">()))</span>
+
+    <span class="c1"># Calculate and display the average degree of the network.</span>
+    <span class="n">degree_dist</span> <span class="o">=</span> <span class="p">[</span><span class="n">G</span><span class="o">.</span><span class="n">degree</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">vs</span><span class="p">]</span>
+    <span class="n">avg_degree</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">degree_dist</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">degree_dist</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The average degree of the network is </span><span class="si">{0}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">avg_degree</span><span class="p">))</span>
+
+    <span class="c1"># If chosen, find the average shortest path length.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">skip_aspl</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The average shortest path length is </span><span class="si">{0}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">distances</span><span class="p">())))</span>
+
+    <span class="c1"># If chosen, find the diameter.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">skip_diam</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The diameter is </span><span class="si">{0}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">diameter</span><span class="p">()))</span></div>
+
+
+
+<div class="viewcode-block" id="find_distances">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.networkproperties.find_distances">[docs]</a>
+<span class="k">def</span> <span class="nf">find_distances</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds the diameter and average shortest path length of a network.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        diam (int): The diameter of the network.</span>
+<span class="sd">        aspl (float): The average shortest path length of the network.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Calculate the diameter</span>
+    <span class="n">diam</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">diameter</span><span class="p">()</span>
+    <span class="c1"># Calculate the average shortest path length</span>
+    <span class="n">aspl</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">average_path_length</span><span class="p">()</span>
+
+    <span class="c1"># Return both values</span>
+    <span class="k">return</span> <span class="n">diam</span><span class="p">,</span> <span class="n">aspl</span></div>
+
+
+
+<div class="viewcode-block" id="mean_hub_distance">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.networkproperties.mean_hub_distance">[docs]</a>
+<span class="k">def</span> <span class="nf">mean_hub_distance</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">hubs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hub_method</span><span class="o">=</span><span class="n">identify_hubs</span><span class="p">,</span> <span class="n">normalised</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds the mean distance between hubs.</span>
+<span class="sd">    The normalised mean distance is the mean distance between hubs over the mean distance between any pair of nodes in the network.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        hubs (list) (opt): A list of hubs in the network, If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function finds the hubs.</span>
+<span class="sd">        hub_method (func) (opt): If the hubs are to be calculated, then this parameter specifies the method used to find hubs. Default is identify_hubs, which uses the Z score.</span>
+<span class="sd">        normalised (Bool) (opt): If true, the distances are normalised over the average distance in the network. Default is False.</span>
+<span class="sd">        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        mean_distance (float): The mean distance between pairs of hubs in the network.</span>
+<span class="sd">        hub_distances (list): A list of distances between pairs of hubs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Find the hubs of the network</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">hubs</span><span class="p">:</span>
+        <span class="n">hubs</span> <span class="o">=</span> <span class="n">hub_method</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="n">degrees</span><span class="p">)</span>
+
+    <span class="c1"># If there are no hubs in the network, then there is no mean distance.</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">hubs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">NaN</span><span class="p">(),</span> <span class="p">[]</span>
+
+    <span class="c1"># Initialise an empty list for hub distances</span>
+    <span class="n">hub_distances</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Add the distance between each pair of hubs to the list</span>
+    <span class="k">for</span> <span class="n">hub_u</span><span class="p">,</span> <span class="n">hub_v</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">hubs</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="n">hub_distances</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">get_shortest_paths</span><span class="p">(</span><span class="n">hub_u</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="n">hub_v</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="s2">&quot;vpath&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Find the mean</span>
+    <span class="n">mean_distance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">hub_distances</span><span class="p">)</span>
+
+    <span class="c1"># Normalise the mean with the average distance between any pair of nodes.</span>
+    <span class="k">if</span> <span class="n">normalised</span><span class="p">:</span>
+        <span class="n">mean_distance</span> <span class="o">=</span> <span class="n">mean_distance</span> <span class="o">/</span> <span class="n">G</span><span class="o">.</span><span class="n">average_path_length</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">mean_distance</span><span class="p">,</span> <span class="n">hub_distances</span></div>
+
+
+
+<div class="viewcode-block" id="hub_distance_distribution">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.networkproperties.hub_distance_distribution">[docs]</a>
+<span class="k">def</span> <span class="nf">hub_distance_distribution</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">hubs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hub_method</span><span class="o">=</span><span class="n">identify_hubs</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Find the distribution of distances between hubs.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        hubs (list) (opt): A list of hubs in the network, If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function finds the hubs.</span>
+<span class="sd">        hub_method (func) (opt): If the hubs are to be calculated, then this parameter specifies the method used to find hubs. Default is identify_hubs, which uses the Z score.</span>
+<span class="sd">        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        distance_distributions (dict): A dictionary with distances as keys, the probability of two hubs being separated by that distance as the values.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Find the hubs of the network</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">hubs</span><span class="p">:</span>
+        <span class="n">hubs</span> <span class="o">=</span> <span class="n">hub_method</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="n">degrees</span><span class="p">)</span>
+
+    <span class="c1"># If there are no hubs in the network, then there is no mean distance.</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">hubs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">NaN</span><span class="p">(),</span> <span class="p">[]</span>
+
+    <span class="c1"># Find the number of possible edges.</span>
+    <span class="n">no_of_possible_edges</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">hubs</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">hubs</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span>
+
+    <span class="c1"># Find a list of distances between pairs of hubs in the network</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">hub_distances</span> <span class="o">=</span> <span class="n">mean_hub_distance</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">hubs</span><span class="o">=</span><span class="n">hubs</span><span class="p">)</span>
+
+    <span class="c1"># Initialise an empty dictionary to store the probabilities.</span>
+    <span class="n">distance_distribution</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="n">hub_distances</span><span class="p">)</span>
+
+    <span class="c1"># For each distance, find the probability of it being the distance between two hubs.</span>
+    <span class="k">for</span> <span class="n">distance</span> <span class="ow">in</span> <span class="n">hub_distances</span><span class="p">:</span>
+        <span class="n">distance_distribution</span><span class="p">[</span><span class="n">distance</span><span class="p">]</span> <span class="o">=</span> <span class="n">hub_distances</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">distance</span><span class="p">)</span> <span class="o">/</span> <span class="n">no_of_possible_edges</span>
+
+    <span class="c1"># Return the dictionary</span>
+    <span class="k">return</span> <span class="n">distance_distribution</span></div>
+
+
+
+<div class="viewcode-block" id="find_clustering_coefficient">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.networkproperties.find_clustering_coefficient">[docs]</a>
+<span class="k">def</span> <span class="nf">find_clustering_coefficient</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds the clustering coefficient T of a given network.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (float): The clustering coefficient (transitivity) T of the network.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">G</span><span class="o">.</span><span class="n">transitivity_undirected</span><span class="p">()</span></div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Fractal Networks</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">fractalnetworks</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Katherine Hamilton.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

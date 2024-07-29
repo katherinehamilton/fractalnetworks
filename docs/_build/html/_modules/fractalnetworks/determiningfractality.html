@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fractalnetworks.determiningfractality &#8212; Fractal Networks 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=61cd365c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
+    <script src="../../_static/documentation_options.js?v=8d563738"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for fractalnetworks.determiningfractality</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;This module contians the functions needed to determine if a given network is fractal or non-fractal&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">.maximumexcludedmassburning</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.utilities</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.greedyalgorithm</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">import</span> <span class="nn">tqdm</span>
+
+<div class="viewcode-block" id="calculate_lB_NB_dist">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.determiningfractality.calculate_lB_NB_dist">[docs]</a>
+<span class="k">def</span> <span class="nf">calculate_lB_NB_dist</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">diam</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">degree_based_MEMB</span><span class="p">,</span> <span class="n">min_lB</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds the distribution of the optimal number of boxes NB against the diameter of these boxes lB.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        diam (int) (opt): The diameter of the network G. The default is None, and note that if no diameter is given the algorithm will calculate it which is expensive for large networks.</span>
+<span class="sd">        method (func): The method used to calculate the box covering. Default is the degree based amended MEMB algorithm (see [2]).</span>
+<span class="sd">        min_lB (int): The first value of lB to calculate NB from. Default is 3.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        lB (list): List of values for the box diameters lB.</span>
+<span class="sd">        NB (list): List of the corresponding optimal number of boxes.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># If no diameter is given for the network then it is calculated using networkX.</span>
+    <span class="k">if</span> <span class="n">diam</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">diam</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">diameter</span><span class="p">()</span>
+
+    <span class="c1"># The MEMB algorithm only works for odd numbers (see MEMB function docstrings or [2] for explanation).</span>
+    <span class="c1"># Therefore, find the next biggest odd number.</span>
+    <span class="n">nearest_odd</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">diam</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Take all possible (odd) values of lB from 1 to the diameter of the network.</span>
+    <span class="n">lB</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">min_lB</span><span class="p">,</span> <span class="n">nearest_odd</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span>
+
+    <span class="c1"># Initialise an empty list for the values of NB.</span>
+    <span class="n">NB</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">N</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">()</span>
+
+    <span class="c1"># Iterate through all possible values of lB.</span>
+    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">lB</span><span class="p">:</span>
+        <span class="n">centres</span> <span class="o">=</span> <span class="n">method</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span> <span class="c1"># Find the list of centres using the given method.</span>
+        <span class="n">NB</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">centres</span><span class="p">))</span> <span class="c1"># Add the number of boxes (length of the list of centres) to the list NB.</span>
+
+    <span class="c1"># Return the complete list of lB and NB values.</span>
+    <span class="k">return</span> <span class="n">lB</span><span class="p">,</span> <span class="n">NB</span></div>
+
+
+
+<div class="viewcode-block" id="is_fractal">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.determiningfractality.is_fractal">[docs]</a>
+<span class="k">def</span> <span class="nf">is_fractal</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">diam</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">normalise</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">lB_min</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">save_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+               <span class="n">colouring_ordering_method</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Determines whether a network is fractal or not depending on the sum of squares regression score for the fractal and exponential fits.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        diam (int): The diameter of the graph. If None, calculates the diameter. Default is None.</span>
+<span class="sd">        plot (Bool): If True, plot a comparison of the best fits. Default is False.</span>
+<span class="sd">        verbose (Bool): If True, print statements with the fractal and non fractal values. Default is False.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        lB (list): A list of box diameters for the covering.</span>
+<span class="sd">        NB (list): A list of the number of boxes needed to cover the network.</span>
+<span class="sd">        (Bool): True if the network is determined to be fractal, False otherwise.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">diam</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">diam</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">diameter</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">colouring_ordering_method</span><span class="p">:</span>
+        <span class="n">ordering</span> <span class="o">=</span> <span class="n">colouring_ordering_method</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ordering</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">())]</span>
+
+    <span class="c1"># Calculate NB for all lB with the given method and diameter.</span>
+    <span class="n">NB</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">lB</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">lB_min</span><span class="p">,</span> <span class="n">diam</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)]</span>
+
+    <span class="k">for</span> <span class="n">l</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">lB</span><span class="p">,</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lB</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">step</span><span class="p">))):</span>
+        <span class="k">if</span> <span class="n">l</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="n">greedy_box_covering</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">node_order</span><span class="o">=</span><span class="n">ordering</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">l</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">previous_N</span> <span class="o">=</span> <span class="n">NB</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">N</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">previous_N</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">centres</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">accelerated_MEMB</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>
+            <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">centres</span><span class="p">)</span>
+        <span class="n">NB</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">save_path</span><span class="p">:</span>
+        <span class="n">to_write</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">row_stack</span><span class="p">((</span><span class="n">lB</span><span class="p">,</span> <span class="n">NB</span><span class="p">))</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="n">to_write</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">normalise</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">()</span>
+        <span class="n">NB</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">/</span> <span class="n">N</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">NB</span><span class="p">]</span>
+
+    <span class="c1"># Find the best fractal fit.</span>
+    <span class="p">(</span><span class="n">frac_A</span><span class="p">,</span> <span class="n">frac_c</span><span class="p">),</span> <span class="n">frac_score</span> <span class="o">=</span> <span class="n">find_best_fit_iteratively</span><span class="p">(</span><span class="n">lB</span><span class="p">,</span> <span class="n">NB</span><span class="p">,</span> <span class="n">find_best_fractal_fit</span><span class="p">)</span>
+
+    <span class="c1"># Find the best exponential fit.</span>
+    <span class="p">(</span><span class="n">exp_A</span><span class="p">,</span> <span class="n">exp_c</span><span class="p">),</span> <span class="n">exp_score</span> <span class="o">=</span> <span class="n">find_best_fit_iteratively</span><span class="p">(</span><span class="n">lB</span><span class="p">,</span> <span class="n">NB</span><span class="p">,</span> <span class="n">find_best_exp_fit</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">frac_score</span> <span class="o">/</span> <span class="n">exp_score</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">exp_score</span> <span class="o">/</span> <span class="n">frac_score</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Power Law Parameters&quot;</span><span class="p">,</span> <span class="n">frac_A</span><span class="p">,</span> <span class="n">frac_c</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exponential Parameters&quot;</span><span class="p">,</span> <span class="n">exp_A</span><span class="p">,</span> <span class="n">exp_c</span><span class="p">)</span>
+
+    <span class="c1"># If verbose, print a statement with both scores.</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The SSR score for the fractal model is </span><span class="si">{0}</span><span class="s2"> and for the non-fractal model is </span><span class="si">{1}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">frac_score</span><span class="p">,</span>
+                                                                                                        <span class="n">exp_score</span><span class="p">))</span>
+
+    <span class="c1"># If the fractal score is less than the exponential score, then the network is fractal.</span>
+    <span class="k">if</span> <span class="n">frac_score</span> <span class="o">&lt;</span> <span class="n">exp_score</span><span class="p">:</span>
+        <span class="c1"># If verbose, print such a statement.</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This network is fractal.&quot;</span><span class="p">)</span>
+        <span class="c1"># If plot is True then plot a comparison of the best fits (see Section 4).</span>
+        <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
+            <span class="n">plot_best_fit_comparison</span><span class="p">(</span><span class="n">lB</span><span class="p">,</span> <span class="n">NB</span><span class="p">,</span> <span class="n">exp_A</span><span class="p">,</span> <span class="n">exp_c</span><span class="p">,</span> <span class="n">exp_score</span><span class="p">,</span> <span class="n">frac_A</span><span class="p">,</span> <span class="n">frac_c</span><span class="p">,</span> <span class="n">frac_score</span><span class="p">)</span>
+        <span class="c1"># Return True if the network is fractal.</span>
+        <span class="k">return</span> <span class="n">lB</span><span class="p">,</span> <span class="n">NB</span><span class="p">,</span> <span class="kc">True</span>
+    <span class="c1"># If the fractal score is greater than the exponential score, then the network is non-fractal.</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># If verbose, print such a statement.</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This network is non-fractal.&quot;</span><span class="p">)</span>
+        <span class="c1"># If plot is True then plot a comparison of the best fits (see Section 4).</span>
+        <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
+            <span class="n">plot_best_fit_comparison</span><span class="p">(</span><span class="n">lB</span><span class="p">,</span> <span class="n">NB</span><span class="p">,</span> <span class="n">exp_A</span><span class="p">,</span> <span class="n">exp_c</span><span class="p">,</span> <span class="n">exp_score</span><span class="p">,</span> <span class="n">frac_A</span><span class="p">,</span> <span class="n">frac_c</span><span class="p">,</span> <span class="n">frac_score</span><span class="p">)</span>
+        <span class="c1"># Return False if the network is fractal.</span>
+        <span class="k">return</span> <span class="n">lB</span><span class="p">,</span> <span class="n">NB</span><span class="p">,</span> <span class="kc">False</span></div>
+
+
+
+<div class="viewcode-block" id="is_fractal_by_logarithm">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.determiningfractality.is_fractal_by_logarithm">[docs]</a>
+<span class="k">def</span> <span class="nf">is_fractal_by_logarithm</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">diam</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">normalise</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">lB_min</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">save_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                            <span class="n">colouring_ordering_method</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Determines whether a network is fractal or not depending on the sum of squares regression score for the fractal and exponential fits.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        diam (int): The diameter of the graph. If None, calculates the diameter. Default is None.</span>
+<span class="sd">        plot (Bool): If True, plot a comparison of the best fits. Default is False.</span>
+<span class="sd">        verbose (Bool): If True, print statements with the fractal and non fractal values. Default is False.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        lB (list): A list of box diameters for the covering.</span>
+<span class="sd">        NB (list): A list of the number of boxes needed to cover the network.</span>
+<span class="sd">        (Bool): True if the network is determined to be fractal, False otherwise.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">diam</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">diam</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">diameter</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">colouring_ordering_method</span><span class="p">:</span>
+        <span class="n">ordering</span> <span class="o">=</span> <span class="n">colouring_ordering_method</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ordering</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">())]</span>
+
+    <span class="c1"># Calculate NB for all lB with the given method and diameter.</span>
+    <span class="n">NB</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">lB</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">lB_min</span><span class="p">,</span> <span class="n">diam</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)]</span>
+
+    <span class="k">for</span> <span class="n">l</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">lB</span><span class="p">,</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lB</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))):</span>
+        <span class="k">if</span> <span class="n">l</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="n">greedy_box_covering</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">node_order</span><span class="o">=</span><span class="n">ordering</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">l</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">previous_N</span> <span class="o">=</span> <span class="n">NB</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">N</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">previous_N</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">centres</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">accelerated_MEMB</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>
+            <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">centres</span><span class="p">)</span>
+        <span class="n">NB</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">save_path</span><span class="p">:</span>
+        <span class="n">to_write</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">row_stack</span><span class="p">((</span><span class="n">lB</span><span class="p">,</span> <span class="n">NB</span><span class="p">))</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="n">to_write</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">normalise</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">()</span>
+        <span class="n">NB</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">/</span> <span class="n">N</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">NB</span><span class="p">]</span>
+
+    <span class="n">loglB</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">lB</span><span class="p">]</span>
+    <span class="n">logNB</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">NB</span><span class="p">]</span>
+
+    <span class="c1"># Find the best fractal fit.</span>
+    <span class="p">(</span><span class="n">frac_A</span><span class="p">,</span> <span class="n">frac_c</span><span class="p">),</span> <span class="n">frac_score</span> <span class="o">=</span> <span class="n">find_best_fit_iteratively</span><span class="p">(</span><span class="n">loglB</span><span class="p">,</span> <span class="n">logNB</span><span class="p">,</span> <span class="n">find_best_linear_fit</span><span class="p">)</span>
+
+    <span class="c1"># Find the best exponential fit.</span>
+    <span class="p">(</span><span class="n">exp_A</span><span class="p">,</span> <span class="n">exp_c</span><span class="p">),</span> <span class="n">exp_score</span> <span class="o">=</span> <span class="n">find_best_fit_iteratively</span><span class="p">(</span><span class="n">lB</span><span class="p">,</span> <span class="n">logNB</span><span class="p">,</span> <span class="n">find_best_linear_fit</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">frac_score</span> <span class="o">/</span> <span class="n">exp_score</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">exp_score</span> <span class="o">/</span> <span class="n">frac_score</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Power Law Parameters&quot;</span><span class="p">,</span> <span class="n">frac_A</span><span class="p">,</span> <span class="n">frac_c</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exponential Parameters&quot;</span><span class="p">,</span> <span class="n">exp_A</span><span class="p">,</span> <span class="n">exp_c</span><span class="p">)</span>
+
+    <span class="c1"># If verbose, print a statement with both scores.</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The SSR score for the fractal model is </span><span class="si">{0}</span><span class="s2"> and for the non-fractal model is </span><span class="si">{1}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">frac_score</span><span class="p">,</span>
+                                                                                                        <span class="n">exp_score</span><span class="p">))</span>
+
+    <span class="c1"># If the fractal score is less than the exponential score, then the network is fractal.</span>
+    <span class="k">if</span> <span class="n">frac_score</span> <span class="o">&lt;</span> <span class="n">exp_score</span><span class="p">:</span>
+        <span class="c1"># If verbose, print such a statement.</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This network is fractal.&quot;</span><span class="p">)</span>
+        <span class="c1"># If plot is True then plot a comparison of the best fits (see Section 4).</span>
+        <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
+            <span class="n">plot_best_fit_comparison_by_logarithm</span><span class="p">(</span><span class="n">lB</span><span class="p">,</span> <span class="n">NB</span><span class="p">,</span> <span class="n">exp_A</span><span class="p">,</span> <span class="n">exp_c</span><span class="p">,</span> <span class="n">exp_score</span><span class="p">,</span> <span class="n">frac_A</span><span class="p">,</span> <span class="n">frac_c</span><span class="p">,</span> <span class="n">frac_score</span><span class="p">)</span>
+        <span class="c1"># Return True if the network is fractal.</span>
+        <span class="k">return</span> <span class="n">lB</span><span class="p">,</span> <span class="n">NB</span><span class="p">,</span> <span class="kc">True</span>
+    <span class="c1"># If the fractal score is greater than the exponential score, then the network is non-fractal.</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># If verbose, print such a statement.</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This network is non-fractal.&quot;</span><span class="p">)</span>
+        <span class="c1"># If plot is True then plot a comparison of the best fits (see Section 4).</span>
+        <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
+            <span class="n">plot_best_fit_comparison_by_logarithm</span><span class="p">(</span><span class="n">lB</span><span class="p">,</span> <span class="n">NB</span><span class="p">,</span> <span class="n">exp_A</span><span class="p">,</span> <span class="n">exp_c</span><span class="p">,</span> <span class="n">exp_score</span><span class="p">,</span> <span class="n">frac_A</span><span class="p">,</span> <span class="n">frac_c</span><span class="p">,</span> <span class="n">frac_score</span><span class="p">)</span>
+        <span class="c1"># Return False if the network is fractal.</span>
+        <span class="k">return</span> <span class="n">lB</span><span class="p">,</span> <span class="n">NB</span><span class="p">,</span> <span class="kc">False</span></div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Fractal Networks</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">fractalnetworks</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Katherine Hamilton.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

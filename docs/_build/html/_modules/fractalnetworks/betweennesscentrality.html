@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fractalnetworks.betweennesscentrality &#8212; Fractal Networks 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=61cd365c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
+    <script src="../../_static/documentation_options.js?v=8d563738"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for fractalnetworks.betweennesscentrality</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;This module contains functions to analyse the betweenness centralities of nodes and edges in fractal and non-fractal networks.&quot;&quot;&quot;</span>
+
+<span class="c1"># Other module imports</span>
+<span class="kn">from</span> <span class="nn">.hubrepulsion</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># Mathematics modules</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+
+<div class="viewcode-block" id="find_betweenness_centralities">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.betweennesscentrality.find_betweenness_centralities">[docs]</a>
+<span class="k">def</span> <span class="nf">find_betweenness_centralities</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculates the normalised betweenness centrality distribution of the network.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (list): A list of betweenness centralities in the network. The i-th value is the betweenness centrality of the i-th node.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Calculate the normalising constant for the betweenness centrality.</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">()</span>
+    <span class="n">normalising_constant</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">/</span> <span class="p">((</span><span class="n">N</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="c1"># Calculate the betweenness centralities.</span>
+    <span class="n">bc</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">betweenness</span><span class="p">()</span>
+
+    <span class="c1"># Normalise the betweenness centralities</span>
+    <span class="n">bc</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="o">*</span> <span class="n">normalising_constant</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">bc</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">bc</span></div>
+
+
+
+<div class="viewcode-block" id="plot_degree_distribution">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.betweennesscentrality.plot_degree_distribution">[docs]</a>
+<span class="k">def</span> <span class="nf">plot_degree_distribution</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">save_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plots the degree distribution of a given network on a histogram.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+<span class="sd">        save_path (str) (opt): If a save path is given then the histogram is saved as a .png file. Default is None.</span>
+<span class="sd">        plot (Bool) (opt): If True, the histogram is displayed. Default is True.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Find the degree distribution of the network.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">degrees</span><span class="p">:</span>
+        <span class="n">degrees</span> <span class="o">=</span> <span class="n">find_degree_distribution</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="c1"># Plot a degree distribution histogram</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">degrees</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;navy&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Label the axis</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Degree $k$&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frequency&quot;</span><span class="p">)</span>
+
+    <span class="c1"># If a save path is given, then save the file in that location.</span>
+    <span class="k">if</span> <span class="n">save_path</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">save_path</span><span class="p">)</span>
+
+    <span class="c1"># If plot is True display the graph</span>
+    <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="c1"># Close the figure</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="plot_betweenness_centralities">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.betweennesscentrality.plot_betweenness_centralities">[docs]</a>
+<span class="k">def</span> <span class="nf">plot_betweenness_centralities</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">bcs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">save_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plots the betweenness centrality distribution of a given network on a histogram.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        bcs (list) (opt): A list of betweenness centralities in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+<span class="sd">        save_path (str) (opt): If a save path is given then the histogram is saved as a .png file. Default is None.</span>
+<span class="sd">        plot (Bool) (opt): If True, the histogram is displayed. Default is True.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Find the betweenness centrality distribution of the network.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">bcs</span><span class="p">:</span>
+        <span class="n">bcs</span> <span class="o">=</span> <span class="n">find_betweenness_centralities</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="c1"># Plot a degree distribution histogram</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bcs</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;crimson&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Label the axis</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Betweenness Centrality $C$&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frequency&quot;</span><span class="p">)</span>
+
+    <span class="c1"># If a save path is given, then save the file in that location.</span>
+    <span class="k">if</span> <span class="n">save_path</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">save_path</span><span class="p">)</span>
+
+    <span class="c1"># If plot is True display the graph</span>
+    <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="c1"># Close the figure</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="calc_betweenness_degree_correlation">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.betweennesscentrality.calc_betweenness_degree_correlation">[docs]</a>
+<span class="k">def</span> <span class="nf">calc_betweenness_degree_correlation</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">bcs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculates the Pearson correlation coefficient for the degree and betweenness centrality of the nodes in a network.</span>
+<span class="sd">    Fractal networks are hypothesised to be less correlated in this regard than non-fractal networks.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        bcs (list) (opt): A list of betweenness centralities in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+<span class="sd">        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (float): Pearson&#39;s correlation coefficient.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Find the betweenness centrality distribution of the network.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">bcs</span><span class="p">:</span>
+        <span class="n">bcs</span> <span class="o">=</span> <span class="n">find_betweenness_centralities</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="c1"># Find the degree distribution of the network.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">degrees</span><span class="p">:</span>
+        <span class="n">degrees</span> <span class="o">=</span> <span class="n">find_degree_distribution</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="c1"># Convert both to a Pandas Series</span>
+    <span class="n">bc_series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">bcs</span><span class="p">)</span>
+    <span class="n">dd_series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">degrees</span><span class="p">)</span>
+
+    <span class="c1"># Return the correlation coefficient for the variables.</span>
+    <span class="k">return</span> <span class="n">bc_series</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">dd_series</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="calc_betweenness_degree_correlation_non_hubs">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.betweennesscentrality.calc_betweenness_degree_correlation_non_hubs">[docs]</a>
+<span class="k">def</span> <span class="nf">calc_betweenness_degree_correlation_non_hubs</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">hubs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hub_method</span><span class="o">=</span><span class="n">identify_hubs</span><span class="p">,</span> <span class="n">bcs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculates the Pearson correlation coefficient for the degree and betweenness centrality of the non-hub nodes in a network.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        hubs (list) (opt): A list of nodes indexes for hubs in the network. If no list is passed, the function with find the hubs with hub_method.</span>
+<span class="sd">        hub_method (func): The method by which to calculate hubs, if not give. Default is identify_hubs.</span>
+<span class="sd">        bcs (list) (opt): A list of betweenness centralities in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+<span class="sd">        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (float): Pearson&#39;s correlation coefficient.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Find the hubs of the network</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">hubs</span><span class="p">:</span>
+        <span class="n">hubs</span> <span class="o">=</span> <span class="n">hub_method</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="c1"># Find the betweenness centrality distribution of the network.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">bcs</span><span class="p">:</span>
+        <span class="n">bcs</span> <span class="o">=</span> <span class="n">find_betweenness_centralities</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="c1"># Find the degree distribution of the network.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">degrees</span><span class="p">:</span>
+        <span class="n">degrees</span> <span class="o">=</span> <span class="n">find_degree_distribution</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="c1"># Only consider the betweenness centrality for non hubs</span>
+    <span class="n">filtered_bc</span> <span class="o">=</span> <span class="p">[</span><span class="n">bcs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">())</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">hubs</span><span class="p">]</span>
+    <span class="c1"># Only consider the degree for non hubs</span>
+    <span class="n">filtered_dd</span> <span class="o">=</span> <span class="p">[</span><span class="n">degrees</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">())</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">hubs</span><span class="p">]</span>
+
+    <span class="c1"># Convert both to a Pandas Series</span>
+    <span class="n">bc_series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">filtered_bc</span><span class="p">)</span>
+    <span class="n">dd_series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">filtered_dd</span><span class="p">)</span>
+
+    <span class="c1"># Return the correlation coefficient for the variables.</span>
+    <span class="k">return</span> <span class="n">bc_series</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">dd_series</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="calc_betweenness_degree_correlation_hubs">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.betweennesscentrality.calc_betweenness_degree_correlation_hubs">[docs]</a>
+<span class="k">def</span> <span class="nf">calc_betweenness_degree_correlation_hubs</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">hubs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hub_method</span><span class="o">=</span><span class="n">identify_hubs</span><span class="p">,</span> <span class="n">bcs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculates the Pearson correlation coefficient for the degree and betweenness centrality of the hub nodes in a network.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        hubs (list) (opt): A list of nodes indexes for hubs in the network. If no list is passed, the function with find the hubs with hub_method.</span>
+<span class="sd">        hub_method (func): The method by which to calculate hubs, if not give. Default is identify_hubs.</span>
+<span class="sd">        bcs (list) (opt): A list of betweenness centralities in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+<span class="sd">        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (float): Pearson&#39;s correlation coefficient.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Find the hubs of the network</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">hubs</span><span class="p">:</span>
+        <span class="n">hubs</span> <span class="o">=</span> <span class="n">hub_method</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="c1"># Find the betweenness centrality distribution of the network.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">bcs</span><span class="p">:</span>
+        <span class="n">bcs</span> <span class="o">=</span> <span class="n">find_betweenness_centralities</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="c1"># Find the degree distribution of the network.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">degrees</span><span class="p">:</span>
+        <span class="n">degrees</span> <span class="o">=</span> <span class="n">find_degree_distribution</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="c1"># Only consider the betweenness centrality for non hubs</span>
+    <span class="n">filtered_bc</span> <span class="o">=</span> <span class="p">[</span><span class="n">bcs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">())</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">hubs</span><span class="p">]</span>
+    <span class="c1"># Only consider the degree for non hubs</span>
+    <span class="n">filtered_dd</span> <span class="o">=</span> <span class="p">[</span><span class="n">degrees</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">())</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">hubs</span><span class="p">]</span>
+
+    <span class="c1"># Convert both to a Pandas Series</span>
+    <span class="n">bc_series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">filtered_bc</span><span class="p">)</span>
+    <span class="n">dd_series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">filtered_dd</span><span class="p">)</span>
+
+    <span class="c1"># Return the correlation coefficient for the variables.</span>
+    <span class="k">return</span> <span class="n">bc_series</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">dd_series</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="analyse_betweenness_centrality">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.betweennesscentrality.analyse_betweenness_centrality">[docs]</a>
+<span class="k">def</span> <span class="nf">analyse_betweenness_centrality</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">bcs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns key attributes of the betweenness centrality distribution of a network.</span>
+<span class="sd">    Namely, finds the maximum, minimum and mean betweenness centrality, as well as the standard deviation and number of outliers with greater than expected betweenness.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): Network to be analysed.</span>
+<span class="sd">        bcs (list) (opt): A list of betweenness centralities in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        max_bc (float): The maximum betweenness centrality in the network.</span>
+<span class="sd">        min_bc (float): The minimum betweenness centrality in the network.</span>
+<span class="sd">        mean_bc (float): The mean betweenness centrality in the network.</span>
+<span class="sd">        stdv_bc (float): The standard deviation of the betweenness centrality distribution in the network.</span>
+<span class="sd">        no_of_high_bc_nodes (int): Number of nodes with significantly higher betweenness centrality than expected.</span>
+<span class="sd">        mean_max_bc (float): The mean betweenness centrality of the top 10% of nodes in the network.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Find the betweenness centrality distribution of the network.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">bcs</span><span class="p">:</span>
+        <span class="n">bcs</span> <span class="o">=</span> <span class="n">find_betweenness_centralities</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="c1"># Find the maximum betweenness centrality</span>
+    <span class="n">max_bc</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">bcs</span><span class="p">)</span>
+    <span class="c1"># Find the minimum betweenness centrality</span>
+    <span class="n">min_bc</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">bcs</span><span class="p">)</span>
+    <span class="c1"># Find the mean betweenness centrality</span>
+    <span class="n">mean_bc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">bcs</span><span class="p">)</span>
+    <span class="c1"># Find the standard deviation of the betweenness centrality</span>
+    <span class="n">stdv_bc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">bcs</span><span class="p">)</span>
+
+    <span class="c1"># Outliers are those with betweenness centrality 3 standard deviations higher than the mean.</span>
+    <span class="c1"># Calculate the cutoff value</span>
+    <span class="n">cutoff</span> <span class="o">=</span> <span class="n">mean_bc</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">stdv_bc</span>
+    <span class="c1"># Find nodes with betweenness centralities greater than this cutoff.</span>
+    <span class="n">high_bcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">bcs</span> <span class="k">if</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="n">cutoff</span><span class="p">]</span>
+    <span class="c1"># The number of nodes with high betweenness centrality is the length of this list.</span>
+    <span class="n">no_of_high_bc_nodes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">high_bcs</span><span class="p">)</span>
+
+    <span class="c1"># Find the top 10% of betweenness centralities.</span>
+    <span class="n">cutoff</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">bcs</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.9</span><span class="p">)</span>
+    <span class="n">bcs</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="n">top_10_percent</span> <span class="o">=</span> <span class="n">bcs</span><span class="p">[</span><span class="n">cutoff</span><span class="p">:]</span>
+    <span class="c1"># Find the mean of these values.</span>
+    <span class="n">mean_max_bc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">top_10_percent</span><span class="p">)</span>
+
+    <span class="c1"># Return the maximum, minimum, mean, standard deviation, number of outliers and mean of the top 10% of betweenness centralities.</span>
+    <span class="k">return</span> <span class="n">max_bc</span><span class="p">,</span> <span class="n">min_bc</span><span class="p">,</span> <span class="n">mean_bc</span><span class="p">,</span> <span class="n">stdv_bc</span><span class="p">,</span> <span class="n">no_of_high_bc_nodes</span><span class="p">,</span> <span class="n">mean_max_bc</span></div>
+
+
+
+<div class="viewcode-block" id="find_edge_betweenness_centralities">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.betweennesscentrality.find_edge_betweenness_centralities">[docs]</a>
+<span class="k">def</span> <span class="nf">find_edge_betweenness_centralities</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculates the normalised betweenness centrality distribution of the network.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (list): A list of betweenness centralities in the network. The i-th value is the betweenness centrality of the i-th node.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Calculate the normalising constant for the betweenness centrality.</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">()</span>
+    <span class="n">normalising_constant</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="n">N</span> <span class="o">*</span> <span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="c1"># Calculate the betweenness centralities.</span>
+    <span class="n">ebc</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">edge_betweenness</span><span class="p">()</span>
+
+    <span class="c1"># Normalise the betweenness centralities</span>
+    <span class="n">ebc</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="o">*</span> <span class="n">normalising_constant</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">ebc</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">ebc</span></div>
+
+
+
+<div class="viewcode-block" id="edge_vertex_betweenness_correlation">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.betweennesscentrality.edge_vertex_betweenness_correlation">[docs]</a>
+<span class="k">def</span> <span class="nf">edge_vertex_betweenness_correlation</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">bcs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ebcs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculates the correlation between the betweenness centrality of edges and the betweenness centrality of its endpoints.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        bcs (list) (opt): A list of betweenness centralities in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+<span class="sd">        ebcs (list) (opt): A list of betweenness centralities in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Find the betweenness centralities</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">bcs</span><span class="p">:</span>
+        <span class="n">bcs</span> <span class="o">=</span> <span class="n">find_betweenness_centralities</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="c1"># Find the edge betweenness centralities</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">ebcs</span><span class="p">:</span>
+        <span class="n">ebcs</span> <span class="o">=</span> <span class="n">find_edge_betweenness_centralities</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="c1"># Initialise an empty list to store the edge betweenness centralities of each edge</span>
+    <span class="n">edge_bcs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Initialise an empty list to store the node betweenness centralities of every edge endpoint.</span>
+    <span class="n">node_bcs</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Iterate through every edge in the network</span>
+    <span class="k">for</span> <span class="n">edge_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">ecount</span><span class="p">()):</span>
+        <span class="c1"># Find the endpoints of the edge</span>
+        <span class="n">edge</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">es</span><span class="p">()[</span><span class="n">edge_index</span><span class="p">]</span>
+        <span class="n">source</span> <span class="o">=</span> <span class="n">edge</span><span class="o">.</span><span class="n">tuple</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="n">edge</span><span class="o">.</span><span class="n">tuple</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># Find the betweenness centrality of the edge and its endpoints.</span>
+        <span class="n">edge_bc</span> <span class="o">=</span> <span class="n">ebcs</span><span class="p">[</span><span class="n">edge_index</span><span class="p">]</span>
+        <span class="n">source_bc</span> <span class="o">=</span> <span class="n">bcs</span><span class="p">[</span><span class="n">source</span><span class="p">]</span>
+        <span class="n">target_bc</span> <span class="o">=</span> <span class="n">bcs</span><span class="p">[</span><span class="n">target</span><span class="p">]</span>
+
+        <span class="c1"># Add the betweenness centrality of the edge and its source to the lists.</span>
+        <span class="n">edge_bcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">edge_bc</span><span class="p">)</span>
+        <span class="n">node_bcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">source_bc</span><span class="p">)</span>
+
+        <span class="c1"># Add the betweenness centrality of the edge and its target to the lists.</span>
+        <span class="n">edge_bcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">edge_bc</span><span class="p">)</span>
+        <span class="n">node_bcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">target_bc</span><span class="p">)</span>
+
+    <span class="c1"># Convert the lists to pandas Series</span>
+    <span class="n">edge_bcs_series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">edge_bcs</span><span class="p">)</span>
+    <span class="n">node_bcs_series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">node_bcs</span><span class="p">)</span>
+
+    <span class="c1"># Return the correlation coefficient for the variables.</span>
+    <span class="k">return</span> <span class="n">edge_bcs_series</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">node_bcs_series</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="edge_betweenness_degree_correlation">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.betweennesscentrality.edge_betweenness_degree_correlation">[docs]</a>
+<span class="k">def</span> <span class="nf">edge_betweenness_degree_correlation</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ebcs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculates the correlation between the betweenness centrality of edges and the degree of its endpoints.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+<span class="sd">        ebcs (list) (opt): A list of betweenness centralities in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Find the degrees of nodes</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">degrees</span><span class="p">:</span>
+        <span class="n">degrees</span> <span class="o">=</span> <span class="n">find_degree_distribution</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="c1"># Find the edge betweenness centralities</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">ebcs</span><span class="p">:</span>
+        <span class="n">ebcs</span> <span class="o">=</span> <span class="n">find_edge_betweenness_centralities</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="c1"># Initialise an empty list to store the edge betweenness centralities of each edge</span>
+    <span class="n">edge_bcs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Initialise an empty list to store the degree of every edge endpoint.</span>
+    <span class="n">node_degrees</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Iterate through every edge in the network</span>
+    <span class="k">for</span> <span class="n">edge_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">ecount</span><span class="p">()):</span>
+        <span class="c1"># Find the endpoints of the edge</span>
+        <span class="n">edge</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">es</span><span class="p">()[</span><span class="n">edge_index</span><span class="p">]</span>
+        <span class="n">source</span> <span class="o">=</span> <span class="n">edge</span><span class="o">.</span><span class="n">tuple</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="n">edge</span><span class="o">.</span><span class="n">tuple</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># Find the betweenness centrality of the edge and the degrees of its endpoints.</span>
+        <span class="n">edge_bc</span> <span class="o">=</span> <span class="n">ebcs</span><span class="p">[</span><span class="n">edge_index</span><span class="p">]</span>
+        <span class="n">source_k</span> <span class="o">=</span> <span class="n">degrees</span><span class="p">[</span><span class="n">source</span><span class="p">]</span>
+        <span class="n">target_k</span> <span class="o">=</span> <span class="n">degrees</span><span class="p">[</span><span class="n">target</span><span class="p">]</span>
+
+        <span class="c1"># Add the betweenness centrality of the edge and its source&#39;s degree to the lists.</span>
+        <span class="n">edge_bcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">edge_bc</span><span class="p">)</span>
+        <span class="n">node_degrees</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">source_k</span><span class="p">)</span>
+
+        <span class="c1"># Add the betweenness centrality of the edge and its target&#39;s degree to the lists.</span>
+        <span class="n">edge_bcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">edge_bc</span><span class="p">)</span>
+        <span class="n">node_degrees</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">target_k</span><span class="p">)</span>
+
+    <span class="c1"># Convert the lists to pandas Series</span>
+    <span class="n">edge_bcs_series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">edge_bcs</span><span class="p">)</span>
+    <span class="n">node_degrees_series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">node_degrees</span><span class="p">)</span>
+
+    <span class="c1"># Return the correlation coefficient for the variables.</span>
+    <span class="k">return</span> <span class="n">edge_bcs_series</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">node_degrees_series</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="find_hub_betweenness">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.betweennesscentrality.find_hub_betweenness">[docs]</a>
+<span class="k">def</span> <span class="nf">find_hub_betweenness</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">hubs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hub_method</span><span class="o">=</span><span class="n">identify_hubs</span><span class="p">,</span> <span class="n">bcs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds lists of betweenness centrality for the hubs and non-hubs in the network.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        hubs (list) (opt): A list of hubs in the network, If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function finds the hubs.</span>
+<span class="sd">        hub_method (func) (opt): If the hubs are to be calculated, then this parameter specifies the method used to find hubs. Default is identify_hubs, which uses the Z score.</span>
+<span class="sd">        bcs (list) (opt): A list of betweenness centralities in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        hub_bcs (list): A list of betweenness centralities of hubs.</span>
+<span class="sd">        non_hub_bcs (list): A list of betweenness centralities of non-hubs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Find the hubs of the network</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">hubs</span><span class="p">:</span>
+        <span class="n">hubs</span> <span class="o">=</span> <span class="n">hub_method</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+    <span class="c1"># Find the betweenness centrality distribution of the network.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">bcs</span><span class="p">:</span>
+        <span class="n">bcs</span> <span class="o">=</span> <span class="n">find_betweenness_centralities</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="c1"># Initialise empty lists for the betweenness centralities of hubs and non-hubs.</span>
+    <span class="n">hub_bcs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">non_hub_bcs</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Iterate over every node in the network</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">())]:</span>
+        <span class="c1"># If the node is a hub, add its betweenness centrality to the hub list.</span>
+        <span class="k">if</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">hubs</span><span class="p">:</span>
+            <span class="n">hub_bcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bcs</span><span class="p">[</span><span class="n">node</span><span class="p">])</span>
+        <span class="c1"># If the node is a non-hub, add its betweenness centrality to the non-hub list.</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">non_hub_bcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bcs</span><span class="p">[</span><span class="n">node</span><span class="p">])</span>
+
+    <span class="c1"># Return both lists.</span>
+    <span class="k">return</span> <span class="n">hub_bcs</span><span class="p">,</span> <span class="n">non_hub_bcs</span></div>
+
+
+
+<div class="viewcode-block" id="hub_hub_path_betweenness">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.betweennesscentrality.hub_hub_path_betweenness">[docs]</a>
+<span class="k">def</span> <span class="nf">hub_hub_path_betweenness</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">bcs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hubs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hub_method</span><span class="o">=</span><span class="n">identify_hubs</span><span class="p">,</span> <span class="n">hub_hub_path_nodes</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analyses the betweenness of nodes on the paths between hubs with the number of their occurrences.</span>
+<span class="sd">    Returns a list of the betweenness centralities of these nodes, and the Pearson correlation coefficient between the number of occurrences on such a path and their centrality.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        bcs (list) (opt): A list of betweenness centralities in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+<span class="sd">        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+<span class="sd">        hubs (list) (opt): A list of hubs in the network, If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function finds the hubs.</span>
+<span class="sd">        hub_method (func) (opt): If the hubs are to be calculated, then this parameter specifies the method used to find hubs. Default is identify_hubs, which uses the Z score.</span>
+<span class="sd">        hub_hub_path_nodes (list) (opt): A list of nodes on the paths between hubs. If None, this is calculated internally.</span>
+<span class="sd">        occurrences (dict) (opt): A dictionary of hub path nodes and their number of occurrences. If None, this is calculated internally.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bcs_list (list): A list of betweenness centralities belonging to nodes found on the paths between hubs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Find the betweenness centrality distribution of the network.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">bcs</span><span class="p">:</span>
+        <span class="n">bcs</span> <span class="o">=</span> <span class="n">find_betweenness_centralities</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="c1"># Find the hub-hub path nodes and their number of occurrences.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">hub_hub_path_nodes</span><span class="p">:</span>
+
+        <span class="c1"># Find the degree distribution of the network.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">degrees</span><span class="p">:</span>
+            <span class="n">degrees</span> <span class="o">=</span> <span class="n">find_degree_distribution</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+        <span class="c1"># Find the hubs of the network</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">hubs</span><span class="p">:</span>
+            <span class="n">hubs</span> <span class="o">=</span> <span class="n">hub_method</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+        <span class="c1"># Find the hub path nodes and their occurrences</span>
+        <span class="n">hub_hub_path_nodes</span> <span class="o">=</span> <span class="n">find_hub_hub_path_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">hubs</span><span class="o">=</span><span class="n">hubs</span><span class="p">,</span> <span class="n">hub_method</span><span class="o">=</span><span class="n">hub_method</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+    <span class="c1"># Find lists of betweenness centralities for the hub path nodes</span>
+    <span class="n">bcs_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">bcs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">hub_hub_path_nodes</span><span class="p">]</span>
+
+    <span class="c1"># Return the betweenness centralities</span>
+    <span class="k">return</span> <span class="n">bcs_list</span></div>
+
+
+
+<div class="viewcode-block" id="hub_hub_path_betweenness_by_occurrence">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.betweennesscentrality.hub_hub_path_betweenness_by_occurrence">[docs]</a>
+<span class="k">def</span> <span class="nf">hub_hub_path_betweenness_by_occurrence</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">bcs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hubs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hub_method</span><span class="o">=</span><span class="n">identify_hubs</span><span class="p">,</span>
+                                           <span class="n">hub_hub_path_nodes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">occurrences</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analyses the betweenness of nodes on the paths between hubs with the number of their occurrences.</span>
+<span class="sd">    Returns a list of the betweenness centralities of these nodes, and the Pearson correlation coefficient between the number of occurrences on such a path and their centrality.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        bcs (list) (opt): A list of betweenness centralities in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+<span class="sd">        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+<span class="sd">        hubs (list) (opt): A list of hubs in the network, If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function finds the hubs.</span>
+<span class="sd">        hub_method (func) (opt): If the hubs are to be calculated, then this parameter specifies the method used to find hubs. Default is identify_hubs, which uses the Z score.</span>
+<span class="sd">        hub_hub_path_nodes (list) (opt): A list of nodes on the paths between hubs. If None, this is calculated internally.</span>
+<span class="sd">        occurrences (dict) (opt): A dictionary of hub path nodes and their number of occurrences. If None, this is calculated internally.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bcs_list (list): A list of betweenness centralities belonging to nodes found on the paths between hubs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Find the betweenness centrality distribution of the network.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">bcs</span><span class="p">:</span>
+        <span class="n">bcs</span> <span class="o">=</span> <span class="n">find_betweenness_centralities</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="c1"># Find the hub-hub path nodes and their number of occurrences.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">hub_hub_path_nodes</span><span class="p">:</span>
+
+        <span class="c1"># Find the degree distribution of the network.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">degrees</span><span class="p">:</span>
+            <span class="n">degrees</span> <span class="o">=</span> <span class="n">find_degree_distribution</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+        <span class="c1"># Find the hubs of the network</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">hubs</span><span class="p">:</span>
+            <span class="n">hubs</span> <span class="o">=</span> <span class="n">hub_method</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+        <span class="c1"># Find the hub path nodes and their occurrences</span>
+        <span class="n">hub_hub_path_nodes</span><span class="p">,</span> <span class="n">occurrences</span> <span class="o">=</span> <span class="n">find_hub_hub_path_node_occurrences</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">hubs</span><span class="o">=</span><span class="n">hubs</span><span class="p">,</span> <span class="n">hub_method</span><span class="o">=</span><span class="n">hub_method</span><span class="p">,</span>
+                                                                             <span class="n">degrees</span><span class="o">=</span><span class="n">degrees</span><span class="p">)</span>
+
+    <span class="c1"># Find lists of the occurrences and betweenness centralities</span>
+    <span class="n">bcs_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">bcs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">hub_hub_path_nodes</span><span class="p">]</span>
+    <span class="n">occ_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">occurrences</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">hub_hub_path_nodes</span><span class="p">]</span>
+
+    <span class="c1"># Convert the occurrences and the betweenness centralities to a Pandas Series</span>
+    <span class="n">bcs_series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">bcs_list</span><span class="p">)</span>
+    <span class="n">occ_series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">occ_list</span><span class="p">)</span>
+
+    <span class="c1"># Return the correlation coefficient for the variables.</span>
+    <span class="k">return</span> <span class="n">bcs_list</span><span class="p">,</span> <span class="n">bcs_series</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">occ_series</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="calculate_r1">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.betweennesscentrality.calculate_r1">[docs]</a>
+<span class="k">def</span> <span class="nf">calculate_r1</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="c1"># Find the degree distribution</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">degrees</span><span class="p">:</span>
+        <span class="n">degrees</span> <span class="o">=</span> <span class="n">find_degree_distribution</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="c1"># Initialise an empty list to store the reach of nodes.</span>
+    <span class="n">r1</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Find the degree of each node.</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">vs</span><span class="p">():</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">degree</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+
+        <span class="c1"># The reach of node v is d(v)+1</span>
+        <span class="n">r1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Return the r1 distribution</span>
+    <span class="k">return</span> <span class="n">r1</span></div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Fractal Networks</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">fractalnetworks</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Katherine Hamilton.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

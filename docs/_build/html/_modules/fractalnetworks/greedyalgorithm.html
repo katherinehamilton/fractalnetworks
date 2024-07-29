@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fractalnetworks.greedyalgorithm &#8212; Fractal Networks 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=61cd365c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
+    <script src="../../_static/documentation_options.js?v=8d563738"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for fractalnetworks.greedyalgorithm</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Implements the greedy colouring box covering algorithm&quot;&quot;&quot;</span>
+
+<span class="c1"># Network analysis modules</span>
+<span class="kn">import</span> <span class="nn">igraph</span>
+
+<span class="c1"># Mathematics modules</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<div class="viewcode-block" id="smallest_last">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.greedyalgorithm.smallest_last">[docs]</a>
+<span class="k">def</span> <span class="nf">smallest_last</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Orders nodes using the smallest last [3] method.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network being ordered.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ordering (list): A list of the nodes in order.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Find the number of nodes.</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">()</span>
+
+    <span class="c1"># Find a list of the nodes.</span>
+    <span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
+
+    <span class="c1"># Initialise an empty list for the ordering.</span>
+    <span class="n">ordering</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Create a local copy of the network</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="c1"># Iterate whilst there are still nodes that need to be ordered.</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">ordering</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">:</span>
+        <span class="c1"># Find the degrees of all the nodes.</span>
+        <span class="n">degrees</span> <span class="o">=</span> <span class="n">H</span><span class="o">.</span><span class="n">degree</span><span class="p">()</span>
+        <span class="c1"># Find the index of the node with the smallest degree.</span>
+        <span class="n">min_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">degrees</span><span class="p">))</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="n">min_i</span><span class="p">]</span>
+        <span class="c1"># Add that node to the start of the ordering.</span>
+        <span class="n">ordering</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
+        <span class="c1"># Remove that node from the graph.</span>
+        <span class="n">nodes</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">min_i</span><span class="p">)</span>
+        <span class="n">H</span><span class="o">.</span><span class="n">delete_vertices</span><span class="p">(</span><span class="n">min_i</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ordering</span></div>
+
+
+
+<div class="viewcode-block" id="greedy_box_covering">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.greedyalgorithm.greedy_box_covering">[docs]</a>
+<span class="k">def</span> <span class="nf">greedy_box_covering</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">lB</span><span class="p">,</span> <span class="n">node_order</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Colours the network in boxes of diameter lB using the greedy algorithm.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        lB (int): The diameter of the boxes for the box covering.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        colouring (dict): The greedy colouring, with the nodes as keys and the colours as values.</span>
+<span class="sd">        NB (int): The number of boxes of diameter lB needed to cover the network.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Find the dual graph</span>
+    <span class="n">dual_G</span> <span class="o">=</span> <span class="n">make_dual_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">lB</span><span class="p">)</span>
+
+    <span class="c1"># Find the graph colouring</span>
+    <span class="n">colouring</span> <span class="o">=</span> <span class="n">greedy_colouring</span><span class="p">(</span><span class="n">dual_G</span><span class="p">,</span> <span class="n">node_order</span><span class="o">=</span><span class="n">node_order</span><span class="p">)</span>
+
+    <span class="c1"># The number of boxes is the number of colours used in the colouring.</span>
+    <span class="n">NB</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">colouring</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="c1"># Return the colouring dictionary and the number of boxes.</span>
+    <span class="k">return</span> <span class="n">colouring</span><span class="p">,</span> <span class="n">NB</span></div>
+
+
+
+<div class="viewcode-block" id="greedy_colouring">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.greedyalgorithm.greedy_colouring">[docs]</a>
+<span class="k">def</span> <span class="nf">greedy_colouring</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">node_order</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Colour a graph by the greedy colouring algorithm.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The graph to be analysed.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        colouring (dict): A dictionary with nodes as keys and the colours they are assigned as values.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Find the number of nodes.</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">()</span>
+
+    <span class="c1"># Find a list of the nodes.</span>
+    <span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
+    <span class="c1"># Initialise an empty dictionary with the nodes as keys.</span>
+    <span class="n">colouring</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
+
+    <span class="c1"># Apply the ordering method to the nodes, if one is given.</span>
+    <span class="k">if</span> <span class="n">node_order</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">node_order</span> <span class="o">=</span> <span class="n">nodes</span>
+
+    <span class="c1"># Iterate through all the nodes.</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">node_order</span><span class="p">:</span>
+        <span class="c1"># Initialise an empty list for the forbidden colours.</span>
+        <span class="n">forbidden_colours</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># Find the neighbours of the given node.</span>
+        <span class="n">neighbours</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+
+        <span class="c1"># Iterate through each of the neighbours of that node.</span>
+        <span class="k">for</span> <span class="n">neighbour</span> <span class="ow">in</span> <span class="n">neighbours</span><span class="p">:</span>
+            <span class="c1"># Find the colour each neighbour is assigned.</span>
+            <span class="n">neighbour_colour</span> <span class="o">=</span> <span class="n">colouring</span><span class="p">[</span><span class="n">neighbour</span><span class="p">]</span>
+
+            <span class="c1"># If the neighbour has a colour, then add it to the list of forbidden colours.</span>
+            <span class="k">if</span> <span class="n">neighbour_colour</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">forbidden_colours</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">neighbour_colour</span><span class="p">)</span>
+
+        <span class="c1"># If there are no forbidden colours, i.e. none of the neighbours have colours, then assign the node colour 0.</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">forbidden_colours</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">colour</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># Otherwise find the next minimum value and assign that colour to the node.</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">colours</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">forbidden_colours</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)]</span>
+            <span class="n">possible_colours</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">colours</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">forbidden_colours</span><span class="p">))</span>
+            <span class="n">colour</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">possible_colours</span><span class="p">)</span>
+        <span class="c1"># Assign the chosen colour to the node</span>
+        <span class="n">colouring</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="n">colour</span>
+
+    <span class="c1"># Return the complete covering.</span>
+    <span class="k">return</span> <span class="n">colouring</span></div>
+
+
+
+<div class="viewcode-block" id="make_dual_graph">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.greedyalgorithm.make_dual_graph">[docs]</a>
+<span class="k">def</span> <span class="nf">make_dual_graph</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">lB</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds the dual graph as defined under the greedy colouring algorithm.</span>
+<span class="sd">    In the dual graph, two nodes are connected if the distance between them is at least lB.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        graph (igraph.Graph): The graph to be analysed.</span>
+<span class="sd">        lB (int): The diameter of the boxes for the box covering.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dual_graph (igraph.Graph): The dual graph.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Calculate the matrix of shortest paths between each pair of nodes in the network, and convert it to a numpy array.</span>
+    <span class="n">distance_matrix</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">distances</span><span class="p">()</span>
+    <span class="n">distance_np_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">distance_matrix</span><span class="p">)</span>
+
+    <span class="c1"># The following lines of code convert the distance matrix into a matrix with ones if the nodes are a distance of at least lB apart, and zeroes otherwise.</span>
+    <span class="n">distance_np_array</span><span class="p">[</span><span class="n">distance_np_array</span> <span class="o">&lt;</span> <span class="n">lB</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">distance_np_array</span><span class="p">[</span><span class="n">distance_np_array</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="c1"># Create the dual graph based on the adjacency matrix defined above.</span>
+    <span class="n">dual_graph</span> <span class="o">=</span> <span class="n">igraph</span><span class="o">.</span><span class="n">Graph</span><span class="o">.</span><span class="n">Adjacency</span><span class="p">(</span><span class="n">distance_np_array</span><span class="p">)</span>
+    <span class="n">dual_graph</span><span class="o">.</span><span class="n">to_undirected</span><span class="p">()</span>
+
+    <span class="c1"># Return the dual graph.</span>
+    <span class="k">return</span> <span class="n">dual_graph</span></div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Fractal Networks</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">fractalnetworks</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Katherine Hamilton.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

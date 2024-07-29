@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fractalnetworks.hubrepulsion &#8212; Fractal Networks 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=61cd365c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
+    <script src="../../_static/documentation_options.js?v=8d563738"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for fractalnetworks.hubrepulsion</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;This file contains function to analyse the effect of hub-hub repulsion in fractal networks.&quot;&quot;&quot;</span>
+
+<span class="c1"># Mathematics modules</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Utility imports</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+
+<div class="viewcode-block" id="find_degree_distribution">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.hubrepulsion.find_degree_distribution">[docs]</a>
+<span class="k">def</span> <span class="nf">find_degree_distribution</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculates the degree distribution of the network.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (list): A list of degrees in the network. The i-th value is the degree of the i-th node.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">G</span><span class="o">.</span><span class="n">degree</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="identify_hubs">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.hubrepulsion.identify_hubs">[docs]</a>
+<span class="k">def</span> <span class="nf">identify_hubs</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Identify the hubs of the network using the Z-score, where hubs are those nodes with Z &gt; 3.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (list): A list of nodes with Z &gt; 3.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Find the degree distribution of the network.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">degrees</span><span class="p">:</span>
+        <span class="n">degrees</span> <span class="o">=</span> <span class="n">find_degree_distribution</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="c1"># Find the mean and standard deviation of the degree distribution.</span>
+    <span class="n">mean_degree</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">degrees</span><span class="p">)</span>
+    <span class="n">stdv_degree</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">degrees</span><span class="p">)</span>
+
+    <span class="c1"># Initialise an empty dictionary to store the Z-score for each node.</span>
+    <span class="n">z_scores</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">()))</span>
+
+    <span class="c1"># For each node calculate and store the Z-score</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">z_scores</span><span class="p">:</span>
+        <span class="n">z_scores</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">degrees</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">mean_degree</span><span class="p">)</span> <span class="o">/</span> <span class="n">stdv_degree</span>
+
+    <span class="c1"># Find the nodes which have a Z-score greater than 3</span>
+    <span class="n">dd_dict_filtered</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">degrees</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">())</span> <span class="k">if</span> <span class="n">z_scores</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">}</span>
+
+    <span class="c1"># Return a list of these nodes.</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">dd_dict_filtered</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
+
+
+
+<div class="viewcode-block" id="identify_hubs_by_mean">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.hubrepulsion.identify_hubs_by_mean">[docs]</a>
+<span class="k">def</span> <span class="nf">identify_hubs_by_mean</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Identify the hubs of the network using the mean, where hubs are those nodes with degree greater than some factor (usually 2) times the mean.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+<span class="sd">        factor (int) (opt): The factor by which the mean is multiplied to identify hubs. Default is 2.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (list): A list of hubs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Find the degree distribution of the network.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">degrees</span><span class="p">:</span>
+        <span class="n">degrees</span> <span class="o">=</span> <span class="n">find_degree_distribution</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="c1"># Find the mean degree</span>
+    <span class="n">mean_degree</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">degrees</span><span class="p">)</span>
+
+    <span class="n">dd_dict_filtered</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">degrees</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">())</span> <span class="k">if</span> <span class="n">degrees</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">factor</span> <span class="o">*</span> <span class="n">mean_degree</span><span class="p">}</span>
+
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">dd_dict_filtered</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
+
+
+
+<div class="viewcode-block" id="identify_hubs_by_percentile">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.hubrepulsion.identify_hubs_by_percentile">[docs]</a>
+<span class="k">def</span> <span class="nf">identify_hubs_by_percentile</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">percentile</span><span class="o">=</span><span class="mi">90</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Identify the hubs of the network by percentile, where hubs are those in some percentile of the degree distribution (normally 90%)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+<span class="sd">        percentile (int) (opt): The percentile hubs belong to. Default is 90.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (list): A list of hubs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Find the degree distribution of the network.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">degrees</span><span class="p">:</span>
+        <span class="n">degrees</span> <span class="o">=</span> <span class="n">find_degree_distribution</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="c1"># Create a dictionary of node indexes and degrees.</span>
+    <span class="n">dd_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">degrees</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">())}</span>
+
+    <span class="c1"># Find a list of nodes sorted by degree</span>
+    <span class="n">sorted_nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span> <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">dd_dict</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+
+    <span class="c1"># Find the cutoff index</span>
+    <span class="n">cutoff</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">percentile</span> <span class="o">*</span> <span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">()</span> <span class="o">/</span> <span class="mi">100</span><span class="p">))</span>
+
+    <span class="c1"># Return nodes in the specified percentile</span>
+    <span class="k">return</span> <span class="n">sorted_nodes</span><span class="p">[</span><span class="n">cutoff</span><span class="p">:]</span></div>
+
+
+
+<div class="viewcode-block" id="mean_hub_degree">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.hubrepulsion.mean_hub_degree">[docs]</a>
+<span class="k">def</span> <span class="nf">mean_hub_degree</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">hubs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hub_method</span><span class="o">=</span><span class="n">identify_hubs</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculates the mean hub degree in the network.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        hubs (list) (opt): A list of hubs in the network, If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function finds the hubs.</span>
+<span class="sd">        hub_method (func) (opt): If the hubs are to be calculated, then this parameter specifies the method used to find hubs. Default is identify_hubs, which uses the Z score.</span>
+<span class="sd">        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Find the degree distribution of the network.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">degrees</span><span class="p">:</span>
+        <span class="n">degrees</span> <span class="o">=</span> <span class="n">find_degree_distribution</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="c1"># Find the hubs of the network</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">hubs</span><span class="p">:</span>
+        <span class="n">hubs</span> <span class="o">=</span> <span class="n">hub_method</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+    <span class="c1"># Create a list of degrees of hubs</span>
+    <span class="n">hub_degrees</span> <span class="o">=</span> <span class="p">[</span><span class="n">degrees</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">hubs</span><span class="p">]</span>
+
+    <span class="c1"># Return the mean of the hub degrees.</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">hub_degrees</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="find_hub_hub_edges">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.hubrepulsion.find_hub_hub_edges">[docs]</a>
+<span class="k">def</span> <span class="nf">find_hub_hub_edges</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">hubs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hub_method</span><span class="o">=</span><span class="n">identify_hubs</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds the number of edges which connect hubs to other hubs.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        hubs (list) (opt): A list of hubs in the network, If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function finds the hubs.</span>
+<span class="sd">        hub_method (func) (opt): If the hubs are to be calculated, then this parameter specifies the method used to find hubs. Default is identify_hubs, which uses the Z score.</span>
+<span class="sd">        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        no_of_hub_edges (int): The number of edges between hubs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Find the degree distribution of the network.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">degrees</span><span class="p">:</span>
+        <span class="n">degrees</span> <span class="o">=</span> <span class="n">find_degree_distribution</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="c1"># Find the hubs of the network</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">hubs</span><span class="p">:</span>
+        <span class="n">hubs</span> <span class="o">=</span> <span class="n">hub_method</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+    <span class="c1"># Initialise a variable to count the number of hub-hub edges</span>
+    <span class="n">no_of_hub_edges</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># Iterate through every pair of hubs</span>
+    <span class="k">for</span> <span class="n">hub_u</span><span class="p">,</span> <span class="n">hub_v</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">hubs</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="c1"># If there is an edge between this pair of hubs, then add one to the total number of hub-hub edges</span>
+        <span class="k">if</span> <span class="n">G</span><span class="o">.</span><span class="n">are_adjacent</span><span class="p">(</span><span class="n">hub_u</span><span class="p">,</span> <span class="n">hub_v</span><span class="p">):</span>
+            <span class="n">no_of_hub_edges</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># Return the total number of edges between hubs</span>
+    <span class="k">return</span> <span class="n">no_of_hub_edges</span></div>
+
+
+
+<div class="viewcode-block" id="find_hub_hub_path_nodes">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.hubrepulsion.find_hub_hub_path_nodes">[docs]</a>
+<span class="k">def</span> <span class="nf">find_hub_hub_path_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">hubs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hub_method</span><span class="o">=</span><span class="n">identify_hubs</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds the nodes on the shortest paths between pairs of hubs.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        hubs (list) (opt): A list of hubs in the network, If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function finds the hubs.</span>
+<span class="sd">        hub_method (func) (opt): If the hubs are to be calculated, then this parameter specifies the method used to find hubs. Default is identify_hubs, which uses the Z score.</span>
+<span class="sd">        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        hub_hub_path_nodes (list): A list of nodes on the paths between hubs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Find the degree distribution of the network.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">degrees</span><span class="p">:</span>
+        <span class="n">degrees</span> <span class="o">=</span> <span class="n">find_degree_distribution</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="c1"># Find the hubs of the network</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">hubs</span><span class="p">:</span>
+        <span class="n">hubs</span> <span class="o">=</span> <span class="n">hub_method</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+    <span class="c1"># Initialise an empty set to store the nodes.</span>
+    <span class="n">hub_hub_path_nodes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+    <span class="c1"># Iterate through each possible pair of hubs</span>
+    <span class="k">for</span> <span class="n">hub_u</span><span class="p">,</span> <span class="n">hub_v</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">hubs</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="c1"># Find all the shortest paths between this pair of hubs.</span>
+        <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">get_all_shortest_paths</span><span class="p">(</span><span class="n">hub_u</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="n">hub_v</span><span class="p">):</span>
+            <span class="c1"># Add all nodes on this path to the set of nodes.</span>
+            <span class="n">hub_hub_path_nodes</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+    <span class="c1"># Remove the hubs from the list</span>
+    <span class="n">hub_hub_path_nodes</span> <span class="o">=</span> <span class="n">hub_hub_path_nodes</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">hubs</span><span class="p">))</span>
+
+    <span class="c1"># Return the list of nodes.</span>
+    <span class="k">return</span> <span class="n">hub_hub_path_nodes</span></div>
+
+
+
+<div class="viewcode-block" id="find_hub_hub_path_node_occurrences">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.hubrepulsion.find_hub_hub_path_node_occurrences">[docs]</a>
+<span class="k">def</span> <span class="nf">find_hub_hub_path_node_occurrences</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">hubs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hub_method</span><span class="o">=</span><span class="n">identify_hubs</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds the nodes on the shortest paths between pairs of hubs, and the number of times they appear.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        hubs (list) (opt): A list of hubs in the network, If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function finds the hubs.</span>
+<span class="sd">        hub_method (func) (opt): If the hubs are to be calculated, then this parameter specifies the method used to find hubs. Default is identify_hubs, which uses the Z score.</span>
+<span class="sd">        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        hub_hub_path_nodes (list): A list of nodes on the paths between hubs.</span>
+<span class="sd">        occurrences (dict): A dictionary with nodes as keys and the number of times they appear on shortest paths as values.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Find the degree distribution of the network.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">degrees</span><span class="p">:</span>
+        <span class="n">degrees</span> <span class="o">=</span> <span class="n">find_degree_distribution</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="c1"># Find the hubs of the network</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">hubs</span><span class="p">:</span>
+        <span class="n">hubs</span> <span class="o">=</span> <span class="n">hub_method</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+    <span class="c1"># Initialise a set to store the nodes.</span>
+    <span class="n">hub_hub_path_nodes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+    <span class="c1"># Initialise a dictionary to store the number of occurrences</span>
+    <span class="n">occurrences</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">()),</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># Iterate through each pair of hubs</span>
+    <span class="k">for</span> <span class="n">hub_u</span><span class="p">,</span> <span class="n">hub_v</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">hubs</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="c1"># Iterate through every shortest path between that pair of hubs.</span>
+        <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">get_all_shortest_paths</span><span class="p">(</span><span class="n">hub_u</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="n">hub_v</span><span class="p">):</span>
+            <span class="c1"># Add all nodes on this path to the set of nodes.</span>
+            <span class="n">hub_hub_path_nodes</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="c1"># For each non-hub on the path, add the number of occurrences to the dictionary</span>
+            <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">path</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">node</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">hubs</span><span class="p">:</span>
+                    <span class="n">occurrences</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">+=</span> <span class="n">path</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+
+    <span class="c1"># Remove the hubs from the list</span>
+    <span class="n">hub_hub_path_nodes</span> <span class="o">=</span> <span class="n">hub_hub_path_nodes</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">hubs</span><span class="p">))</span>
+
+    <span class="c1"># Remove all nodes from the dictionary with no occurrences</span>
+    <span class="n">occurrences</span> <span class="o">=</span> <span class="p">{</span><span class="n">node</span><span class="p">:</span> <span class="n">occurrences</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">occurrences</span> <span class="k">if</span> <span class="n">occurrences</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">hub_hub_path_nodes</span><span class="p">,</span> <span class="n">occurrences</span></div>
+
+
+
+<div class="viewcode-block" id="calculate_HCS">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.hubrepulsion.calculate_HCS">[docs]</a>
+<span class="k">def</span> <span class="nf">calculate_HCS</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">hubs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hub_method</span><span class="o">=</span><span class="n">identify_hubs</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the Hub Connectivity Score (HCS) of the network. This is the average number of hubs each hub is adjacent to.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        hubs (list) (opt): A list of hubs in the network, If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function finds the hubs.</span>
+<span class="sd">        hub_method (func) (opt): If the hubs are to be calculated, then this parameter specifies the method used to find hubs. Default is identify_hubs, which uses the Z score.</span>
+<span class="sd">        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (float): The Hub Connectivity Score of the network.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Find the degree distribution of the network.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">degrees</span><span class="p">:</span>
+        <span class="n">degrees</span> <span class="o">=</span> <span class="n">find_degree_distribution</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="c1"># Find the hubs of the network</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">hubs</span><span class="p">:</span>
+        <span class="n">hubs</span> <span class="o">=</span> <span class="n">hub_method</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+    <span class="c1"># If there are no hubs in the network, the HCS has no value.</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">hubs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">NaN</span>
+
+    <span class="c1"># Find the number of hub-hub edges</span>
+    <span class="n">E_hub</span> <span class="o">=</span> <span class="n">find_hub_hub_edges</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">hubs</span><span class="o">=</span><span class="n">hubs</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="n">degrees</span><span class="p">)</span>
+
+    <span class="c1"># Find the number of hubs</span>
+    <span class="n">N_hub</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">hubs</span><span class="p">)</span>
+
+    <span class="c1"># Return the HCS</span>
+    <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">E_hub</span> <span class="o">/</span> <span class="n">N_hub</span></div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Fractal Networks</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">fractalnetworks</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Katherine Hamilton.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

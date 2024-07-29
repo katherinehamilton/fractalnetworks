@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fractalnetworks.randomsequential &#8212; Fractal Networks 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=61cd365c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
+    <script src="../../_static/documentation_options.js?v=8d563738"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for fractalnetworks.randomsequential</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Implements the Random Sequential box covering algorithm&quot;&quot;&quot;</span>
+
+<span class="c1"># Mathematics modules</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+<div class="viewcode-block" id="random_sequential">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.randomsequential.random_sequential">[docs]</a>
+<span class="k">def</span> <span class="nf">random_sequential</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">lB</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Implements the random sequential box covering algorithm.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        lB (int): The diameter of the boxes.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        centres (list): A list of centre nodes found by the algorithm.</span>
+<span class="sd">        boxes (list): A list of lists, where each sublist is a box under the box-covering algorithm.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Find the radius of the boxes</span>
+    <span class="n">rB</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">lB</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># Initialise lists to store the centre and non-centre nodes</span>
+    <span class="n">centres</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">non_centres</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">())]</span>
+
+    <span class="c1"># Initialise lists to store the covered and uncovered nodes.</span>
+    <span class="n">covered</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">uncovered</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">())]</span>
+
+    <span class="c1"># Initialise an empty list to store the boxes</span>
+    <span class="n">boxes</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Iterate while there are still uncovered nodes in the network.</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">covered</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">():</span>
+        <span class="c1"># Choose a random centre.</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">non_centres</span><span class="p">)</span>
+        <span class="c1"># Find the uncovered nodes within a radius of rB from this centre</span>
+        <span class="n">newly_covered</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">neighborhood</span><span class="p">([</span><span class="n">p</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="n">rB</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">uncovered</span><span class="p">))</span>
+
+        <span class="c1"># If there are any new nodes which are now covered, then add the new centre and the new box.</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">newly_covered</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">boxes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">newly_covered</span><span class="p">))</span>
+            <span class="n">centres</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+
+            <span class="c1"># Update the list of covered and uncovered nodes</span>
+            <span class="n">covered</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">newly_covered</span><span class="p">)</span>
+            <span class="n">uncovered</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">uncovered</span><span class="p">)</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">newly_covered</span><span class="p">)))</span>
+
+        <span class="c1"># Remove the node p from the list of non-centres.</span>
+        <span class="n">non_centres</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+
+    <span class="c1"># Return the list of centres and the boxes.</span>
+    <span class="k">return</span> <span class="n">centres</span><span class="p">,</span> <span class="n">boxes</span></div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Fractal Networks</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">fractalnetworks</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Katherine Hamilton.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fractalnetworks.maximumexcludedmassburning &#8212; Fractal Networks 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=61cd365c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
+    <script src="../../_static/documentation_options.js?v=8d563738"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for fractalnetworks.maximumexcludedmassburning</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;This module contains MEMB algorithms&quot;&quot;&quot;</span>
+
+<span class="c1"># Mathematics modules</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Utilities modules</span>
+<span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+
+<div class="viewcode-block" id="traditional_MEMB">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.maximumexcludedmassburning.traditional_MEMB">[docs]</a>
+<span class="k">def</span> <span class="nf">traditional_MEMB</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">lB</span><span class="p">,</span> <span class="n">deterministic</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Implements the Maximal Excluded Mass Burning algorithm as according to [1].</span>
+<span class="sd">    Note: Only works for odd numbers of lB, otherwise it takes rB to be the floor of (lB-1)/2 which is the same as for the odd lB-1.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network the algorithm is to be applied to.</span>
+<span class="sd">        lB (int): The diameter of the boxes used to cover the network.</span>
+<span class="sd">        deterministic (Bool) (opt): If False, choose fom nodes with equal excluded mass randomly. If True, choose the first lexicographically.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        centres (list): A list of nodes assigned to be centres under the MEMB algorithm.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># If the diameter lB is less than or equal to 2, then the maximum radius is 0 and so every node is in its own box.</span>
+    <span class="k">if</span> <span class="n">lB</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">lB</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">([</span><span class="n">v</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">vs</span><span class="p">()])</span>
+
+    <span class="n">number_EM_calcs</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># Start with all nodes being uncovered and non-centres.</span>
+    <span class="n">uncovered</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">vs</span><span class="p">()[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span>
+    <span class="n">non_centres</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">vs</span><span class="p">()</span>
+
+    <span class="c1"># Initialise empty lists for the covered and centre nodes.</span>
+    <span class="n">covered</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">centres</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Each box can have diameter of up to lB, so the maximum radius is rB = (lB-1)/2.</span>
+    <span class="n">rB</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">lB</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># Iterate while there are still nodes uncovered in the graph.</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">uncovered</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+
+        <span class="c1"># Start with a maximum excluded mass of zero, and no node p [1].</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">maximum_excluded_mass</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># For the non-deterministic method, keep a list of nodes with equal maximum excluded mass</span>
+        <span class="n">possible_p</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># For each node that isn&#39;t a centre, find the excluded mass.</span>
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">vs</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">node</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">centres</span><span class="p">:</span>  <span class="c1"># Check that the node isn&#39;t a centre.</span>
+                <span class="c1"># The excluded mass is the number of uncovered nodes in within a radius of rB.</span>
+                <span class="n">excluded_mass</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">neighborhood</span><span class="p">([</span><span class="n">node</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="n">rB</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">covered</span><span class="p">)))</span>
+                <span class="n">number_EM_calcs</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="c1"># If the excluded mass of this node is greater than the current excluded mass, choose this node.</span>
+                <span class="k">if</span> <span class="n">excluded_mass</span> <span class="o">&gt;</span> <span class="n">maximum_excluded_mass</span><span class="p">:</span>
+                    <span class="n">p</span> <span class="o">=</span> <span class="n">node</span>  <span class="c1"># Update p.</span>
+                    <span class="n">maximum_excluded_mass</span> <span class="o">=</span> <span class="n">excluded_mass</span>  <span class="c1"># Update maximum excluded mass.</span>
+                    <span class="n">possible_p</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span><span class="p">]</span>  <span class="c1"># Update list of possible nodes for non-deterministic method.</span>
+                <span class="c1"># If the excluded mass of this node is equal to the current maximum excluded mass, then add this node to the list of possible p.</span>
+                <span class="k">elif</span> <span class="n">excluded_mass</span> <span class="o">==</span> <span class="n">maximum_excluded_mass</span><span class="p">:</span>
+                    <span class="n">possible_p</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+
+        <span class="c1"># If the non-deterministic method is chosen, then randomly choose a node from the list of possible p.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">deterministic</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">possible_p</span><span class="p">)</span>
+
+        <span class="c1"># Add the chosen p to the list of centres.</span>
+        <span class="n">centres</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">])</span>
+
+        <span class="c1"># Find the graph centred on the node p with radius rB.</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">neighborhood</span><span class="p">([</span><span class="n">p</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="n">rB</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># Iterate through the nodes in this subgraph.</span>
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">H</span><span class="p">:</span>
+            <span class="n">covered</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>  <span class="c1"># Cover the nodes in the subgraph.</span>
+            <span class="c1"># Remove these nodes from the list of uncovered nodes.</span>
+            <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="ow">in</span> <span class="n">uncovered</span><span class="p">:</span>
+                <span class="n">uncovered</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">node</span><span class="p">))</span>
+
+                <span class="c1"># Once all the nodes are covered, return the list of centres.</span>
+    <span class="k">return</span> <span class="n">centres</span><span class="p">,</span> <span class="n">number_EM_calcs</span></div>
+
+
+
+<div class="viewcode-block" id="MEMB">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.maximumexcludedmassburning.MEMB">[docs]</a>
+<span class="k">def</span> <span class="nf">MEMB</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">lB</span><span class="p">,</span> <span class="n">deterministic</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Implements the Maximal Excluded Mass Burning algorithm as according to [1], with some time improvements.</span>
+<span class="sd">    In this version, the nodes within a radius r_B of a node are only found once, and then updated using the list of covered nodes.</span>
+<span class="sd">    Note: Only works for odd numbers of lB, otherwise it takes rB to be the floor of (lB-1)/2 which is the same as for the odd lB-1.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network the algorithm is to be applied to.</span>
+<span class="sd">        lB (int): The diameter of the boxes used to cover the network.</span>
+<span class="sd">        deterministic (Bool) (opt): If False, choose fom nodes with equal excluded mass randomly. If True, choose the first lexicographically.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        centres (list): A list of nodes assigned to be centres under the MEMB algorithm.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># If the diameter lB is less than or equal to 2, then the maximum radius is 0 and so every node is in its own box.</span>
+    <span class="k">if</span> <span class="n">lB</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">lB</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">([</span><span class="n">v</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">vs</span><span class="p">()])</span>
+
+    <span class="c1"># Start with all nodes being uncovered and non-centres.</span>
+    <span class="n">uncovered</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">vs</span><span class="p">()[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span>
+    <span class="n">non_centres</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">vs</span><span class="p">()</span>
+
+    <span class="c1"># Initialise empty lists for the covered and centre nodes.</span>
+    <span class="n">covered</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">centres</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Each box can have diameter of up to lB, so the maximum radius is rB = (lB-1)/2.</span>
+    <span class="n">rB</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">lB</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># Initialise an empty dictionary to store nodes and a list of nodes in the graphs centred on these nodes with a radius rB.</span>
+    <span class="c1"># Doing this stops us from having to generate the same subgraphs multiple times, which is expensive.</span>
+    <span class="n">eg_dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># For each node find the neighbours of that node within a radius rB.</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">vs</span><span class="p">():</span>
+        <span class="p">[</span><span class="n">neighbors</span><span class="p">]</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">neighborhood</span><span class="p">([</span><span class="n">node</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="n">rB</span><span class="p">)</span>
+        <span class="n">eg_dict</span><span class="p">[</span><span class="n">node</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">neighbors</span>  <span class="c1"># Add the list of nodes to the dictionary.</span>
+
+    <span class="c1"># Iterate while there are still nodes uncovered in the graph.</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">uncovered</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+
+        <span class="c1"># Start with a maximum excluded mass of zero, and no node p [1].</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">maximum_excluded_mass</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># For the non-deterministic method, keep a list of nodes with equal maximum excluded mass</span>
+        <span class="n">possible_p</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># For each node that isn&#39;t a centre, find the excluded mass.</span>
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">vs</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">node</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">centres</span><span class="p">:</span>  <span class="c1"># Check that the node isn&#39;t a centre.</span>
+                <span class="c1"># The excluded mass is the number of uncovered nodes in within a radius of rB.</span>
+                <span class="n">excluded_mass</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">eg_dict</span><span class="p">[</span><span class="n">node</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]])</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">covered</span><span class="p">)))</span>
+                <span class="c1"># If the excluded mass of this node is greater than the current excluded mass, choose this node.</span>
+                <span class="k">if</span> <span class="n">excluded_mass</span> <span class="o">&gt;</span> <span class="n">maximum_excluded_mass</span><span class="p">:</span>
+                    <span class="n">p</span> <span class="o">=</span> <span class="n">node</span>  <span class="c1"># Update p.</span>
+                    <span class="n">maximum_excluded_mass</span> <span class="o">=</span> <span class="n">excluded_mass</span>  <span class="c1"># Update maximum excluded mass.</span>
+                    <span class="n">possible_p</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span><span class="p">]</span>  <span class="c1"># Update list of possible nodes for non-deterministic method.</span>
+                <span class="c1"># If the excluded mass of this node is equal to the current maximum excluded mass, then add this node to the list of possible p.</span>
+                <span class="k">elif</span> <span class="n">excluded_mass</span> <span class="o">==</span> <span class="n">maximum_excluded_mass</span><span class="p">:</span>
+                    <span class="n">possible_p</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+
+        <span class="c1"># If the non-deterministic method is chosen, then randomly choose a node from the list of possible p.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">deterministic</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">possible_p</span><span class="p">)</span>
+
+        <span class="c1"># Add the chosen p to the list of centres.</span>
+        <span class="n">centres</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">])</span>
+
+        <span class="c1"># Find the graph centred on the node p with radius rB.</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="n">eg_dict</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]]</span>
+        <span class="c1"># Iterate through the nodes in this subgraph.</span>
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">H</span><span class="p">:</span>
+            <span class="n">covered</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>  <span class="c1"># Cover the nodes in the subgraph.</span>
+            <span class="c1"># Remove these nodes from the list of uncovered nodes.</span>
+            <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="ow">in</span> <span class="n">uncovered</span><span class="p">:</span>
+                <span class="n">uncovered</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">node</span><span class="p">))</span>
+
+                <span class="c1"># Once all the nodes are covered, return the list of centres.</span>
+    <span class="k">return</span> <span class="n">centres</span></div>
+
+
+
+<div class="viewcode-block" id="degree_based_MEMB">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.maximumexcludedmassburning.degree_based_MEMB">[docs]</a>
+<span class="k">def</span> <span class="nf">degree_based_MEMB</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">lB</span><span class="p">,</span> <span class="n">deterministic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Implements the Maximal Excluded Mass Burning algorithm as according to [1], adjusted to prioritise nodes with high degree.</span>
+<span class="sd">    This reduces the running time of the traditional MEMB without losing accuracy.</span>
+<span class="sd">    Note: Only works for odd numbers of lB, otherwise it takes rB to be the floor of (lB-1)/2 which is the same as for the odd lB-1.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network the algorithm is to be applied to.</span>
+<span class="sd">        lB (int): The diameter of the boxes used to cover the network.</span>
+<span class="sd">        deterministic (Bool) (opt): If False, choose fom nodes with equal excluded mass randomly. If True, choose the first lexicographically.</span>
+<span class="sd">        N (int): Takes the top N-th nodes by degree to find the centred subgraph of.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        centres (list): A list of nodes assigned to be centres under the MEMB algorithm.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># If the diameter lB is less than or equal to 2, then the maximum radius is 0 and so every node is in its own box.</span>
+    <span class="k">if</span> <span class="n">lB</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">lB</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">([</span><span class="n">v</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">vs</span><span class="p">()])</span>
+
+    <span class="c1"># Start with all nodes being uncovered and non-centres.</span>
+    <span class="n">uncovered</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">vs</span><span class="p">()[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span>
+
+    <span class="c1"># Initialise empty lists for the covered and centre nodes.</span>
+    <span class="n">centres</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">covered</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Each box can have diameter of up to lB, so the maximum radius is rB = (lB-1)/2.</span>
+    <span class="n">rB</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">lB</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># Find the N nodes with the greatest degree centrality.</span>
+    <span class="n">dc</span> <span class="o">=</span> <span class="n">degree_centrality</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="n">top_N_dc</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">dc</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[:</span><span class="n">N</span><span class="p">])</span>
+
+    <span class="c1"># Initialise an empty dictionary to store nodes and a list of nodes in the graphs centred on these nodes with a radius rB.</span>
+    <span class="c1"># Doing this stops us from having to generate the same subgraphs multiple times, which is expensive.</span>
+    <span class="n">eg_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">vs</span><span class="p">():</span>
+        <span class="c1"># Only check the top N graphs according to degree centrality.</span>
+        <span class="k">if</span> <span class="n">node</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">top_N_dc</span><span class="p">:</span>
+            <span class="p">[</span><span class="n">neighbors</span><span class="p">]</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">neighborhood</span><span class="p">([</span><span class="n">node</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="n">rB</span><span class="p">)</span>
+            <span class="n">eg_dict</span><span class="p">[</span><span class="n">node</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">neighbors</span>  <span class="c1"># Add the list of nodes to the dictionary.</span>
+
+    <span class="c1"># On the initial iteration, set maiden to True.</span>
+    <span class="n">maiden</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="c1"># This variable checks if the algorithm does not find a solution, and then looks at the next N nodes.</span>
+    <span class="n">failed</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1"># Iterate while there are still nodes uncovered in the graph.</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">uncovered</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+
+        <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+        <span class="c1"># For all iterations except the first, calculate the new dictionary of nodes in each subgraph of radius rB.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">maiden</span><span class="p">:</span>
+            <span class="n">eg_dict</span> <span class="o">=</span> <span class="n">calc_next_iter</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">uncovered</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">dc</span><span class="p">,</span> <span class="n">eg_dict</span><span class="p">,</span> <span class="n">rB</span><span class="p">,</span> <span class="n">centres</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">failed</span><span class="p">)</span>
+        <span class="n">maiden</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="c1"># Start with a maximum excluded mass of zero, and no node p [1].</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">maximum_excluded_mass</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># For the non-deterministic method, keep a list of nodes with equal maximum excluded mass</span>
+        <span class="n">possible_p</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># For each of the top N nodes by degree, find the excluded mass.</span>
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">eg_dict</span><span class="p">:</span>
+            <span class="c1"># The excluded mass is the number of uncovered nodes in within a radius of rB.</span>
+            <span class="n">excluded_mass</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">eg_dict</span><span class="p">[</span><span class="n">node</span><span class="p">])</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">covered</span><span class="p">)))</span>
+            <span class="c1"># If the excluded mass of this node is greater than the current excluded mass, choose this node.</span>
+            <span class="k">if</span> <span class="n">excluded_mass</span> <span class="o">&gt;</span> <span class="n">maximum_excluded_mass</span><span class="p">:</span>
+                <span class="n">p</span> <span class="o">=</span> <span class="n">node</span>  <span class="c1"># Update p.</span>
+                <span class="n">maximum_excluded_mass</span> <span class="o">=</span> <span class="n">excluded_mass</span>  <span class="c1"># Update maximum excluded mass.</span>
+                <span class="n">possible_p</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span><span class="p">]</span>  <span class="c1"># Update list of possible nodes for non-deterministic method.</span>
+            <span class="c1"># If the excluded mass of this node is equal to the current maximum excluded mass, then add this node to the list of possible p.</span>
+            <span class="k">elif</span> <span class="n">excluded_mass</span> <span class="o">==</span> <span class="n">maximum_excluded_mass</span><span class="p">:</span>
+                <span class="n">possible_p</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+
+        <span class="c1"># If the non-deterministic method is chosen, then randomly choose a node from the list of possible p.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">deterministic</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">possible_p</span><span class="p">)</span>
+
+        <span class="c1"># Check if the method fails to find a node p.</span>
+        <span class="c1"># The method only fails if every single node has zero uncovered nodes within a radius rB.</span>
+        <span class="k">if</span> <span class="n">p</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># If it does fail, remove all the nodes that have already been tried from the list of top N nodes.</span>
+            <span class="n">failed</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># Set the failed variable.</span>
+            <span class="k">for</span> <span class="n">tried_node_label</span> <span class="ow">in</span> <span class="n">eg_dict</span><span class="p">:</span>
+                <span class="n">dc</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">tried_node_label</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Otherwise, add the new p to the list of centre nodes.</span>
+            <span class="n">centres</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+            <span class="c1"># Update the list so that the newly covered nodes are in the list of covered nodes and not in the list of uncovered nodes.</span>
+            <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">eg_dict</span><span class="p">[</span><span class="n">p</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="ow">in</span> <span class="n">uncovered</span><span class="p">:</span>
+                    <span class="n">uncovered</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">node</span><span class="p">))</span>
+                    <span class="n">covered</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">node</span><span class="p">))</span>
+            <span class="n">failed</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># Reset the failed variable.</span>
+
+        <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> </span><span class="si">{0}</span><span class="s2"> centres found, </span><span class="si">{1}</span><span class="s2"> uncovered nodes remaining.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">centres</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">uncovered</span><span class="p">)))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This round took </span><span class="si">{0}</span><span class="s2"> seconds.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">))</span>
+
+    <span class="c1"># Once all the nodes are covered return the list of centres found in the graph.</span>
+    <span class="k">return</span> <span class="n">centres</span></div>
+
+
+
+<div class="viewcode-block" id="degree_centrality">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.maximumexcludedmassburning.degree_centrality">[docs]</a>
+<span class="k">def</span> <span class="nf">degree_centrality</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculates a dictionary of the degree centralities for all nodes in a graph.</span>
+<span class="sd">    Analagous to the NetworkX degree_centrality method.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network the algorithm is to be applied to.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dc (dict): A dictionary with node labels as keys and their degree centralities as the values.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Initialise an empty dictionary</span>
+    <span class="n">dc</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># Iterate through each node in the graph</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">vs</span><span class="p">():</span>
+        <span class="c1"># Find the degree of the node</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">degree</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+        <span class="c1"># Normalise by the maximum possible degree (n-1) and add to dictionary</span>
+        <span class="n">dc</span><span class="p">[</span><span class="n">node</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">d</span> <span class="o">/</span> <span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">dc</span></div>
+
+
+
+<div class="viewcode-block" id="calc_next_iter">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.maximumexcludedmassburning.calc_next_iter">[docs]</a>
+<span class="k">def</span> <span class="nf">calc_next_iter</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">uncovered</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">dc</span><span class="p">,</span> <span class="n">eg_dict</span><span class="p">,</span> <span class="n">rB</span><span class="p">,</span> <span class="n">centres</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">failed</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds the top N nodes to check in the next iteration of the algorithm.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network being analysed.</span>
+<span class="sd">        uncovered (list): A list of nodes in the network which are uncovered at this stage.</span>
+<span class="sd">        N (int): The number of nodes to check in the next iteration of the algorithm.</span>
+<span class="sd">        dc (dict): Dictionary containing the degree centrality of each node which is yet to be checked as a centre.</span>
+<span class="sd">        eg_dict (dict): Dictionary with keys as nodes and values as the list of nodes within a distance of rB from that node.</span>
+<span class="sd">        rB (int): The radius rB to be checked.</span>
+<span class="sd">        centres (list): List of nodes identified as centres.</span>
+<span class="sd">        p (str): Name of the node chosen as the most recent p [1].</span>
+<span class="sd">        failed (Bool): True if the previous iteration of the algorithm failed, and False otherwise.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        eg_dict (dict): Returns an updated version of eg_dict with the nodes to be checked for the next iteration.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># If the algorithm failed in the previous iteration, then remove the most recent node p from the dictionary.</span>
+    <span class="c1"># This node was chosen as a centre in the last stage, and so it does not need to be considered again.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">failed</span><span class="p">:</span>
+        <span class="n">dc</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+
+    <span class="c1"># Choose the top N nodes by degree centrality.</span>
+    <span class="n">top_N_dc</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">dc</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[:</span><span class="n">N</span><span class="p">])</span>
+
+    <span class="c1"># Initialise an empty updated version of eg_dict.</span>
+    <span class="n">new_eg_dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># For each of the top N nodes, assign the list of nodes in the subgraph of radius rB centred around the node to the new dictionary.</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">vs</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">node</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">top_N_dc</span><span class="p">:</span>
+            <span class="c1"># If the subgraph has already been found then reference the old dictionary to prevent recalculating the subgraph.</span>
+            <span class="k">if</span> <span class="n">node</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">eg_dict</span><span class="p">:</span>
+                <span class="n">new_eg_dict</span><span class="p">[</span><span class="n">node</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">eg_dict</span><span class="p">[</span><span class="n">node</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]]</span>
+            <span class="c1"># If not, then find the graph and add it to the new dictionary.</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="p">[</span><span class="n">neighbors</span><span class="p">]</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">neighborhood</span><span class="p">([</span><span class="n">node</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="n">rB</span><span class="p">)</span>
+                <span class="n">new_eg_dict</span><span class="p">[</span><span class="n">node</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">neighbors</span>  <span class="c1"># Add the list of nodes to the dictionary.</span>
+
+    <span class="c1"># Once this is done for all the relevant nodes, return the new updated dictionary.</span>
+    <span class="k">return</span> <span class="n">new_eg_dict</span></div>
+
+
+
+<div class="viewcode-block" id="accelerated_MEMB">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.maximumexcludedmassburning.accelerated_MEMB">[docs]</a>
+<span class="k">def</span> <span class="nf">accelerated_MEMB</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">lB</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Implements the Maximal Excluded Mass Burning algorithm as according to [1], with accelerated performance.</span>
+<span class="sd">    Rather than calculating the excluded mass for all nodes at each stage, calculate the excluded mass of the node with the next highest excluded mass in the previous stage.</span>
+<span class="sd">    Then reject all nodes with excluded mass in the previous stage less than this value (excluded mass can only decrease between stages)</span>
+<span class="sd">    Repeat until only one node is left, and this becomes the next p.</span>
+<span class="sd">    Note: Only works for odd numbers of lB, otherwise it takes rB to be the floor of (lB-1)/2 which is the same as for the odd lB-1.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network the algorithm is to be applied to.</span>
+<span class="sd">        lB (int): The diameter of the boxes used to cover the network.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        centres (list): A list of nodes assigned to be centres under the MEMB algorithm.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">number_EM_calcs</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># If the diameter lB is less than or equal to 2, then the maximum radius is 0 and so every node is in its own box.</span>
+    <span class="k">if</span> <span class="n">lB</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">lB</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">([</span><span class="n">v</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">vs</span><span class="p">()]),</span> <span class="mi">0</span>
+
+    <span class="c1"># Each box can have diameter of up to lB, so the maximum radius is rB = (lB-1)/2.</span>
+    <span class="n">rB</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">lB</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># Initialise empty lists for the covered and centre nodes.</span>
+    <span class="n">centres</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">covered</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># The labels of the uncovered nodes are 0, ..., n-1 where n is the order of the network.</span>
+    <span class="n">uncovered</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">())]</span>
+
+    <span class="c1"># Initialise an empty dictionary for the excluded mass of each node.</span>
+    <span class="n">excluded_mass</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># For each node, calculate the initial excluded mass by finding the number of neighbours within a radius rB.</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">vs</span><span class="p">():</span>
+        <span class="n">excluded_mass</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">neighborhood_size</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">rB</span><span class="p">)</span>
+        <span class="n">number_EM_calcs</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># Rank the non-centre nodes in order from highest excluded mass to lowest.</span>
+    <span class="n">ordered_list</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">excluded_mass</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># On the initial iteration, set maiden to True.</span>
+    <span class="n">maiden</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="c1"># The first value of p is that in the 1st position in the ordered list.</span>
+    <span class="n">p_value</span> <span class="o">=</span> <span class="n">ordered_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Iterate while there are still uncovered nodes in the network.</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">uncovered</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+
+        <span class="c1"># If it is not the first iteration, then find the values for the next iteration.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">maiden</span><span class="p">:</span>
+            <span class="c1"># Find the next p using the method described above.</span>
+            <span class="n">ordered_list</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">number_EM_calcs</span> <span class="o">=</span> <span class="n">find_next_centre</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">covered</span><span class="p">,</span> <span class="n">rB</span><span class="p">,</span> <span class="n">ordered_list</span><span class="p">,</span> <span class="n">number_EM_calcs</span><span class="p">)</span>
+            <span class="c1"># Reorder the list according to decreasing excluded mass.</span>
+            <span class="c1"># Note at this stage, that some of the nodes have their excluded mass from different stages of the iterative process.</span>
+            <span class="c1"># This does not affect the outcome.</span>
+            <span class="n">ordered_list</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">ordered_list</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># If this is the first iteration then reset the maiden variable.</span>
+            <span class="n">maiden</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="c1"># Take the label of the node to be the next p.</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">p_value</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;label&quot;</span><span class="p">])</span>
+        <span class="c1"># Add p to the list of centres.</span>
+        <span class="n">centres</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="c1"># Remove p from the list of non-centres.</span>
+        <span class="n">ordered_list</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">p_value</span><span class="p">)</span>
+
+        <span class="c1"># Find the neighbours of the new centre p within a radius rB.</span>
+        <span class="n">neighbours</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">neighborhood</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">rB</span><span class="p">)</span>
+        <span class="c1"># Cover each of the nodes in this radius, and remove them from the list of uncovered nodes.</span>
+        <span class="k">for</span> <span class="n">neighbour</span> <span class="ow">in</span> <span class="n">neighbours</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">neighbour</span> <span class="ow">in</span> <span class="n">uncovered</span><span class="p">:</span>
+                <span class="n">covered</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">neighbour</span><span class="p">)</span>
+                <span class="n">uncovered</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">neighbour</span><span class="p">)</span>
+
+    <span class="c1"># Return the list of centres found.</span>
+    <span class="k">return</span> <span class="n">centres</span><span class="p">,</span> <span class="n">number_EM_calcs</span></div>
+
+
+
+<div class="viewcode-block" id="find_next_centre">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.maximumexcludedmassburning.find_next_centre">[docs]</a>
+<span class="k">def</span> <span class="nf">find_next_centre</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">covered</span><span class="p">,</span> <span class="n">rB</span><span class="p">,</span> <span class="n">ordered_list</span><span class="p">,</span> <span class="n">number_EM_calcs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Find the node with the next highest excluded mass to be the next centre.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        covered (list): A list of indices for the covered nodes in the network at the current stage.</span>
+<span class="sd">        rB (int): The radius of boxes to be found.</span>
+<span class="sd">        ordered_list (list): A list of tuples containing the nodes of the network and their most recently updated excluded mass, in decreasing order of excluded mass.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ordered_list (list): An updated version of the ordered list.</span>
+<span class="sd">        p (tuple): The new centre value and its excluded mass.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Create a copy of the ordered list in its current state.</span>
+    <span class="n">working_list</span> <span class="o">=</span> <span class="n">ordered_list</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="c1"># Start from the first node in the list.</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># Initialise an empty variable to store the maximum excluded mass.</span>
+    <span class="n">max_excluded_mass</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># The working list stores all options for the next value of p.</span>
+    <span class="c1"># Iterate whilst there are still multiple options for the next centre p.</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">working_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+
+        <span class="c1"># Take the next available node in the list.</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">working_list</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+
+        <span class="c1"># Update the excluded mass for this node with the new covered nodes.</span>
+        <span class="n">new_excluded_mass</span> <span class="o">=</span> <span class="n">update_excluded_mass</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">covered</span><span class="p">,</span> <span class="n">node</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">rB</span><span class="p">)</span>
+        <span class="n">number_EM_calcs</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1"># If this is the new maximum then update the values.</span>
+        <span class="k">if</span> <span class="n">new_excluded_mass</span> <span class="o">&gt;</span> <span class="n">max_excluded_mass</span><span class="p">:</span>
+            <span class="n">max_excluded_mass</span> <span class="o">=</span> <span class="n">new_excluded_mass</span>
+
+            <span class="c1"># Remove all nodes from the list of potential centres which have an excluded mass less than the current maximum</span>
+            <span class="n">working_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">max_excluded_mass</span><span class="p">,</span> <span class="n">working_list</span><span class="p">))</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+            <span class="c1"># Add the current node back to the list if it has been removed.</span>
+            <span class="k">if</span> <span class="n">node</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">new_excluded_mass</span><span class="p">:</span>
+                <span class="n">working_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+
+            <span class="c1"># Update the excluded mass for the node in the ordered list.</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">ordered_list</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+            <span class="n">ordered_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">new_excluded_mass</span><span class="p">)</span>
+
+            <span class="c1"># Update the excluded mass for the node in the working list.</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">working_list</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+            <span class="n">working_list</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">new_excluded_mass</span><span class="p">)</span>
+
+            <span class="c1"># Look for the next node in the ordered list.</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="c1"># If the node is not the new maximum, i.e. it is less than some other value, then remove it from the working list.</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Find the node in the list and remove it.</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">ordered_list</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+            <span class="n">ordered_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">new_excluded_mass</span><span class="p">)</span>
+            <span class="n">working_list</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+
+    <span class="c1"># The final remaining node is the new centre p.</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">working_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Return the new centre and the ordered list of nodes.</span>
+    <span class="k">return</span> <span class="n">ordered_list</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">number_EM_calcs</span></div>
+
+
+
+<div class="viewcode-block" id="update_excluded_mass">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.maximumexcludedmassburning.update_excluded_mass">[docs]</a>
+<span class="k">def</span> <span class="nf">update_excluded_mass</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">covered</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">rB</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Update the excluded mass for the given node with the current list of covered nodes.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        covered (list): A list of the nodes which are currently covered in the network.</span>
+<span class="sd">        node (igraph.Vertex): The node whose excluded mass is to be updated.</span>
+<span class="sd">        rB (int): The radius of the boxes for the box covering.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        excluded_mass (int): The updated excluded mass for the given node.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Find all neighbours of the node within radius rB.</span>
+    <span class="n">neighbourhood</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">neighborhood</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">rB</span><span class="p">)</span>
+    <span class="c1"># Find the number of those which are not yet covered.</span>
+    <span class="n">excluded_mass</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">neighbourhood</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">covered</span><span class="p">))</span>
+    <span class="c1"># Return the updated excluded mass.</span>
+    <span class="k">return</span> <span class="n">excluded_mass</span></div>
+
+
+
+<div class="viewcode-block" id="distance_based_MEMB_all_lB">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.maximumexcludedmassburning.distance_based_MEMB_all_lB">[docs]</a>
+<span class="k">def</span> <span class="nf">distance_based_MEMB_all_lB</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">lB_min</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculates the centres for each lB from lB_min to the diameter of the network by first calculating the shortest path distance between every pair of nodes in the network.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        lB_min (int) (opt): The minimum diameter of the boxes for the box covering.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        lB (list): A list of all box diameters lB.</span>
+<span class="sd">        NB (list): A list of all number of boxes NB.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Calculate the matrix of shortest paths between each pair of nodes in the network, and convert it to a numpy array.</span>
+    <span class="n">distance_matrix</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">distances</span><span class="p">()</span>
+    <span class="n">distance_np_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">distance_matrix</span><span class="p">)</span>
+
+    <span class="c1"># Calculate the diameter and order of the network.</span>
+    <span class="n">diam</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">diameter</span><span class="p">()</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">()</span>
+
+    <span class="c1"># Initialise an empty array for the number of boxes in the box covering for each lB.</span>
+    <span class="n">NB</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Find the nearest odd number to the diameter of the network.</span>
+    <span class="n">nearest_odd</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">diam</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Generate a list of odd box diameters from the minimum value to two more than the diameter.</span>
+    <span class="n">lB</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">lB_min</span><span class="p">,</span> <span class="n">nearest_odd</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span>
+
+    <span class="c1"># Iterate through each possible lB.</span>
+    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">lB</span><span class="p">:</span>
+        <span class="c1"># Initialise an empty list to store the centres.</span>
+        <span class="n">centres</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Find the maximum radius of the boxes.</span>
+        <span class="n">rB</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">l</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="c1"># Create a local copy of the array of shortest path distances.</span>
+        <span class="n">lB_dist</span> <span class="o">=</span> <span class="n">distance_np_array</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="c1"># The following lines of code convert the distance matrix into a matrix with ones if the nodes are within a radius of rB, and zeroes otherwise.</span>
+        <span class="c1"># Remove any pairs of nodes which have a shortest path distance longer than the radius.</span>
+        <span class="n">lB_dist</span><span class="p">[</span><span class="n">lB_dist</span> <span class="o">&gt;</span> <span class="n">rB</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># Reset the remaining values to 1.</span>
+        <span class="n">lB_dist</span><span class="p">[</span><span class="n">lB_dist</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="c1"># Fill the diagonal with 1s.</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">lB_dist</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Initialise an array for the uncovered nodes. A 1 in the ith position means that the ith node is uncovered.</span>
+        <span class="c1"># Begin with all nodes uncovered.</span>
+        <span class="n">uncovered</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">N</span><span class="p">])</span>
+
+        <span class="c1"># Whilst there are still uncovered nodes in the network.</span>
+        <span class="k">while</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">uncovered</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Find the excluded masses by multiplying the uncovered array with the normalised matrix of distances.</span>
+            <span class="c1"># The result is an array where the ith element is the excluded mass of the ith node.</span>
+            <span class="n">excluded_masses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">uncovered</span><span class="p">,</span> <span class="n">lB_dist</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="c1"># Assign p to be the node with the greatest excluded mass.</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">excluded_masses</span><span class="p">)</span>
+            <span class="n">max_excluded_mass</span> <span class="o">=</span> <span class="n">excluded_masses</span><span class="p">[</span><span class="n">p</span><span class="p">]</span>
+
+            <span class="c1"># Find the new nodes which are now covered and were not covered in the previous iteration.</span>
+            <span class="n">new_covered</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span> <span class="ow">and</span> <span class="n">y</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">lB_dist</span><span class="p">[</span><span class="n">p</span><span class="p">],</span> <span class="n">uncovered</span><span class="p">[</span><span class="mi">0</span><span class="p">])])</span>
+            <span class="c1"># Find the new array of uncovered nodes.</span>
+            <span class="n">uncovered</span> <span class="o">=</span> <span class="n">uncovered</span> <span class="o">-</span> <span class="n">new_covered</span>
+            <span class="c1"># Add p to the list of centres.</span>
+            <span class="n">centres</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+
+        <span class="c1"># Add the number of boxes NB to the list.</span>
+        <span class="n">NB</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">centres</span><span class="p">))</span>
+
+    <span class="c1"># Return the list of diameters lB and number of boxes NB.</span>
+    <span class="k">return</span> <span class="n">lB</span><span class="p">,</span> <span class="n">NB</span></div>
+
+
+
+<div class="viewcode-block" id="distance_based_MEMB">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.maximumexcludedmassburning.distance_based_MEMB">[docs]</a>
+<span class="k">def</span> <span class="nf">distance_based_MEMB</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">lB</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculates the centres for each lB from lB_min to the diameter of the network by first calculating the shortest path distance between every pair of nodes in the network.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        lB_min (int) (opt): The minimum diameter of the boxes for the box covering.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        centres (list): A list of centres found by the algorithm.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Calculate the matrix of shortest paths between each pair of nodes in the network, and convert it to a numpy array.</span>
+    <span class="n">distance_matrix</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">distances</span><span class="p">()</span>
+    <span class="n">lB_dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">distance_matrix</span><span class="p">)</span>
+
+    <span class="c1"># Initialise an empty list to store the centres.</span>
+    <span class="n">centres</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Find the maximum radius of the boxes.</span>
+    <span class="n">rB</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">lB</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># The following lines of code convert the distance matrix into a matrix with ones if the nodes are within a radius of rB, and zeroes otherwise.</span>
+    <span class="c1"># Remove any pairs of nodes which have a shortest path distance longer than the radius.</span>
+    <span class="n">lB_dist</span><span class="p">[</span><span class="n">lB_dist</span> <span class="o">&gt;</span> <span class="n">rB</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># Reset the remaining values to 1.</span>
+    <span class="n">lB_dist</span><span class="p">[</span><span class="n">lB_dist</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="c1"># Fill the diagonal with 1s.</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">lB_dist</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Initialise an array for the uncovered nodes. A 1 in the ith position means that the ith node is uncovered.</span>
+    <span class="c1"># Begin with all nodes uncovered.</span>
+    <span class="n">uncovered</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">()])</span>
+
+    <span class="c1"># Whilst there are still uncovered nodes in the network.</span>
+    <span class="k">while</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">uncovered</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># Find the excluded masses by multiplying the uncovered array with the normalised matrix of distances.</span>
+        <span class="c1"># The result is an array where the ith element is the excluded mass of the ith node.</span>
+        <span class="n">excluded_masses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">uncovered</span><span class="p">,</span> <span class="n">lB_dist</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># Assign p to be the node with the greatest excluded mass.</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">excluded_masses</span><span class="p">)</span>
+        <span class="n">max_excluded_mass</span> <span class="o">=</span> <span class="n">excluded_masses</span><span class="p">[</span><span class="n">p</span><span class="p">]</span>
+
+        <span class="c1"># Find the new nodes which are now covered and were not covered in the previous iteration.</span>
+        <span class="n">new_covered</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span> <span class="ow">and</span> <span class="n">y</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">lB_dist</span><span class="p">[</span><span class="n">p</span><span class="p">],</span> <span class="n">uncovered</span><span class="p">[</span><span class="mi">0</span><span class="p">])])</span>
+        <span class="c1"># Find the new array of uncovered nodes.</span>
+        <span class="n">uncovered</span> <span class="o">=</span> <span class="n">uncovered</span> <span class="o">-</span> <span class="n">new_covered</span>
+        <span class="c1"># Add p to the list of centres.</span>
+        <span class="n">centres</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+
+    <span class="c1"># Return the list of diameters lB and number of boxes NB.</span>
+    <span class="k">return</span> <span class="n">centres</span></div>
+
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Fractal Networks</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">fractalnetworks</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Katherine Hamilton.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

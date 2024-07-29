@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fractalnetworks.networkskeleton &#8212; Fractal Networks 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=61cd365c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
+    <script src="../../_static/documentation_options.js?v=8d563738"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for fractalnetworks.networkskeleton</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;This module includes functions to find and analyse the network&#39;s skeleton&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">.betweennesscentrality</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<div class="viewcode-block" id="find_skel">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.networkskeleton.find_skel">[docs]</a>
+<span class="k">def</span> <span class="nf">find_skel</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">ebcs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds the skeleton of the given network.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        ebcs (list) (opt): A list of edge betweenness centralities. If already calculated, it can be passed as an argument to prevent duplication. Default is None, meaning it will be calculated internally.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        H (igraph.Graph): The skeleton of the network G</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Find the edge betweenness centralities</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">ebcs</span><span class="p">:</span>
+        <span class="n">ebcs</span> <span class="o">=</span> <span class="n">find_edge_betweenness_centralities</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="c1"># Create a list of tuples of the form (edge ID, edge betweenness centrality)</span>
+    <span class="n">edges_to_ebcs</span> <span class="o">=</span> <span class="p">[(</span><span class="n">G</span><span class="o">.</span><span class="n">es</span><span class="p">()[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">tuple</span><span class="p">,</span> <span class="n">ebcs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">ecount</span><span class="p">())]</span>
+
+    <span class="c1"># Sort the list in order of decreasing betweenness</span>
+    <span class="n">edges_to_ebcs</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Create a copy of the network with no edges</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">H</span><span class="o">.</span><span class="n">delete_edges</span><span class="p">()</span>
+
+    <span class="c1"># Iterate through all the edges in the network, in order of decreasing edge betweenness centrality,</span>
+    <span class="k">for</span> <span class="n">edge</span><span class="p">,</span> <span class="n">ebc</span> <span class="ow">in</span> <span class="n">edges_to_ebcs</span><span class="p">:</span>
+        <span class="c1"># Check if adding this edge would create a cycle</span>
+        <span class="n">paths</span> <span class="o">=</span> <span class="n">H</span><span class="o">.</span><span class="n">get_shortest_paths</span><span class="p">(</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">to</span><span class="o">=</span><span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">output</span><span class="o">=</span><span class="s2">&quot;vpath&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">paths</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">paths</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># If there is no cycle, add the edge</span>
+            <span class="n">H</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="c1"># When the network is connected, the spanning tree is complete.</span>
+        <span class="k">if</span> <span class="n">H</span><span class="o">.</span><span class="n">is_connected</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">H</span>
+
+    <span class="c1"># Return the skeleton</span>
+    <span class="k">return</span> <span class="n">H</span></div>
+
+
+
+<div class="viewcode-block" id="find_skeleton_eids">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.networkskeleton.find_skeleton_eids">[docs]</a>
+<span class="k">def</span> <span class="nf">find_skeleton_eids</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">H</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ebcs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds a list of edge IDs for edges in the skeleton of G.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        H (igraph.Graph) (opt): The skeleton of the network, if known. Default is None.</span>
+<span class="sd">        ebcs (list) (opt): The edge betweenness centralities of the network, if known. Default is None.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        skeleton_edges (list): List of IDs of edges in G which are in the skeleton of G.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Find the skeleton of the network</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">H</span><span class="p">:</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="n">find_skel</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">ebcs</span><span class="o">=</span><span class="n">ebcs</span><span class="p">)</span>
+
+    <span class="c1"># Initialise an empty list of edge IDs</span>
+    <span class="n">skeleton_edges</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Find the edge ID of each edge in the network and add it to the list</span>
+    <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">H</span><span class="o">.</span><span class="n">es</span><span class="p">():</span>
+        <span class="n">source</span> <span class="o">=</span> <span class="n">edge</span><span class="o">.</span><span class="n">tuple</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="n">edge</span><span class="o">.</span><span class="n">tuple</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">eid</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">get_eid</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+        <span class="n">skeleton_edges</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">eid</span><span class="p">)</span>
+
+    <span class="c1"># Return the complete list.</span>
+    <span class="k">return</span> <span class="n">skeleton_edges</span></div>
+
+
+
+<div class="viewcode-block" id="find_skeleton_edge_betweenness">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.networkskeleton.find_skeleton_edge_betweenness">[docs]</a>
+<span class="k">def</span> <span class="nf">find_skeleton_edge_betweenness</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">H</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ebcs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds the edge betweenness centralities of edges in the skeleton of the network.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        H (igraph.Graph) (opt): The skeleton of the network, if known. Default is None.</span>
+<span class="sd">        ebcs (list) (opt): The edge betweenness centralities of the network, if known. Default is None.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        skeleton_ebcs (list): A list of edge betweenness centralities of edges in the skeleton.</span>
+<span class="sd">        non_skeleton_ebcs (list): A list of edge betweenness centralities of edges not in the skeleton.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Find the betweenness centrality distribution of the network.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">ebcs</span><span class="p">:</span>
+        <span class="n">ebcs</span> <span class="o">=</span> <span class="n">find_edge_betweenness_centralities</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+    <span class="c1"># Find the IDs of edges in the skeleton</span>
+    <span class="n">skeleton_edges</span> <span class="o">=</span> <span class="n">find_skeleton_eids</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">H</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">ebcs</span><span class="o">=</span><span class="n">ebcs</span><span class="p">)</span>
+
+    <span class="c1"># Find a list of edge betweenness centralities in the skeleton and not in the skeleton</span>
+    <span class="n">skeleton_ebcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">ebcs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">skeleton_edges</span><span class="p">]</span>
+    <span class="n">non_skeleton_ebcs</span> <span class="o">=</span> <span class="p">[</span><span class="n">ebcs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">ecount</span><span class="p">())</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">skeleton_edges</span><span class="p">]</span>
+
+    <span class="c1"># Return both lists.</span>
+    <span class="k">return</span> <span class="n">skeleton_ebcs</span><span class="p">,</span> <span class="n">non_skeleton_ebcs</span></div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Fractal Networks</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">fractalnetworks</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Katherine Hamilton.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
