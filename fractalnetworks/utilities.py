@@ -13,6 +13,7 @@ import math
 
 # Utility modules
 from scipy.io import mmread
+import csv
 
 # Reading Graphs
 
@@ -771,3 +772,17 @@ def chi_squared_error(observed_y, expected_y):
             chi += (((observed_yi - expected_yi) ** 2) / expected_yi)
     # Return the total sum of the squares.
     return chi
+
+
+def read_lB_NB_from_csv(filepath):
+    with open(filepath, newline='') as csvfile:
+        reader = csv.reader(csvfile, delimiter=',')
+        count = 1
+        for row in reader:
+            if count == 1:
+                lB = [float(i) for i in row]
+            else:
+                NB = [float(i) for i in row]
+            count += 1
+
+    return lB, NB
