@@ -75,7 +75,7 @@ def mean_hub_distance(G, hubs=None, hub_method=identify_hubs, normalised=False, 
 
     # If there are no hubs in the network, then there is no mean distance.
     if len(hubs) == 0:
-        return np.NaN(), []
+        return np.NaN, []
 
     # Initialise an empty list for hub distances
     hub_distances = []
@@ -113,7 +113,7 @@ def hub_distance_distribution(G, hubs=None, hub_method=identify_hubs, degrees=No
 
     # If there are no hubs in the network, then there is no mean distance.
     if len(hubs) == 0:
-        return np.NaN(), []
+        return np.NaN, []
 
     # Find the number of possible edges.
     no_of_possible_edges = (len(hubs) * (len(hubs) - 1)) / 2
