@@ -137,7 +137,8 @@ def is_fractal(results_filepath, plot=False, verbose=False, save_path=None):
     if frac_score > exp_score:
         # If verbose is True, print the results.
         if verbose:
-            print("This network is fractal with box dimension {:.4f}.".format(-1 * exp_c))
+            _, dB, _ = find_fractal_dimension(loglB, logNB)
+            print("This network is fractal with box dimension {:.4f}.".format(-1 * dB))
             print("Power law score: {:.4f}.".format(frac_score))
             print("Exponential score: {:.4f}.".format(exp_score))
         return True
@@ -149,3 +150,57 @@ def is_fractal(results_filepath, plot=False, verbose=False, save_path=None):
             print("Power law score: {:.4f}.".format(frac_score))
             print("Exponential score: {:.4f}.".format(exp_score))
         return False
+
+
+def find_fractal_dimension(loglB, logNB):
+    """
+    Finds the fractal dimension of a fractal network given the lB, NB distribution.
+    """
+    # Initialise the variables to store the best fit
+    best_score = 0
+    best_A = None
+    best_c = None
+
+    # Look at sections of the curve at least 1/2 the full length.
+    for p in [0.5, 0.6, 0.7, 0.8, 0.9, 1.0]:
+        # Find the best score over portions of that width
+        (A, c), score = find_best_range(loglB, logNB, percentage=p)
+        # If this is better than the previous portion, then update the variables.
+        if score > best_score:
+            best_score = score
+            best_A = A[0]
+            best_c = c[0][0]
+
+    return best_A, best_c, best_score
+
+
+def find_best_range(x, y, percentage=0.5):
+    best_score = None
+    best_A = None
+    best_c = None
+
+    sample_width = int(len(x) * percentage)
+
+    i = 0
+    while i + sample_width <= len(x):
+        sublist_x = x[i:int(i + sample_width)]
+        sublist_y = y[i:int(i + sample_width)]
+        sublist_array_x = np.array(sublist_x).reshape((-1, 1))
+        sublist_array_y = np.array(sublist_y).reshape((-1, 1))
+        model = LinearRegression()
+        model.fit(sublist_array_x, sublist_array_y)
+
+        score = model.score(sublist_array_x, sublist_array_y)
+
+        if best_score == None:
+            best_score = score
+            best_A = model.intercept_
+            best_c = model.coef_
+
+        elif score > best_score:
+            best_score = score
+            best_A = model.intercept_
+            best_c = model.coef_
+
+        i += 1
+    return (best_A, best_c), best_score
