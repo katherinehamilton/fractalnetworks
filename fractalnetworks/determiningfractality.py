@@ -69,19 +69,21 @@ def calculate_lB_NB_dist(G, diam=None, normalise=False, lB_min=2, save_path=None
 
     return lB, NB
 
-def is_fractal(results_filepath, plot=False, verbose=False):
+
+def is_fractal(results_filepath, plot=False, verbose=False, save_path=None):
     """
     Tests if a given lB-NB distribution is a power-law or exponential, thus determining if a network is fractal or non-fractal.
 
     Args:
-        results_filepath (string): The filepath for the csv file storing the lB-NB distribution.
+        results_filepath (str): The filepath for the csv file storing the lB-NB distribution.
         plot (:obj:`bool`, optional): If True, a comparison of the relationship between lB and NB is plotted on a log-log scale and a log scale.
         verbose (:obj:`bool`, optional): If True, the results are displayed.
+        save_path (:obj:`str`, optional): The figure generated is saved to the file path, if given. Default is None.
     Returns:
         bool: True if the network is fractal, False otherwise.
     """
     # Read the lB-NB distribution from the csv file.
-    lB, NB = read_lB_NB_from_csv(results_filepath)
+    lB, NB = fn.read_lB_NB_from_csv(results_filepath)
 
     # Find the logarithms of the box diameter lB and the number of boxes NB.
     loglB = [math.log(l) for l in lB]
@@ -114,26 +116,36 @@ def is_fractal(results_filepath, plot=False, verbose=False):
     # Plot the exponential and power law relationship
     if plot:
         fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(8, 3))
-        axes[0].plot(loglB, logNB)
-        axes[0].plot(loglB, [(frac_c) * l + frac_A for l in loglB])
-        axes[1].plot(lB, logNB)
-        axes[1].plot(lB, [(exp_c) * l + exp_A for l in lB])
+        axes[0].plot(loglB, logNB, color='navy')
+        axes[0].plot(loglB, [(frac_c) * l + frac_A for l in loglB], ':', color='crimson')
+        axes[0].set_xlabel('$\ln \ell_B$')
+        axes[0].set_ylabel('$\ln N_B$')
+        axes[0].set_title('Power-Law Relationship')
+        axes[1].plot(lB, logNB, color='navy')
+        axes[1].plot(lB, [(exp_c) * l + exp_A for l in lB], ':', color='crimson')
+        axes[1].set_xlabel('$\ell_B$')
+        axes[1].set_ylabel('$\ln N_B$')
+        axes[1].set_title('Exponential Relationship')
+        # If a save path is given, save the png file.
+        if save_path:
+            plt.savefig(save_path)
         plt.show()
-        plt.close()
+
+    plt.close()
 
     # If the fractal power-law fit is better than the exponential fit, then the network is fractal.
     if frac_score > exp_score:
         # If verbose is True, print the results.
         if verbose:
-            print("This network is fractal.")
-            print("Power law score: {0}.".format(frac_score))
-            print("Exponential score: {0}.".format(exp_score))
+            print("This network is fractal with box dimension {:.4f}.".format(-1 * exp_c))
+            print("Power law score: {:.4f}.".format(frac_score))
+            print("Exponential score: {:.4f}.".format(exp_score))
         return True
     # If the exponential fit is better than the power-law then the network is non-fractal.
     else:
         # If verbose is True, print the results.
         if verbose:
-            print("This network is fractal.")
-            print("Power law score: {0}.".format(frac_score))
-            print("Exponential score: {0}.".format(exp_score))
+            print("This network is non-fractal.")
+            print("Power law score: {:.4f}.".format(frac_score))
+            print("Exponential score: {:.4f}.".format(exp_score))
         return False
