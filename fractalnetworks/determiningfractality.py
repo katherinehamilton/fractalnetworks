@@ -4,218 +4,136 @@ from .maximumexcludedmassburning import *
 from .utilities import *
 from .greedyalgorithm import *
 
-import tqdm
+from tqdm import tqdm
+from sklearn.linear_model import LinearRegression
 
-def calculate_lB_NB_dist(G, diam=None, method=degree_based_MEMB, min_lB=3):
+
+def calculate_lB_NB_dist(G, diam=None, normalise=False, lB_min=2, save_path=None, colouring_ordering_method=None):
     """
     Finds the distribution of the optimal number of boxes NB against the diameter of these boxes lB.
 
     Args:
         G (igraph.Graph): The network to be analysed.
-        diam (int) (opt): The diameter of the network G. The default is None, and note that if no diameter is given the algorithm will calculate it which is expensive for large networks.
-        method (func): The method used to calculate the box covering. Default is the degree based amended MEMB algorithm (see [2]).
-        min_lB (int): The first value of lB to calculate NB from. Default is 3.
+        diam (:obj:`int`, optional): The diameter of the network G. The default is None, and note that if no diameter is given the algorithm will calculate it which is expensive for large networks.
+        normalise (:obj:`bool`, optional): If True, normalises the number of boxes over the total number of nodes in the network. Default is False.
+        lB_min (:obj:`int`, optional): The minimum value of box diameter used to cover the network. Default is 2.
+        save_path (:obj:`str`, optional): The filepath to save the results of the lB-NB distribution to. If none given, results are not saved.
+        colouring_ordering_method (:obj:`func`, optional): The method by which to order the nodes for the greedy colouring algorithm. If none given, nodes are ordered lexicographically.
 
     Returns:
-        lB (list): List of values for the box diameters lB.
-        NB (list): List of the corresponding optimal number of boxes.
+        (list): List of values for the box diameters lB.
+        (list): List of the corresponding optimal number of boxes NB.
     """
 
     # If no diameter is given for the network then it is calculated using networkX.
     if diam == None:
         diam = G.diameter()
 
-    # The MEMB algorithm only works for odd numbers (see MEMB function docstrings or [2] for explanation).
-    # Therefore, find the next biggest odd number.
-    nearest_odd = int(np.ceil(diam) // 2 * 2 + 1)
+    # If an ordering method is specified, order nodes according to that scheme.
+    # Otherwise the nodes are handled in lexicographical order.
+    if colouring_ordering_method:
+        ordering = colouring_ordering_method(G)
+    else:
+        ordering = [i for i in range(G.vcount())]
 
-    # Take all possible (odd) values of lB from 1 to the diameter of the network.
-    lB = [i for i in range(min_lB, nearest_odd + 2, 2)]
-
-    # Initialise an empty list for the values of NB.
+    # Calculate NB for all lB with the given method and diameter.
     NB = []
+    lB = [l for l in range(lB_min, diam + 2)]
 
-    N = G.vcount()
+    # Iterate through all the possible values of l
+    for l, _ in zip(lB, tqdm(range(1, len(lB) + 1))):
+        # If l is even, apply the greedy box covering algorithm.
+        if l % 2 == 0:
+            # Find the number of boxes.
+            _, N = greedy_box_covering(G, l, node_order=ordering)
+            # Take the minimum of this value and the previous calculated NB as the next NB
+            if l > 2:
+                previous_N = NB[-1]
+                N = min(previous_N, N)
+        # If l is odd, use the accelerated MEMB method.
+        else:
+            centres, _ = accelerated_MEMB(G, l)
+            N = len(centres)
+        # Add the new value of NB to the list
+        NB.append(N)
 
-    # Iterate through all possible values of lB.
-    for l in lB:
-        centres = method(G, l) # Find the list of centres using the given method.
-        NB.append(len(centres)) # Add the number of boxes (length of the list of centres) to the list NB.
+    # If normalise is True, normalise each result over the number of nodes in the network.
+    if normalise == True:
+        N = G.vcount()
+        NB = [x / N for x in NB]
 
-    # Return the complete list of lB and NB values.
+    # If a save path is given, save the results to a csv file.
+    if save_path:
+        to_write = np.row_stack((lB, NB))
+        np.savetxt(save_path, to_write, delimiter=",")
+
     return lB, NB
 
-
-def is_fractal(G, diam=None, plot=False, verbose=False, normalise=False, lB_min=2, save_path=None,
-               colouring_ordering_method=None, step=1):
+def is_fractal(results_filepath, plot=False, verbose=False):
     """
-    Determines whether a network is fractal or not depending on the sum of squares regression score for the fractal and exponential fits.
+    Tests if a given lB-NB distribution is a power-law or exponential, thus determining if a network is fractal or non-fractal.
 
     Args:
-        G (igraph.Graph): The network to be analysed.
-        diam (int): The diameter of the graph. If None, calculates the diameter. Default is None.
-        plot (Bool): If True, plot a comparison of the best fits. Default is False.
-        verbose (Bool): If True, print statements with the fractal and non fractal values. Default is False.
-
+        results_filepath (string): The filepath for the csv file storing the lB-NB distribution.
+        plot (:obj:`bool`, optional): If True, a comparison of the relationship between lB and NB is plotted on a log-log scale and a log scale.
+        verbose (:obj:`bool`, optional): If True, the results are displayed.
     Returns:
-        lB (list): A list of box diameters for the covering.
-        NB (list): A list of the number of boxes needed to cover the network.
-        (Bool): True if the network is determined to be fractal, False otherwise.
+        bool: True if the network is fractal, False otherwise.
     """
+    # Read the lB-NB distribution from the csv file.
+    lB, NB = read_lB_NB_from_csv(results_filepath)
 
-    if diam == None:
-        diam = G.diameter()
-
-    if colouring_ordering_method:
-        ordering = colouring_ordering_method(G)
-    else:
-        ordering = [i for i in range(G.vcount())]
-
-    # Calculate NB for all lB with the given method and diameter.
-    NB = []
-    lB = [l for l in range(lB_min, diam + 2)]
-
-    for l, _ in zip(lB, tqdm(range(1, len(lB) + 1, step))):
-        if l % 2 == 0:
-            _, N = greedy_box_covering(G, l, node_order=ordering)
-            if l > 2:
-                previous_N = NB[-1]
-                N = min(previous_N, N)
-        else:
-            centres, _ = accelerated_MEMB(G, l)
-            N = len(centres)
-        NB.append(N)
-
-    if save_path:
-        to_write = np.row_stack((lB, NB))
-        np.savetxt(save_path, to_write, delimiter=",")
-
-    if normalise == True:
-        N = G.vcount()
-        NB = [x / N for x in NB]
-
-    # Find the best fractal fit.
-    (frac_A, frac_c), frac_score = find_best_fit_iteratively(lB, NB, find_best_fractal_fit)
-
-    # Find the best exponential fit.
-    (exp_A, exp_c), exp_score = find_best_fit_iteratively(lB, NB, find_best_exp_fit)
-
-    print(frac_score / exp_score)
-    print(exp_score / frac_score)
-    print("Power Law Parameters", frac_A, frac_c)
-    print("Exponential Parameters", exp_A, exp_c)
-
-    # If verbose, print a statement with both scores.
-    if verbose:
-        print("The SSR score for the fractal model is {0} and for the non-fractal model is {1}.".format(frac_score,
-                                                                                                        exp_score))
-
-    # If the fractal score is less than the exponential score, then the network is fractal.
-    if frac_score < exp_score:
-        # If verbose, print such a statement.
-        if verbose:
-            print("This network is fractal.")
-        # If plot is True then plot a comparison of the best fits (see Section 4).
-        if plot:
-            plot_best_fit_comparison(lB, NB, exp_A, exp_c, exp_score, frac_A, frac_c, frac_score)
-        # Return True if the network is fractal.
-        return lB, NB, True
-    # If the fractal score is greater than the exponential score, then the network is non-fractal.
-    else:
-        # If verbose, print such a statement.
-        if verbose:
-            print("This network is non-fractal.")
-        # If plot is True then plot a comparison of the best fits (see Section 4).
-        if plot:
-            plot_best_fit_comparison(lB, NB, exp_A, exp_c, exp_score, frac_A, frac_c, frac_score)
-        # Return False if the network is fractal.
-        return lB, NB, False
-
-
-def is_fractal_by_logarithm(G, diam=None, plot=False, verbose=False, normalise=False, lB_min=2, save_path=None,
-                            colouring_ordering_method=None):
-    """
-    Determines whether a network is fractal or not depending on the sum of squares regression score for the fractal and exponential fits.
-
-    Args:
-        G (igraph.Graph): The network to be analysed.
-        diam (int): The diameter of the graph. If None, calculates the diameter. Default is None.
-        plot (Bool): If True, plot a comparison of the best fits. Default is False.
-        verbose (Bool): If True, print statements with the fractal and non fractal values. Default is False.
-
-    Returns:
-        lB (list): A list of box diameters for the covering.
-        NB (list): A list of the number of boxes needed to cover the network.
-        (Bool): True if the network is determined to be fractal, False otherwise.
-    """
-
-    if diam == None:
-        diam = G.diameter()
-
-    if colouring_ordering_method:
-        ordering = colouring_ordering_method(G)
-    else:
-        ordering = [i for i in range(G.vcount())]
-
-    # Calculate NB for all lB with the given method and diameter.
-    NB = []
-    lB = [l for l in range(lB_min, diam + 2)]
-
-    for l, _ in zip(lB, tqdm(range(1, len(lB) + 1))):
-        if l % 2 == 0:
-            _, N = greedy_box_covering(G, l, node_order=ordering)
-            if l > 2:
-                previous_N = NB[-1]
-                N = min(previous_N, N)
-        else:
-            centres, _ = accelerated_MEMB(G, l)
-            N = len(centres)
-        NB.append(N)
-
-    if save_path:
-        to_write = np.row_stack((lB, NB))
-        np.savetxt(save_path, to_write, delimiter=",")
-
-    if normalise == True:
-        N = G.vcount()
-        NB = [x / N for x in NB]
-
+    # Find the logarithms of the box diameter lB and the number of boxes NB.
     loglB = [math.log(l) for l in lB]
     logNB = [math.log(n) for n in NB]
 
-    # Find the best fractal fit.
-    (frac_A, frac_c), frac_score = find_best_fit_iteratively(loglB, logNB, find_best_linear_fit)
+    # Convert the lists to arrays.
+    x = np.array(loglB).reshape((-1, 1))
+    y = np.array(logNB)
 
-    # Find the best exponential fit.
-    (exp_A, exp_c), exp_score = find_best_fit_iteratively(lB, logNB, find_best_linear_fit)
+    # Fit a linear model
+    model = LinearRegression()
+    model.fit(x, y)
+    # Find the regression score of the model
+    frac_score = model.score(x, y)
+    frac_A = model.intercept_
+    frac_c = model.coef_[0]
 
-    print(frac_score / exp_score)
-    print(exp_score / frac_score)
-    print("Power Law Parameters", frac_A, frac_c)
-    print("Exponential Parameters", exp_A, exp_c)
+    # Convert the lists to arrays.
+    x = np.array(lB).reshape((-1, 1))
+    y = np.array(logNB)
 
-    # If verbose, print a statement with both scores.
-    if verbose:
-        print("The SSR score for the fractal model is {0} and for the non-fractal model is {1}.".format(frac_score,
-                                                                                                        exp_score))
+    # Fit a linear model
+    model = LinearRegression()
+    model.fit(x, y)
+    # Find the regression score of the model
+    exp_score = model.score(x, y)
+    exp_A = model.intercept_
+    exp_c = model.coef_[0]
 
-    # If the fractal score is less than the exponential score, then the network is fractal.
-    if frac_score < exp_score:
-        # If verbose, print such a statement.
+    # Plot the exponential and power law relationship
+    if plot:
+        fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(8, 3))
+        axes[0].plot(loglB, logNB)
+        axes[0].plot(loglB, [(frac_c) * l + frac_A for l in loglB])
+        axes[1].plot(lB, logNB)
+        axes[1].plot(lB, [(exp_c) * l + exp_A for l in lB])
+        plt.show()
+        plt.close()
+
+    # If the fractal power-law fit is better than the exponential fit, then the network is fractal.
+    if frac_score > exp_score:
+        # If verbose is True, print the results.
         if verbose:
             print("This network is fractal.")
-        # If plot is True then plot a comparison of the best fits (see Section 4).
-        if plot:
-            plot_best_fit_comparison_by_logarithm(lB, NB, exp_A, exp_c, exp_score, frac_A, frac_c, frac_score)
-        # Return True if the network is fractal.
-        return lB, NB, True
-    # If the fractal score is greater than the exponential score, then the network is non-fractal.
+            print("Power law score: {0}.".format(frac_score))
+            print("Exponential score: {0}.".format(exp_score))
+        return True
+    # If the exponential fit is better than the power-law then the network is non-fractal.
     else:
-        # If verbose, print such a statement.
+        # If verbose is True, print the results.
         if verbose:
-            print("This network is non-fractal.")
-        # If plot is True then plot a comparison of the best fits (see Section 4).
-        if plot:
-            plot_best_fit_comparison_by_logarithm(lB, NB, exp_A, exp_c, exp_score, frac_A, frac_c, frac_score)
-        # Return False if the network is fractal.
-        return lB, NB, False
+            print("This network is fractal.")
+            print("Power law score: {0}.".format(frac_score))
+            print("Exponential score: {0}.".format(exp_score))
+        return False
