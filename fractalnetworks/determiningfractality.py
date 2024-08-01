@@ -83,7 +83,7 @@ def is_fractal(results_filepath, plot=False, verbose=False, save_path=None):
         bool: True if the network is fractal, False otherwise.
     """
     # Read the lB-NB distribution from the csv file.
-    lB, NB = fn.read_lB_NB_from_csv(results_filepath)
+    lB, NB = read_lB_NB_from_csv(results_filepath)
 
     # Find the logarithms of the box diameter lB and the number of boxes NB.
     loglB = [math.log(l) for l in lB]
@@ -137,7 +137,13 @@ def is_fractal(results_filepath, plot=False, verbose=False, save_path=None):
     if frac_score > exp_score:
         # If verbose is True, print the results.
         if verbose:
-            _, dB, _ = find_fractal_dimension(loglB, logNB)
+            A, dB, _ = find_fractal_dimension(loglB, logNB)
+            # Plot the fractal dimension
+            plt.plot(loglB, logNB, color='navy')
+            plt.plot(loglB, [A + dB * l for l in loglB], ':', color='crimson')
+            plt.xlabel('$\ln \ell_B$')
+            plt.ylabel('$\ln N_B$')
+            plt.show()
             print("This network is fractal with box dimension {:.4f}.".format(-1 * dB))
             print("Power law score: {:.4f}.".format(frac_score))
             print("Exponential score: {:.4f}.".format(exp_score))
@@ -151,7 +157,6 @@ def is_fractal(results_filepath, plot=False, verbose=False, save_path=None):
             print("Exponential score: {:.4f}.".format(exp_score))
         return False
 
-
 def find_fractal_dimension(loglB, logNB):
     """
     Finds the fractal dimension of a fractal network given the lB, NB distribution.
@@ -161,8 +166,8 @@ def find_fractal_dimension(loglB, logNB):
     best_A = None
     best_c = None
 
-    # Look at sections of the curve at least 1/2 the full length.
-    for p in [0.5, 0.6, 0.7, 0.8, 0.9, 1.0]:
+    # Look at sections of the curve at least 70% of the full length.
+    for p in [0.7, 0.8, 0.9, 1.0]:
         # Find the best score over portions of that width
         (A, c), score = find_best_range(loglB, logNB, percentage=p)
         # If this is better than the previous portion, then update the variables.
