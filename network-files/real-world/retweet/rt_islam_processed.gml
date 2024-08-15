@@ -1,4 +1,4 @@
-Creator "igraph version 0.10.12 Tue Aug  6 11:34:59 2024"
+Creator "igraph version 0.10.12 Sat Aug 10 12:39:02 2024"
 Version 1
 graph
 [
@@ -22492,23080 +22492,27696 @@ graph
   [
     source 1
     target 0
+    weight 1
   ]
   edge
   [
     source 2
     target 0
+    weight 1
   ]
   edge
   [
     source 3
     target 0
+    weight 1
   ]
   edge
   [
     source 4
     target 0
+    weight 1
   ]
   edge
   [
     source 5
     target 0
+    weight 1
   ]
   edge
   [
     source 6
     target 0
+    weight 1
   ]
   edge
   [
     source 7
     target 0
+    weight 1
   ]
   edge
   [
     source 2890
     target 1
+    weight 1
   ]
   edge
   [
     source 2724
     target 2
+    weight 1
   ]
   edge
   [
     source 9
     target 8
+    weight 1
   ]
   edge
   [
     source 3203
     target 8
+    weight 1
   ]
   edge
   [
     source 3678
     target 9
+    weight 1
   ]
   edge
   [
     source 11
     target 10
+    weight 1
   ]
   edge
   [
     source 12
     target 10
+    weight 1
   ]
   edge
   [
     source 13
     target 10
+    weight 1
   ]
   edge
   [
     source 14
     target 10
+    weight 1
   ]
   edge
   [
     source 15
     target 10
+    weight 1
   ]
   edge
   [
     source 16
     target 10
+    weight 1
   ]
   edge
   [
     source 17
     target 10
+    weight 1
   ]
   edge
   [
     source 18
     target 10
+    weight 1
   ]
   edge
   [
     source 19
     target 10
+    weight 1
   ]
   edge
   [
     source 20
     target 10
+    weight 1
   ]
   edge
   [
     source 21
     target 10
+    weight 1
   ]
   edge
   [
     source 22
     target 10
+    weight 1
   ]
   edge
   [
     source 23
     target 10
+    weight 1
   ]
   edge
   [
     source 24
     target 10
+    weight 1
   ]
   edge
   [
     source 25
     target 10
+    weight 1
   ]
   edge
   [
     source 26
     target 10
+    weight 1
   ]
   edge
   [
     source 27
     target 10
+    weight 1
   ]
   edge
   [
     source 28
     target 10
+    weight 1
   ]
   edge
   [
     source 29
     target 10
+    weight 1
   ]
   edge
   [
     source 30
     target 10
+    weight 1
   ]
   edge
   [
     source 31
     target 10
+    weight 1
   ]
   edge
   [
     source 32
     target 10
+    weight 1
   ]
   edge
   [
     source 33
     target 10
+    weight 1
   ]
   edge
   [
     source 34
     target 10
+    weight 1
   ]
   edge
   [
     source 35
     target 10
+    weight 1
   ]
   edge
   [
     source 36
     target 10
+    weight 1
   ]
   edge
   [
     source 37
     target 10
+    weight 1
   ]
   edge
   [
     source 38
     target 10
+    weight 1
   ]
   edge
   [
     source 39
     target 10
+    weight 1
   ]
   edge
   [
     source 40
     target 10
+    weight 1
   ]
   edge
   [
     source 41
     target 10
+    weight 1
   ]
   edge
   [
     source 42
     target 10
+    weight 1
   ]
   edge
   [
     source 43
     target 10
+    weight 1
   ]
   edge
   [
     source 44
     target 10
+    weight 1
   ]
   edge
   [
     source 45
     target 10
+    weight 1
   ]
   edge
   [
     source 46
     target 10
+    weight 1
   ]
   edge
   [
     source 47
     target 10
+    weight 1
   ]
   edge
   [
     source 48
     target 10
+    weight 1
   ]
   edge
   [
     source 49
     target 10
+    weight 1
   ]
   edge
   [
     source 50
     target 10
+    weight 1
   ]
   edge
   [
     source 51
     target 10
+    weight 1
   ]
   edge
   [
     source 52
     target 10
+    weight 1
   ]
   edge
   [
     source 53
     target 10
+    weight 1
   ]
   edge
   [
     source 54
     target 10
+    weight 1
   ]
   edge
   [
     source 55
     target 10
+    weight 1
   ]
   edge
   [
     source 56
     target 10
+    weight 1
   ]
   edge
   [
     source 57
     target 10
+    weight 1
   ]
   edge
   [
     source 58
     target 10
+    weight 1
   ]
   edge
   [
     source 59
     target 10
+    weight 1
   ]
   edge
   [
     source 60
     target 10
+    weight 1
   ]
   edge
   [
     source 61
     target 10
+    weight 1
   ]
   edge
   [
     source 62
     target 10
+    weight 1
   ]
   edge
   [
     source 63
     target 10
+    weight 1
   ]
   edge
   [
     source 64
     target 10
+    weight 1
   ]
   edge
   [
     source 65
     target 10
+    weight 1
   ]
   edge
   [
     source 66
     target 10
+    weight 1
   ]
   edge
   [
     source 67
     target 10
+    weight 1
   ]
   edge
   [
     source 68
     target 10
+    weight 1
   ]
   edge
   [
     source 69
     target 10
+    weight 1
   ]
   edge
   [
     source 70
     target 10
+    weight 1
   ]
   edge
   [
     source 71
     target 10
+    weight 1
   ]
   edge
   [
     source 72
     target 10
+    weight 1
   ]
   edge
   [
     source 73
     target 10
+    weight 1
   ]
   edge
   [
     source 74
     target 10
+    weight 1
   ]
   edge
   [
     source 75
     target 10
+    weight 1
   ]
   edge
   [
     source 76
     target 10
+    weight 1
   ]
   edge
   [
     source 77
     target 10
+    weight 1
   ]
   edge
   [
     source 78
     target 10
+    weight 1
   ]
   edge
   [
     source 79
     target 10
+    weight 1
   ]
   edge
   [
     source 80
     target 10
+    weight 1
   ]
   edge
   [
     source 81
     target 10
+    weight 1
   ]
   edge
   [
     source 82
     target 10
+    weight 1
   ]
   edge
   [
     source 83
     target 10
+    weight 1
   ]
   edge
   [
     source 84
     target 10
+    weight 1
   ]
   edge
   [
     source 85
     target 10
+    weight 1
   ]
   edge
   [
     source 86
     target 10
+    weight 1
   ]
   edge
   [
     source 87
     target 10
+    weight 1
   ]
   edge
   [
     source 88
     target 10
+    weight 1
   ]
   edge
   [
     source 89
     target 10
+    weight 1
   ]
   edge
   [
     source 90
     target 10
+    weight 1
   ]
   edge
   [
     source 91
     target 10
+    weight 1
   ]
   edge
   [
     source 92
     target 10
+    weight 1
   ]
   edge
   [
     source 93
     target 10
+    weight 1
   ]
   edge
   [
     source 94
     target 10
+    weight 1
   ]
   edge
   [
     source 95
     target 10
+    weight 1
   ]
   edge
   [
     source 96
     target 10
+    weight 1
   ]
   edge
   [
     source 97
     target 10
+    weight 1
   ]
   edge
   [
     source 98
     target 10
+    weight 1
   ]
   edge
   [
     source 99
     target 10
+    weight 1
   ]
   edge
   [
     source 100
     target 10
+    weight 1
   ]
   edge
   [
     source 101
     target 10
+    weight 1
   ]
   edge
   [
     source 102
     target 10
+    weight 1
   ]
   edge
   [
     source 103
     target 10
+    weight 1
   ]
   edge
   [
     source 104
     target 10
+    weight 1
   ]
   edge
   [
     source 105
     target 10
+    weight 1
   ]
   edge
   [
     source 106
     target 10
+    weight 1
   ]
   edge
   [
     source 107
     target 10
+    weight 1
   ]
   edge
   [
     source 108
     target 10
+    weight 1
   ]
   edge
   [
     source 109
     target 10
+    weight 1
   ]
   edge
   [
     source 110
     target 10
+    weight 1
   ]
   edge
   [
     source 111
     target 10
+    weight 1
   ]
   edge
   [
     source 112
     target 10
+    weight 1
   ]
   edge
   [
     source 113
     target 10
+    weight 1
   ]
   edge
   [
     source 114
     target 10
+    weight 1
   ]
   edge
   [
     source 115
     target 10
+    weight 1
   ]
   edge
   [
     source 116
     target 10
+    weight 1
   ]
   edge
   [
     source 117
     target 10
+    weight 1
   ]
   edge
   [
     source 118
     target 10
+    weight 1
   ]
   edge
   [
     source 119
     target 10
+    weight 1
   ]
   edge
   [
     source 120
     target 10
+    weight 1
   ]
   edge
   [
     source 121
     target 10
+    weight 1
   ]
   edge
   [
     source 122
     target 10
+    weight 1
   ]
   edge
   [
     source 123
     target 10
+    weight 1
   ]
   edge
   [
     source 124
     target 10
+    weight 1
   ]
   edge
   [
     source 125
     target 10
+    weight 1
   ]
   edge
   [
     source 126
     target 10
+    weight 1
   ]
   edge
   [
     source 127
     target 10
+    weight 1
   ]
   edge
   [
     source 128
     target 10
+    weight 1
   ]
   edge
   [
     source 129
     target 10
+    weight 1
   ]
   edge
   [
     source 130
     target 10
+    weight 1
   ]
   edge
   [
     source 131
     target 10
+    weight 1
   ]
   edge
   [
     source 132
     target 10
+    weight 1
   ]
   edge
   [
     source 133
     target 10
+    weight 1
   ]
   edge
   [
     source 134
     target 10
+    weight 1
   ]
   edge
   [
     source 135
     target 10
+    weight 1
   ]
   edge
   [
     source 136
     target 10
+    weight 1
   ]
   edge
   [
     source 137
     target 10
+    weight 1
   ]
   edge
   [
     source 138
     target 10
+    weight 1
   ]
   edge
   [
     source 139
     target 10
+    weight 1
   ]
   edge
   [
     source 140
     target 10
+    weight 1
   ]
   edge
   [
     source 141
     target 10
+    weight 1
   ]
   edge
   [
     source 142
     target 10
+    weight 1
   ]
   edge
   [
     source 143
     target 10
+    weight 1
   ]
   edge
   [
     source 144
     target 10
+    weight 1
   ]
   edge
   [
     source 145
     target 10
+    weight 1
   ]
   edge
   [
     source 146
     target 10
+    weight 1
   ]
   edge
   [
     source 147
     target 10
+    weight 1
   ]
   edge
   [
     source 148
     target 10
+    weight 1
   ]
   edge
   [
     source 149
     target 10
+    weight 1
   ]
   edge
   [
     source 150
     target 10
+    weight 1
   ]
   edge
   [
     source 151
     target 10
+    weight 1
   ]
   edge
   [
     source 152
     target 10
+    weight 1
   ]
   edge
   [
     source 153
     target 10
+    weight 1
   ]
   edge
   [
     source 154
     target 10
+    weight 1
   ]
   edge
   [
     source 155
     target 10
+    weight 1
   ]
   edge
   [
     source 156
     target 10
+    weight 1
   ]
   edge
   [
     source 157
     target 10
+    weight 1
   ]
   edge
   [
     source 158
     target 10
+    weight 1
   ]
   edge
   [
     source 159
     target 10
+    weight 1
   ]
   edge
   [
     source 160
     target 10
+    weight 1
   ]
   edge
   [
     source 161
     target 10
+    weight 1
   ]
   edge
   [
     source 162
     target 10
+    weight 1
   ]
   edge
   [
     source 163
     target 10
+    weight 1
   ]
   edge
   [
     source 164
     target 10
+    weight 1
   ]
   edge
   [
     source 165
     target 10
+    weight 1
   ]
   edge
   [
     source 166
     target 10
+    weight 1
   ]
   edge
   [
     source 167
     target 10
+    weight 1
   ]
   edge
   [
     source 168
     target 10
+    weight 1
   ]
   edge
   [
     source 169
     target 10
+    weight 1
   ]
   edge
   [
     source 170
     target 10
+    weight 1
   ]
   edge
   [
     source 171
     target 10
+    weight 1
   ]
   edge
   [
     source 172
     target 10
+    weight 1
   ]
   edge
   [
     source 173
     target 10
+    weight 1
   ]
   edge
   [
     source 174
     target 10
+    weight 1
   ]
   edge
   [
     source 175
     target 10
+    weight 1
   ]
   edge
   [
     source 176
     target 10
+    weight 1
   ]
   edge
   [
     source 177
     target 10
+    weight 1
   ]
   edge
   [
     source 178
     target 10
+    weight 1
   ]
   edge
   [
     source 179
     target 10
+    weight 1
   ]
   edge
   [
     source 180
     target 10
+    weight 1
   ]
   edge
   [
     source 181
     target 10
+    weight 1
   ]
   edge
   [
     source 182
     target 10
+    weight 1
   ]
   edge
   [
     source 183
     target 10
+    weight 1
   ]
   edge
   [
     source 184
     target 10
+    weight 1
   ]
   edge
   [
     source 185
     target 10
+    weight 1
   ]
   edge
   [
     source 186
     target 10
+    weight 1
   ]
   edge
   [
     source 187
     target 10
+    weight 1
   ]
   edge
   [
     source 188
     target 10
+    weight 1
   ]
   edge
   [
     source 189
     target 10
+    weight 1
   ]
   edge
   [
     source 190
     target 10
+    weight 1
   ]
   edge
   [
     source 191
     target 10
+    weight 1
   ]
   edge
   [
     source 192
     target 10
+    weight 1
   ]
   edge
   [
     source 193
     target 10
+    weight 1
   ]
   edge
   [
     source 194
     target 10
+    weight 1
   ]
   edge
   [
     source 195
     target 10
+    weight 1
   ]
   edge
   [
     source 196
     target 10
+    weight 1
   ]
   edge
   [
     source 197
     target 10
+    weight 1
   ]
   edge
   [
     source 198
     target 10
+    weight 1
   ]
   edge
   [
     source 199
     target 10
+    weight 1
   ]
   edge
   [
     source 200
     target 10
+    weight 1
   ]
   edge
   [
     source 201
     target 10
+    weight 1
   ]
   edge
   [
     source 202
     target 10
+    weight 1
   ]
   edge
   [
     source 203
     target 10
+    weight 1
   ]
   edge
   [
     source 204
     target 10
+    weight 1
   ]
   edge
   [
     source 205
     target 10
+    weight 1
   ]
   edge
   [
     source 206
     target 10
+    weight 1
   ]
   edge
   [
     source 207
     target 10
+    weight 1
   ]
   edge
   [
     source 208
     target 10
+    weight 1
   ]
   edge
   [
     source 209
     target 10
+    weight 1
   ]
   edge
   [
     source 210
     target 10
+    weight 1
   ]
   edge
   [
     source 211
     target 10
+    weight 1
   ]
   edge
   [
     source 212
     target 10
+    weight 1
   ]
   edge
   [
     source 213
     target 10
+    weight 1
   ]
   edge
   [
     source 214
     target 10
+    weight 1
   ]
   edge
   [
     source 215
     target 10
+    weight 1
   ]
   edge
   [
     source 216
     target 10
+    weight 1
   ]
   edge
   [
     source 217
     target 10
+    weight 1
   ]
   edge
   [
     source 218
     target 10
+    weight 1
   ]
   edge
   [
     source 219
     target 10
+    weight 1
   ]
   edge
   [
     source 220
     target 10
+    weight 1
   ]
   edge
   [
     source 221
     target 10
+    weight 1
   ]
   edge
   [
     source 222
     target 10
+    weight 1
   ]
   edge
   [
     source 223
     target 10
+    weight 1
   ]
   edge
   [
     source 224
     target 10
+    weight 1
   ]
   edge
   [
     source 225
     target 10
+    weight 1
   ]
   edge
   [
     source 226
     target 10
+    weight 1
   ]
   edge
   [
     source 227
     target 10
+    weight 1
   ]
   edge
   [
     source 228
     target 10
+    weight 1
   ]
   edge
   [
     source 229
     target 10
+    weight 1
   ]
   edge
   [
     source 230
     target 10
+    weight 1
   ]
   edge
   [
     source 231
     target 10
+    weight 1
   ]
   edge
   [
     source 232
     target 10
+    weight 1
   ]
   edge
   [
     source 233
     target 10
+    weight 1
   ]
   edge
   [
     source 234
     target 10
+    weight 1
   ]
   edge
   [
     source 235
     target 10
+    weight 1
   ]
   edge
   [
     source 236
     target 10
+    weight 1
   ]
   edge
   [
     source 237
     target 10
+    weight 1
   ]
   edge
   [
     source 238
     target 10
+    weight 1
   ]
   edge
   [
     source 239
     target 10
+    weight 1
   ]
   edge
   [
     source 240
     target 10
+    weight 1
   ]
   edge
   [
     source 241
     target 10
+    weight 1
   ]
   edge
   [
     source 242
     target 10
+    weight 1
   ]
   edge
   [
     source 243
     target 10
+    weight 1
   ]
   edge
   [
     source 244
     target 10
+    weight 1
   ]
   edge
   [
     source 245
     target 10
+    weight 1
   ]
   edge
   [
     source 246
     target 10
+    weight 1
   ]
   edge
   [
     source 247
     target 10
+    weight 1
   ]
   edge
   [
     source 248
     target 10
+    weight 1
   ]
   edge
   [
     source 249
     target 10
+    weight 1
   ]
   edge
   [
     source 250
     target 10
+    weight 1
   ]
   edge
   [
     source 251
     target 10
+    weight 1
   ]
   edge
   [
     source 252
     target 10
+    weight 1
   ]
   edge
   [
     source 253
     target 10
+    weight 1
   ]
   edge
   [
     source 254
     target 10
+    weight 1
   ]
   edge
   [
     source 255
     target 10
+    weight 1
   ]
   edge
   [
     source 256
     target 10
+    weight 1
   ]
   edge
   [
     source 257
     target 10
+    weight 1
   ]
   edge
   [
     source 258
     target 10
+    weight 1
   ]
   edge
   [
     source 259
     target 10
+    weight 1
   ]
   edge
   [
     source 260
     target 10
+    weight 1
   ]
   edge
   [
     source 261
     target 10
+    weight 1
   ]
   edge
   [
     source 262
     target 10
+    weight 1
   ]
   edge
   [
     source 263
     target 10
+    weight 1
   ]
   edge
   [
     source 264
     target 10
+    weight 1
   ]
   edge
   [
     source 265
     target 10
+    weight 1
   ]
   edge
   [
     source 266
     target 10
+    weight 1
   ]
   edge
   [
     source 267
     target 10
+    weight 1
   ]
   edge
   [
     source 268
     target 10
+    weight 1
   ]
   edge
   [
     source 269
     target 10
+    weight 1
   ]
   edge
   [
     source 270
     target 10
+    weight 1
   ]
   edge
   [
     source 271
     target 10
+    weight 1
   ]
   edge
   [
     source 272
     target 10
+    weight 1
   ]
   edge
   [
     source 273
     target 10
+    weight 1
   ]
   edge
   [
     source 274
     target 10
+    weight 1
   ]
   edge
   [
     source 275
     target 10
+    weight 1
   ]
   edge
   [
     source 276
     target 10
+    weight 1
   ]
   edge
   [
     source 277
     target 10
+    weight 1
   ]
   edge
   [
     source 278
     target 10
+    weight 1
   ]
   edge
   [
     source 279
     target 10
+    weight 1
   ]
   edge
   [
     source 280
     target 10
+    weight 1
   ]
   edge
   [
     source 281
     target 10
+    weight 1
   ]
   edge
   [
     source 282
     target 10
+    weight 1
   ]
   edge
   [
     source 283
     target 10
+    weight 1
   ]
   edge
   [
     source 284
     target 10
+    weight 1
   ]
   edge
   [
     source 285
     target 10
+    weight 1
   ]
   edge
   [
     source 286
     target 10
+    weight 1
   ]
   edge
   [
     source 287
     target 10
+    weight 1
   ]
   edge
   [
     source 288
     target 10
+    weight 1
   ]
   edge
   [
     source 289
     target 10
+    weight 1
   ]
   edge
   [
     source 290
     target 10
+    weight 1
   ]
   edge
   [
     source 291
     target 10
+    weight 1
   ]
   edge
   [
     source 292
     target 10
+    weight 1
   ]
   edge
   [
     source 293
     target 10
+    weight 1
   ]
   edge
   [
     source 294
     target 10
+    weight 1
   ]
   edge
   [
     source 295
     target 10
+    weight 1
   ]
   edge
   [
     source 296
     target 10
+    weight 1
   ]
   edge
   [
     source 297
     target 10
+    weight 1
   ]
   edge
   [
     source 298
     target 10
+    weight 1
   ]
   edge
   [
     source 299
     target 10
+    weight 1
   ]
   edge
   [
     source 300
     target 10
+    weight 1
   ]
   edge
   [
     source 301
     target 10
+    weight 1
   ]
   edge
   [
     source 302
     target 10
+    weight 1
   ]
   edge
   [
     source 303
     target 10
+    weight 1
   ]
   edge
   [
     source 304
     target 10
+    weight 1
   ]
   edge
   [
     source 305
     target 10
+    weight 1
   ]
   edge
   [
     source 306
     target 10
+    weight 1
   ]
   edge
   [
     source 307
     target 10
+    weight 1
   ]
   edge
   [
     source 308
     target 10
+    weight 1
   ]
   edge
   [
     source 309
     target 10
+    weight 1
   ]
   edge
   [
     source 310
     target 10
+    weight 1
   ]
   edge
   [
     source 311
     target 10
+    weight 1
   ]
   edge
   [
     source 312
     target 10
+    weight 1
   ]
   edge
   [
     source 313
     target 10
+    weight 1
   ]
   edge
   [
     source 314
     target 10
+    weight 1
   ]
   edge
   [
     source 315
     target 10
+    weight 1
   ]
   edge
   [
     source 316
     target 10
+    weight 1
   ]
   edge
   [
     source 317
     target 10
+    weight 1
   ]
   edge
   [
     source 318
     target 10
+    weight 1
   ]
   edge
   [
     source 319
     target 10
+    weight 1
   ]
   edge
   [
     source 320
     target 10
+    weight 1
   ]
   edge
   [
     source 321
     target 10
+    weight 1
   ]
   edge
   [
     source 322
     target 10
+    weight 1
   ]
   edge
   [
     source 323
     target 10
+    weight 1
   ]
   edge
   [
     source 324
     target 10
+    weight 1
   ]
   edge
   [
     source 325
     target 10
+    weight 1
   ]
   edge
   [
     source 326
     target 10
+    weight 1
   ]
   edge
   [
     source 327
     target 10
+    weight 1
   ]
   edge
   [
     source 328
     target 10
+    weight 1
   ]
   edge
   [
     source 329
     target 10
+    weight 1
   ]
   edge
   [
     source 330
     target 10
+    weight 1
   ]
   edge
   [
     source 331
     target 10
+    weight 1
   ]
   edge
   [
     source 332
     target 10
+    weight 1
   ]
   edge
   [
     source 333
     target 10
+    weight 1
   ]
   edge
   [
     source 334
     target 10
+    weight 1
   ]
   edge
   [
     source 335
     target 10
+    weight 1
   ]
   edge
   [
     source 336
     target 10
+    weight 1
   ]
   edge
   [
     source 337
     target 10
+    weight 1
   ]
   edge
   [
     source 338
     target 10
+    weight 1
   ]
   edge
   [
     source 339
     target 10
+    weight 1
   ]
   edge
   [
     source 340
     target 10
+    weight 1
   ]
   edge
   [
     source 341
     target 10
+    weight 1
   ]
   edge
   [
     source 342
     target 10
+    weight 1
   ]
   edge
   [
     source 343
     target 10
+    weight 1
   ]
   edge
   [
     source 344
     target 10
+    weight 1
   ]
   edge
   [
     source 345
     target 10
+    weight 1
   ]
   edge
   [
     source 346
     target 10
+    weight 1
   ]
   edge
   [
     source 347
     target 10
+    weight 1
   ]
   edge
   [
     source 348
     target 10
+    weight 1
   ]
   edge
   [
     source 349
     target 10
+    weight 1
   ]
   edge
   [
     source 350
     target 10
+    weight 1
   ]
   edge
   [
     source 351
     target 10
+    weight 1
   ]
   edge
   [
     source 352
     target 10
+    weight 1
   ]
   edge
   [
     source 353
     target 10
+    weight 1
   ]
   edge
   [
     source 354
     target 10
+    weight 1
   ]
   edge
   [
     source 355
     target 10
+    weight 1
   ]
   edge
   [
     source 356
     target 10
+    weight 1
   ]
   edge
   [
     source 357
     target 10
+    weight 1
   ]
   edge
   [
     source 358
     target 10
+    weight 1
   ]
   edge
   [
     source 359
     target 10
+    weight 1
   ]
   edge
   [
     source 360
     target 10
+    weight 1
   ]
   edge
   [
     source 361
     target 10
+    weight 1
   ]
   edge
   [
     source 362
     target 10
+    weight 1
   ]
   edge
   [
     source 363
     target 10
+    weight 1
   ]
   edge
   [
     source 364
     target 10
+    weight 1
   ]
   edge
   [
     source 365
     target 10
+    weight 1
   ]
   edge
   [
     source 366
     target 10
+    weight 1
   ]
   edge
   [
     source 367
     target 10
+    weight 1
   ]
   edge
   [
     source 368
     target 10
+    weight 1
   ]
   edge
   [
     source 369
     target 10
+    weight 1
   ]
   edge
   [
     source 370
     target 10
+    weight 1
   ]
   edge
   [
     source 371
     target 10
+    weight 1
   ]
   edge
   [
     source 372
     target 10
+    weight 1
   ]
   edge
   [
     source 373
     target 10
+    weight 1
   ]
   edge
   [
     source 374
     target 10
+    weight 1
   ]
   edge
   [
     source 375
     target 10
+    weight 1
   ]
   edge
   [
     source 376
     target 10
+    weight 1
   ]
   edge
   [
     source 377
     target 10
+    weight 1
   ]
   edge
   [
     source 378
     target 10
+    weight 1
   ]
   edge
   [
     source 379
     target 10
+    weight 1
   ]
   edge
   [
     source 380
     target 10
+    weight 1
   ]
   edge
   [
     source 381
     target 10
+    weight 1
   ]
   edge
   [
     source 382
     target 10
+    weight 1
   ]
   edge
   [
     source 383
     target 10
+    weight 1
   ]
   edge
   [
     source 384
     target 10
+    weight 1
   ]
   edge
   [
     source 385
     target 10
+    weight 1
   ]
   edge
   [
     source 386
     target 10
+    weight 1
   ]
   edge
   [
     source 387
     target 10
+    weight 1
   ]
   edge
   [
     source 388
     target 10
+    weight 1
   ]
   edge
   [
     source 389
     target 10
+    weight 1
   ]
   edge
   [
     source 390
     target 10
+    weight 1
   ]
   edge
   [
     source 391
     target 10
+    weight 1
   ]
   edge
   [
     source 392
     target 10
+    weight 1
   ]
   edge
   [
     source 393
     target 10
+    weight 1
   ]
   edge
   [
     source 394
     target 10
+    weight 1
   ]
   edge
   [
     source 395
     target 10
+    weight 1
   ]
   edge
   [
     source 396
     target 10
+    weight 1
   ]
   edge
   [
     source 397
     target 10
+    weight 1
   ]
   edge
   [
     source 398
     target 10
+    weight 1
   ]
   edge
   [
     source 399
     target 10
+    weight 1
   ]
   edge
   [
     source 400
     target 10
+    weight 1
   ]
   edge
   [
     source 401
     target 10
+    weight 1
   ]
   edge
   [
     source 402
     target 10
+    weight 1
   ]
   edge
   [
     source 403
     target 10
+    weight 1
   ]
   edge
   [
     source 404
     target 10
+    weight 1
   ]
   edge
   [
     source 405
     target 10
+    weight 1
   ]
   edge
   [
     source 406
     target 10
+    weight 1
   ]
   edge
   [
     source 407
     target 10
+    weight 1
   ]
   edge
   [
     source 408
     target 10
+    weight 1
   ]
   edge
   [
     source 409
     target 10
+    weight 1
   ]
   edge
   [
     source 410
     target 10
+    weight 1
   ]
   edge
   [
     source 411
     target 10
+    weight 1
   ]
   edge
   [
     source 412
     target 10
+    weight 1
   ]
   edge
   [
     source 413
     target 10
+    weight 1
   ]
   edge
   [
     source 414
     target 10
+    weight 1
   ]
   edge
   [
     source 415
     target 10
+    weight 1
   ]
   edge
   [
     source 416
     target 10
+    weight 1
   ]
   edge
   [
     source 417
     target 10
+    weight 1
   ]
   edge
   [
     source 418
     target 10
+    weight 1
   ]
   edge
   [
     source 419
     target 10
+    weight 1
   ]
   edge
   [
     source 420
     target 10
+    weight 1
   ]
   edge
   [
     source 421
     target 10
+    weight 1
   ]
   edge
   [
     source 422
     target 10
+    weight 1
   ]
   edge
   [
     source 423
     target 10
+    weight 1
   ]
   edge
   [
     source 424
     target 10
+    weight 1
   ]
   edge
   [
     source 425
     target 10
+    weight 1
   ]
   edge
   [
     source 426
     target 10
+    weight 1
   ]
   edge
   [
     source 427
     target 10
+    weight 1
   ]
   edge
   [
     source 428
     target 10
+    weight 1
   ]
   edge
   [
     source 429
     target 10
+    weight 1
   ]
   edge
   [
     source 430
     target 10
+    weight 1
   ]
   edge
   [
     source 431
     target 10
+    weight 1
   ]
   edge
   [
     source 432
     target 10
+    weight 1
   ]
   edge
   [
     source 433
     target 10
+    weight 1
   ]
   edge
   [
     source 434
     target 10
+    weight 1
   ]
   edge
   [
     source 435
     target 10
+    weight 1
   ]
   edge
   [
     source 436
     target 10
+    weight 1
   ]
   edge
   [
     source 437
     target 10
+    weight 1
   ]
   edge
   [
     source 438
     target 10
+    weight 1
   ]
   edge
   [
     source 439
     target 10
+    weight 1
   ]
   edge
   [
     source 440
     target 10
+    weight 1
   ]
   edge
   [
     source 441
     target 10
+    weight 1
   ]
   edge
   [
     source 442
     target 10
+    weight 1
   ]
   edge
   [
     source 443
     target 10
+    weight 1
   ]
   edge
   [
     source 444
     target 10
+    weight 1
   ]
   edge
   [
     source 445
     target 10
+    weight 1
   ]
   edge
   [
     source 446
     target 10
+    weight 1
   ]
   edge
   [
     source 447
     target 10
+    weight 1
   ]
   edge
   [
     source 448
     target 10
+    weight 1
   ]
   edge
   [
     source 449
     target 10
+    weight 1
   ]
   edge
   [
     source 450
     target 10
+    weight 1
   ]
   edge
   [
     source 451
     target 10
+    weight 1
   ]
   edge
   [
     source 452
     target 10
+    weight 1
   ]
   edge
   [
     source 453
     target 10
+    weight 1
   ]
   edge
   [
     source 454
     target 10
+    weight 1
   ]
   edge
   [
     source 455
     target 10
+    weight 1
   ]
   edge
   [
     source 456
     target 10
+    weight 1
   ]
   edge
   [
     source 457
     target 10
+    weight 1
   ]
   edge
   [
     source 458
     target 10
+    weight 1
   ]
   edge
   [
     source 459
     target 10
+    weight 1
   ]
   edge
   [
     source 460
     target 10
+    weight 1
   ]
   edge
   [
     source 461
     target 10
+    weight 1
   ]
   edge
   [
     source 462
     target 10
+    weight 1
   ]
   edge
   [
     source 463
     target 10
+    weight 1
   ]
   edge
   [
     source 464
     target 10
+    weight 1
   ]
   edge
   [
     source 465
     target 10
+    weight 1
   ]
   edge
   [
     source 466
     target 10
+    weight 1
   ]
   edge
   [
     source 467
     target 10
+    weight 1
   ]
   edge
   [
     source 468
     target 10
+    weight 1
   ]
   edge
   [
     source 469
     target 10
+    weight 1
   ]
   edge
   [
     source 470
     target 10
+    weight 1
   ]
   edge
   [
     source 471
     target 10
+    weight 1
   ]
   edge
   [
     source 472
     target 10
+    weight 1
   ]
   edge
   [
     source 473
     target 10
+    weight 1
   ]
   edge
   [
     source 474
     target 10
+    weight 1
   ]
   edge
   [
     source 475
     target 10
+    weight 1
   ]
   edge
   [
     source 476
     target 10
+    weight 1
   ]
   edge
   [
     source 477
     target 10
+    weight 1
   ]
   edge
   [
     source 478
     target 10
+    weight 1
   ]
   edge
   [
     source 479
     target 10
+    weight 1
   ]
   edge
   [
     source 480
     target 10
+    weight 1
   ]
   edge
   [
     source 481
     target 10
+    weight 1
   ]
   edge
   [
     source 482
     target 10
+    weight 1
   ]
   edge
   [
     source 483
     target 10
+    weight 1
   ]
   edge
   [
     source 484
     target 10
+    weight 1
   ]
   edge
   [
     source 485
     target 10
+    weight 1
   ]
   edge
   [
     source 486
     target 10
+    weight 1
   ]
   edge
   [
     source 487
     target 10
+    weight 1
   ]
   edge
   [
     source 488
     target 10
+    weight 1
   ]
   edge
   [
     source 489
     target 10
+    weight 1
   ]
   edge
   [
     source 490
     target 10
+    weight 1
   ]
   edge
   [
     source 491
     target 10
+    weight 1
   ]
   edge
   [
     source 492
     target 10
+    weight 1
   ]
   edge
   [
     source 493
     target 10
+    weight 1
   ]
   edge
   [
     source 494
     target 10
+    weight 1
   ]
   edge
   [
     source 495
     target 10
+    weight 1
   ]
   edge
   [
     source 496
     target 10
+    weight 1
   ]
   edge
   [
     source 497
     target 10
+    weight 1
   ]
   edge
   [
     source 498
     target 10
+    weight 1
   ]
   edge
   [
     source 499
     target 10
+    weight 1
   ]
   edge
   [
     source 500
     target 10
+    weight 1
   ]
   edge
   [
     source 501
     target 10
+    weight 1
   ]
   edge
   [
     source 502
     target 10
+    weight 1
   ]
   edge
   [
     source 503
     target 10
+    weight 1
   ]
   edge
   [
     source 504
     target 10
+    weight 1
   ]
   edge
   [
     source 505
     target 10
+    weight 1
   ]
   edge
   [
     source 506
     target 10
+    weight 1
   ]
   edge
   [
     source 507
     target 10
+    weight 1
   ]
   edge
   [
     source 508
     target 10
+    weight 1
   ]
   edge
   [
     source 509
     target 10
+    weight 1
   ]
   edge
   [
     source 510
     target 10
+    weight 1
   ]
   edge
   [
     source 511
     target 10
+    weight 1
   ]
   edge
   [
     source 512
     target 10
+    weight 1
   ]
   edge
   [
     source 513
     target 10
+    weight 1
   ]
   edge
   [
     source 514
     target 10
+    weight 1
   ]
   edge
   [
     source 515
     target 10
+    weight 1
   ]
   edge
   [
     source 516
     target 10
+    weight 1
   ]
   edge
   [
     source 517
     target 10
+    weight 1
   ]
   edge
   [
     source 518
     target 10
+    weight 1
   ]
   edge
   [
     source 519
     target 10
+    weight 1
   ]
   edge
   [
     source 520
     target 10
+    weight 1
   ]
   edge
   [
     source 521
     target 10
+    weight 1
   ]
   edge
   [
     source 522
     target 10
+    weight 1
   ]
   edge
   [
     source 523
     target 10
+    weight 1
   ]
   edge
   [
     source 524
     target 10
+    weight 1
   ]
   edge
   [
     source 525
     target 10
+    weight 1
   ]
   edge
   [
     source 526
     target 10
+    weight 1
   ]
   edge
   [
     source 527
     target 10
+    weight 1
   ]
   edge
   [
     source 528
     target 10
+    weight 1
   ]
   edge
   [
     source 529
     target 10
+    weight 1
   ]
   edge
   [
     source 530
     target 10
+    weight 1
   ]
   edge
   [
     source 531
     target 10
+    weight 1
   ]
   edge
   [
     source 532
     target 10
+    weight 1
   ]
   edge
   [
     source 533
     target 10
+    weight 1
   ]
   edge
   [
     source 534
     target 10
+    weight 1
   ]
   edge
   [
     source 535
     target 10
+    weight 1
   ]
   edge
   [
     source 536
     target 10
+    weight 1
   ]
   edge
   [
     source 537
     target 10
+    weight 1
   ]
   edge
   [
     source 538
     target 10
+    weight 1
   ]
   edge
   [
     source 539
     target 10
+    weight 1
   ]
   edge
   [
     source 540
     target 10
+    weight 1
   ]
   edge
   [
     source 541
     target 10
+    weight 1
   ]
   edge
   [
     source 542
     target 10
+    weight 1
   ]
   edge
   [
     source 543
     target 10
+    weight 1
   ]
   edge
   [
     source 544
     target 10
+    weight 1
   ]
   edge
   [
     source 545
     target 10
+    weight 1
   ]
   edge
   [
     source 546
     target 10
+    weight 1
   ]
   edge
   [
     source 547
     target 10
+    weight 1
   ]
   edge
   [
     source 548
     target 10
+    weight 1
   ]
   edge
   [
     source 549
     target 10
+    weight 1
   ]
   edge
   [
     source 550
     target 10
+    weight 1
   ]
   edge
   [
     source 551
     target 10
+    weight 1
   ]
   edge
   [
     source 552
     target 10
+    weight 1
   ]
   edge
   [
     source 553
     target 10
+    weight 1
   ]
   edge
   [
     source 554
     target 10
+    weight 1
   ]
   edge
   [
     source 555
     target 10
+    weight 1
   ]
   edge
   [
     source 556
     target 10
+    weight 1
   ]
   edge
   [
     source 557
     target 10
+    weight 1
   ]
   edge
   [
     source 558
     target 10
+    weight 1
   ]
   edge
   [
     source 559
     target 10
+    weight 1
   ]
   edge
   [
     source 560
     target 10
+    weight 1
   ]
   edge
   [
     source 561
     target 10
+    weight 1
   ]
   edge
   [
     source 562
     target 10
+    weight 1
   ]
   edge
   [
     source 563
     target 10
+    weight 1
   ]
   edge
   [
     source 564
     target 10
+    weight 1
   ]
   edge
   [
     source 565
     target 10
+    weight 1
   ]
   edge
   [
     source 566
     target 10
+    weight 1
   ]
   edge
   [
     source 567
     target 10
+    weight 1
   ]
   edge
   [
     source 568
     target 10
+    weight 1
   ]
   edge
   [
     source 569
     target 10
+    weight 1
   ]
   edge
   [
     source 570
     target 10
+    weight 1
   ]
   edge
   [
     source 571
     target 10
+    weight 1
   ]
   edge
   [
     source 572
     target 10
+    weight 1
   ]
   edge
   [
     source 573
     target 10
+    weight 1
   ]
   edge
   [
     source 574
     target 10
+    weight 1
   ]
   edge
   [
     source 575
     target 10
+    weight 1
   ]
   edge
   [
     source 576
     target 10
+    weight 1
   ]
   edge
   [
     source 577
     target 10
+    weight 1
   ]
   edge
   [
     source 578
     target 10
+    weight 1
   ]
   edge
   [
     source 579
     target 10
+    weight 1
   ]
   edge
   [
     source 580
     target 10
+    weight 1
   ]
   edge
   [
     source 581
     target 10
+    weight 1
   ]
   edge
   [
     source 582
     target 10
+    weight 1
   ]
   edge
   [
     source 583
     target 10
+    weight 1
   ]
   edge
   [
     source 584
     target 10
+    weight 1
   ]
   edge
   [
     source 585
     target 10
+    weight 1
   ]
   edge
   [
     source 586
     target 10
+    weight 1
   ]
   edge
   [
     source 587
     target 10
+    weight 1
   ]
   edge
   [
     source 588
     target 10
+    weight 1
   ]
   edge
   [
     source 589
     target 10
+    weight 1
   ]
   edge
   [
     source 590
     target 10
+    weight 1
   ]
   edge
   [
     source 591
     target 10
+    weight 1
   ]
   edge
   [
     source 592
     target 10
+    weight 1
   ]
   edge
   [
     source 593
     target 10
+    weight 1
   ]
   edge
   [
     source 594
     target 10
+    weight 1
   ]
   edge
   [
     source 595
     target 10
+    weight 1
   ]
   edge
   [
     source 596
     target 10
+    weight 1
   ]
   edge
   [
     source 597
     target 10
+    weight 1
   ]
   edge
   [
     source 598
     target 10
+    weight 1
   ]
   edge
   [
     source 599
     target 10
+    weight 1
   ]
   edge
   [
     source 600
     target 10
+    weight 1
   ]
   edge
   [
     source 601
     target 10
+    weight 1
   ]
   edge
   [
     source 602
     target 10
+    weight 1
   ]
   edge
   [
     source 603
     target 10
+    weight 1
   ]
   edge
   [
     source 604
     target 10
+    weight 1
   ]
   edge
   [
     source 605
     target 10
+    weight 1
   ]
   edge
   [
     source 606
     target 10
+    weight 1
   ]
   edge
   [
     source 607
     target 10
+    weight 1
   ]
   edge
   [
     source 608
     target 10
+    weight 1
   ]
   edge
   [
     source 609
     target 10
+    weight 1
   ]
   edge
   [
     source 610
     target 10
+    weight 1
   ]
   edge
   [
     source 611
     target 10
+    weight 1
   ]
   edge
   [
     source 612
     target 10
+    weight 1
   ]
   edge
   [
     source 613
     target 10
+    weight 1
   ]
   edge
   [
     source 614
     target 10
+    weight 1
   ]
   edge
   [
     source 615
     target 10
+    weight 1
   ]
   edge
   [
     source 616
     target 10
+    weight 1
   ]
   edge
   [
     source 617
     target 10
+    weight 1
   ]
   edge
   [
     source 618
     target 10
+    weight 1
   ]
   edge
   [
     source 619
     target 10
+    weight 1
   ]
   edge
   [
     source 620
     target 10
+    weight 1
   ]
   edge
   [
     source 621
     target 10
+    weight 1
   ]
   edge
   [
     source 622
     target 10
+    weight 1
   ]
   edge
   [
     source 623
     target 10
+    weight 1
   ]
   edge
   [
     source 624
     target 10
+    weight 1
   ]
   edge
   [
     source 625
     target 10
+    weight 1
   ]
   edge
   [
     source 626
     target 10
+    weight 1
   ]
   edge
   [
     source 627
     target 10
+    weight 1
   ]
   edge
   [
     source 628
     target 10
+    weight 1
   ]
   edge
   [
     source 629
     target 10
+    weight 1
   ]
   edge
   [
     source 630
     target 10
+    weight 1
   ]
   edge
   [
     source 631
     target 10
+    weight 1
   ]
   edge
   [
     source 632
     target 10
+    weight 1
   ]
   edge
   [
     source 633
     target 10
+    weight 1
   ]
   edge
   [
     source 634
     target 10
+    weight 1
   ]
   edge
   [
     source 635
     target 10
+    weight 1
   ]
   edge
   [
     source 636
     target 10
+    weight 1
   ]
   edge
   [
     source 637
     target 10
+    weight 1
   ]
   edge
   [
     source 638
     target 10
+    weight 1
   ]
   edge
   [
     source 639
     target 10
+    weight 1
   ]
   edge
   [
     source 640
     target 10
+    weight 1
   ]
   edge
   [
     source 641
     target 10
+    weight 1
   ]
   edge
   [
     source 642
     target 10
+    weight 1
   ]
   edge
   [
     source 643
     target 10
+    weight 1
   ]
   edge
   [
     source 644
     target 10
+    weight 1
   ]
   edge
   [
     source 645
     target 10
+    weight 1
   ]
   edge
   [
     source 646
     target 10
+    weight 1
   ]
   edge
   [
     source 647
     target 10
+    weight 1
   ]
   edge
   [
     source 648
     target 10
+    weight 1
   ]
   edge
   [
     source 649
     target 10
+    weight 1
   ]
   edge
   [
     source 650
     target 10
+    weight 1
   ]
   edge
   [
     source 651
     target 10
+    weight 1
   ]
   edge
   [
     source 652
     target 10
+    weight 1
   ]
   edge
   [
     source 653
     target 10
+    weight 1
   ]
   edge
   [
     source 654
     target 10
+    weight 1
   ]
   edge
   [
     source 655
     target 10
+    weight 1
   ]
   edge
   [
     source 656
     target 10
+    weight 1
   ]
   edge
   [
     source 657
     target 10
+    weight 1
   ]
   edge
   [
     source 658
     target 10
+    weight 1
   ]
   edge
   [
     source 659
     target 10
+    weight 1
   ]
   edge
   [
     source 660
     target 10
+    weight 1
   ]
   edge
   [
     source 661
     target 10
+    weight 1
   ]
   edge
   [
     source 662
     target 10
+    weight 1
   ]
   edge
   [
     source 663
     target 10
+    weight 1
   ]
   edge
   [
     source 664
     target 10
+    weight 1
   ]
   edge
   [
     source 665
     target 10
+    weight 1
   ]
   edge
   [
     source 666
     target 10
+    weight 1
   ]
   edge
   [
     source 667
     target 10
+    weight 1
   ]
   edge
   [
     source 668
     target 10
+    weight 1
   ]
   edge
   [
     source 669
     target 10
+    weight 1
   ]
   edge
   [
     source 670
     target 10
+    weight 1
   ]
   edge
   [
     source 671
     target 10
+    weight 1
   ]
   edge
   [
     source 672
     target 10
+    weight 1
   ]
   edge
   [
     source 673
     target 10
+    weight 1
   ]
   edge
   [
     source 674
     target 10
+    weight 1
   ]
   edge
   [
     source 675
     target 10
+    weight 1
   ]
   edge
   [
     source 676
     target 10
+    weight 1
   ]
   edge
   [
     source 677
     target 10
+    weight 1
   ]
   edge
   [
     source 678
     target 10
+    weight 1
   ]
   edge
   [
     source 679
     target 10
+    weight 1
   ]
   edge
   [
     source 680
     target 10
+    weight 1
   ]
   edge
   [
     source 681
     target 10
+    weight 1
   ]
   edge
   [
     source 682
     target 10
+    weight 1
   ]
   edge
   [
     source 683
     target 10
+    weight 1
   ]
   edge
   [
     source 684
     target 10
+    weight 1
   ]
   edge
   [
     source 685
     target 10
+    weight 1
   ]
   edge
   [
     source 686
     target 10
+    weight 1
   ]
   edge
   [
     source 687
     target 10
+    weight 1
   ]
   edge
   [
     source 688
     target 10
+    weight 1
   ]
   edge
   [
     source 689
     target 10
+    weight 1
   ]
   edge
   [
     source 690
     target 10
+    weight 1
   ]
   edge
   [
     source 691
     target 10
+    weight 1
   ]
   edge
   [
     source 692
     target 10
+    weight 1
   ]
   edge
   [
     source 693
     target 10
+    weight 1
   ]
   edge
   [
     source 694
     target 10
+    weight 1
   ]
   edge
   [
     source 695
     target 10
+    weight 1
   ]
   edge
   [
     source 696
     target 10
+    weight 1
   ]
   edge
   [
     source 697
     target 10
+    weight 1
   ]
   edge
   [
     source 698
     target 10
+    weight 1
   ]
   edge
   [
     source 699
     target 10
+    weight 1
   ]
   edge
   [
     source 700
     target 10
+    weight 1
   ]
   edge
   [
     source 701
     target 10
+    weight 1
   ]
   edge
   [
     source 702
     target 10
+    weight 1
   ]
   edge
   [
     source 703
     target 10
+    weight 1
   ]
   edge
   [
     source 704
     target 10
+    weight 1
   ]
   edge
   [
     source 705
     target 10
+    weight 1
   ]
   edge
   [
     source 706
     target 10
+    weight 1
   ]
   edge
   [
     source 707
     target 10
+    weight 1
   ]
   edge
   [
     source 708
     target 10
+    weight 1
   ]
   edge
   [
     source 709
     target 10
+    weight 1
   ]
   edge
   [
     source 710
     target 10
+    weight 1
   ]
   edge
   [
     source 711
     target 10
+    weight 1
   ]
   edge
   [
     source 712
     target 10
+    weight 1
   ]
   edge
   [
     source 713
     target 10
+    weight 1
   ]
   edge
   [
     source 714
     target 10
+    weight 1
   ]
   edge
   [
     source 715
     target 10
+    weight 1
   ]
   edge
   [
     source 716
     target 10
+    weight 1
   ]
   edge
   [
     source 717
     target 10
+    weight 1
   ]
   edge
   [
     source 718
     target 10
+    weight 1
   ]
   edge
   [
     source 719
     target 10
+    weight 1
   ]
   edge
   [
     source 720
     target 10
+    weight 1
   ]
   edge
   [
     source 721
     target 10
+    weight 1
   ]
   edge
   [
     source 722
     target 10
+    weight 1
   ]
   edge
   [
     source 723
     target 10
+    weight 1
   ]
   edge
   [
     source 724
     target 10
+    weight 1
   ]
   edge
   [
     source 725
     target 10
+    weight 1
   ]
   edge
   [
     source 726
     target 10
+    weight 1
   ]
   edge
   [
     source 727
     target 10
+    weight 1
   ]
   edge
   [
     source 728
     target 10
+    weight 1
   ]
   edge
   [
     source 729
     target 10
+    weight 1
   ]
   edge
   [
     source 730
     target 10
+    weight 1
   ]
   edge
   [
     source 731
     target 10
+    weight 1
   ]
   edge
   [
     source 732
     target 10
+    weight 1
   ]
   edge
   [
     source 733
     target 10
+    weight 1
   ]
   edge
   [
     source 734
     target 10
+    weight 1
   ]
   edge
   [
     source 735
     target 10
+    weight 1
   ]
   edge
   [
     source 736
     target 10
+    weight 1
   ]
   edge
   [
     source 737
     target 10
+    weight 1
   ]
   edge
   [
     source 738
     target 10
+    weight 1
   ]
   edge
   [
     source 739
     target 10
+    weight 1
   ]
   edge
   [
     source 740
     target 10
+    weight 1
   ]
   edge
   [
     source 741
     target 10
+    weight 1
   ]
   edge
   [
     source 742
     target 10
+    weight 1
   ]
   edge
   [
     source 743
     target 10
+    weight 1
   ]
   edge
   [
     source 744
     target 10
+    weight 1
   ]
   edge
   [
     source 745
     target 10
+    weight 1
   ]
   edge
   [
     source 746
     target 10
+    weight 1
   ]
   edge
   [
     source 747
     target 10
+    weight 1
   ]
   edge
   [
     source 748
     target 10
+    weight 1
   ]
   edge
   [
     source 749
     target 10
+    weight 1
   ]
   edge
   [
     source 750
     target 10
+    weight 1
   ]
   edge
   [
     source 751
     target 10
+    weight 1
   ]
   edge
   [
     source 752
     target 10
+    weight 1
   ]
   edge
   [
     source 753
     target 10
+    weight 1
   ]
   edge
   [
     source 754
     target 10
+    weight 1
   ]
   edge
   [
     source 755
     target 10
+    weight 1
   ]
   edge
   [
     source 756
     target 10
+    weight 1
   ]
   edge
   [
     source 757
     target 10
+    weight 1
   ]
   edge
   [
     source 758
     target 10
+    weight 1
   ]
   edge
   [
     source 759
     target 10
+    weight 1
   ]
   edge
   [
     source 760
     target 10
+    weight 1
   ]
   edge
   [
     source 761
     target 10
+    weight 1
   ]
   edge
   [
     source 762
     target 10
+    weight 1
   ]
   edge
   [
     source 763
     target 10
+    weight 1
   ]
   edge
   [
     source 764
     target 10
+    weight 1
   ]
   edge
   [
     source 765
     target 10
+    weight 1
   ]
   edge
   [
     source 766
     target 10
+    weight 1
   ]
   edge
   [
     source 767
     target 10
+    weight 1
   ]
   edge
   [
     source 768
     target 10
+    weight 1
   ]
   edge
   [
     source 769
     target 10
+    weight 1
   ]
   edge
   [
     source 770
     target 10
+    weight 1
   ]
   edge
   [
     source 771
     target 10
+    weight 1
   ]
   edge
   [
     source 772
     target 10
+    weight 1
   ]
   edge
   [
     source 773
     target 10
+    weight 1
   ]
   edge
   [
     source 774
     target 10
+    weight 1
   ]
   edge
   [
     source 775
     target 10
+    weight 1
   ]
   edge
   [
     source 776
     target 10
+    weight 1
   ]
   edge
   [
     source 777
     target 10
+    weight 1
   ]
   edge
   [
     source 778
     target 10
+    weight 1
   ]
   edge
   [
     source 779
     target 10
+    weight 1
   ]
   edge
   [
     source 780
     target 10
+    weight 1
   ]
   edge
   [
     source 781
     target 10
+    weight 1
   ]
   edge
   [
     source 782
     target 10
+    weight 1
   ]
   edge
   [
     source 783
     target 10
+    weight 1
   ]
   edge
   [
     source 784
     target 10
+    weight 1
   ]
   edge
   [
     source 785
     target 10
+    weight 1
   ]
   edge
   [
     source 786
     target 10
+    weight 1
   ]
   edge
   [
     source 787
     target 10
+    weight 1
   ]
   edge
   [
     source 788
     target 10
+    weight 1
   ]
   edge
   [
     source 789
     target 10
+    weight 1
   ]
   edge
   [
     source 790
     target 10
+    weight 1
   ]
   edge
   [
     source 791
     target 10
+    weight 1
   ]
   edge
   [
     source 792
     target 10
+    weight 1
   ]
   edge
   [
     source 793
     target 10
+    weight 1
   ]
   edge
   [
     source 794
     target 10
+    weight 1
   ]
   edge
   [
     source 795
     target 10
+    weight 1
   ]
   edge
   [
     source 796
     target 10
+    weight 1
   ]
   edge
   [
     source 797
     target 10
+    weight 1
   ]
   edge
   [
     source 798
     target 10
+    weight 1
   ]
   edge
   [
     source 799
     target 10
+    weight 1
   ]
   edge
   [
     source 800
     target 10
+    weight 1
   ]
   edge
   [
     source 801
     target 10
+    weight 1
   ]
   edge
   [
     source 802
     target 10
+    weight 1
   ]
   edge
   [
     source 803
     target 10
+    weight 1
   ]
   edge
   [
     source 804
     target 10
+    weight 1
   ]
   edge
   [
     source 805
     target 10
+    weight 1
   ]
   edge
   [
     source 806
     target 10
+    weight 1
   ]
   edge
   [
     source 807
     target 10
+    weight 1
   ]
   edge
   [
     source 808
     target 10
+    weight 1
   ]
   edge
   [
     source 809
     target 10
+    weight 1
   ]
   edge
   [
     source 810
     target 10
+    weight 1
   ]
   edge
   [
     source 811
     target 10
+    weight 1
   ]
   edge
   [
     source 812
     target 10
+    weight 1
   ]
   edge
   [
     source 813
     target 10
+    weight 1
   ]
   edge
   [
     source 814
     target 10
+    weight 1
   ]
   edge
   [
     source 815
     target 10
+    weight 1
   ]
   edge
   [
     source 816
     target 10
+    weight 1
   ]
   edge
   [
     source 817
     target 10
+    weight 1
   ]
   edge
   [
     source 818
     target 10
+    weight 1
   ]
   edge
   [
     source 819
     target 10
+    weight 1
   ]
   edge
   [
     source 820
     target 10
+    weight 1
   ]
   edge
   [
     source 821
     target 10
+    weight 1
   ]
   edge
   [
     source 822
     target 10
+    weight 1
   ]
   edge
   [
     source 823
     target 10
+    weight 1
   ]
   edge
   [
     source 824
     target 10
+    weight 1
   ]
   edge
   [
     source 825
     target 10
+    weight 1
   ]
   edge
   [
     source 826
     target 10
+    weight 1
   ]
   edge
   [
     source 827
     target 10
+    weight 1
   ]
   edge
   [
     source 828
     target 10
+    weight 1
   ]
   edge
   [
     source 829
     target 10
+    weight 1
   ]
   edge
   [
     source 830
     target 10
+    weight 1
   ]
   edge
   [
     source 831
     target 10
+    weight 1
   ]
   edge
   [
     source 832
     target 10
+    weight 1
   ]
   edge
   [
     source 833
     target 10
+    weight 1
   ]
   edge
   [
     source 834
     target 10
+    weight 1
   ]
   edge
   [
     source 835
     target 10
+    weight 1
   ]
   edge
   [
     source 836
     target 10
+    weight 1
   ]
   edge
   [
     source 837
     target 10
+    weight 1
   ]
   edge
   [
     source 838
     target 10
+    weight 1
   ]
   edge
   [
     source 839
     target 10
+    weight 1
   ]
   edge
   [
     source 840
     target 10
+    weight 1
   ]
   edge
   [
     source 841
     target 10
+    weight 1
   ]
   edge
   [
     source 842
     target 10
+    weight 1
   ]
   edge
   [
     source 843
     target 10
+    weight 1
   ]
   edge
   [
     source 844
     target 10
+    weight 1
   ]
   edge
   [
     source 845
     target 10
+    weight 1
   ]
   edge
   [
     source 846
     target 10
+    weight 1
   ]
   edge
   [
     source 847
     target 10
+    weight 1
   ]
   edge
   [
     source 848
     target 10
+    weight 1
   ]
   edge
   [
     source 849
     target 10
+    weight 1
   ]
   edge
   [
     source 850
     target 10
+    weight 1
   ]
   edge
   [
     source 851
     target 10
+    weight 1
   ]
   edge
   [
     source 852
     target 10
+    weight 1
   ]
   edge
   [
     source 853
     target 10
+    weight 1
   ]
   edge
   [
     source 854
     target 10
+    weight 1
   ]
   edge
   [
     source 855
     target 10
+    weight 1
   ]
   edge
   [
     source 856
     target 10
+    weight 1
   ]
   edge
   [
     source 857
     target 10
+    weight 1
   ]
   edge
   [
     source 858
     target 10
+    weight 1
   ]
   edge
   [
     source 859
     target 10
+    weight 1
   ]
   edge
   [
     source 860
     target 10
+    weight 1
   ]
   edge
   [
     source 861
     target 10
+    weight 1
   ]
   edge
   [
     source 862
     target 10
+    weight 1
   ]
   edge
   [
     source 863
     target 10
+    weight 1
   ]
   edge
   [
     source 864
     target 10
+    weight 1
   ]
   edge
   [
     source 865
     target 10
+    weight 1
   ]
   edge
   [
     source 866
     target 10
+    weight 1
   ]
   edge
   [
     source 867
     target 10
+    weight 1
   ]
   edge
   [
     source 868
     target 10
+    weight 1
   ]
   edge
   [
     source 869
     target 10
+    weight 1
   ]
   edge
   [
     source 870
     target 10
+    weight 1
   ]
   edge
   [
     source 871
     target 10
+    weight 1
   ]
   edge
   [
     source 872
     target 10
+    weight 1
   ]
   edge
   [
     source 873
     target 10
+    weight 1
   ]
   edge
   [
     source 874
     target 10
+    weight 1
   ]
   edge
   [
     source 875
     target 10
+    weight 1
   ]
   edge
   [
     source 876
     target 10
+    weight 1
   ]
   edge
   [
     source 877
     target 10
+    weight 1
   ]
   edge
   [
     source 878
     target 10
+    weight 1
   ]
   edge
   [
     source 879
     target 10
+    weight 1
   ]
   edge
   [
     source 880
     target 10
+    weight 1
   ]
   edge
   [
     source 881
     target 10
+    weight 1
   ]
   edge
   [
     source 882
     target 10
+    weight 1
   ]
   edge
   [
     source 883
     target 10
+    weight 1
   ]
   edge
   [
     source 884
     target 10
+    weight 1
   ]
   edge
   [
     source 885
     target 10
+    weight 1
   ]
   edge
   [
     source 886
     target 10
+    weight 1
   ]
   edge
   [
     source 887
     target 10
+    weight 1
   ]
   edge
   [
     source 888
     target 10
+    weight 1
   ]
   edge
   [
     source 889
     target 10
+    weight 1
   ]
   edge
   [
     source 890
     target 10
+    weight 1
   ]
   edge
   [
     source 891
     target 10
+    weight 1
   ]
   edge
   [
     source 892
     target 10
+    weight 1
   ]
   edge
   [
     source 893
     target 10
+    weight 1
   ]
   edge
   [
     source 894
     target 10
+    weight 1
   ]
   edge
   [
     source 895
     target 10
+    weight 1
   ]
   edge
   [
     source 896
     target 10
+    weight 1
   ]
   edge
   [
     source 897
     target 10
+    weight 1
   ]
   edge
   [
     source 898
     target 10
+    weight 1
   ]
   edge
   [
     source 899
     target 10
+    weight 1
   ]
   edge
   [
     source 900
     target 10
+    weight 1
   ]
   edge
   [
     source 901
     target 10
+    weight 1
   ]
   edge
   [
     source 902
     target 10
+    weight 1
   ]
   edge
   [
     source 903
     target 10
+    weight 1
   ]
   edge
   [
     source 904
     target 10
+    weight 1
   ]
   edge
   [
     source 905
     target 10
+    weight 1
   ]
   edge
   [
     source 906
     target 10
+    weight 1
   ]
   edge
   [
     source 907
     target 10
+    weight 1
   ]
   edge
   [
     source 908
     target 10
+    weight 1
   ]
   edge
   [
     source 909
     target 10
+    weight 1
   ]
   edge
   [
     source 910
     target 10
+    weight 1
   ]
   edge
   [
     source 911
     target 10
+    weight 1
   ]
   edge
   [
     source 912
     target 10
+    weight 1
   ]
   edge
   [
     source 913
     target 10
+    weight 1
   ]
   edge
   [
     source 914
     target 10
+    weight 1
   ]
   edge
   [
     source 915
     target 10
+    weight 1
   ]
   edge
   [
     source 916
     target 10
+    weight 1
   ]
   edge
   [
     source 917
     target 10
+    weight 1
   ]
   edge
   [
     source 918
     target 10
+    weight 1
   ]
   edge
   [
     source 919
     target 10
+    weight 1
   ]
   edge
   [
     source 920
     target 10
+    weight 1
   ]
   edge
   [
     source 921
     target 10
+    weight 1
   ]
   edge
   [
     source 922
     target 10
+    weight 1
   ]
   edge
   [
     source 923
     target 10
+    weight 1
   ]
   edge
   [
     source 924
     target 10
+    weight 1
   ]
   edge
   [
     source 925
     target 10
+    weight 1
   ]
   edge
   [
     source 926
     target 10
+    weight 1
   ]
   edge
   [
     source 927
     target 10
+    weight 1
   ]
   edge
   [
     source 928
     target 10
+    weight 1
   ]
   edge
   [
     source 929
     target 10
+    weight 1
   ]
   edge
   [
     source 930
     target 10
+    weight 1
   ]
   edge
   [
     source 931
     target 10
+    weight 1
   ]
   edge
   [
     source 932
     target 10
+    weight 1
   ]
   edge
   [
     source 933
     target 10
+    weight 1
   ]
   edge
   [
     source 934
     target 10
+    weight 1
   ]
   edge
   [
     source 935
     target 10
+    weight 1
   ]
   edge
   [
     source 936
     target 10
+    weight 1
   ]
   edge
   [
     source 937
     target 10
+    weight 1
   ]
   edge
   [
     source 938
     target 10
+    weight 1
   ]
   edge
   [
     source 939
     target 10
+    weight 1
   ]
   edge
   [
     source 940
     target 10
+    weight 1
   ]
   edge
   [
     source 941
     target 10
+    weight 1
   ]
   edge
   [
     source 942
     target 10
+    weight 1
   ]
   edge
   [
     source 943
     target 10
+    weight 1
   ]
   edge
   [
     source 944
     target 10
+    weight 1
   ]
   edge
   [
     source 945
     target 10
+    weight 1
   ]
   edge
   [
     source 946
     target 10
+    weight 1
   ]
   edge
   [
     source 947
     target 10
+    weight 1
   ]
   edge
   [
     source 948
     target 10
+    weight 1
   ]
   edge
   [
     source 949
     target 10
+    weight 1
   ]
   edge
   [
     source 950
     target 10
+    weight 1
   ]
   edge
   [
     source 951
     target 10
+    weight 1
   ]
   edge
   [
     source 952
     target 10
+    weight 1
   ]
   edge
   [
     source 953
     target 10
+    weight 1
   ]
   edge
   [
     source 954
     target 10
+    weight 1
   ]
   edge
   [
     source 955
     target 10
+    weight 1
   ]
   edge
   [
     source 956
     target 10
+    weight 1
   ]
   edge
   [
     source 957
     target 10
+    weight 1
   ]
   edge
   [
     source 958
     target 10
+    weight 1
   ]
   edge
   [
     source 959
     target 10
+    weight 1
   ]
   edge
   [
     source 960
     target 10
+    weight 1
   ]
   edge
   [
     source 961
     target 10
+    weight 1
   ]
   edge
   [
     source 962
     target 10
+    weight 1
   ]
   edge
   [
     source 963
     target 10
+    weight 1
   ]
   edge
   [
     source 964
     target 10
+    weight 1
   ]
   edge
   [
     source 965
     target 10
+    weight 1
   ]
   edge
   [
     source 966
     target 10
+    weight 1
   ]
   edge
   [
     source 967
     target 10
+    weight 1
   ]
   edge
   [
     source 968
     target 10
+    weight 1
   ]
   edge
   [
     source 969
     target 10
+    weight 1
   ]
   edge
   [
     source 970
     target 10
+    weight 1
   ]
   edge
   [
     source 971
     target 10
+    weight 1
   ]
   edge
   [
     source 972
     target 10
+    weight 1
   ]
   edge
   [
     source 973
     target 10
+    weight 1
   ]
   edge
   [
     source 974
     target 10
+    weight 1
   ]
   edge
   [
     source 975
     target 10
+    weight 1
   ]
   edge
   [
     source 976
     target 10
+    weight 1
   ]
   edge
   [
     source 977
     target 10
+    weight 1
   ]
   edge
   [
     source 978
     target 10
+    weight 1
   ]
   edge
   [
     source 979
     target 10
+    weight 1
   ]
   edge
   [
     source 980
     target 10
+    weight 1
   ]
   edge
   [
     source 981
     target 10
+    weight 1
   ]
   edge
   [
     source 982
     target 10
+    weight 1
   ]
   edge
   [
     source 983
     target 10
+    weight 1
   ]
   edge
   [
     source 984
     target 10
+    weight 1
   ]
   edge
   [
     source 985
     target 10
+    weight 1
   ]
   edge
   [
     source 986
     target 10
+    weight 1
   ]
   edge
   [
     source 987
     target 10
+    weight 1
   ]
   edge
   [
     source 988
     target 10
+    weight 1
   ]
   edge
   [
     source 989
     target 10
+    weight 1
   ]
   edge
   [
     source 990
     target 10
+    weight 1
   ]
   edge
   [
     source 991
     target 10
+    weight 1
   ]
   edge
   [
     source 992
     target 10
+    weight 1
   ]
   edge
   [
     source 993
     target 10
+    weight 1
   ]
   edge
   [
     source 994
     target 10
+    weight 1
   ]
   edge
   [
     source 995
     target 10
+    weight 1
   ]
   edge
   [
     source 996
     target 10
+    weight 1
   ]
   edge
   [
     source 997
     target 10
+    weight 1
   ]
   edge
   [
     source 998
     target 10
+    weight 1
   ]
   edge
   [
     source 999
     target 10
+    weight 1
   ]
   edge
   [
     source 1000
     target 10
+    weight 1
   ]
   edge
   [
     source 1001
     target 10
+    weight 1
   ]
   edge
   [
     source 1002
     target 10
+    weight 1
   ]
   edge
   [
     source 1003
     target 10
+    weight 1
   ]
   edge
   [
     source 1004
     target 10
+    weight 1
   ]
   edge
   [
     source 1005
     target 10
+    weight 1
   ]
   edge
   [
     source 1006
     target 10
+    weight 1
   ]
   edge
   [
     source 1007
     target 10
+    weight 1
   ]
   edge
   [
     source 1008
     target 10
+    weight 1
   ]
   edge
   [
     source 1009
     target 10
+    weight 1
   ]
   edge
   [
     source 1010
     target 10
+    weight 1
   ]
   edge
   [
     source 1011
     target 10
+    weight 1
   ]
   edge
   [
     source 1012
     target 10
+    weight 1
   ]
   edge
   [
     source 1013
     target 10
+    weight 1
   ]
   edge
   [
     source 1014
     target 10
+    weight 1
   ]
   edge
   [
     source 1015
     target 10
+    weight 1
   ]
   edge
   [
     source 1016
     target 10
+    weight 1
   ]
   edge
   [
     source 1017
     target 10
+    weight 1
   ]
   edge
   [
     source 1018
     target 10
+    weight 1
   ]
   edge
   [
     source 1019
     target 10
+    weight 1
   ]
   edge
   [
     source 1020
     target 10
+    weight 1
   ]
   edge
   [
     source 1021
     target 10
+    weight 1
   ]
   edge
   [
     source 1022
     target 10
+    weight 1
   ]
   edge
   [
     source 1023
     target 10
+    weight 1
   ]
   edge
   [
     source 1024
     target 10
+    weight 1
   ]
   edge
   [
     source 1025
     target 10
+    weight 1
   ]
   edge
   [
     source 1026
     target 10
+    weight 1
   ]
   edge
   [
     source 1027
     target 10
+    weight 1
   ]
   edge
   [
     source 1028
     target 10
+    weight 1
   ]
   edge
   [
     source 1029
     target 10
+    weight 1
   ]
   edge
   [
     source 1030
     target 10
+    weight 1
   ]
   edge
   [
     source 1031
     target 10
+    weight 1
   ]
   edge
   [
     source 1032
     target 10
+    weight 1
   ]
   edge
   [
     source 1033
     target 10
+    weight 1
   ]
   edge
   [
     source 1034
     target 10
+    weight 1
   ]
   edge
   [
     source 1035
     target 10
+    weight 1
   ]
   edge
   [
     source 1036
     target 10
+    weight 1
   ]
   edge
   [
     source 1037
     target 10
+    weight 1
   ]
   edge
   [
     source 1038
     target 10
+    weight 1
   ]
   edge
   [
     source 1039
     target 10
+    weight 1
   ]
   edge
   [
     source 1040
     target 10
+    weight 1
   ]
   edge
   [
     source 1041
     target 10
+    weight 1
   ]
   edge
   [
     source 1042
     target 10
+    weight 1
   ]
   edge
   [
     source 1043
     target 10
+    weight 1
   ]
   edge
   [
     source 1044
     target 10
+    weight 1
   ]
   edge
   [
     source 1045
     target 10
+    weight 1
   ]
   edge
   [
     source 1046
     target 10
+    weight 1
   ]
   edge
   [
     source 1047
     target 10
+    weight 1
   ]
   edge
   [
     source 1048
     target 10
+    weight 1
   ]
   edge
   [
     source 1049
     target 10
+    weight 1
   ]
   edge
   [
     source 1050
     target 10
+    weight 1
   ]
   edge
   [
     source 1051
     target 10
+    weight 1
   ]
   edge
   [
     source 1052
     target 10
+    weight 1
   ]
   edge
   [
     source 1053
     target 10
+    weight 1
   ]
   edge
   [
     source 1054
     target 10
+    weight 1
   ]
   edge
   [
     source 1055
     target 10
+    weight 1
   ]
   edge
   [
     source 1056
     target 10
+    weight 1
   ]
   edge
   [
     source 1057
     target 10
+    weight 1
   ]
   edge
   [
     source 1058
     target 10
+    weight 1
   ]
   edge
   [
     source 1059
     target 10
+    weight 1
   ]
   edge
   [
     source 1060
     target 10
+    weight 1
   ]
   edge
   [
     source 1061
     target 10
+    weight 1
   ]
   edge
   [
     source 1062
     target 10
+    weight 1
   ]
   edge
   [
     source 1063
     target 10
+    weight 1
   ]
   edge
   [
     source 1064
     target 10
+    weight 1
   ]
   edge
   [
     source 1065
     target 10
+    weight 1
   ]
   edge
   [
     source 1066
     target 10
+    weight 1
   ]
   edge
   [
     source 1067
     target 10
+    weight 1
   ]
   edge
   [
     source 1068
     target 10
+    weight 1
   ]
   edge
   [
     source 1069
     target 10
+    weight 1
   ]
   edge
   [
     source 1070
     target 10
+    weight 1
   ]
   edge
   [
     source 1071
     target 10
+    weight 1
   ]
   edge
   [
     source 1072
     target 10
+    weight 1
   ]
   edge
   [
     source 1073
     target 10
+    weight 1
   ]
   edge
   [
     source 1074
     target 10
+    weight 1
   ]
   edge
   [
     source 1075
     target 10
+    weight 1
   ]
   edge
   [
     source 1076
     target 10
+    weight 1
   ]
   edge
   [
     source 1077
     target 10
+    weight 1
   ]
   edge
   [
     source 1078
     target 10
+    weight 1
   ]
   edge
   [
     source 1079
     target 10
+    weight 1
   ]
   edge
   [
     source 1080
     target 10
+    weight 1
   ]
   edge
   [
     source 1081
     target 10
+    weight 1
   ]
   edge
   [
     source 1082
     target 10
+    weight 1
   ]
   edge
   [
     source 1083
     target 10
+    weight 1
   ]
   edge
   [
     source 1084
     target 10
+    weight 1
   ]
   edge
   [
     source 1085
     target 10
+    weight 1
   ]
   edge
   [
     source 1086
     target 10
+    weight 1
   ]
   edge
   [
     source 1087
     target 10
+    weight 1
   ]
   edge
   [
     source 1088
     target 10
+    weight 1
   ]
   edge
   [
     source 1089
     target 10
+    weight 1
   ]
   edge
   [
     source 1090
     target 10
+    weight 1
   ]
   edge
   [
     source 1091
     target 10
+    weight 1
   ]
   edge
   [
     source 1092
     target 10
+    weight 1
   ]
   edge
   [
     source 1093
     target 10
+    weight 1
   ]
   edge
   [
     source 1094
     target 10
+    weight 1
   ]
   edge
   [
     source 1095
     target 10
+    weight 1
   ]
   edge
   [
     source 1096
     target 10
+    weight 1
   ]
   edge
   [
     source 1097
     target 10
+    weight 1
   ]
   edge
   [
     source 1098
     target 10
+    weight 1
   ]
   edge
   [
     source 1099
     target 10
+    weight 1
   ]
   edge
   [
     source 1100
     target 10
+    weight 1
   ]
   edge
   [
     source 1101
     target 10
+    weight 1
   ]
   edge
   [
     source 1102
     target 10
+    weight 1
   ]
   edge
   [
     source 1103
     target 10
+    weight 1
   ]
   edge
   [
     source 1104
     target 10
+    weight 1
   ]
   edge
   [
     source 1105
     target 10
+    weight 1
   ]
   edge
   [
     source 1106
     target 10
+    weight 1
   ]
   edge
   [
     source 1107
     target 10
+    weight 1
   ]
   edge
   [
     source 1108
     target 10
+    weight 1
   ]
   edge
   [
     source 1109
     target 10
+    weight 1
   ]
   edge
   [
     source 1110
     target 10
+    weight 1
   ]
   edge
   [
     source 1111
     target 10
+    weight 1
   ]
   edge
   [
     source 1112
     target 10
+    weight 1
   ]
   edge
   [
     source 1113
     target 10
+    weight 1
   ]
   edge
   [
     source 1114
     target 10
+    weight 1
   ]
   edge
   [
     source 1115
     target 10
+    weight 1
   ]
   edge
   [
     source 1116
     target 10
+    weight 1
   ]
   edge
   [
     source 1117
     target 10
+    weight 1
   ]
   edge
   [
     source 1118
     target 10
+    weight 1
   ]
   edge
   [
     source 1119
     target 10
+    weight 1
   ]
   edge
   [
     source 1120
     target 10
+    weight 1
   ]
   edge
   [
     source 1121
     target 10
+    weight 1
   ]
   edge
   [
     source 1122
     target 10
+    weight 1
   ]
   edge
   [
     source 1123
     target 10
+    weight 1
   ]
   edge
   [
     source 1124
     target 10
+    weight 1
   ]
   edge
   [
     source 1125
     target 10
+    weight 1
   ]
   edge
   [
     source 1126
     target 10
+    weight 1
   ]
   edge
   [
     source 1127
     target 10
+    weight 1
   ]
   edge
   [
     source 1128
     target 10
+    weight 1
   ]
   edge
   [
     source 1129
     target 10
+    weight 1
   ]
   edge
   [
     source 1130
     target 10
+    weight 1
   ]
   edge
   [
     source 1131
     target 10
+    weight 1
   ]
   edge
   [
     source 1132
     target 10
+    weight 1
   ]
   edge
   [
     source 1133
     target 10
+    weight 1
   ]
   edge
   [
     source 1134
     target 10
+    weight 1
   ]
   edge
   [
     source 1135
     target 10
+    weight 1
   ]
   edge
   [
     source 1136
     target 10
+    weight 1
   ]
   edge
   [
     source 1137
     target 10
+    weight 1
   ]
   edge
   [
     source 1138
     target 10
+    weight 1
   ]
   edge
   [
     source 1139
     target 10
+    weight 1
   ]
   edge
   [
     source 1140
     target 10
+    weight 1
   ]
   edge
   [
     source 1141
     target 10
+    weight 1
   ]
   edge
   [
     source 1142
     target 10
+    weight 1
   ]
   edge
   [
     source 1143
     target 10
+    weight 1
   ]
   edge
   [
     source 1144
     target 10
+    weight 1
   ]
   edge
   [
     source 1145
     target 10
+    weight 1
   ]
   edge
   [
     source 1146
     target 10
+    weight 1
   ]
   edge
   [
     source 1147
     target 10
+    weight 1
   ]
   edge
   [
     source 1148
     target 10
+    weight 1
   ]
   edge
   [
     source 1149
     target 10
+    weight 1
   ]
   edge
   [
     source 1150
     target 10
+    weight 1
   ]
   edge
   [
     source 1151
     target 10
+    weight 1
   ]
   edge
   [
     source 1152
     target 10
+    weight 1
   ]
   edge
   [
     source 1153
     target 10
+    weight 1
   ]
   edge
   [
     source 1154
     target 10
+    weight 1
   ]
   edge
   [
     source 1155
     target 10
+    weight 1
   ]
   edge
   [
     source 1156
     target 10
+    weight 1
   ]
   edge
   [
     source 1157
     target 10
+    weight 1
   ]
   edge
   [
     source 1158
     target 10
+    weight 1
   ]
   edge
   [
     source 1159
     target 10
+    weight 1
   ]
   edge
   [
     source 1160
     target 10
+    weight 1
   ]
   edge
   [
     source 1161
     target 10
+    weight 1
   ]
   edge
   [
     source 1162
     target 10
+    weight 1
   ]
   edge
   [
     source 1163
     target 10
+    weight 1
   ]
   edge
   [
     source 1164
     target 10
+    weight 1
   ]
   edge
   [
     source 1165
     target 10
+    weight 1
   ]
   edge
   [
     source 1166
     target 10
+    weight 1
   ]
   edge
   [
     source 1167
     target 10
+    weight 1
   ]
   edge
   [
     source 1168
     target 10
+    weight 1
   ]
   edge
   [
     source 1169
     target 10
+    weight 1
   ]
   edge
   [
     source 1170
     target 10
+    weight 1
   ]
   edge
   [
     source 1171
     target 10
+    weight 1
   ]
   edge
   [
     source 1172
     target 10
+    weight 1
   ]
   edge
   [
     source 1173
     target 10
+    weight 1
   ]
   edge
   [
     source 1174
     target 10
+    weight 1
   ]
   edge
   [
     source 1175
     target 10
+    weight 1
   ]
   edge
   [
     source 1176
     target 10
+    weight 1
   ]
   edge
   [
     source 1177
     target 10
+    weight 1
   ]
   edge
   [
     source 1178
     target 10
+    weight 1
   ]
   edge
   [
     source 1179
     target 10
+    weight 1
   ]
   edge
   [
     source 1180
     target 10
+    weight 1
   ]
   edge
   [
     source 1181
     target 10
+    weight 1
   ]
   edge
   [
     source 1182
     target 10
+    weight 1
   ]
   edge
   [
     source 1183
     target 10
+    weight 1
   ]
   edge
   [
     source 1184
     target 10
+    weight 1
   ]
   edge
   [
     source 1185
     target 10
+    weight 1
   ]
   edge
   [
     source 1186
     target 10
+    weight 1
   ]
   edge
   [
     source 1187
     target 10
+    weight 1
   ]
   edge
   [
     source 1188
     target 10
+    weight 1
   ]
   edge
   [
     source 1189
     target 10
+    weight 1
   ]
   edge
   [
     source 1190
     target 10
+    weight 1
   ]
   edge
   [
     source 1191
     target 10
+    weight 1
   ]
   edge
   [
     source 1192
     target 10
+    weight 1
   ]
   edge
   [
     source 1193
     target 10
+    weight 1
   ]
   edge
   [
     source 1194
     target 10
+    weight 1
   ]
   edge
   [
     source 1195
     target 10
+    weight 1
   ]
   edge
   [
     source 1196
     target 10
+    weight 1
   ]
   edge
   [
     source 1197
     target 10
+    weight 1
   ]
   edge
   [
     source 1198
     target 10
+    weight 1
   ]
   edge
   [
     source 1199
     target 10
+    weight 1
   ]
   edge
   [
     source 1200
     target 10
+    weight 1
   ]
   edge
   [
     source 1201
     target 10
+    weight 1
   ]
   edge
   [
     source 1202
     target 10
+    weight 1
   ]
   edge
   [
     source 1203
     target 10
+    weight 1
   ]
   edge
   [
     source 1204
     target 10
+    weight 1
   ]
   edge
   [
     source 1205
     target 10
+    weight 1
   ]
   edge
   [
     source 1206
     target 10
+    weight 1
   ]
   edge
   [
     source 1207
     target 10
+    weight 1
   ]
   edge
   [
     source 1208
     target 10
+    weight 1
   ]
   edge
   [
     source 1209
     target 10
+    weight 1
   ]
   edge
   [
     source 1210
     target 10
+    weight 1
   ]
   edge
   [
     source 1211
     target 10
+    weight 1
   ]
   edge
   [
     source 1212
     target 10
+    weight 1
   ]
   edge
   [
     source 1213
     target 10
+    weight 1
   ]
   edge
   [
     source 1214
     target 10
+    weight 1
   ]
   edge
   [
     source 1215
     target 10
+    weight 1
   ]
   edge
   [
     source 1216
     target 10
+    weight 1
   ]
   edge
   [
     source 1217
     target 10
+    weight 1
   ]
   edge
   [
     source 1218
     target 10
+    weight 1
   ]
   edge
   [
     source 1219
     target 10
+    weight 1
   ]
   edge
   [
     source 1220
     target 10
+    weight 1
   ]
   edge
   [
     source 1221
     target 10
+    weight 1
   ]
   edge
   [
     source 1222
     target 10
+    weight 1
   ]
   edge
   [
     source 1223
     target 10
+    weight 1
   ]
   edge
   [
     source 1224
     target 10
+    weight 1
   ]
   edge
   [
     source 1225
     target 10
+    weight 1
   ]
   edge
   [
     source 1226
     target 10
+    weight 1
   ]
   edge
   [
     source 1227
     target 10
+    weight 1
   ]
   edge
   [
     source 1228
     target 10
+    weight 1
   ]
   edge
   [
     source 1229
     target 10
+    weight 1
   ]
   edge
   [
     source 1230
     target 10
+    weight 1
   ]
   edge
   [
     source 1231
     target 10
+    weight 1
   ]
   edge
   [
     source 1232
     target 10
+    weight 1
   ]
   edge
   [
     source 1233
     target 10
+    weight 1
   ]
   edge
   [
     source 1234
     target 10
+    weight 1
   ]
   edge
   [
     source 1235
     target 10
+    weight 1
   ]
   edge
   [
     source 1236
     target 10
+    weight 1
   ]
   edge
   [
     source 1237
     target 10
+    weight 1
   ]
   edge
   [
     source 1238
     target 10
+    weight 1
   ]
   edge
   [
     source 1239
     target 10
+    weight 1
   ]
   edge
   [
     source 1240
     target 10
+    weight 1
   ]
   edge
   [
     source 1241
     target 10
+    weight 1
   ]
   edge
   [
     source 1242
     target 10
+    weight 1
   ]
   edge
   [
     source 1243
     target 10
+    weight 1
   ]
   edge
   [
     source 1244
     target 10
+    weight 1
   ]
   edge
   [
     source 1245
     target 10
+    weight 1
   ]
   edge
   [
     source 1246
     target 10
+    weight 1
   ]
   edge
   [
     source 1247
     target 10
+    weight 1
   ]
   edge
   [
     source 1248
     target 10
+    weight 1
   ]
   edge
   [
     source 1249
     target 10
+    weight 1
   ]
   edge
   [
     source 1250
     target 10
+    weight 1
   ]
   edge
   [
     source 1251
     target 10
+    weight 1
   ]
   edge
   [
     source 1252
     target 10
+    weight 1
   ]
   edge
   [
     source 1253
     target 10
+    weight 1
   ]
   edge
   [
     source 1254
     target 10
+    weight 1
   ]
   edge
   [
     source 1255
     target 10
+    weight 1
   ]
   edge
   [
     source 1256
     target 10
+    weight 1
   ]
   edge
   [
     source 1257
     target 10
+    weight 1
   ]
   edge
   [
     source 1258
     target 10
+    weight 1
   ]
   edge
   [
     source 1259
     target 10
+    weight 1
   ]
   edge
   [
     source 1260
     target 10
+    weight 1
   ]
   edge
   [
     source 1261
     target 10
+    weight 1
   ]
   edge
   [
     source 1262
     target 10
+    weight 1
   ]
   edge
   [
     source 1263
     target 10
+    weight 1
   ]
   edge
   [
     source 1264
     target 10
+    weight 1
   ]
   edge
   [
     source 1265
     target 10
+    weight 1
   ]
   edge
   [
     source 1266
     target 10
+    weight 1
   ]
   edge
   [
     source 1267
     target 10
+    weight 1
   ]
   edge
   [
     source 1268
     target 10
+    weight 1
   ]
   edge
   [
     source 1269
     target 10
+    weight 1
   ]
   edge
   [
     source 1270
     target 10
+    weight 1
   ]
   edge
   [
     source 1271
     target 10
+    weight 1
   ]
   edge
   [
     source 1272
     target 10
+    weight 1
   ]
   edge
   [
     source 1273
     target 10
+    weight 1
   ]
   edge
   [
     source 1274
     target 10
+    weight 1
   ]
   edge
   [
     source 1275
     target 10
+    weight 1
   ]
   edge
   [
     source 1276
     target 10
+    weight 1
   ]
   edge
   [
     source 1277
     target 10
+    weight 1
   ]
   edge
   [
     source 1278
     target 10
+    weight 1
   ]
   edge
   [
     source 1279
     target 10
+    weight 1
   ]
   edge
   [
     source 1280
     target 10
+    weight 1
   ]
   edge
   [
     source 1281
     target 10
+    weight 1
   ]
   edge
   [
     source 1282
     target 10
+    weight 1
   ]
   edge
   [
     source 1283
     target 10
+    weight 1
   ]
   edge
   [
     source 1284
     target 10
+    weight 1
   ]
   edge
   [
     source 1285
     target 10
+    weight 1
   ]
   edge
   [
     source 1286
     target 10
+    weight 1
   ]
   edge
   [
     source 1287
     target 10
+    weight 1
   ]
   edge
   [
     source 1288
     target 10
+    weight 1
   ]
   edge
   [
     source 1289
     target 10
+    weight 1
   ]
   edge
   [
     source 1290
     target 10
+    weight 1
   ]
   edge
   [
     source 1291
     target 10
+    weight 1
   ]
   edge
   [
     source 1292
     target 10
+    weight 1
   ]
   edge
   [
     source 1293
     target 10
+    weight 1
   ]
   edge
   [
     source 1294
     target 10
+    weight 1
   ]
   edge
   [
     source 1295
     target 10
+    weight 1
   ]
   edge
   [
     source 1296
     target 10
+    weight 1
   ]
   edge
   [
     source 1297
     target 10
+    weight 1
   ]
   edge
   [
     source 1298
     target 10
+    weight 1
   ]
   edge
   [
     source 1299
     target 10
+    weight 1
   ]
   edge
   [
     source 1300
     target 10
+    weight 1
   ]
   edge
   [
     source 1301
     target 10
+    weight 1
   ]
   edge
   [
     source 1302
     target 10
+    weight 1
   ]
   edge
   [
     source 1303
     target 10
+    weight 1
   ]
   edge
   [
     source 1304
     target 10
+    weight 1
   ]
   edge
   [
     source 1305
     target 10
+    weight 1
   ]
   edge
   [
     source 1306
     target 10
+    weight 1
   ]
   edge
   [
     source 1307
     target 10
+    weight 1
   ]
   edge
   [
     source 1308
     target 10
+    weight 1
   ]
   edge
   [
     source 1309
     target 10
+    weight 1
   ]
   edge
   [
     source 1310
     target 10
+    weight 1
   ]
   edge
   [
     source 1311
     target 10
+    weight 1
   ]
   edge
   [
     source 1312
     target 10
+    weight 1
   ]
   edge
   [
     source 1313
     target 10
+    weight 1
   ]
   edge
   [
     source 1314
     target 10
+    weight 1
   ]
   edge
   [
     source 1315
     target 10
+    weight 1
   ]
   edge
   [
     source 1316
     target 10
+    weight 1
   ]
   edge
   [
     source 1317
     target 10
+    weight 1
   ]
   edge
   [
     source 1318
     target 10
+    weight 1
   ]
   edge
   [
     source 1319
     target 10
+    weight 1
   ]
   edge
   [
     source 1320
     target 10
+    weight 1
   ]
   edge
   [
     source 1321
     target 10
+    weight 1
   ]
   edge
   [
     source 1322
     target 10
+    weight 1
   ]
   edge
   [
     source 1323
     target 10
+    weight 1
   ]
   edge
   [
     source 1324
     target 10
+    weight 1
   ]
   edge
   [
     source 1325
     target 10
+    weight 1
   ]
   edge
   [
     source 1326
     target 10
+    weight 1
   ]
   edge
   [
     source 1327
     target 10
+    weight 1
   ]
   edge
   [
     source 1328
     target 10
+    weight 1
   ]
   edge
   [
     source 1329
     target 10
+    weight 1
   ]
   edge
   [
     source 1330
     target 10
+    weight 1
   ]
   edge
   [
     source 1331
     target 10
+    weight 1
   ]
   edge
   [
     source 1332
     target 10
+    weight 1
   ]
   edge
   [
     source 1333
     target 10
+    weight 1
   ]
   edge
   [
     source 1334
     target 10
+    weight 1
   ]
   edge
   [
     source 1335
     target 10
+    weight 1
   ]
   edge
   [
     source 1336
     target 10
+    weight 1
   ]
   edge
   [
     source 1337
     target 10
+    weight 1
   ]
   edge
   [
     source 1338
     target 10
+    weight 1
   ]
   edge
   [
     source 1339
     target 10
+    weight 1
   ]
   edge
   [
     source 1340
     target 10
+    weight 1
   ]
   edge
   [
     source 1341
     target 10
+    weight 1
   ]
   edge
   [
     source 1342
     target 10
+    weight 1
   ]
   edge
   [
     source 1343
     target 10
+    weight 1
   ]
   edge
   [
     source 1344
     target 10
+    weight 1
   ]
   edge
   [
     source 1345
     target 10
+    weight 1
   ]
   edge
   [
     source 1346
     target 10
+    weight 1
   ]
   edge
   [
     source 1347
     target 10
+    weight 1
   ]
   edge
   [
     source 1348
     target 10
+    weight 1
   ]
   edge
   [
     source 1349
     target 10
+    weight 1
   ]
   edge
   [
     source 1350
     target 10
+    weight 1
   ]
   edge
   [
     source 1351
     target 10
+    weight 1
   ]
   edge
   [
     source 1352
     target 10
+    weight 1
   ]
   edge
   [
     source 1353
     target 10
+    weight 1
   ]
   edge
   [
     source 1354
     target 10
+    weight 1
   ]
   edge
   [
     source 1355
     target 10
+    weight 1
   ]
   edge
   [
     source 1356
     target 10
+    weight 1
   ]
   edge
   [
     source 1357
     target 10
+    weight 1
   ]
   edge
   [
     source 1358
     target 10
+    weight 1
   ]
   edge
   [
     source 1359
     target 10
+    weight 1
   ]
   edge
   [
     source 1360
     target 10
+    weight 1
   ]
   edge
   [
     source 1361
     target 10
+    weight 1
   ]
   edge
   [
     source 1362
     target 10
+    weight 1
   ]
   edge
   [
     source 1363
     target 10
+    weight 1
   ]
   edge
   [
     source 1364
     target 10
+    weight 1
   ]
   edge
   [
     source 1365
     target 10
+    weight 1
   ]
   edge
   [
     source 1366
     target 10
+    weight 1
   ]
   edge
   [
     source 1367
     target 10
+    weight 1
   ]
   edge
   [
     source 1368
     target 10
+    weight 1
   ]
   edge
   [
     source 1369
     target 10
+    weight 1
   ]
   edge
   [
     source 1370
     target 10
+    weight 1
   ]
   edge
   [
     source 1371
     target 10
+    weight 1
   ]
   edge
   [
     source 1372
     target 10
+    weight 1
   ]
   edge
   [
     source 1373
     target 10
+    weight 1
   ]
   edge
   [
     source 1374
     target 10
+    weight 1
   ]
   edge
   [
     source 1375
     target 10
+    weight 1
   ]
   edge
   [
     source 1376
     target 10
+    weight 1
   ]
   edge
   [
     source 1377
     target 10
+    weight 1
   ]
   edge
   [
     source 1378
     target 10
+    weight 1
   ]
   edge
   [
     source 1379
     target 10
+    weight 1
   ]
   edge
   [
     source 1380
     target 10
+    weight 1
   ]
   edge
   [
     source 1381
     target 10
+    weight 1
   ]
   edge
   [
     source 1382
     target 10
+    weight 1
   ]
   edge
   [
     source 1383
     target 10
+    weight 1
   ]
   edge
   [
     source 1384
     target 10
+    weight 1
   ]
   edge
   [
     source 1385
     target 10
+    weight 1
   ]
   edge
   [
     source 1386
     target 10
+    weight 1
   ]
   edge
   [
     source 1387
     target 10
+    weight 1
   ]
   edge
   [
     source 1388
     target 10
+    weight 1
   ]
   edge
   [
     source 1389
     target 10
+    weight 1
   ]
   edge
   [
     source 1390
     target 10
+    weight 1
   ]
   edge
   [
     source 1391
     target 10
+    weight 1
   ]
   edge
   [
     source 1392
     target 10
+    weight 1
   ]
   edge
   [
     source 1393
     target 10
+    weight 1
   ]
   edge
   [
     source 1394
     target 10
+    weight 1
   ]
   edge
   [
     source 1395
     target 10
+    weight 1
   ]
   edge
   [
     source 1396
     target 10
+    weight 1
   ]
   edge
   [
     source 1397
     target 10
+    weight 1
   ]
   edge
   [
     source 1398
     target 10
+    weight 1
   ]
   edge
   [
     source 1399
     target 10
+    weight 1
   ]
   edge
   [
     source 1400
     target 10
+    weight 1
   ]
   edge
   [
     source 1401
     target 10
+    weight 1
   ]
   edge
   [
     source 1402
     target 10
+    weight 1
   ]
   edge
   [
     source 1403
     target 10
+    weight 1
   ]
   edge
   [
     source 1404
     target 10
+    weight 1
   ]
   edge
   [
     source 1405
     target 10
+    weight 1
   ]
   edge
   [
     source 1406
     target 10
+    weight 1
   ]
   edge
   [
     source 1407
     target 10
+    weight 1
   ]
   edge
   [
     source 1408
     target 10
+    weight 1
   ]
   edge
   [
     source 1409
     target 10
+    weight 1
   ]
   edge
   [
     source 1410
     target 10
+    weight 1
   ]
   edge
   [
     source 1411
     target 10
+    weight 1
   ]
   edge
   [
     source 1412
     target 10
+    weight 1
   ]
   edge
   [
     source 1413
     target 10
+    weight 1
   ]
   edge
   [
     source 1414
     target 10
+    weight 1
   ]
   edge
   [
     source 1415
     target 10
+    weight 1
   ]
   edge
   [
     source 1416
     target 10
+    weight 1
   ]
   edge
   [
     source 1417
     target 10
+    weight 1
   ]
   edge
   [
     source 1418
     target 10
+    weight 1
   ]
   edge
   [
     source 1419
     target 10
+    weight 1
   ]
   edge
   [
     source 1420
     target 10
+    weight 1
   ]
   edge
   [
     source 1421
     target 10
+    weight 1
   ]
   edge
   [
     source 1422
     target 10
+    weight 1
   ]
   edge
   [
     source 1423
     target 10
+    weight 1
   ]
   edge
   [
     source 1424
     target 10
+    weight 1
   ]
   edge
   [
     source 1425
     target 10
+    weight 1
   ]
   edge
   [
     source 1426
     target 10
+    weight 1
   ]
   edge
   [
     source 1427
     target 10
+    weight 1
   ]
   edge
   [
     source 1428
     target 10
+    weight 1
   ]
   edge
   [
     source 1429
     target 10
+    weight 1
   ]
   edge
   [
     source 1430
     target 10
+    weight 1
   ]
   edge
   [
     source 1431
     target 10
+    weight 1
   ]
   edge
   [
     source 1432
     target 10
+    weight 1
   ]
   edge
   [
     source 1433
     target 10
+    weight 1
   ]
   edge
   [
     source 1434
     target 10
+    weight 1
   ]
   edge
   [
     source 1435
     target 10
+    weight 1
   ]
   edge
   [
     source 1436
     target 10
+    weight 1
   ]
   edge
   [
     source 1437
     target 10
+    weight 1
   ]
   edge
   [
     source 1438
     target 10
+    weight 1
   ]
   edge
   [
     source 1439
     target 10
+    weight 1
   ]
   edge
   [
     source 1440
     target 10
+    weight 1
   ]
   edge
   [
     source 1441
     target 10
+    weight 1
   ]
   edge
   [
     source 1442
     target 10
+    weight 1
   ]
   edge
   [
     source 1443
     target 10
+    weight 1
   ]
   edge
   [
     source 1444
     target 10
+    weight 1
   ]
   edge
   [
     source 1445
     target 10
+    weight 1
   ]
   edge
   [
     source 1446
     target 10
+    weight 1
   ]
   edge
   [
     source 1447
     target 10
+    weight 1
   ]
   edge
   [
     source 1448
     target 10
+    weight 1
   ]
   edge
   [
     source 1449
     target 10
+    weight 1
   ]
   edge
   [
     source 1450
     target 10
+    weight 1
   ]
   edge
   [
     source 1451
     target 10
+    weight 1
   ]
   edge
   [
     source 1452
     target 10
+    weight 1
   ]
   edge
   [
     source 1453
     target 10
+    weight 1
   ]
   edge
   [
     source 1454
     target 10
+    weight 1
   ]
   edge
   [
     source 1455
     target 10
+    weight 1
   ]
   edge
   [
     source 1456
     target 10
+    weight 1
   ]
   edge
   [
     source 1457
     target 10
+    weight 1
   ]
   edge
   [
     source 1458
     target 10
+    weight 1
   ]
   edge
   [
     source 1459
     target 10
+    weight 1
   ]
   edge
   [
     source 1460
     target 10
+    weight 1
   ]
   edge
   [
     source 1461
     target 10
+    weight 1
   ]
   edge
   [
     source 1462
     target 10
+    weight 1
   ]
   edge
   [
     source 1463
     target 10
+    weight 1
   ]
   edge
   [
     source 1464
     target 10
+    weight 1
   ]
   edge
   [
     source 1465
     target 10
+    weight 1
   ]
   edge
   [
     source 1466
     target 10
+    weight 1
   ]
   edge
   [
     source 1467
     target 10
+    weight 1
   ]
   edge
   [
     source 1468
     target 10
+    weight 1
   ]
   edge
   [
     source 1469
     target 10
+    weight 1
   ]
   edge
   [
     source 1470
     target 10
+    weight 1
   ]
   edge
   [
     source 1471
     target 10
+    weight 1
   ]
   edge
   [
     source 1472
     target 10
+    weight 1
   ]
   edge
   [
     source 1473
     target 10
+    weight 1
   ]
   edge
   [
     source 1474
     target 10
+    weight 1
   ]
   edge
   [
     source 1475
     target 10
+    weight 1
   ]
   edge
   [
     source 1476
     target 10
+    weight 1
   ]
   edge
   [
     source 1477
     target 10
+    weight 1
   ]
   edge
   [
     source 1478
     target 10
+    weight 1
   ]
   edge
   [
     source 1479
     target 10
+    weight 1
   ]
   edge
   [
     source 1480
     target 10
+    weight 1
   ]
   edge
   [
     source 1481
     target 10
+    weight 1
   ]
   edge
   [
     source 1482
     target 10
+    weight 1
   ]
   edge
   [
     source 1483
     target 10
+    weight 1
   ]
   edge
   [
     source 1484
     target 10
+    weight 1
   ]
   edge
   [
     source 1485
     target 10
+    weight 1
   ]
   edge
   [
     source 1486
     target 10
+    weight 1
   ]
   edge
   [
     source 1487
     target 10
+    weight 1
   ]
   edge
   [
     source 1488
     target 10
+    weight 1
   ]
   edge
   [
     source 1489
     target 10
+    weight 1
   ]
   edge
   [
     source 1490
     target 10
+    weight 1
   ]
   edge
   [
     source 1491
     target 10
+    weight 1
   ]
   edge
   [
     source 1492
     target 10
+    weight 1
   ]
   edge
   [
     source 1493
     target 10
+    weight 1
   ]
   edge
   [
     source 1494
     target 10
+    weight 1
   ]
   edge
   [
     source 1495
     target 10
+    weight 1
   ]
   edge
   [
     source 1496
     target 10
+    weight 1
   ]
   edge
   [
     source 1497
     target 10
+    weight 1
   ]
   edge
   [
     source 1498
     target 10
+    weight 1
   ]
   edge
   [
     source 1499
     target 10
+    weight 1
   ]
   edge
   [
     source 1500
     target 10
+    weight 1
   ]
   edge
   [
     source 1501
     target 10
+    weight 1
   ]
   edge
   [
     source 1502
     target 10
+    weight 1
   ]
   edge
   [
     source 1503
     target 10
+    weight 1
   ]
   edge
   [
     source 1504
     target 10
+    weight 1
   ]
   edge
   [
     source 1505
     target 10
+    weight 1
   ]
   edge
   [
     source 1506
     target 10
+    weight 1
   ]
   edge
   [
     source 1507
     target 10
+    weight 1
   ]
   edge
   [
     source 1508
     target 10
+    weight 1
   ]
   edge
   [
     source 1509
     target 10
+    weight 1
   ]
   edge
   [
     source 1510
     target 10
+    weight 1
   ]
   edge
   [
     source 1511
     target 10
+    weight 1
   ]
   edge
   [
     source 1512
     target 10
+    weight 1
   ]
   edge
   [
     source 1513
     target 10
+    weight 1
   ]
   edge
   [
     source 1514
     target 10
+    weight 1
   ]
   edge
   [
     source 1515
     target 10
+    weight 1
   ]
   edge
   [
     source 1516
     target 10
+    weight 1
   ]
   edge
   [
     source 1517
     target 10
+    weight 1
   ]
   edge
   [
     source 1518
     target 10
+    weight 1
   ]
   edge
   [
     source 1519
     target 10
+    weight 1
   ]
   edge
   [
     source 1520
     target 10
+    weight 1
   ]
   edge
   [
     source 1521
     target 10
+    weight 1
   ]
   edge
   [
     source 1522
     target 10
+    weight 1
   ]
   edge
   [
     source 1523
     target 10
+    weight 1
   ]
   edge
   [
     source 1524
     target 10
+    weight 1
   ]
   edge
   [
     source 1525
     target 10
+    weight 1
   ]
   edge
   [
     source 1526
     target 10
+    weight 1
   ]
   edge
   [
     source 1527
     target 10
+    weight 1
   ]
   edge
   [
     source 1528
     target 10
+    weight 1
   ]
   edge
   [
     source 1529
     target 10
+    weight 1
   ]
   edge
   [
     source 1530
     target 10
+    weight 1
   ]
   edge
   [
     source 1531
     target 10
+    weight 1
   ]
   edge
   [
     source 1532
     target 10
+    weight 1
   ]
   edge
   [
     source 1533
     target 10
+    weight 1
   ]
   edge
   [
     source 1534
     target 10
+    weight 1
   ]
   edge
   [
     source 1535
     target 10
+    weight 1
   ]
   edge
   [
     source 1536
     target 10
+    weight 1
   ]
   edge
   [
     source 1537
     target 10
+    weight 1
   ]
   edge
   [
     source 1538
     target 10
+    weight 1
   ]
   edge
   [
     source 1539
     target 10
+    weight 1
   ]
   edge
   [
     source 1540
     target 10
+    weight 1
   ]
   edge
   [
     source 1541
     target 10
+    weight 1
   ]
   edge
   [
     source 1542
     target 10
+    weight 1
   ]
   edge
   [
     source 1543
     target 10
+    weight 1
   ]
   edge
   [
     source 1544
     target 10
+    weight 1
   ]
   edge
   [
     source 1545
     target 10
+    weight 1
   ]
   edge
   [
     source 1546
     target 10
+    weight 1
   ]
   edge
   [
     source 1547
     target 10
+    weight 1
   ]
   edge
   [
     source 1548
     target 10
+    weight 1
   ]
   edge
   [
     source 1549
     target 10
+    weight 1
   ]
   edge
   [
     source 1550
     target 10
+    weight 1
   ]
   edge
   [
     source 1551
     target 10
+    weight 1
   ]
   edge
   [
     source 1552
     target 10
+    weight 1
   ]
   edge
   [
     source 1553
     target 10
+    weight 1
   ]
   edge
   [
     source 1554
     target 10
+    weight 1
   ]
   edge
   [
     source 1555
     target 10
+    weight 1
   ]
   edge
   [
     source 1556
     target 10
+    weight 1
   ]
   edge
   [
     source 1557
     target 10
+    weight 1
   ]
   edge
   [
     source 1558
     target 10
+    weight 1
   ]
   edge
   [
     source 1559
     target 10
+    weight 1
   ]
   edge
   [
     source 1560
     target 10
+    weight 1
   ]
   edge
   [
     source 1561
     target 10
+    weight 1
   ]
   edge
   [
     source 1562
     target 10
+    weight 1
   ]
   edge
   [
     source 1563
     target 10
+    weight 1
   ]
   edge
   [
     source 1564
     target 10
+    weight 1
   ]
   edge
   [
     source 1565
     target 10
+    weight 1
   ]
   edge
   [
     source 1566
     target 10
+    weight 1
   ]
   edge
   [
     source 1567
     target 10
+    weight 1
   ]
   edge
   [
     source 1568
     target 10
+    weight 1
   ]
   edge
   [
     source 1569
     target 10
+    weight 1
   ]
   edge
   [
     source 1570
     target 10
+    weight 1
   ]
   edge
   [
     source 1571
     target 10
+    weight 1
   ]
   edge
   [
     source 1572
     target 10
+    weight 1
   ]
   edge
   [
     source 1573
     target 10
+    weight 1
   ]
   edge
   [
     source 1574
     target 10
+    weight 1
   ]
   edge
   [
     source 1575
     target 10
+    weight 1
   ]
   edge
   [
     source 1576
     target 10
+    weight 1
   ]
   edge
   [
     source 1577
     target 10
+    weight 1
   ]
   edge
   [
     source 1578
     target 10
+    weight 1
   ]
   edge
   [
     source 1579
     target 10
+    weight 1
   ]
   edge
   [
     source 1580
     target 10
+    weight 1
   ]
   edge
   [
     source 1581
     target 10
+    weight 1
   ]
   edge
   [
     source 1582
     target 10
+    weight 1
   ]
   edge
   [
     source 1583
     target 10
+    weight 1
   ]
   edge
   [
     source 1584
     target 10
+    weight 1
   ]
   edge
   [
     source 1585
     target 10
+    weight 1
   ]
   edge
   [
     source 1586
     target 10
+    weight 1
   ]
   edge
   [
     source 1587
     target 10
+    weight 1
   ]
   edge
   [
     source 1588
     target 10
+    weight 1
   ]
   edge
   [
     source 1589
     target 10
+    weight 1
   ]
   edge
   [
     source 1590
     target 10
+    weight 1
   ]
   edge
   [
     source 1591
     target 10
+    weight 1
   ]
   edge
   [
     source 1592
     target 10
+    weight 1
   ]
   edge
   [
     source 1593
     target 10
+    weight 1
   ]
   edge
   [
     source 1594
     target 10
+    weight 1
   ]
   edge
   [
     source 1595
     target 10
+    weight 1
   ]
   edge
   [
     source 1596
     target 10
+    weight 1
   ]
   edge
   [
     source 1597
     target 10
+    weight 1
   ]
   edge
   [
     source 1598
     target 10
+    weight 1
   ]
   edge
   [
     source 1599
     target 10
+    weight 1
   ]
   edge
   [
     source 1600
     target 10
+    weight 1
   ]
   edge
   [
     source 1601
     target 10
+    weight 1
   ]
   edge
   [
     source 1602
     target 10
+    weight 1
   ]
   edge
   [
     source 1603
     target 10
+    weight 1
   ]
   edge
   [
     source 1604
     target 10
+    weight 1
   ]
   edge
   [
     source 1605
     target 10
+    weight 1
   ]
   edge
   [
     source 1606
     target 10
+    weight 1
   ]
   edge
   [
     source 1607
     target 10
+    weight 1
   ]
   edge
   [
     source 1608
     target 10
+    weight 1
   ]
   edge
   [
     source 1609
     target 10
+    weight 1
   ]
   edge
   [
     source 1610
     target 10
+    weight 1
   ]
   edge
   [
     source 1611
     target 10
+    weight 1
   ]
   edge
   [
     source 1612
     target 10
+    weight 1
   ]
   edge
   [
     source 1613
     target 10
+    weight 1
   ]
   edge
   [
     source 1614
     target 10
+    weight 1
   ]
   edge
   [
     source 1615
     target 10
+    weight 1
   ]
   edge
   [
     source 1616
     target 10
+    weight 1
   ]
   edge
   [
     source 1617
     target 10
+    weight 1
   ]
   edge
   [
     source 1618
     target 10
+    weight 1
   ]
   edge
   [
     source 1619
     target 10
+    weight 1
   ]
   edge
   [
     source 1620
     target 10
+    weight 1
   ]
   edge
   [
     source 1621
     target 10
+    weight 1
   ]
   edge
   [
     source 1622
     target 10
+    weight 1
   ]
   edge
   [
     source 1623
     target 10
+    weight 1
   ]
   edge
   [
     source 1624
     target 10
+    weight 1
   ]
   edge
   [
     source 1625
     target 10
+    weight 1
   ]
   edge
   [
     source 1626
     target 10
+    weight 1
   ]
   edge
   [
     source 1627
     target 10
+    weight 1
   ]
   edge
   [
     source 1628
     target 10
+    weight 1
   ]
   edge
   [
     source 1629
     target 10
+    weight 1
   ]
   edge
   [
     source 1630
     target 10
+    weight 1
   ]
   edge
   [
     source 1631
     target 10
+    weight 1
   ]
   edge
   [
     source 1632
     target 10
+    weight 1
   ]
   edge
   [
     source 1633
     target 10
+    weight 1
   ]
   edge
   [
     source 1634
     target 10
+    weight 1
   ]
   edge
   [
     source 1635
     target 10
+    weight 1
   ]
   edge
   [
     source 1636
     target 10
+    weight 1
   ]
   edge
   [
     source 1637
     target 10
+    weight 1
   ]
   edge
   [
     source 1638
     target 10
+    weight 1
   ]
   edge
   [
     source 1639
     target 10
+    weight 1
   ]
   edge
   [
     source 1640
     target 10
+    weight 1
   ]
   edge
   [
     source 1641
     target 10
+    weight 1
   ]
   edge
   [
     source 1642
     target 10
+    weight 1
   ]
   edge
   [
     source 1643
     target 10
+    weight 1
   ]
   edge
   [
     source 1644
     target 10
+    weight 1
   ]
   edge
   [
     source 1645
     target 10
+    weight 1
   ]
   edge
   [
     source 1646
     target 10
+    weight 1
   ]
   edge
   [
     source 1647
     target 10
+    weight 1
   ]
   edge
   [
     source 1648
     target 10
+    weight 1
   ]
   edge
   [
     source 1649
     target 10
+    weight 1
   ]
   edge
   [
     source 1650
     target 10
+    weight 1
   ]
   edge
   [
     source 1651
     target 10
+    weight 1
   ]
   edge
   [
     source 1652
     target 10
+    weight 1
   ]
   edge
   [
     source 1653
     target 10
+    weight 1
   ]
   edge
   [
     source 1654
     target 10
+    weight 1
   ]
   edge
   [
     source 1655
     target 10
+    weight 1
   ]
   edge
   [
     source 1656
     target 10
+    weight 1
   ]
   edge
   [
     source 1657
     target 10
+    weight 1
   ]
   edge
   [
     source 1658
     target 10
+    weight 1
   ]
   edge
   [
     source 1659
     target 10
+    weight 1
   ]
   edge
   [
     source 1660
     target 10
+    weight 1
   ]
   edge
   [
     source 1661
     target 10
+    weight 1
   ]
   edge
   [
     source 1662
     target 10
+    weight 1
   ]
   edge
   [
     source 1663
     target 10
+    weight 1
   ]
   edge
   [
     source 1664
     target 10
+    weight 1
   ]
   edge
   [
     source 1665
     target 10
+    weight 1
   ]
   edge
   [
     source 1666
     target 10
+    weight 1
   ]
   edge
   [
     source 1667
     target 10
+    weight 1
   ]
   edge
   [
     source 1668
     target 10
+    weight 1
   ]
   edge
   [
     source 1669
     target 10
+    weight 1
   ]
   edge
   [
     source 1670
     target 10
+    weight 1
   ]
   edge
   [
     source 1671
     target 10
+    weight 1
   ]
   edge
   [
     source 1672
     target 10
+    weight 1
   ]
   edge
   [
     source 1673
     target 10
+    weight 1
   ]
   edge
   [
     source 1674
     target 10
+    weight 1
   ]
   edge
   [
     source 1675
     target 10
+    weight 1
   ]
   edge
   [
     source 1676
     target 10
+    weight 1
   ]
   edge
   [
     source 1677
     target 10
+    weight 1
   ]
   edge
   [
     source 1678
     target 10
+    weight 1
   ]
   edge
   [
     source 1679
     target 10
+    weight 1
   ]
   edge
   [
     source 1680
     target 10
+    weight 1
   ]
   edge
   [
     source 1681
     target 10
+    weight 1
   ]
   edge
   [
     source 1682
     target 10
+    weight 1
   ]
   edge
   [
     source 1683
     target 10
+    weight 1
   ]
   edge
   [
     source 1684
     target 10
+    weight 1
   ]
   edge
   [
     source 1685
     target 10
+    weight 1
   ]
   edge
   [
     source 1686
     target 10
+    weight 1
   ]
   edge
   [
     source 1687
     target 10
+    weight 1
   ]
   edge
   [
     source 1688
     target 10
+    weight 1
   ]
   edge
   [
     source 1689
     target 10
+    weight 1
   ]
   edge
   [
     source 1690
     target 10
+    weight 1
   ]
   edge
   [
     source 1691
     target 10
+    weight 1
   ]
   edge
   [
     source 1692
     target 10
+    weight 1
   ]
   edge
   [
     source 1693
     target 10
+    weight 1
   ]
   edge
   [
     source 1694
     target 10
+    weight 1
   ]
   edge
   [
     source 1695
     target 10
+    weight 1
   ]
   edge
   [
     source 1696
     target 10
+    weight 1
   ]
   edge
   [
     source 1697
     target 10
+    weight 1
   ]
   edge
   [
     source 1698
     target 10
+    weight 1
   ]
   edge
   [
     source 1699
     target 10
+    weight 1
   ]
   edge
   [
     source 1700
     target 10
+    weight 1
   ]
   edge
   [
     source 1701
     target 10
+    weight 1
   ]
   edge
   [
     source 1702
     target 10
+    weight 1
   ]
   edge
   [
     source 1703
     target 10
+    weight 1
   ]
   edge
   [
     source 1704
     target 10
+    weight 1
   ]
   edge
   [
     source 1705
     target 10
+    weight 1
   ]
   edge
   [
     source 1706
     target 10
+    weight 1
   ]
   edge
   [
     source 1707
     target 10
+    weight 1
   ]
   edge
   [
     source 1708
     target 10
+    weight 1
   ]
   edge
   [
     source 1709
     target 10
+    weight 1
   ]
   edge
   [
     source 1710
     target 10
+    weight 1
   ]
   edge
   [
     source 1711
     target 10
+    weight 1
   ]
   edge
   [
     source 1712
     target 10
+    weight 1
   ]
   edge
   [
     source 1713
     target 10
+    weight 1
   ]
   edge
   [
     source 1714
     target 10
+    weight 1
   ]
   edge
   [
     source 1715
     target 10
+    weight 1
   ]
   edge
   [
     source 1716
     target 10
+    weight 1
   ]
   edge
   [
     source 1717
     target 10
+    weight 1
   ]
   edge
   [
     source 1718
     target 10
+    weight 1
   ]
   edge
   [
     source 1719
     target 10
+    weight 1
   ]
   edge
   [
     source 1720
     target 10
+    weight 1
   ]
   edge
   [
     source 1721
     target 10
+    weight 1
   ]
   edge
   [
     source 1722
     target 10
+    weight 1
   ]
   edge
   [
     source 1723
     target 10
+    weight 1
   ]
   edge
   [
     source 1724
     target 10
+    weight 1
   ]
   edge
   [
     source 1725
     target 10
+    weight 1
   ]
   edge
   [
     source 1726
     target 10
+    weight 1
   ]
   edge
   [
     source 1727
     target 10
+    weight 1
   ]
   edge
   [
     source 1728
     target 10
+    weight 1
   ]
   edge
   [
     source 1729
     target 10
+    weight 1
   ]
   edge
   [
     source 1730
     target 10
+    weight 1
   ]
   edge
   [
     source 1731
     target 10
+    weight 1
   ]
   edge
   [
     source 1732
     target 10
+    weight 1
   ]
   edge
   [
     source 1733
     target 10
+    weight 1
   ]
   edge
   [
     source 1734
     target 10
+    weight 1
   ]
   edge
   [
     source 1735
     target 10
+    weight 1
   ]
   edge
   [
     source 1736
     target 10
+    weight 1
   ]
   edge
   [
     source 1737
     target 10
+    weight 1
   ]
   edge
   [
     source 1738
     target 10
+    weight 1
   ]
   edge
   [
     source 1739
     target 10
+    weight 1
   ]
   edge
   [
     source 1740
     target 10
+    weight 1
   ]
   edge
   [
     source 1741
     target 10
+    weight 1
   ]
   edge
   [
     source 1742
     target 10
+    weight 1
   ]
   edge
   [
     source 1743
     target 10
+    weight 1
   ]
   edge
   [
     source 1744
     target 10
+    weight 1
   ]
   edge
   [
     source 1745
     target 10
+    weight 1
   ]
   edge
   [
     source 1746
     target 10
+    weight 1
   ]
   edge
   [
     source 1747
     target 10
+    weight 1
   ]
   edge
   [
     source 1748
     target 10
+    weight 1
   ]
   edge
   [
     source 1749
     target 10
+    weight 1
   ]
   edge
   [
     source 1750
     target 10
+    weight 1
   ]
   edge
   [
     source 1751
     target 10
+    weight 1
   ]
   edge
   [
     source 1752
     target 10
+    weight 1
   ]
   edge
   [
     source 1753
     target 10
+    weight 1
   ]
   edge
   [
     source 1754
     target 10
+    weight 1
   ]
   edge
   [
     source 1755
     target 10
+    weight 1
   ]
   edge
   [
     source 1756
     target 10
+    weight 1
   ]
   edge
   [
     source 1757
     target 10
+    weight 1
   ]
   edge
   [
     source 1758
     target 10
+    weight 1
   ]
   edge
   [
     source 1759
     target 10
+    weight 1
   ]
   edge
   [
     source 1760
     target 10
+    weight 1
   ]
   edge
   [
     source 1761
     target 10
+    weight 1
   ]
   edge
   [
     source 1762
     target 10
+    weight 1
   ]
   edge
   [
     source 1763
     target 10
+    weight 1
   ]
   edge
   [
     source 1764
     target 10
+    weight 1
   ]
   edge
   [
     source 1765
     target 10
+    weight 1
   ]
   edge
   [
     source 1766
     target 10
+    weight 1
   ]
   edge
   [
     source 1767
     target 10
+    weight 1
   ]
   edge
   [
     source 1768
     target 10
+    weight 1
   ]
   edge
   [
     source 1769
     target 10
+    weight 1
   ]
   edge
   [
     source 1770
     target 10
+    weight 1
   ]
   edge
   [
     source 1771
     target 10
+    weight 1
   ]
   edge
   [
     source 1772
     target 10
+    weight 1
   ]
   edge
   [
     source 1773
     target 10
+    weight 1
   ]
   edge
   [
     source 1774
     target 10
+    weight 1
   ]
   edge
   [
     source 1775
     target 10
+    weight 1
   ]
   edge
   [
     source 1776
     target 10
+    weight 1
   ]
   edge
   [
     source 1777
     target 10
+    weight 1
   ]
   edge
   [
     source 1778
     target 10
+    weight 1
   ]
   edge
   [
     source 1779
     target 10
+    weight 1
   ]
   edge
   [
     source 1780
     target 10
+    weight 1
   ]
   edge
   [
     source 1781
     target 10
+    weight 1
   ]
   edge
   [
     source 1782
     target 10
+    weight 1
   ]
   edge
   [
     source 1783
     target 10
+    weight 1
   ]
   edge
   [
     source 1784
     target 10
+    weight 1
   ]
   edge
   [
     source 1785
     target 10
+    weight 1
   ]
   edge
   [
     source 1786
     target 10
+    weight 1
   ]
   edge
   [
     source 1787
     target 10
+    weight 1
   ]
   edge
   [
     source 1788
     target 10
+    weight 1
   ]
   edge
   [
     source 1789
     target 10
+    weight 1
   ]
   edge
   [
     source 1790
     target 10
+    weight 1
   ]
   edge
   [
     source 1791
     target 10
+    weight 1
   ]
   edge
   [
     source 1792
     target 10
+    weight 1
   ]
   edge
   [
     source 1793
     target 10
+    weight 1
   ]
   edge
   [
     source 1794
     target 10
+    weight 1
   ]
   edge
   [
     source 1795
     target 10
+    weight 1
   ]
   edge
   [
     source 1796
     target 10
+    weight 1
   ]
   edge
   [
     source 1797
     target 10
+    weight 1
   ]
   edge
   [
     source 1798
     target 10
+    weight 1
   ]
   edge
   [
     source 1799
     target 10
+    weight 1
   ]
   edge
   [
     source 1800
     target 10
+    weight 1
   ]
   edge
   [
     source 1801
     target 10
+    weight 1
   ]
   edge
   [
     source 1802
     target 10
+    weight 1
   ]
   edge
   [
     source 1803
     target 10
+    weight 1
   ]
   edge
   [
     source 1804
     target 10
+    weight 1
   ]
   edge
   [
     source 1805
     target 10
+    weight 1
   ]
   edge
   [
     source 1806
     target 10
+    weight 1
   ]
   edge
   [
     source 1807
     target 10
+    weight 1
   ]
   edge
   [
     source 1808
     target 10
+    weight 1
   ]
   edge
   [
     source 1809
     target 10
+    weight 1
   ]
   edge
   [
     source 1810
     target 10
+    weight 1
   ]
   edge
   [
     source 1811
     target 10
+    weight 1
   ]
   edge
   [
     source 1812
     target 10
+    weight 1
   ]
   edge
   [
     source 1813
     target 10
+    weight 1
   ]
   edge
   [
     source 1814
     target 10
+    weight 1
   ]
   edge
   [
     source 1815
     target 10
+    weight 1
   ]
   edge
   [
     source 1816
     target 10
+    weight 1
   ]
   edge
   [
     source 1817
     target 10
+    weight 1
   ]
   edge
   [
     source 1818
     target 10
+    weight 1
   ]
   edge
   [
     source 1819
     target 10
+    weight 1
   ]
   edge
   [
     source 1820
     target 10
+    weight 1
   ]
   edge
   [
     source 1821
     target 10
+    weight 1
   ]
   edge
   [
     source 1822
     target 10
+    weight 1
   ]
   edge
   [
     source 1823
     target 10
+    weight 1
   ]
   edge
   [
     source 1824
     target 10
+    weight 1
   ]
   edge
   [
     source 1825
     target 10
+    weight 1
   ]
   edge
   [
     source 1826
     target 10
+    weight 1
   ]
   edge
   [
     source 1827
     target 10
+    weight 1
   ]
   edge
   [
     source 1828
     target 10
+    weight 1
   ]
   edge
   [
     source 1829
     target 10
+    weight 1
   ]
   edge
   [
     source 1830
     target 10
+    weight 1
   ]
   edge
   [
     source 1831
     target 10
+    weight 1
   ]
   edge
   [
     source 1832
     target 10
+    weight 1
   ]
   edge
   [
     source 1833
     target 10
+    weight 1
   ]
   edge
   [
     source 1834
     target 10
+    weight 1
   ]
   edge
   [
     source 1835
     target 10
+    weight 1
   ]
   edge
   [
     source 1836
     target 10
+    weight 1
   ]
   edge
   [
     source 1837
     target 10
+    weight 1
   ]
   edge
   [
     source 1838
     target 10
+    weight 1
   ]
   edge
   [
     source 1839
     target 10
+    weight 1
   ]
   edge
   [
     source 1840
     target 10
+    weight 1
   ]
   edge
   [
     source 1841
     target 10
+    weight 1
   ]
   edge
   [
     source 1842
     target 10
+    weight 1
   ]
   edge
   [
     source 1843
     target 10
+    weight 1
   ]
   edge
   [
     source 1844
     target 10
+    weight 1
   ]
   edge
   [
     source 1845
     target 10
+    weight 1
   ]
   edge
   [
     source 1846
     target 10
+    weight 1
   ]
   edge
   [
     source 1847
     target 10
+    weight 1
   ]
   edge
   [
     source 1848
     target 10
+    weight 1
   ]
   edge
   [
     source 1849
     target 10
+    weight 1
   ]
   edge
   [
     source 1850
     target 10
+    weight 1
   ]
   edge
   [
     source 1851
     target 10
+    weight 1
   ]
   edge
   [
     source 1852
     target 10
+    weight 1
   ]
   edge
   [
     source 1853
     target 10
+    weight 1
   ]
   edge
   [
     source 1854
     target 10
+    weight 1
   ]
   edge
   [
     source 1855
     target 10
+    weight 1
   ]
   edge
   [
     source 1856
     target 10
+    weight 1
   ]
   edge
   [
     source 1857
     target 10
+    weight 1
   ]
   edge
   [
     source 1858
     target 10
+    weight 1
   ]
   edge
   [
     source 1859
     target 10
+    weight 1
   ]
   edge
   [
     source 1860
     target 10
+    weight 1
   ]
   edge
   [
     source 1861
     target 10
+    weight 1
   ]
   edge
   [
     source 1862
     target 10
+    weight 1
   ]
   edge
   [
     source 1863
     target 10
+    weight 1
   ]
   edge
   [
     source 1864
     target 10
+    weight 1
   ]
   edge
   [
     source 1865
     target 10
+    weight 1
   ]
   edge
   [
     source 1866
     target 10
+    weight 1
   ]
   edge
   [
     source 1867
     target 10
+    weight 1
   ]
   edge
   [
     source 1868
     target 10
+    weight 1
   ]
   edge
   [
     source 1869
     target 10
+    weight 1
   ]
   edge
   [
     source 1870
     target 10
+    weight 1
   ]
   edge
   [
     source 1871
     target 10
+    weight 1
   ]
   edge
   [
     source 1872
     target 10
+    weight 1
   ]
   edge
   [
     source 1873
     target 10
+    weight 1
   ]
   edge
   [
     source 1874
     target 10
+    weight 1
   ]
   edge
   [
     source 1875
     target 10
+    weight 1
   ]
   edge
   [
     source 1876
     target 10
+    weight 1
   ]
   edge
   [
     source 1877
     target 10
+    weight 1
   ]
   edge
   [
     source 1878
     target 10
+    weight 1
   ]
   edge
   [
     source 1879
     target 10
+    weight 1
   ]
   edge
   [
     source 1880
     target 10
+    weight 1
   ]
   edge
   [
     source 1881
     target 10
+    weight 1
   ]
   edge
   [
     source 1882
     target 10
+    weight 1
   ]
   edge
   [
     source 1883
     target 10
+    weight 1
   ]
   edge
   [
     source 1884
     target 10
+    weight 1
   ]
   edge
   [
     source 1885
     target 10
+    weight 1
   ]
   edge
   [
     source 1886
     target 10
+    weight 1
   ]
   edge
   [
     source 1887
     target 10
+    weight 1
   ]
   edge
   [
     source 1888
     target 10
+    weight 1
   ]
   edge
   [
     source 1889
     target 10
+    weight 1
   ]
   edge
   [
     source 1890
     target 10
+    weight 1
   ]
   edge
   [
     source 1891
     target 10
+    weight 1
   ]
   edge
   [
     source 1892
     target 10
+    weight 1
   ]
   edge
   [
     source 1893
     target 10
+    weight 1
   ]
   edge
   [
     source 1894
     target 10
+    weight 1
   ]
   edge
   [
     source 1895
     target 10
+    weight 1
   ]
   edge
   [
     source 1896
     target 10
+    weight 1
   ]
   edge
   [
     source 1897
     target 10
+    weight 1
   ]
   edge
   [
     source 1898
     target 10
+    weight 1
   ]
   edge
   [
     source 1899
     target 10
+    weight 1
   ]
   edge
   [
     source 1900
     target 10
+    weight 1
   ]
   edge
   [
     source 1901
     target 10
+    weight 1
   ]
   edge
   [
     source 1902
     target 10
+    weight 1
   ]
   edge
   [
     source 1903
     target 10
+    weight 1
   ]
   edge
   [
     source 1904
     target 10
+    weight 1
   ]
   edge
   [
     source 1905
     target 10
+    weight 1
   ]
   edge
   [
     source 1906
     target 10
+    weight 1
   ]
   edge
   [
     source 1907
     target 10
+    weight 1
   ]
   edge
   [
     source 1908
     target 10
+    weight 1
   ]
   edge
   [
     source 1909
     target 10
+    weight 1
   ]
   edge
   [
     source 1910
     target 10
+    weight 1
   ]
   edge
   [
     source 1911
     target 10
+    weight 1
   ]
   edge
   [
     source 1912
     target 10
+    weight 1
   ]
   edge
   [
     source 1913
     target 10
+    weight 1
   ]
   edge
   [
     source 1914
     target 10
+    weight 1
   ]
   edge
   [
     source 1915
     target 10
+    weight 1
   ]
   edge
   [
     source 1916
     target 10
+    weight 1
   ]
   edge
   [
     source 1917
     target 10
+    weight 1
   ]
   edge
   [
     source 1918
     target 10
+    weight 1
   ]
   edge
   [
     source 1919
     target 10
+    weight 1
   ]
   edge
   [
     source 1920
     target 10
+    weight 1
   ]
   edge
   [
     source 1921
     target 10
+    weight 1
   ]
   edge
   [
     source 1922
     target 10
+    weight 1
   ]
   edge
   [
     source 1923
     target 10
+    weight 1
   ]
   edge
   [
     source 1924
     target 10
+    weight 1
   ]
   edge
   [
     source 1925
     target 10
+    weight 1
   ]
   edge
   [
     source 1926
     target 10
+    weight 1
   ]
   edge
   [
     source 1927
     target 10
+    weight 1
   ]
   edge
   [
     source 1928
     target 10
+    weight 1
   ]
   edge
   [
     source 1929
     target 10
+    weight 1
   ]
   edge
   [
     source 1930
     target 10
+    weight 1
   ]
   edge
   [
     source 1931
     target 10
+    weight 1
   ]
   edge
   [
     source 1932
     target 10
+    weight 1
   ]
   edge
   [
     source 1933
     target 10
+    weight 1
   ]
   edge
   [
     source 1934
     target 10
+    weight 1
   ]
   edge
   [
     source 1935
     target 10
+    weight 1
   ]
   edge
   [
     source 1936
     target 10
+    weight 1
   ]
   edge
   [
     source 1937
     target 10
+    weight 1
   ]
   edge
   [
     source 1938
     target 10
+    weight 1
   ]
   edge
   [
     source 1939
     target 10
+    weight 1
   ]
   edge
   [
     source 1940
     target 10
+    weight 1
   ]
   edge
   [
     source 1941
     target 10
+    weight 1
   ]
   edge
   [
     source 1942
     target 10
+    weight 1
   ]
   edge
   [
     source 1943
     target 10
+    weight 1
   ]
   edge
   [
     source 1944
     target 10
+    weight 1
   ]
   edge
   [
     source 1945
     target 10
+    weight 1
   ]
   edge
   [
     source 1946
     target 10
+    weight 1
   ]
   edge
   [
     source 1947
     target 10
+    weight 1
   ]
   edge
   [
     source 1948
     target 10
+    weight 1
   ]
   edge
   [
     source 1949
     target 10
+    weight 1
   ]
   edge
   [
     source 1950
     target 10
+    weight 1
   ]
   edge
   [
     source 1951
     target 10
+    weight 1
   ]
   edge
   [
     source 1952
     target 10
+    weight 1
   ]
   edge
   [
     source 1953
     target 10
+    weight 1
   ]
   edge
   [
     source 1954
     target 10
+    weight 1
   ]
   edge
   [
     source 1955
     target 10
+    weight 1
   ]
   edge
   [
     source 1956
     target 10
+    weight 1
   ]
   edge
   [
     source 1957
     target 10
+    weight 1
   ]
   edge
   [
     source 1958
     target 10
+    weight 1
   ]
   edge
   [
     source 1959
     target 10
+    weight 1
   ]
   edge
   [
     source 1960
     target 10
+    weight 1
   ]
   edge
   [
     source 1961
     target 10
+    weight 1
   ]
   edge
   [
     source 1962
     target 10
+    weight 1
   ]
   edge
   [
     source 1963
     target 10
+    weight 1
   ]
   edge
   [
     source 1964
     target 10
+    weight 1
   ]
   edge
   [
     source 1965
     target 10
+    weight 1
   ]
   edge
   [
     source 1966
     target 10
+    weight 1
   ]
   edge
   [
     source 1967
     target 10
+    weight 1
   ]
   edge
   [
     source 1968
     target 10
+    weight 1
   ]
   edge
   [
     source 1969
     target 10
+    weight 1
   ]
   edge
   [
     source 1970
     target 10
+    weight 1
   ]
   edge
   [
     source 1971
     target 10
+    weight 1
   ]
   edge
   [
     source 1972
     target 10
+    weight 1
   ]
   edge
   [
     source 1973
     target 10
+    weight 1
   ]
   edge
   [
     source 1974
     target 10
+    weight 1
   ]
   edge
   [
     source 1975
     target 10
+    weight 1
   ]
   edge
   [
     source 1976
     target 10
+    weight 1
   ]
   edge
   [
     source 1977
     target 10
+    weight 1
   ]
   edge
   [
     source 1978
     target 10
+    weight 1
   ]
   edge
   [
     source 1979
     target 10
+    weight 1
   ]
   edge
   [
     source 1980
     target 10
+    weight 1
   ]
   edge
   [
     source 1981
     target 10
+    weight 1
   ]
   edge
   [
     source 1982
     target 10
+    weight 1
   ]
   edge
   [
     source 1983
     target 10
+    weight 1
   ]
   edge
   [
     source 1984
     target 10
+    weight 1
   ]
   edge
   [
     source 1985
     target 10
+    weight 1
   ]
   edge
   [
     source 1986
     target 10
+    weight 1
   ]
   edge
   [
     source 1987
     target 10
+    weight 1
   ]
   edge
   [
     source 1988
     target 10
+    weight 1
   ]
   edge
   [
     source 1989
     target 10
+    weight 1
   ]
   edge
   [
     source 1990
     target 10
+    weight 1
   ]
   edge
   [
     source 1991
     target 10
+    weight 1
   ]
   edge
   [
     source 1992
     target 10
+    weight 1
   ]
   edge
   [
     source 1993
     target 10
+    weight 1
   ]
   edge
   [
     source 1994
     target 10
+    weight 1
   ]
   edge
   [
     source 1995
     target 10
+    weight 1
   ]
   edge
   [
     source 1996
     target 10
+    weight 1
   ]
   edge
   [
     source 1997
     target 10
+    weight 1
   ]
   edge
   [
     source 1998
     target 10
+    weight 1
   ]
   edge
   [
     source 1999
     target 10
+    weight 1
   ]
   edge
   [
     source 2000
     target 10
+    weight 1
   ]
   edge
   [
     source 2001
     target 10
+    weight 1
   ]
   edge
   [
     source 2002
     target 10
+    weight 1
   ]
   edge
   [
     source 2003
     target 10
+    weight 1
   ]
   edge
   [
     source 2004
     target 10
+    weight 1
   ]
   edge
   [
     source 2005
     target 10
+    weight 1
   ]
   edge
   [
     source 2006
     target 10
+    weight 1
   ]
   edge
   [
     source 2007
     target 10
+    weight 1
   ]
   edge
   [
     source 2008
     target 10
+    weight 1
   ]
   edge
   [
     source 2009
     target 10
+    weight 1
   ]
   edge
   [
     source 2010
     target 10
+    weight 1
   ]
   edge
   [
     source 2011
     target 10
+    weight 1
   ]
   edge
   [
     source 2012
     target 10
+    weight 1
   ]
   edge
   [
     source 2013
     target 10
+    weight 1
   ]
   edge
   [
     source 2014
     target 10
+    weight 1
   ]
   edge
   [
     source 2015
     target 10
+    weight 1
   ]
   edge
   [
     source 2016
     target 10
+    weight 1
   ]
   edge
   [
     source 2017
     target 10
+    weight 1
   ]
   edge
   [
     source 2018
     target 10
+    weight 1
   ]
   edge
   [
     source 2019
     target 10
+    weight 1
   ]
   edge
   [
     source 2020
     target 10
+    weight 1
   ]
   edge
   [
     source 2021
     target 10
+    weight 1
   ]
   edge
   [
     source 2022
     target 10
+    weight 1
   ]
   edge
   [
     source 2023
     target 10
+    weight 1
   ]
   edge
   [
     source 2024
     target 10
+    weight 1
   ]
   edge
   [
     source 2025
     target 10
+    weight 1
   ]
   edge
   [
     source 2026
     target 10
+    weight 1
   ]
   edge
   [
     source 2027
     target 10
+    weight 1
   ]
   edge
   [
     source 2028
     target 10
+    weight 1
   ]
   edge
   [
     source 2029
     target 10
+    weight 1
   ]
   edge
   [
     source 2030
     target 10
+    weight 1
   ]
   edge
   [
     source 2031
     target 10
+    weight 1
   ]
   edge
   [
     source 2032
     target 10
+    weight 1
   ]
   edge
   [
     source 2033
     target 10
+    weight 1
   ]
   edge
   [
     source 2034
     target 10
+    weight 1
   ]
   edge
   [
     source 2035
     target 10
+    weight 1
   ]
   edge
   [
     source 2036
     target 10
+    weight 1
   ]
   edge
   [
     source 2037
     target 10
+    weight 1
   ]
   edge
   [
     source 2038
     target 10
+    weight 1
   ]
   edge
   [
     source 2039
     target 10
+    weight 1
   ]
   edge
   [
     source 2040
     target 10
+    weight 1
   ]
   edge
   [
     source 2041
     target 10
+    weight 1
   ]
   edge
   [
     source 2042
     target 10
+    weight 1
   ]
   edge
   [
     source 2043
     target 10
+    weight 1
   ]
   edge
   [
     source 2044
     target 10
+    weight 1
   ]
   edge
   [
     source 2045
     target 10
+    weight 1
   ]
   edge
   [
     source 2046
     target 10
+    weight 1
   ]
   edge
   [
     source 2047
     target 10
+    weight 1
   ]
   edge
   [
     source 2048
     target 10
+    weight 1
   ]
   edge
   [
     source 2049
     target 10
+    weight 1
   ]
   edge
   [
     source 2050
     target 10
+    weight 1
   ]
   edge
   [
     source 2051
     target 10
+    weight 1
   ]
   edge
   [
     source 2052
     target 10
+    weight 1
   ]
   edge
   [
     source 2053
     target 10
+    weight 1
   ]
   edge
   [
     source 2054
     target 10
+    weight 1
   ]
   edge
   [
     source 2055
     target 10
+    weight 1
   ]
   edge
   [
     source 2056
     target 10
+    weight 1
   ]
   edge
   [
     source 2057
     target 10
+    weight 1
   ]
   edge
   [
     source 2058
     target 10
+    weight 1
   ]
   edge
   [
     source 2059
     target 10
+    weight 1
   ]
   edge
   [
     source 2060
     target 10
+    weight 1
   ]
   edge
   [
     source 2061
     target 10
+    weight 1
   ]
   edge
   [
     source 2062
     target 10
+    weight 1
   ]
   edge
   [
     source 2063
     target 10
+    weight 1
   ]
   edge
   [
     source 2064
     target 10
+    weight 1
   ]
   edge
   [
     source 2065
     target 10
+    weight 1
   ]
   edge
   [
     source 2066
     target 10
+    weight 1
   ]
   edge
   [
     source 2067
     target 10
+    weight 1
   ]
   edge
   [
     source 2068
     target 10
+    weight 1
   ]
   edge
   [
     source 2069
     target 10
+    weight 1
   ]
   edge
   [
     source 2070
     target 10
+    weight 1
   ]
   edge
   [
     source 2071
     target 10
+    weight 1
   ]
   edge
   [
     source 2072
     target 10
+    weight 1
   ]
   edge
   [
     source 2073
     target 10
+    weight 1
   ]
   edge
   [
     source 2074
     target 10
+    weight 1
   ]
   edge
   [
     source 2075
     target 10
+    weight 1
   ]
   edge
   [
     source 2076
     target 10
+    weight 1
   ]
   edge
   [
     source 2077
     target 10
+    weight 1
   ]
   edge
   [
     source 2078
     target 10
+    weight 1
   ]
   edge
   [
     source 2079
     target 10
+    weight 1
   ]
   edge
   [
     source 2080
     target 10
+    weight 1
   ]
   edge
   [
     source 2081
     target 10
+    weight 1
   ]
   edge
   [
     source 2082
     target 10
+    weight 1
   ]
   edge
   [
     source 2083
     target 10
+    weight 1
   ]
   edge
   [
     source 2084
     target 10
+    weight 1
   ]
   edge
   [
     source 2085
     target 10
+    weight 1
   ]
   edge
   [
     source 2086
     target 10
+    weight 1
   ]
   edge
   [
     source 2087
     target 10
+    weight 1
   ]
   edge
   [
     source 2088
     target 10
+    weight 1
   ]
   edge
   [
     source 2089
     target 10
+    weight 1
   ]
   edge
   [
     source 2090
     target 10
+    weight 1
   ]
   edge
   [
     source 2091
     target 10
+    weight 1
   ]
   edge
   [
     source 2092
     target 10
+    weight 1
   ]
   edge
   [
     source 2093
     target 10
+    weight 1
   ]
   edge
   [
     source 2094
     target 10
+    weight 1
   ]
   edge
   [
     source 2095
     target 10
+    weight 1
   ]
   edge
   [
     source 2096
     target 10
+    weight 1
   ]
   edge
   [
     source 2097
     target 10
+    weight 1
   ]
   edge
   [
     source 2098
     target 10
+    weight 1
   ]
   edge
   [
     source 2099
     target 10
+    weight 1
   ]
   edge
   [
     source 2100
     target 10
+    weight 1
   ]
   edge
   [
     source 2101
     target 10
+    weight 1
   ]
   edge
   [
     source 2102
     target 10
+    weight 1
   ]
   edge
   [
     source 2103
     target 10
+    weight 1
   ]
   edge
   [
     source 2104
     target 10
+    weight 1
   ]
   edge
   [
     source 2105
     target 10
+    weight 1
   ]
   edge
   [
     source 2106
     target 10
+    weight 1
   ]
   edge
   [
     source 2107
     target 10
+    weight 1
   ]
   edge
   [
     source 2108
     target 10
+    weight 1
   ]
   edge
   [
     source 2109
     target 10
+    weight 1
   ]
   edge
   [
     source 2110
     target 10
+    weight 1
   ]
   edge
   [
     source 2111
     target 10
+    weight 1
   ]
   edge
   [
     source 2112
     target 10
+    weight 1
   ]
   edge
   [
     source 2113
     target 10
+    weight 1
   ]
   edge
   [
     source 2114
     target 10
+    weight 1
   ]
   edge
   [
     source 2115
     target 10
+    weight 1
   ]
   edge
   [
     source 2116
     target 10
+    weight 1
   ]
   edge
   [
     source 2117
     target 10
+    weight 1
   ]
   edge
   [
     source 2118
     target 10
+    weight 1
   ]
   edge
   [
     source 2119
     target 10
+    weight 1
   ]
   edge
   [
     source 2120
     target 10
+    weight 1
   ]
   edge
   [
     source 2121
     target 10
+    weight 1
   ]
   edge
   [
     source 2122
     target 10
+    weight 1
   ]
   edge
   [
     source 2123
     target 10
+    weight 1
   ]
   edge
   [
     source 2124
     target 10
+    weight 1
   ]
   edge
   [
     source 2125
     target 10
+    weight 1
   ]
   edge
   [
     source 2126
     target 10
+    weight 1
   ]
   edge
   [
     source 2127
     target 10
+    weight 1
   ]
   edge
   [
     source 2128
     target 10
+    weight 1
   ]
   edge
   [
     source 2129
     target 10
+    weight 1
   ]
   edge
   [
     source 2130
     target 10
+    weight 1
   ]
   edge
   [
     source 2131
     target 10
+    weight 1
   ]
   edge
   [
     source 2132
     target 10
+    weight 1
   ]
   edge
   [
     source 2133
     target 10
+    weight 1
   ]
   edge
   [
     source 2134
     target 10
+    weight 1
   ]
   edge
   [
     source 2135
     target 10
+    weight 1
   ]
   edge
   [
     source 2136
     target 10
+    weight 1
   ]
   edge
   [
     source 2137
     target 10
+    weight 1
   ]
   edge
   [
     source 2138
     target 10
+    weight 1
   ]
   edge
   [
     source 2139
     target 10
+    weight 1
   ]
   edge
   [
     source 2140
     target 10
+    weight 1
   ]
   edge
   [
     source 2141
     target 10
+    weight 1
   ]
   edge
   [
     source 2142
     target 10
+    weight 1
   ]
   edge
   [
     source 2143
     target 10
+    weight 1
   ]
   edge
   [
     source 2144
     target 10
+    weight 1
   ]
   edge
   [
     source 2145
     target 10
+    weight 1
   ]
   edge
   [
     source 2146
     target 10
+    weight 1
   ]
   edge
   [
     source 2147
     target 10
+    weight 1
   ]
   edge
   [
     source 2148
     target 10
+    weight 1
   ]
   edge
   [
     source 2149
     target 10
+    weight 1
   ]
   edge
   [
     source 2150
     target 10
+    weight 1
   ]
   edge
   [
     source 2151
     target 10
+    weight 1
   ]
   edge
   [
     source 2152
     target 10
+    weight 1
   ]
   edge
   [
     source 2153
     target 10
+    weight 1
   ]
   edge
   [
     source 2154
     target 10
+    weight 1
   ]
   edge
   [
     source 2155
     target 10
+    weight 1
   ]
   edge
   [
     source 2156
     target 10
+    weight 1
   ]
   edge
   [
     source 2157
     target 10
+    weight 1
   ]
   edge
   [
     source 2158
     target 10
+    weight 1
   ]
   edge
   [
     source 2159
     target 10
+    weight 1
   ]
   edge
   [
     source 2160
     target 10
+    weight 1
   ]
   edge
   [
     source 2161
     target 10
+    weight 1
   ]
   edge
   [
     source 2162
     target 10
+    weight 1
   ]
   edge
   [
     source 2163
     target 10
+    weight 1
   ]
   edge
   [
     source 2164
     target 10
+    weight 1
   ]
   edge
   [
     source 2165
     target 10
+    weight 1
   ]
   edge
   [
     source 2166
     target 10
+    weight 1
   ]
   edge
   [
     source 2167
     target 10
+    weight 1
   ]
   edge
   [
     source 2168
     target 10
+    weight 1
   ]
   edge
   [
     source 2169
     target 10
+    weight 1
   ]
   edge
   [
     source 2170
     target 10
+    weight 1
   ]
   edge
   [
     source 2171
     target 10
+    weight 1
   ]
   edge
   [
     source 2172
     target 10
+    weight 1
   ]
   edge
   [
     source 2173
     target 10
+    weight 1
   ]
   edge
   [
     source 2174
     target 10
+    weight 1
   ]
   edge
   [
     source 2175
     target 10
+    weight 1
   ]
   edge
   [
     source 2176
     target 10
+    weight 1
   ]
   edge
   [
     source 2177
     target 10
+    weight 1
   ]
   edge
   [
     source 2178
     target 10
+    weight 1
   ]
   edge
   [
     source 2179
     target 10
+    weight 1
   ]
   edge
   [
     source 2180
     target 10
+    weight 1
   ]
   edge
   [
     source 2181
     target 10
+    weight 1
   ]
   edge
   [
     source 2182
     target 10
+    weight 1
   ]
   edge
   [
     source 2183
     target 10
+    weight 1
   ]
   edge
   [
     source 2184
     target 10
+    weight 1
   ]
   edge
   [
     source 2185
     target 10
+    weight 1
   ]
   edge
   [
     source 2186
     target 10
+    weight 1
   ]
   edge
   [
     source 2187
     target 10
+    weight 1
   ]
   edge
   [
     source 2188
     target 10
+    weight 1
   ]
   edge
   [
     source 2189
     target 10
+    weight 1
   ]
   edge
   [
     source 2190
     target 10
+    weight 1
   ]
   edge
   [
     source 2191
     target 10
+    weight 1
   ]
   edge
   [
     source 2192
     target 10
+    weight 1
   ]
   edge
   [
     source 2193
     target 10
+    weight 1
   ]
   edge
   [
     source 2194
     target 10
+    weight 1
   ]
   edge
   [
     source 2195
     target 10
+    weight 1
   ]
   edge
   [
     source 2196
     target 10
+    weight 1
   ]
   edge
   [
     source 2197
     target 10
+    weight 1
   ]
   edge
   [
     source 2198
     target 10
+    weight 1
   ]
   edge
   [
     source 2199
     target 10
+    weight 1
   ]
   edge
   [
     source 2200
     target 10
+    weight 1
   ]
   edge
   [
     source 2201
     target 10
+    weight 1
   ]
   edge
   [
     source 2202
     target 10
+    weight 1
   ]
   edge
   [
     source 2203
     target 10
+    weight 1
   ]
   edge
   [
     source 2204
     target 10
+    weight 1
   ]
   edge
   [
     source 2205
     target 10
+    weight 1
   ]
   edge
   [
     source 2206
     target 10
+    weight 1
   ]
   edge
   [
     source 2207
     target 10
+    weight 1
   ]
   edge
   [
     source 2208
     target 10
+    weight 1
   ]
   edge
   [
     source 2209
     target 10
+    weight 1
   ]
   edge
   [
     source 2210
     target 10
+    weight 1
   ]
   edge
   [
     source 2211
     target 10
+    weight 1
   ]
   edge
   [
     source 2212
     target 10
+    weight 1
   ]
   edge
   [
     source 2213
     target 10
+    weight 1
   ]
   edge
   [
     source 2214
     target 10
+    weight 1
   ]
   edge
   [
     source 2215
     target 10
+    weight 1
   ]
   edge
   [
     source 2216
     target 10
+    weight 1
   ]
   edge
   [
     source 2217
     target 10
+    weight 1
   ]
   edge
   [
     source 2218
     target 10
+    weight 1
   ]
   edge
   [
     source 2219
     target 10
+    weight 1
   ]
   edge
   [
     source 2220
     target 10
+    weight 1
   ]
   edge
   [
     source 2221
     target 10
+    weight 1
   ]
   edge
   [
     source 2222
     target 10
+    weight 1
   ]
   edge
   [
     source 2223
     target 10
+    weight 1
   ]
   edge
   [
     source 2224
     target 10
+    weight 1
   ]
   edge
   [
     source 2225
     target 10
+    weight 1
   ]
   edge
   [
     source 2226
     target 10
+    weight 1
   ]
   edge
   [
     source 2227
     target 10
+    weight 1
   ]
   edge
   [
     source 2228
     target 10
+    weight 1
   ]
   edge
   [
     source 2229
     target 10
+    weight 1
   ]
   edge
   [
     source 2230
     target 10
+    weight 1
   ]
   edge
   [
     source 2231
     target 10
+    weight 1
   ]
   edge
   [
     source 2232
     target 10
+    weight 1
   ]
   edge
   [
     source 2233
     target 10
+    weight 1
   ]
   edge
   [
     source 2234
     target 10
+    weight 1
   ]
   edge
   [
     source 2235
     target 10
+    weight 1
   ]
   edge
   [
     source 2236
     target 10
+    weight 1
   ]
   edge
   [
     source 2237
     target 10
+    weight 1
   ]
   edge
   [
     source 2238
     target 10
+    weight 1
   ]
   edge
   [
     source 2239
     target 10
+    weight 1
   ]
   edge
   [
     source 2240
     target 10
+    weight 1
   ]
   edge
   [
     source 2241
     target 10
+    weight 1
   ]
   edge
   [
     source 2242
     target 10
+    weight 1
   ]
   edge
   [
     source 2243
     target 10
+    weight 1
   ]
   edge
   [
     source 2244
     target 10
+    weight 1
   ]
   edge
   [
     source 2245
     target 10
+    weight 1
   ]
   edge
   [
     source 2246
     target 10
+    weight 1
   ]
   edge
   [
     source 2247
     target 10
+    weight 1
   ]
   edge
   [
     source 2248
     target 10
+    weight 1
   ]
   edge
   [
     source 2249
     target 10
+    weight 1
   ]
   edge
   [
     source 2250
     target 10
+    weight 1
   ]
   edge
   [
     source 2251
     target 10
+    weight 1
   ]
   edge
   [
     source 2252
     target 10
+    weight 1
   ]
   edge
   [
     source 2253
     target 10
+    weight 1
   ]
   edge
   [
     source 2254
     target 10
+    weight 1
   ]
   edge
   [
     source 2255
     target 10
+    weight 1
   ]
   edge
   [
     source 2256
     target 10
+    weight 1
   ]
   edge
   [
     source 2257
     target 10
+    weight 1
   ]
   edge
   [
     source 2258
     target 10
+    weight 1
   ]
   edge
   [
     source 2259
     target 10
+    weight 1
   ]
   edge
   [
     source 2260
     target 10
+    weight 1
   ]
   edge
   [
     source 2261
     target 10
+    weight 1
   ]
   edge
   [
     source 2262
     target 10
+    weight 1
   ]
   edge
   [
     source 2263
     target 10
+    weight 1
   ]
   edge
   [
     source 2264
     target 10
+    weight 1
   ]
   edge
   [
     source 2265
     target 10
+    weight 1
   ]
   edge
   [
     source 2266
     target 10
+    weight 1
   ]
   edge
   [
     source 2267
     target 10
+    weight 1
   ]
   edge
   [
     source 2268
     target 10
+    weight 1
   ]
   edge
   [
     source 2269
     target 10
+    weight 1
   ]
   edge
   [
     source 2270
     target 10
+    weight 1
   ]
   edge
   [
     source 2271
     target 10
+    weight 1
   ]
   edge
   [
     source 2272
     target 10
+    weight 1
   ]
   edge
   [
     source 2273
     target 10
+    weight 1
   ]
   edge
   [
     source 2274
     target 10
+    weight 1
   ]
   edge
   [
     source 2275
     target 10
+    weight 1
   ]
   edge
   [
     source 2276
     target 10
+    weight 1
   ]
   edge
   [
     source 2277
     target 10
+    weight 1
   ]
   edge
   [
     source 2278
     target 10
+    weight 1
   ]
   edge
   [
     source 2279
     target 10
+    weight 1
   ]
   edge
   [
     source 2280
     target 10
+    weight 1
   ]
   edge
   [
     source 2281
     target 10
+    weight 1
   ]
   edge
   [
     source 2282
     target 10
+    weight 1
   ]
   edge
   [
     source 2283
     target 10
+    weight 1
   ]
   edge
   [
     source 2284
     target 10
+    weight 1
   ]
   edge
   [
     source 2285
     target 10
+    weight 1
   ]
   edge
   [
     source 2286
     target 10
+    weight 1
   ]
   edge
   [
     source 2287
     target 10
+    weight 1
   ]
   edge
   [
     source 2288
     target 10
+    weight 1
   ]
   edge
   [
     source 2289
     target 10
+    weight 1
   ]
   edge
   [
     source 2290
     target 10
+    weight 1
   ]
   edge
   [
     source 2291
     target 10
+    weight 1
   ]
   edge
   [
     source 2292
     target 10
+    weight 1
   ]
   edge
   [
     source 2293
     target 10
+    weight 1
   ]
   edge
   [
     source 2294
     target 10
+    weight 1
   ]
   edge
   [
     source 2295
     target 10
+    weight 1
   ]
   edge
   [
     source 2296
     target 10
+    weight 1
   ]
   edge
   [
     source 2297
     target 10
+    weight 1
   ]
   edge
   [
     source 2298
     target 10
+    weight 1
   ]
   edge
   [
     source 2299
     target 10
+    weight 1
   ]
   edge
   [
     source 2300
     target 10
+    weight 1
   ]
   edge
   [
     source 2301
     target 10
+    weight 1
   ]
   edge
   [
     source 2302
     target 10
+    weight 1
   ]
   edge
   [
     source 2303
     target 10
+    weight 1
   ]
   edge
   [
     source 2304
     target 10
+    weight 1
   ]
   edge
   [
     source 2305
     target 10
+    weight 1
   ]
   edge
   [
     source 2306
     target 10
+    weight 1
   ]
   edge
   [
     source 2307
     target 10
+    weight 1
   ]
   edge
   [
     source 2308
     target 10
+    weight 1
   ]
   edge
   [
     source 2309
     target 10
+    weight 1
   ]
   edge
   [
     source 2310
     target 10
+    weight 1
   ]
   edge
   [
     source 2311
     target 10
+    weight 1
   ]
   edge
   [
     source 2312
     target 10
+    weight 1
   ]
   edge
   [
     source 2313
     target 10
+    weight 1
   ]
   edge
   [
     source 2314
     target 10
+    weight 1
   ]
   edge
   [
     source 2315
     target 10
+    weight 1
   ]
   edge
   [
     source 2316
     target 10
+    weight 1
   ]
   edge
   [
     source 2317
     target 10
+    weight 1
   ]
   edge
   [
     source 2318
     target 10
+    weight 1
   ]
   edge
   [
     source 2319
     target 10
+    weight 1
   ]
   edge
   [
     source 2320
     target 10
+    weight 1
   ]
   edge
   [
     source 2321
     target 10
+    weight 1
   ]
   edge
   [
     source 2322
     target 10
+    weight 1
   ]
   edge
   [
     source 2323
     target 10
+    weight 1
   ]
   edge
   [
     source 2324
     target 10
+    weight 1
   ]
   edge
   [
     source 2325
     target 10
+    weight 1
   ]
   edge
   [
     source 2326
     target 10
+    weight 1
   ]
   edge
   [
     source 2327
     target 10
+    weight 1
   ]
   edge
   [
     source 2328
     target 10
+    weight 1
   ]
   edge
   [
     source 2329
     target 10
+    weight 1
   ]
   edge
   [
     source 2330
     target 10
+    weight 1
   ]
   edge
   [
     source 2331
     target 10
+    weight 1
   ]
   edge
   [
     source 2332
     target 10
+    weight 1
   ]
   edge
   [
     source 2333
     target 10
+    weight 1
   ]
   edge
   [
     source 2334
     target 10
+    weight 1
   ]
   edge
   [
     source 2335
     target 10
+    weight 1
   ]
   edge
   [
     source 2336
     target 10
+    weight 1
   ]
   edge
   [
     source 2337
     target 10
+    weight 1
   ]
   edge
   [
     source 2338
     target 10
+    weight 1
   ]
   edge
   [
     source 2339
     target 10
+    weight 1
   ]
   edge
   [
     source 2340
     target 10
+    weight 1
   ]
   edge
   [
     source 2341
     target 10
+    weight 1
   ]
   edge
   [
     source 2342
     target 10
+    weight 1
   ]
   edge
   [
     source 2343
     target 10
+    weight 1
   ]
   edge
   [
     source 2344
     target 10
+    weight 1
   ]
   edge
   [
     source 2345
     target 10
+    weight 1
   ]
   edge
   [
     source 2346
     target 10
+    weight 1
   ]
   edge
   [
     source 2347
     target 10
+    weight 1
   ]
   edge
   [
     source 2348
     target 10
+    weight 1
   ]
   edge
   [
     source 2349
     target 10
+    weight 1
   ]
   edge
   [
     source 2350
     target 10
+    weight 1
   ]
   edge
   [
     source 2351
     target 10
+    weight 1
   ]
   edge
   [
     source 2352
     target 10
+    weight 1
   ]
   edge
   [
     source 2353
     target 10
+    weight 1
   ]
   edge
   [
     source 2354
     target 10
+    weight 1
   ]
   edge
   [
     source 2355
     target 10
+    weight 1
   ]
   edge
   [
     source 2356
     target 10
+    weight 1
   ]
   edge
   [
     source 2357
     target 10
+    weight 1
   ]
   edge
   [
     source 2358
     target 10
+    weight 1
   ]
   edge
   [
     source 2359
     target 10
+    weight 1
   ]
   edge
   [
     source 2360
     target 10
+    weight 1
   ]
   edge
   [
     source 2361
     target 10
+    weight 1
   ]
   edge
   [
     source 2362
     target 10
+    weight 1
   ]
   edge
   [
     source 2363
     target 10
+    weight 1
   ]
   edge
   [
     source 2364
     target 10
+    weight 1
   ]
   edge
   [
     source 2365
     target 10
+    weight 1
   ]
   edge
   [
     source 2366
     target 10
+    weight 1
   ]
   edge
   [
     source 2367
     target 10
+    weight 1
   ]
   edge
   [
     source 2368
     target 10
+    weight 1
   ]
   edge
   [
     source 2369
     target 10
+    weight 1
   ]
   edge
   [
     source 2370
     target 10
+    weight 1
   ]
   edge
   [
     source 2371
     target 10
+    weight 1
   ]
   edge
   [
     source 2372
     target 10
+    weight 1
   ]
   edge
   [
     source 2373
     target 10
+    weight 1
   ]
   edge
   [
     source 2374
     target 10
+    weight 1
   ]
   edge
   [
     source 2375
     target 10
+    weight 1
   ]
   edge
   [
     source 2376
     target 10
+    weight 1
   ]
   edge
   [
     source 2377
     target 10
+    weight 1
   ]
   edge
   [
     source 2378
     target 10
+    weight 1
   ]
   edge
   [
     source 2379
     target 10
+    weight 1
   ]
   edge
   [
     source 2380
     target 10
+    weight 1
   ]
   edge
   [
     source 2381
     target 10
+    weight 1
   ]
   edge
   [
     source 2382
     target 10
+    weight 1
   ]
   edge
   [
     source 2383
     target 10
+    weight 1
   ]
   edge
   [
     source 2384
     target 10
+    weight 1
   ]
   edge
   [
     source 2385
     target 10
+    weight 1
   ]
   edge
   [
     source 2386
     target 10
+    weight 1
   ]
   edge
   [
     source 2387
     target 10
+    weight 1
   ]
   edge
   [
     source 2388
     target 10
+    weight 1
   ]
   edge
   [
     source 2389
     target 10
+    weight 1
   ]
   edge
   [
     source 2390
     target 10
+    weight 1
   ]
   edge
   [
     source 2391
     target 10
+    weight 1
   ]
   edge
   [
     source 2392
     target 10
+    weight 1
   ]
   edge
   [
     source 2393
     target 10
+    weight 1
   ]
   edge
   [
     source 2394
     target 10
+    weight 1
   ]
   edge
   [
     source 2395
     target 10
+    weight 1
   ]
   edge
   [
     source 2396
     target 10
+    weight 1
   ]
   edge
   [
     source 2397
     target 10
+    weight 1
   ]
   edge
   [
     source 2398
     target 10
+    weight 1
   ]
   edge
   [
     source 2399
     target 10
+    weight 1
   ]
   edge
   [
     source 2400
     target 10
+    weight 1
   ]
   edge
   [
     source 2401
     target 10
+    weight 1
   ]
   edge
   [
     source 2402
     target 10
+    weight 1
   ]
   edge
   [
     source 2403
     target 10
+    weight 1
   ]
   edge
   [
     source 2404
     target 10
+    weight 1
   ]
   edge
   [
     source 2405
     target 10
+    weight 1
   ]
   edge
   [
     source 2406
     target 10
+    weight 1
   ]
   edge
   [
     source 2407
     target 10
+    weight 1
   ]
   edge
   [
     source 2408
     target 10
+    weight 1
   ]
   edge
   [
     source 2409
     target 10
+    weight 1
   ]
   edge
   [
     source 2410
     target 10
+    weight 1
   ]
   edge
   [
     source 2411
     target 10
+    weight 1
   ]
   edge
   [
     source 2412
     target 10
+    weight 1
   ]
   edge
   [
     source 2413
     target 10
+    weight 1
   ]
   edge
   [
     source 2414
     target 10
+    weight 1
   ]
   edge
   [
     source 2415
     target 10
+    weight 1
   ]
   edge
   [
     source 2416
     target 10
+    weight 1
   ]
   edge
   [
     source 2417
     target 10
+    weight 1
   ]
   edge
   [
     source 2418
     target 10
+    weight 1
   ]
   edge
   [
     source 2419
     target 10
+    weight 1
   ]
   edge
   [
     source 2420
     target 10
+    weight 1
   ]
   edge
   [
     source 2421
     target 10
+    weight 1
   ]
   edge
   [
     source 2422
     target 10
+    weight 1
   ]
   edge
   [
     source 2423
     target 10
+    weight 1
   ]
   edge
   [
     source 2424
     target 10
+    weight 1
   ]
   edge
   [
     source 2425
     target 10
+    weight 1
   ]
   edge
   [
     source 2426
     target 10
+    weight 1
   ]
   edge
   [
     source 2427
     target 10
+    weight 1
   ]
   edge
   [
     source 2428
     target 10
+    weight 1
   ]
   edge
   [
     source 2429
     target 10
+    weight 1
   ]
   edge
   [
     source 2430
     target 10
+    weight 1
   ]
   edge
   [
     source 2431
     target 10
+    weight 1
   ]
   edge
   [
     source 2432
     target 10
+    weight 1
   ]
   edge
   [
     source 2433
     target 10
+    weight 1
   ]
   edge
   [
     source 2434
     target 10
+    weight 1
   ]
   edge
   [
     source 2435
     target 10
+    weight 1
   ]
   edge
   [
     source 2436
     target 10
+    weight 1
   ]
   edge
   [
     source 2437
     target 10
+    weight 1
   ]
   edge
   [
     source 2438
     target 10
+    weight 1
   ]
   edge
   [
     source 2439
     target 10
+    weight 1
   ]
   edge
   [
     source 2440
     target 10
+    weight 1
   ]
   edge
   [
     source 2441
     target 10
+    weight 1
   ]
   edge
   [
     source 2442
     target 10
+    weight 1
   ]
   edge
   [
     source 2443
     target 10
+    weight 1
   ]
   edge
   [
     source 2444
     target 10
+    weight 1
   ]
   edge
   [
     source 2445
     target 10
+    weight 1
   ]
   edge
   [
     source 2446
     target 10
+    weight 1
   ]
   edge
   [
     source 2447
     target 10
+    weight 1
   ]
   edge
   [
     source 2448
     target 10
+    weight 1
   ]
   edge
   [
     source 2449
     target 10
+    weight 1
   ]
   edge
   [
     source 2450
     target 10
+    weight 1
   ]
   edge
   [
     source 2451
     target 10
+    weight 1
   ]
   edge
   [
     source 2452
     target 10
+    weight 1
   ]
   edge
   [
     source 2453
     target 10
+    weight 1
   ]
   edge
   [
     source 2454
     target 10
+    weight 1
   ]
   edge
   [
     source 2455
     target 10
+    weight 1
   ]
   edge
   [
     source 2456
     target 10
+    weight 1
   ]
   edge
   [
     source 2457
     target 10
+    weight 1
   ]
   edge
   [
     source 2458
     target 10
+    weight 1
   ]
   edge
   [
     source 2459
     target 10
+    weight 1
   ]
   edge
   [
     source 2460
     target 10
+    weight 1
   ]
   edge
   [
     source 2461
     target 10
+    weight 1
   ]
   edge
   [
     source 2462
     target 10
+    weight 1
   ]
   edge
   [
     source 2463
     target 10
+    weight 1
   ]
   edge
   [
     source 2464
     target 10
+    weight 1
   ]
   edge
   [
     source 2465
     target 10
+    weight 1
   ]
   edge
   [
     source 2466
     target 10
+    weight 1
   ]
   edge
   [
     source 2467
     target 10
+    weight 1
   ]
   edge
   [
     source 2468
     target 10
+    weight 1
   ]
   edge
   [
     source 2469
     target 10
+    weight 1
   ]
   edge
   [
     source 2470
     target 10
+    weight 1
   ]
   edge
   [
     source 2471
     target 10
+    weight 1
   ]
   edge
   [
     source 2472
     target 10
+    weight 1
   ]
   edge
   [
     source 2473
     target 10
+    weight 1
   ]
   edge
   [
     source 2474
     target 10
+    weight 1
   ]
   edge
   [
     source 2475
     target 10
+    weight 1
   ]
   edge
   [
     source 2476
     target 10
+    weight 1
   ]
   edge
   [
     source 2477
     target 10
+    weight 1
   ]
   edge
   [
     source 2478
     target 10
+    weight 1
   ]
   edge
   [
     source 2479
     target 10
+    weight 1
   ]
   edge
   [
     source 2480
     target 10
+    weight 1
   ]
   edge
   [
     source 2481
     target 10
+    weight 1
   ]
   edge
   [
     source 2482
     target 10
+    weight 1
   ]
   edge
   [
     source 2483
     target 10
+    weight 1
   ]
   edge
   [
     source 2484
     target 10
+    weight 1
   ]
   edge
   [
     source 2485
     target 10
+    weight 1
   ]
   edge
   [
     source 2486
     target 10
+    weight 1
   ]
   edge
   [
     source 2487
     target 10
+    weight 1
   ]
   edge
   [
     source 2488
     target 10
+    weight 1
   ]
   edge
   [
     source 2489
     target 10
+    weight 1
   ]
   edge
   [
     source 2490
     target 10
+    weight 1
   ]
   edge
   [
     source 2491
     target 10
+    weight 1
   ]
   edge
   [
     source 2492
     target 10
+    weight 1
   ]
   edge
   [
     source 2493
     target 10
+    weight 1
   ]
   edge
   [
     source 2494
     target 10
+    weight 1
   ]
   edge
   [
     source 2495
     target 10
+    weight 1
   ]
   edge
   [
     source 2496
     target 10
+    weight 1
   ]
   edge
   [
     source 2497
     target 10
+    weight 1
   ]
   edge
   [
     source 2498
     target 10
+    weight 1
   ]
   edge
   [
     source 2499
     target 10
+    weight 1
   ]
   edge
   [
     source 2500
     target 10
+    weight 1
   ]
   edge
   [
     source 2501
     target 10
+    weight 1
   ]
   edge
   [
     source 2502
     target 10
+    weight 1
   ]
   edge
   [
     source 2503
     target 10
+    weight 1
   ]
   edge
   [
     source 2504
     target 10
+    weight 1
   ]
   edge
   [
     source 2505
     target 10
+    weight 1
   ]
   edge
   [
     source 2506
     target 10
+    weight 1
   ]
   edge
   [
     source 2507
     target 10
+    weight 1
   ]
   edge
   [
     source 2508
     target 10
+    weight 1
   ]
   edge
   [
     source 2509
     target 10
+    weight 1
   ]
   edge
   [
     source 2510
     target 10
+    weight 1
   ]
   edge
   [
     source 2511
     target 10
+    weight 1
   ]
   edge
   [
     source 2512
     target 10
+    weight 1
   ]
   edge
   [
     source 2513
     target 10
+    weight 1
   ]
   edge
   [
     source 2514
     target 10
+    weight 1
   ]
   edge
   [
     source 2515
     target 10
+    weight 1
   ]
   edge
   [
     source 2516
     target 10
+    weight 1
   ]
   edge
   [
     source 2517
     target 10
+    weight 1
   ]
   edge
   [
     source 2518
     target 10
+    weight 1
   ]
   edge
   [
     source 2519
     target 10
+    weight 1
   ]
   edge
   [
     source 2520
     target 10
+    weight 1
   ]
   edge
   [
     source 2521
     target 10
+    weight 1
   ]
   edge
   [
     source 2522
     target 10
+    weight 1
   ]
   edge
   [
     source 2523
     target 10
+    weight 1
   ]
   edge
   [
     source 2524
     target 10
+    weight 1
   ]
   edge
   [
     source 2525
     target 10
+    weight 1
   ]
   edge
   [
     source 2526
     target 10
+    weight 1
   ]
   edge
   [
     source 2527
     target 10
+    weight 1
   ]
   edge
   [
     source 2528
     target 10
+    weight 1
   ]
   edge
   [
     source 2529
     target 10
+    weight 1
   ]
   edge
   [
     source 2530
     target 10
+    weight 1
   ]
   edge
   [
     source 2531
     target 10
+    weight 1
   ]
   edge
   [
     source 2532
     target 10
+    weight 1
   ]
   edge
   [
     source 2533
     target 10
+    weight 1
   ]
   edge
   [
     source 2534
     target 10
+    weight 1
   ]
   edge
   [
     source 2535
     target 10
+    weight 1
   ]
   edge
   [
     source 2536
     target 10
+    weight 1
   ]
   edge
   [
     source 2537
     target 10
+    weight 1
   ]
   edge
   [
     source 2538
     target 10
+    weight 1
   ]
   edge
   [
     source 2539
     target 10
+    weight 1
   ]
   edge
   [
     source 2540
     target 10
+    weight 1
   ]
   edge
   [
     source 2541
     target 10
+    weight 1
   ]
   edge
   [
     source 2542
     target 10
+    weight 1
   ]
   edge
   [
     source 2543
     target 10
+    weight 1
   ]
   edge
   [
     source 2544
     target 10
+    weight 1
   ]
   edge
   [
     source 2545
     target 10
+    weight 1
   ]
   edge
   [
     source 2546
     target 10
+    weight 1
   ]
   edge
   [
     source 2547
     target 10
+    weight 1
   ]
   edge
   [
     source 2548
     target 10
+    weight 1
   ]
   edge
   [
     source 2549
     target 10
+    weight 1
   ]
   edge
   [
     source 2550
     target 10
+    weight 1
   ]
   edge
   [
     source 2551
     target 10
+    weight 1
   ]
   edge
   [
     source 2552
     target 10
+    weight 1
   ]
   edge
   [
     source 2553
     target 10
+    weight 1
   ]
   edge
   [
     source 2554
     target 10
+    weight 1
   ]
   edge
   [
     source 2555
     target 10
+    weight 1
   ]
   edge
   [
     source 2556
     target 10
+    weight 1
   ]
   edge
   [
     source 2557
     target 10
+    weight 1
   ]
   edge
   [
     source 2558
     target 10
+    weight 1
   ]
   edge
   [
     source 2559
     target 10
+    weight 1
   ]
   edge
   [
     source 2560
     target 10
+    weight 1
   ]
   edge
   [
     source 2561
     target 10
+    weight 1
   ]
   edge
   [
     source 2562
     target 10
+    weight 1
   ]
   edge
   [
     source 2563
     target 10
+    weight 1
   ]
   edge
   [
     source 2564
     target 10
+    weight 1
   ]
   edge
   [
     source 2565
     target 10
+    weight 1
   ]
   edge
   [
     source 2566
     target 10
+    weight 1
   ]
   edge
   [
     source 2567
     target 10
+    weight 1
   ]
   edge
   [
     source 2568
     target 10
+    weight 1
   ]
   edge
   [
     source 2569
     target 10
+    weight 1
   ]
   edge
   [
     source 2570
     target 10
+    weight 1
   ]
   edge
   [
     source 2571
     target 10
+    weight 1
   ]
   edge
   [
     source 2572
     target 10
+    weight 1
   ]
   edge
   [
     source 2573
     target 10
+    weight 1
   ]
   edge
   [
     source 2574
     target 10
+    weight 1
   ]
   edge
   [
     source 2575
     target 10
+    weight 1
   ]
   edge
   [
     source 2576
     target 10
+    weight 1
   ]
   edge
   [
     source 2577
     target 10
+    weight 1
   ]
   edge
   [
     source 2578
     target 10
+    weight 1
   ]
   edge
   [
     source 2579
     target 10
+    weight 1
   ]
   edge
   [
     source 2580
     target 10
+    weight 1
   ]
   edge
   [
     source 2581
     target 10
+    weight 1
   ]
   edge
   [
     source 2582
     target 10
+    weight 1
   ]
   edge
   [
     source 2583
     target 10
+    weight 1
   ]
   edge
   [
     source 2584
     target 10
+    weight 1
   ]
   edge
   [
     source 2585
     target 10
+    weight 1
   ]
   edge
   [
     source 2586
     target 10
+    weight 1
   ]
   edge
   [
     source 2587
     target 10
+    weight 1
   ]
   edge
   [
     source 2588
     target 10
+    weight 1
   ]
   edge
   [
     source 2589
     target 10
+    weight 1
   ]
   edge
   [
     source 2590
     target 10
+    weight 1
   ]
   edge
   [
     source 2591
     target 10
+    weight 1
   ]
   edge
   [
     source 2592
     target 10
+    weight 1
   ]
   edge
   [
     source 2593
     target 10
+    weight 1
   ]
   edge
   [
     source 2594
     target 10
+    weight 1
   ]
   edge
   [
     source 2595
     target 10
+    weight 1
   ]
   edge
   [
     source 2596
     target 10
+    weight 1
   ]
   edge
   [
     source 2597
     target 10
+    weight 1
   ]
   edge
   [
     source 2598
     target 10
+    weight 1
   ]
   edge
   [
     source 2599
     target 10
+    weight 1
   ]
   edge
   [
     source 2600
     target 10
+    weight 1
   ]
   edge
   [
     source 2601
     target 10
+    weight 1
   ]
   edge
   [
     source 2602
     target 10
+    weight 1
   ]
   edge
   [
     source 2603
     target 10
+    weight 1
   ]
   edge
   [
     source 2604
     target 10
+    weight 1
   ]
   edge
   [
     source 2605
     target 10
+    weight 1
   ]
   edge
   [
     source 2606
     target 10
+    weight 1
   ]
   edge
   [
     source 2607
     target 10
+    weight 1
   ]
   edge
   [
     source 2608
     target 10
+    weight 1
   ]
   edge
   [
     source 2609
     target 10
+    weight 1
   ]
   edge
   [
     source 2610
     target 10
+    weight 1
   ]
   edge
   [
     source 2611
     target 10
+    weight 1
   ]
   edge
   [
     source 2612
     target 10
+    weight 1
   ]
   edge
   [
     source 2613
     target 10
+    weight 1
   ]
   edge
   [
     source 2614
     target 10
+    weight 1
   ]
   edge
   [
     source 2615
     target 10
+    weight 1
   ]
   edge
   [
     source 2616
     target 10
+    weight 1
   ]
   edge
   [
     source 2617
     target 10
+    weight 1
   ]
   edge
   [
     source 2618
     target 10
+    weight 1
   ]
   edge
   [
     source 2619
     target 10
+    weight 1
   ]
   edge
   [
     source 2620
     target 10
+    weight 1
   ]
   edge
   [
     source 2621
     target 10
+    weight 1
   ]
   edge
   [
     source 2622
     target 10
+    weight 1
   ]
   edge
   [
     source 2623
     target 10
+    weight 1
   ]
   edge
   [
     source 2624
     target 10
+    weight 1
   ]
   edge
   [
     source 2625
     target 10
+    weight 1
   ]
   edge
   [
     source 2626
     target 10
+    weight 1
   ]
   edge
   [
     source 2627
     target 10
+    weight 1
   ]
   edge
   [
     source 2628
     target 10
+    weight 1
   ]
   edge
   [
     source 2629
     target 10
+    weight 1
   ]
   edge
   [
     source 2630
     target 10
+    weight 1
   ]
   edge
   [
     source 2631
     target 10
+    weight 1
   ]
   edge
   [
     source 2632
     target 10
+    weight 1
   ]
   edge
   [
     source 2633
     target 10
+    weight 1
   ]
   edge
   [
     source 2634
     target 10
+    weight 1
   ]
   edge
   [
     source 2635
     target 10
+    weight 1
   ]
   edge
   [
     source 2636
     target 10
+    weight 1
   ]
   edge
   [
     source 2637
     target 10
+    weight 1
   ]
   edge
   [
     source 2638
     target 10
+    weight 1
   ]
   edge
   [
     source 2639
     target 10
+    weight 1
   ]
   edge
   [
     source 2640
     target 10
+    weight 1
   ]
   edge
   [
     source 2641
     target 10
+    weight 1
   ]
   edge
   [
     source 2642
     target 10
+    weight 1
   ]
   edge
   [
     source 2643
     target 10
+    weight 1
   ]
   edge
   [
     source 2644
     target 10
+    weight 1
   ]
   edge
   [
     source 2645
     target 10
+    weight 1
   ]
   edge
   [
     source 2646
     target 10
+    weight 1
   ]
   edge
   [
     source 2647
     target 10
+    weight 1
   ]
   edge
   [
     source 2648
     target 10
+    weight 1
   ]
   edge
   [
     source 2649
     target 10
+    weight 1
   ]
   edge
   [
     source 2650
     target 10
+    weight 1
   ]
   edge
   [
     source 2651
     target 10
+    weight 1
   ]
   edge
   [
     source 2652
     target 10
+    weight 1
   ]
   edge
   [
     source 2653
     target 10
+    weight 1
   ]
   edge
   [
     source 2654
     target 10
+    weight 1
   ]
   edge
   [
     source 2655
     target 10
+    weight 1
   ]
   edge
   [
     source 2656
     target 10
+    weight 1
   ]
   edge
   [
     source 2657
     target 10
+    weight 1
   ]
   edge
   [
     source 2658
     target 10
+    weight 1
   ]
   edge
   [
     source 2659
     target 10
+    weight 1
   ]
   edge
   [
     source 2660
     target 10
+    weight 1
   ]
   edge
   [
     source 2661
     target 10
+    weight 1
   ]
   edge
   [
     source 2662
     target 10
+    weight 1
   ]
   edge
   [
     source 3798
     target 10
+    weight 1
   ]
   edge
   [
     source 3882
     target 10
+    weight 1
   ]
   edge
   [
     source 4012
     target 10
+    weight 1
   ]
   edge
   [
     source 4020
     target 10
+    weight 1
   ]
   edge
   [
     source 4080
     target 10
+    weight 1
   ]
   edge
   [
     source 4086
     target 10
+    weight 1
   ]
   edge
   [
     source 4128
     target 10
+    weight 1
   ]
   edge
   [
     source 4134
     target 10
+    weight 1
   ]
   edge
   [
     source 4138
     target 10
+    weight 1
   ]
   edge
   [
     source 4200
     target 10
+    weight 1
   ]
   edge
   [
     source 4296
     target 10
+    weight 1
   ]
   edge
   [
     source 4297
     target 10
+    weight 1
   ]
   edge
   [
     source 4380
     target 10
+    weight 1
   ]
   edge
   [
     source 4381
     target 10
+    weight 1
   ]
   edge
   [
     source 4387
     target 10
+    weight 1
   ]
   edge
   [
     source 4398
     target 10
+    weight 1
   ]
   edge
   [
     source 4414
     target 10
+    weight 1
   ]
   edge
   [
     source 4422
     target 10
+    weight 1
   ]
   edge
   [
     source 4448
     target 10
+    weight 1
   ]
   edge
   [
     source 4450
     target 10
+    weight 1
   ]
   edge
   [
     source 4454
     target 10
+    weight 1
   ]
   edge
   [
     source 4459
     target 10
+    weight 1
   ]
   edge
   [
     source 4473
     target 10
+    weight 1
   ]
   edge
   [
     source 4484
     target 10
+    weight 1
   ]
   edge
   [
     source 4487
     target 10
+    weight 1
   ]
   edge
   [
     source 4489
     target 10
+    weight 1
   ]
   edge
   [
     source 4490
     target 10
+    weight 1
   ]
   edge
   [
     source 4492
     target 10
+    weight 1
   ]
   edge
   [
     source 4494
     target 10
+    weight 1
   ]
   edge
   [
     source 3883
     target 21
+    weight 1
   ]
   edge
   [
     source 4087
     target 36
+    weight 1
   ]
   edge
   [
     source 3938
     target 38
+    weight 1
   ]
   edge
   [
     source 2712
     target 50
+    weight 1
   ]
   edge
   [
     source 4365
     target 50
+    weight 1
   ]
   edge
   [
     source 2814
     target 62
+    weight 1
   ]
   edge
   [
     source 2838
     target 107
+    weight 1
   ]
   edge
   [
     source 4096
     target 147
+    weight 1
   ]
   edge
   [
     source 4474
     target 152
+    weight 1
   ]
   edge
   [
     source 2821
     target 165
+    weight 1
   ]
   edge
   [
     source 4365
     target 177
+    weight 1
   ]
   edge
   [
     source 2724
     target 179
+    weight 1
   ]
   edge
   [
     source 3210
     target 221
+    weight 1
   ]
   edge
   [
     source 3853
     target 240
+    weight 1
   ]
   edge
   [
     source 3883
     target 240
+    weight 1
   ]
   edge
   [
     source 3981
     target 240
+    weight 1
   ]
   edge
   [
     source 3262
     target 291
+    weight 1
   ]
   edge
   [
     source 4016
     target 341
+    weight 1
   ]
   edge
   [
     source 3282
     target 348
+    weight 1
   ]
   edge
   [
     source 3282
     target 369
+    weight 1
   ]
   edge
   [
     source 3634
     target 371
+    weight 1
   ]
   edge
   [
     source 3072
     target 378
+    weight 1
   ]
   edge
   [
     source 2838
     target 380
+    weight 1
   ]
   edge
   [
     source 2872
     target 381
+    weight 1
   ]
   edge
   [
     source 3281
     target 381
+    weight 1
   ]
   edge
   [
     source 3934
     target 381
+    weight 1
   ]
   edge
   [
     source 4093
     target 391
+    weight 1
   ]
   edge
   [
     source 3282
     target 393
+    weight 1
   ]
   edge
   [
     source 4127
     target 398
+    weight 1
   ]
   edge
   [
     source 3946
     target 404
+    weight 1
   ]
   edge
   [
     source 2663
     target 405
+    weight 1
   ]
   edge
   [
     source 3705
     target 405
+    weight 1
   ]
   edge
   [
     source 4462
     target 405
+    weight 1
   ]
   edge
   [
     source 2838
     target 481
+    weight 1
   ]
   edge
   [
     source 3282
     target 481
+    weight 1
   ]
   edge
   [
     source 3641
     target 508
+    weight 1
   ]
   edge
   [
     source 4087
     target 511
+    weight 1
   ]
   edge
   [
     source 2838
     target 516
+    weight 1
   ]
   edge
   [
     source 2845
     target 529
+    weight 1
   ]
   edge
   [
     source 3210
     target 538
+    weight 1
   ]
   edge
   [
     source 2838
     target 540
+    weight 1
   ]
   edge
   [
     source 2663
     target 542
+    weight 1
   ]
   edge
   [
     source 3947
     target 544
+    weight 1
   ]
   edge
   [
     source 4139
     target 550
+    weight 1
   ]
   edge
   [
     source 3641
     target 595
+    weight 1
   ]
   edge
   [
     source 3282
     target 598
+    weight 1
   ]
   edge
   [
     source 4033
     target 605
+    weight 1
   ]
   edge
   [
     source 4365
     target 635
+    weight 1
   ]
   edge
   [
     source 3883
     target 644
+    weight 1
   ]
   edge
   [
     source 4259
     target 644
+    weight 1
   ]
   edge
   [
     source 3282
     target 645
+    weight 1
   ]
   edge
   [
     source 3695
     target 651
+    weight 1
   ]
   edge
   [
     source 2838
     target 696
+    weight 1
   ]
   edge
   [
     source 4056
     target 715
+    weight 1
   ]
   edge
   [
     source 4117
     target 725
+    weight 1
   ]
   edge
   [
     source 2818
     target 730
+    weight 1
   ]
   edge
   [
     source 4083
     target 742
+    weight 1
   ]
   edge
   [
     source 3883
     target 745
+    weight 1
   ]
   edge
   [
     source 2838
     target 833
+    weight 1
   ]
   edge
   [
     source 4451
     target 834
+    weight 1
   ]
   edge
   [
     source 3785
     target 835
+    weight 1
   ]
   edge
   [
     source 3804
     target 862
+    weight 1
   ]
   edge
   [
     source 2838
     target 879
+    weight 1
   ]
   edge
   [
     source 3641
     target 895
+    weight 1
   ]
   edge
   [
     source 2838
     target 897
+    weight 1
   ]
   edge
   [
     source 3785
     target 897
+    weight 1
   ]
   edge
   [
     source 4259
     target 897
+    weight 1
   ]
   edge
   [
     source 2838
     target 902
+    weight 1
   ]
   edge
   [
     source 4101
     target 902
+    weight 1
   ]
   edge
   [
     source 2838
     target 907
+    weight 1
   ]
   edge
   [
     source 4259
     target 907
+    weight 1
   ]
   edge
   [
     source 4259
     target 946
+    weight 1
   ]
   edge
   [
     source 3705
     target 959
+    weight 1
   ]
   edge
   [
     source 4057
     target 964
+    weight 1
   ]
   edge
   [
     source 4096
     target 968
+    weight 1
   ]
   edge
   [
     source 3936
     target 1014
+    weight 1
   ]
   edge
   [
     source 3282
     target 1021
+    weight 1
   ]
   edge
   [
     source 3981
     target 1022
+    weight 1
   ]
   edge
   [
     source 2838
     target 1035
+    weight 1
   ]
   edge
   [
     source 3210
     target 1035
+    weight 1
   ]
   edge
   [
     source 4364
     target 1056
-  ]
-  edge
-  [
-    source 2330
-    target 1070
+    weight 1
   ]
   edge
   [
     source 3780
     target 1070
+    weight 1
   ]
   edge
   [
     source 4192
     target 1070
+    weight 1
+  ]
+  edge
+  [
+    source 2330
+    target 1070
+    weight 1
   ]
   edge
   [
     source 3695
     target 1081
+    weight 1
   ]
   edge
   [
     source 3966
     target 1081
+    weight 1
   ]
   edge
   [
     source 4130
     target 1081
+    weight 1
   ]
   edge
   [
     source 4362
     target 1081
+    weight 1
   ]
   edge
   [
     source 4471
     target 1081
+    weight 1
   ]
   edge
   [
     source 4259
     target 1103
+    weight 1
   ]
   edge
   [
     source 3883
     target 1138
+    weight 1
   ]
   edge
   [
     source 2821
     target 1146
+    weight 1
   ]
   edge
   [
     source 4259
     target 1190
+    weight 1
   ]
   edge
   [
     source 3007
     target 1203
+    weight 1
   ]
   edge
   [
     source 3282
     target 1204
+    weight 1
   ]
   edge
   [
     source 2785
     target 1208
+    weight 1
   ]
   edge
   [
     source 3947
     target 1219
+    weight 1
   ]
   edge
   [
     source 3282
     target 1225
+    weight 1
   ]
   edge
   [
     source 2838
     target 1232
+    weight 1
   ]
   edge
   [
     source 3939
     target 1239
+    weight 1
   ]
   edge
   [
     source 3883
     target 1264
+    weight 1
   ]
   edge
   [
     source 2877
     target 1274
+    weight 1
   ]
   edge
   [
     source 3269
     target 1274
+    weight 1
   ]
   edge
   [
     source 4376
     target 1290
+    weight 1
   ]
   edge
   [
     source 4259
     target 1309
+    weight 1
   ]
   edge
   [
     source 3705
     target 1315
+    weight 1
   ]
   edge
   [
     source 3282
     target 1329
+    weight 1
   ]
   edge
   [
     source 3282
     target 1333
+    weight 1
   ]
   edge
   [
     source 4257
     target 1355
+    weight 1
   ]
   edge
   [
     source 3282
     target 1377
+    weight 1
   ]
   edge
   [
     source 3641
     target 1377
+    weight 1
   ]
   edge
   [
     source 4011
     target 1388
+    weight 1
   ]
   edge
   [
     source 4194
     target 1411
+    weight 1
   ]
   edge
   [
     source 3282
     target 1417
+    weight 1
   ]
   edge
   [
     source 3282
     target 1419
+    weight 1
   ]
   edge
   [
     source 4093
     target 1420
+    weight 1
   ]
   edge
   [
     source 3981
     target 1452
+    weight 1
   ]
   edge
   [
     source 3282
     target 1455
+    weight 1
   ]
   edge
   [
     source 4259
     target 1455
+    weight 1
   ]
   edge
   [
     source 4139
     target 1493
+    weight 1
   ]
   edge
   [
     source 4399
     target 1525
+    weight 1
   ]
   edge
   [
     source 4139
     target 1537
+    weight 1
   ]
   edge
   [
     source 4384
     target 1537
+    weight 1
   ]
   edge
   [
     source 4084
     target 1577
+    weight 1
   ]
   edge
   [
     source 4408
     target 1619
+    weight 1
   ]
   edge
   [
     source 2712
     target 1621
+    weight 1
   ]
   edge
   [
     source 4206
     target 1628
+    weight 1
   ]
   edge
   [
     source 4423
     target 1635
+    weight 1
   ]
   edge
   [
     source 2838
     target 1642
+    weight 1
   ]
   edge
   [
     source 4180
     target 1645
+    weight 1
   ]
   edge
   [
     source 3939
     target 1698
+    weight 1
   ]
   edge
   [
     source 2858
     target 1728
+    weight 1
   ]
   edge
   [
     source 3883
     target 1728
+    weight 1
   ]
   edge
   [
     source 3864
     target 1747
+    weight 1
   ]
   edge
   [
     source 3785
     target 1803
+    weight 1
   ]
   edge
   [
     source 4434
     target 1810
+    weight 1
   ]
   edge
   [
     source 2838
     target 1890
+    weight 1
   ]
   edge
   [
     source 3883
     target 1913
+    weight 1
   ]
   edge
   [
     source 4137
     target 1917
+    weight 1
   ]
   edge
   [
     source 3282
     target 1920
+    weight 1
   ]
   edge
   [
     source 4436
     target 1931
+    weight 1
   ]
   edge
   [
     source 3695
     target 1944
+    weight 1
   ]
   edge
   [
     source 3282
     target 1958
+    weight 1
   ]
   edge
   [
     source 3705
     target 1965
+    weight 1
   ]
   edge
   [
     source 3695
     target 1993
+    weight 1
   ]
   edge
   [
     source 3966
     target 1993
+    weight 1
   ]
   edge
   [
     source 3981
     target 2096
+    weight 1
   ]
   edge
   [
     source 4404
     target 2096
+    weight 1
   ]
   edge
   [
     source 3282
     target 2157
+    weight 1
   ]
   edge
   [
     source 4456
     target 2158
+    weight 1
   ]
   edge
   [
     source 4457
     target 2169
+    weight 1
   ]
   edge
   [
     source 3282
     target 2174
+    weight 1
   ]
   edge
   [
     source 2712
     target 2185
+    weight 1
   ]
   edge
   [
     source 3981
     target 2215
+    weight 1
   ]
   edge
   [
     source 3883
     target 2257
+    weight 1
   ]
   edge
   [
     source 3883
     target 2299
+    weight 1
   ]
   edge
   [
     source 4476
     target 2316
+    weight 1
   ]
   edge
   [
     source 2838
     target 2358
+    weight 1
   ]
   edge
   [
     source 4486
     target 2381
+    weight 1
   ]
   edge
   [
     source 4495
     target 2408
+    weight 1
   ]
   edge
   [
     source 3282
     target 2412
+    weight 1
   ]
   edge
   [
     source 3705
     target 2431
+    weight 1
   ]
   edge
   [
     source 3981
     target 2459
+    weight 1
   ]
   edge
   [
     source 3282
     target 2496
+    weight 1
   ]
   edge
   [
     source 4491
     target 2562
+    weight 1
   ]
   edge
   [
     source 2664
     target 2663
+    weight 1
   ]
   edge
   [
     source 2665
     target 2663
+    weight 1
   ]
   edge
   [
     source 2666
     target 2663
+    weight 1
   ]
   edge
   [
     source 2667
     target 2663
+    weight 1
   ]
   edge
   [
     source 2668
     target 2663
+    weight 1
   ]
   edge
   [
     source 2669
     target 2663
+    weight 1
   ]
   edge
   [
     source 2670
     target 2663
+    weight 1
   ]
   edge
   [
     source 2671
     target 2663
+    weight 1
   ]
   edge
   [
     source 2672
     target 2663
+    weight 1
   ]
   edge
   [
     source 2673
     target 2663
+    weight 1
   ]
   edge
   [
     source 2674
     target 2663
+    weight 1
   ]
   edge
   [
     source 2675
     target 2663
+    weight 1
   ]
   edge
   [
     source 2676
     target 2663
+    weight 1
   ]
   edge
   [
     source 2677
     target 2663
+    weight 1
   ]
   edge
   [
     source 2799
     target 2665
+    weight 1
   ]
   edge
   [
     source 4485
     target 2676
+    weight 1
   ]
   edge
   [
     source 2679
     target 2678
+    weight 1
   ]
   edge
   [
     source 2680
     target 2678
+    weight 1
   ]
   edge
   [
     source 2681
     target 2678
+    weight 1
   ]
   edge
   [
     source 2682
     target 2678
+    weight 1
   ]
   edge
   [
     source 2683
     target 2678
+    weight 1
   ]
   edge
   [
     source 2684
     target 2678
+    weight 1
   ]
   edge
   [
     source 2685
     target 2678
+    weight 1
   ]
   edge
   [
     source 2686
     target 2678
+    weight 1
   ]
   edge
   [
     source 2687
     target 2678
+    weight 1
   ]
   edge
   [
     source 2688
     target 2678
+    weight 1
   ]
   edge
   [
     source 2689
     target 2678
+    weight 1
   ]
   edge
   [
     source 2690
     target 2678
+    weight 1
   ]
   edge
   [
     source 2691
     target 2678
+    weight 1
   ]
   edge
   [
     source 2692
     target 2678
+    weight 1
   ]
   edge
   [
     source 2693
     target 2678
+    weight 1
   ]
   edge
   [
     source 2694
     target 2678
+    weight 1
   ]
   edge
   [
     source 2695
     target 2678
+    weight 1
   ]
   edge
   [
     source 2696
     target 2678
+    weight 1
   ]
   edge
   [
     source 2697
     target 2678
+    weight 1
   ]
   edge
   [
     source 2698
     target 2678
+    weight 1
   ]
   edge
   [
     source 2724
     target 2678
+    weight 1
   ]
   edge
   [
     source 3207
     target 2680
+    weight 1
   ]
   edge
   [
     source 3208
     target 2680
+    weight 1
   ]
   edge
   [
     source 3209
     target 2680
+    weight 1
   ]
   edge
   [
     source 3678
     target 2680
+    weight 1
   ]
   edge
   [
     source 2700
     target 2699
+    weight 1
   ]
   edge
   [
     source 2876
     target 2700
+    weight 1
   ]
   edge
   [
     source 3967
     target 2700
+    weight 1
   ]
   edge
   [
     source 3968
     target 2700
+    weight 1
   ]
   edge
   [
     source 3969
     target 2700
+    weight 1
   ]
   edge
   [
     source 3970
     target 2700
+    weight 1
   ]
   edge
   [
     source 3971
     target 2700
+    weight 1
   ]
   edge
   [
     source 3972
     target 2700
+    weight 1
   ]
   edge
   [
     source 3973
     target 2700
+    weight 1
   ]
   edge
   [
     source 3974
     target 2700
+    weight 1
   ]
   edge
   [
     source 3975
     target 2700
+    weight 1
   ]
   edge
   [
     source 3976
     target 2700
+    weight 1
   ]
   edge
   [
     source 3977
     target 2700
+    weight 1
   ]
   edge
   [
     source 2702
     target 2701
+    weight 1
   ]
   edge
   [
     source 2703
     target 2701
+    weight 1
   ]
   edge
   [
     source 2704
     target 2701
+    weight 1
   ]
   edge
   [
     source 2705
     target 2701
+    weight 1
   ]
   edge
   [
     source 2706
     target 2701
+    weight 1
   ]
   edge
   [
     source 2707
     target 2701
+    weight 1
   ]
   edge
   [
     source 2708
     target 2701
+    weight 1
   ]
   edge
   [
     source 2709
     target 2701
+    weight 1
   ]
   edge
   [
     source 2710
     target 2701
+    weight 1
   ]
   edge
   [
     source 2711
     target 2701
+    weight 1
   ]
   edge
   [
     source 2815
     target 2704
+    weight 1
   ]
   edge
   [
     source 4178
     target 2707
+    weight 1
   ]
   edge
   [
     source 2713
     target 2712
+    weight 1
   ]
   edge
   [
     source 2714
     target 2712
+    weight 1
   ]
   edge
   [
     source 2715
     target 2712
+    weight 1
   ]
   edge
   [
     source 2716
     target 2712
+    weight 1
   ]
   edge
   [
     source 2717
     target 2712
+    weight 1
   ]
   edge
   [
     source 2718
     target 2712
+    weight 1
   ]
   edge
   [
     source 2719
     target 2712
+    weight 1
   ]
   edge
   [
     source 2720
     target 2712
+    weight 1
   ]
   edge
   [
     source 2721
     target 2712
+    weight 1
   ]
   edge
   [
     source 2722
     target 2712
+    weight 1
   ]
   edge
   [
     source 2723
     target 2712
+    weight 1
   ]
   edge
   [
     source 4354
     target 2715
+    weight 1
   ]
   edge
   [
     source 3258
     target 2717
+    weight 1
   ]
   edge
   [
     source 2725
     target 2724
+    weight 1
   ]
   edge
   [
     source 2726
     target 2724
+    weight 1
   ]
   edge
   [
     source 2727
     target 2724
+    weight 1
   ]
   edge
   [
     source 2728
     target 2724
+    weight 1
   ]
   edge
   [
     source 2729
     target 2724
+    weight 1
   ]
   edge
   [
     source 2730
     target 2724
+    weight 1
   ]
   edge
   [
     source 2731
     target 2724
+    weight 1
   ]
   edge
   [
     source 2732
     target 2724
+    weight 1
   ]
   edge
   [
     source 2733
     target 2724
+    weight 1
   ]
   edge
   [
     source 2734
     target 2724
+    weight 1
   ]
   edge
   [
     source 2735
     target 2724
+    weight 1
   ]
   edge
   [
     source 2736
     target 2724
+    weight 1
   ]
   edge
   [
     source 2737
     target 2724
+    weight 1
   ]
   edge
   [
     source 2738
     target 2724
+    weight 1
   ]
   edge
   [
     source 2739
     target 2724
+    weight 1
   ]
   edge
   [
     source 2740
     target 2724
+    weight 1
   ]
   edge
   [
     source 2741
     target 2724
+    weight 1
   ]
   edge
   [
     source 2742
     target 2724
+    weight 1
   ]
   edge
   [
     source 2743
     target 2724
+    weight 1
   ]
   edge
   [
     source 2744
     target 2724
+    weight 1
   ]
   edge
   [
     source 2745
     target 2724
+    weight 1
   ]
   edge
   [
     source 2746
     target 2724
+    weight 1
   ]
   edge
   [
     source 2747
     target 2724
+    weight 1
   ]
   edge
   [
     source 2748
     target 2724
+    weight 1
   ]
   edge
   [
     source 2749
     target 2724
+    weight 1
   ]
   edge
   [
     source 2750
     target 2724
+    weight 1
   ]
   edge
   [
     source 2751
     target 2724
+    weight 1
   ]
   edge
   [
     source 2752
     target 2724
+    weight 1
   ]
   edge
   [
     source 2753
     target 2724
+    weight 1
   ]
   edge
   [
     source 2754
     target 2724
+    weight 1
   ]
   edge
   [
     source 2755
     target 2724
+    weight 1
   ]
   edge
   [
     source 2756
     target 2724
+    weight 1
   ]
   edge
   [
     source 2757
     target 2724
+    weight 1
   ]
   edge
   [
     source 2758
     target 2724
+    weight 1
   ]
   edge
   [
     source 2759
     target 2724
+    weight 1
   ]
   edge
   [
     source 2760
     target 2724
+    weight 1
   ]
   edge
   [
     source 2761
     target 2724
+    weight 1
   ]
   edge
   [
     source 2762
     target 2724
+    weight 1
   ]
   edge
   [
     source 2763
     target 2724
+    weight 1
   ]
   edge
   [
     source 2764
     target 2724
+    weight 1
   ]
   edge
   [
     source 2765
     target 2724
+    weight 1
   ]
   edge
   [
     source 2766
     target 2724
+    weight 1
   ]
   edge
   [
     source 2767
     target 2724
+    weight 1
   ]
   edge
   [
     source 2768
     target 2724
+    weight 1
   ]
   edge
   [
     source 2769
     target 2724
+    weight 1
   ]
   edge
   [
     source 2770
     target 2724
+    weight 1
   ]
   edge
   [
     source 2771
     target 2724
+    weight 1
   ]
   edge
   [
     source 2772
     target 2724
+    weight 1
   ]
   edge
   [
     source 2773
     target 2724
+    weight 1
   ]
   edge
   [
     source 2774
     target 2724
+    weight 1
   ]
   edge
   [
     source 2775
     target 2724
+    weight 1
   ]
   edge
   [
     source 2776
     target 2724
+    weight 1
   ]
   edge
   [
     source 2777
     target 2724
+    weight 1
   ]
   edge
   [
     source 2778
     target 2724
+    weight 1
   ]
   edge
   [
     source 2779
     target 2724
+    weight 1
   ]
   edge
   [
     source 2780
     target 2724
+    weight 1
   ]
   edge
   [
     source 2781
     target 2724
+    weight 1
   ]
   edge
   [
     source 2782
     target 2724
+    weight 1
   ]
   edge
   [
     source 4493
     target 2724
+    weight 1
   ]
   edge
   [
     source 3626
     target 2743
+    weight 1
   ]
   edge
   [
     source 2784
     target 2783
+    weight 1
   ]
   edge
   [
     source 3654
     target 2784
+    weight 1
   ]
   edge
   [
     source 2786
     target 2785
+    weight 1
   ]
   edge
   [
     source 2787
     target 2785
+    weight 1
   ]
   edge
   [
     source 2788
     target 2785
+    weight 1
   ]
   edge
   [
     source 2789
     target 2785
+    weight 1
   ]
   edge
   [
     source 2790
     target 2785
+    weight 1
   ]
   edge
   [
     source 2791
     target 2785
+    weight 1
   ]
   edge
   [
     source 2792
     target 2785
+    weight 1
   ]
   edge
   [
     source 2793
     target 2785
+    weight 1
   ]
   edge
   [
     source 2795
     target 2794
+    weight 1
   ]
   edge
   [
     source 2796
     target 2794
+    weight 1
   ]
   edge
   [
     source 2797
     target 2794
+    weight 1
   ]
   edge
   [
     source 2798
     target 2794
+    weight 1
   ]
   edge
   [
     source 3667
     target 2795
+    weight 1
   ]
   edge
   [
     source 2820
     target 2796
+    weight 1
   ]
   edge
   [
     source 3639
     target 2796
+    weight 1
   ]
   edge
   [
     source 4006
     target 2796
+    weight 1
   ]
   edge
   [
     source 4030
     target 2796
+    weight 1
   ]
   edge
   [
     source 4091
     target 2796
+    weight 1
   ]
   edge
   [
     source 4136
     target 2796
+    weight 1
   ]
   edge
   [
     source 4352
     target 2796
+    weight 1
   ]
   edge
   [
     source 4447
     target 2796
+    weight 1
   ]
   edge
   [
     source 3883
     target 2797
+    weight 1
   ]
   edge
   [
     source 2800
     target 2799
+    weight 1
   ]
   edge
   [
     source 2801
     target 2799
+    weight 1
   ]
   edge
   [
     source 2802
     target 2799
+    weight 1
   ]
   edge
   [
     source 2803
     target 2799
+    weight 1
   ]
   edge
   [
     source 2804
     target 2799
+    weight 1
   ]
   edge
   [
     source 2805
     target 2799
+    weight 1
   ]
   edge
   [
     source 2806
     target 2799
+    weight 1
   ]
   edge
   [
     source 2807
     target 2799
+    weight 1
   ]
   edge
   [
     source 2808
     target 2799
+    weight 1
   ]
   edge
   [
     source 2809
     target 2799
+    weight 1
   ]
   edge
   [
     source 2810
     target 2799
+    weight 1
   ]
   edge
   [
     source 2811
     target 2799
+    weight 1
   ]
   edge
   [
     source 2812
     target 2799
+    weight 1
   ]
   edge
   [
     source 2813
     target 2799
+    weight 1
   ]
   edge
   [
     source 3789
     target 2799
+    weight 1
   ]
   edge
   [
     source 3973
     target 2799
+    weight 1
   ]
   edge
   [
     source 4449
     target 2799
+    weight 1
   ]
   edge
   [
     source 2827
     target 2801
+    weight 1
   ]
   edge
   [
     source 2828
     target 2801
+    weight 1
   ]
   edge
   [
     source 2829
     target 2801
+    weight 1
   ]
   edge
   [
     source 4361
     target 2811
+    weight 1
   ]
   edge
   [
     source 2817
     target 2816
+    weight 1
   ]
   edge
   [
     source 2818
     target 2816
+    weight 1
   ]
   edge
   [
     source 2819
     target 2816
+    weight 1
   ]
   edge
   [
     source 4071
     target 2818
+    weight 1
   ]
   edge
   [
     source 4072
     target 2818
+    weight 1
   ]
   edge
   [
     source 4073
     target 2818
+    weight 1
   ]
   edge
   [
     source 4074
     target 2818
+    weight 1
   ]
   edge
   [
     source 2822
     target 2821
+    weight 1
   ]
   edge
   [
     source 2823
     target 2821
+    weight 1
   ]
   edge
   [
     source 2824
     target 2821
+    weight 1
   ]
   edge
   [
     source 2825
     target 2821
+    weight 1
   ]
   edge
   [
     source 2826
     target 2821
+    weight 1
   ]
   edge
   [
     source 4461
     target 2828
+    weight 1
   ]
   edge
   [
     source 2831
     target 2830
+    weight 1
   ]
   edge
   [
     source 2832
     target 2830
+    weight 1
   ]
   edge
   [
     source 2833
     target 2830
+    weight 1
   ]
   edge
   [
     source 2834
     target 2831
+    weight 1
   ]
   edge
   [
     source 3654
     target 2831
+    weight 1
   ]
   edge
   [
     source 2835
     target 2834
+    weight 1
   ]
   edge
   [
     source 2836
     target 2834
+    weight 1
   ]
   edge
   [
     source 2838
     target 2837
+    weight 1
   ]
   edge
   [
     source 2889
     target 2838
+    weight 1
   ]
   edge
   [
     source 2894
     target 2838
+    weight 1
   ]
   edge
   [
     source 2895
     target 2838
+    weight 1
   ]
   edge
   [
     source 2896
     target 2838
+    weight 1
   ]
   edge
   [
     source 2897
     target 2838
+    weight 1
   ]
   edge
   [
     source 2898
     target 2838
+    weight 1
   ]
   edge
   [
     source 2899
     target 2838
+    weight 1
   ]
   edge
   [
     source 2900
     target 2838
+    weight 1
   ]
   edge
   [
     source 2901
     target 2838
+    weight 1
   ]
   edge
   [
     source 2902
     target 2838
+    weight 1
   ]
   edge
   [
     source 2903
     target 2838
+    weight 1
   ]
   edge
   [
     source 2904
     target 2838
+    weight 1
   ]
   edge
   [
     source 2905
     target 2838
+    weight 1
   ]
   edge
   [
     source 2906
     target 2838
+    weight 1
   ]
   edge
   [
     source 2907
     target 2838
+    weight 1
   ]
   edge
   [
     source 2908
     target 2838
+    weight 1
   ]
   edge
   [
     source 2909
     target 2838
+    weight 1
   ]
   edge
   [
     source 2910
     target 2838
+    weight 1
   ]
   edge
   [
     source 2911
     target 2838
+    weight 1
   ]
   edge
   [
     source 2912
     target 2838
+    weight 1
   ]
   edge
   [
     source 2913
     target 2838
+    weight 1
   ]
   edge
   [
     source 2914
     target 2838
+    weight 1
   ]
   edge
   [
     source 2915
     target 2838
+    weight 1
   ]
   edge
   [
     source 2916
     target 2838
+    weight 1
   ]
   edge
   [
     source 2917
     target 2838
+    weight 1
   ]
   edge
   [
     source 2918
     target 2838
+    weight 1
   ]
   edge
   [
     source 2919
     target 2838
+    weight 1
   ]
   edge
   [
     source 2920
     target 2838
+    weight 1
   ]
   edge
   [
     source 2921
     target 2838
+    weight 1
   ]
   edge
   [
     source 2922
     target 2838
+    weight 1
   ]
   edge
   [
     source 2923
     target 2838
+    weight 1
   ]
   edge
   [
     source 2924
     target 2838
+    weight 1
   ]
   edge
   [
     source 2925
     target 2838
+    weight 1
   ]
   edge
   [
     source 2926
     target 2838
+    weight 1
   ]
   edge
   [
     source 2927
     target 2838
+    weight 1
   ]
   edge
   [
     source 2928
     target 2838
+    weight 1
   ]
   edge
   [
     source 2929
     target 2838
+    weight 1
   ]
   edge
   [
     source 2930
     target 2838
+    weight 1
   ]
   edge
   [
     source 2931
     target 2838
+    weight 1
   ]
   edge
   [
     source 2932
     target 2838
+    weight 1
   ]
   edge
   [
     source 2933
     target 2838
+    weight 1
   ]
   edge
   [
     source 2934
     target 2838
+    weight 1
   ]
   edge
   [
     source 2935
     target 2838
+    weight 1
   ]
   edge
   [
     source 2936
     target 2838
+    weight 1
   ]
   edge
   [
     source 2937
     target 2838
+    weight 1
   ]
   edge
   [
     source 2938
     target 2838
+    weight 1
   ]
   edge
   [
     source 2939
     target 2838
+    weight 1
   ]
   edge
   [
     source 2940
     target 2838
+    weight 1
   ]
   edge
   [
     source 2941
     target 2838
+    weight 1
   ]
   edge
   [
     source 2942
     target 2838
+    weight 1
   ]
   edge
   [
     source 2943
     target 2838
+    weight 1
   ]
   edge
   [
     source 2944
     target 2838
+    weight 1
   ]
   edge
   [
     source 2945
     target 2838
+    weight 1
   ]
   edge
   [
     source 2946
     target 2838
+    weight 1
   ]
   edge
   [
     source 2947
     target 2838
+    weight 1
   ]
   edge
   [
     source 2948
     target 2838
+    weight 1
   ]
   edge
   [
     source 2949
     target 2838
+    weight 1
   ]
   edge
   [
     source 2950
     target 2838
+    weight 1
   ]
   edge
   [
     source 2951
     target 2838
+    weight 1
   ]
   edge
   [
     source 2952
     target 2838
+    weight 1
   ]
   edge
   [
     source 2953
     target 2838
+    weight 1
   ]
   edge
   [
     source 2954
     target 2838
+    weight 1
   ]
   edge
   [
     source 2955
     target 2838
+    weight 1
   ]
   edge
   [
     source 2956
     target 2838
+    weight 1
   ]
   edge
   [
     source 2957
     target 2838
+    weight 1
   ]
   edge
   [
     source 2958
     target 2838
+    weight 1
   ]
   edge
   [
     source 2959
     target 2838
+    weight 1
   ]
   edge
   [
     source 2960
     target 2838
+    weight 1
   ]
   edge
   [
     source 2961
     target 2838
+    weight 1
   ]
   edge
   [
     source 2962
     target 2838
+    weight 1
   ]
   edge
   [
     source 2963
     target 2838
+    weight 1
   ]
   edge
   [
     source 2964
     target 2838
+    weight 1
   ]
   edge
   [
     source 2965
     target 2838
+    weight 1
   ]
   edge
   [
     source 2966
     target 2838
+    weight 1
   ]
   edge
   [
     source 2967
     target 2838
+    weight 1
   ]
   edge
   [
     source 2968
     target 2838
+    weight 1
   ]
   edge
   [
     source 2969
     target 2838
+    weight 1
   ]
   edge
   [
     source 2970
     target 2838
+    weight 1
   ]
   edge
   [
     source 2971
     target 2838
+    weight 1
   ]
   edge
   [
     source 2972
     target 2838
+    weight 1
   ]
   edge
   [
     source 2973
     target 2838
+    weight 1
   ]
   edge
   [
     source 2974
     target 2838
+    weight 1
   ]
   edge
   [
     source 2975
     target 2838
+    weight 1
   ]
   edge
   [
     source 2976
     target 2838
+    weight 1
   ]
   edge
   [
     source 2977
     target 2838
+    weight 1
   ]
   edge
   [
     source 2978
     target 2838
+    weight 1
   ]
   edge
   [
     source 2979
     target 2838
+    weight 1
   ]
   edge
   [
     source 2980
     target 2838
+    weight 1
   ]
   edge
   [
     source 2981
     target 2838
+    weight 1
   ]
   edge
   [
     source 2982
     target 2838
+    weight 1
   ]
   edge
   [
     source 2983
     target 2838
+    weight 1
   ]
   edge
   [
     source 2984
     target 2838
+    weight 1
   ]
   edge
   [
     source 2985
     target 2838
+    weight 1
   ]
   edge
   [
     source 2986
     target 2838
+    weight 1
   ]
   edge
   [
     source 2987
     target 2838
+    weight 1
   ]
   edge
   [
     source 2988
     target 2838
+    weight 1
   ]
   edge
   [
     source 2989
     target 2838
+    weight 1
   ]
   edge
   [
     source 2990
     target 2838
+    weight 1
   ]
   edge
   [
     source 2991
     target 2838
+    weight 1
   ]
   edge
   [
     source 2992
     target 2838
+    weight 1
   ]
   edge
   [
     source 2993
     target 2838
+    weight 1
   ]
   edge
   [
     source 2994
     target 2838
+    weight 1
   ]
   edge
   [
     source 2995
     target 2838
+    weight 1
   ]
   edge
   [
     source 2996
     target 2838
+    weight 1
   ]
   edge
   [
     source 2997
     target 2838
+    weight 1
   ]
   edge
   [
     source 2998
     target 2838
+    weight 1
   ]
   edge
   [
     source 2999
     target 2838
+    weight 1
   ]
   edge
   [
     source 3000
     target 2838
+    weight 1
   ]
   edge
   [
     source 3001
     target 2838
+    weight 1
   ]
   edge
   [
     source 3002
     target 2838
+    weight 1
   ]
   edge
   [
     source 3003
     target 2838
+    weight 1
   ]
   edge
   [
     source 3004
     target 2838
+    weight 1
   ]
   edge
   [
     source 3005
     target 2838
+    weight 1
   ]
   edge
   [
     source 3006
     target 2838
+    weight 1
   ]
   edge
   [
     source 3007
     target 2838
+    weight 1
   ]
   edge
   [
     source 3008
     target 2838
+    weight 1
   ]
   edge
   [
     source 3009
     target 2838
+    weight 1
   ]
   edge
   [
     source 3010
     target 2838
+    weight 1
   ]
   edge
   [
     source 3011
     target 2838
+    weight 1
   ]
   edge
   [
     source 3012
     target 2838
+    weight 1
   ]
   edge
   [
     source 3013
     target 2838
+    weight 1
   ]
   edge
   [
     source 3014
     target 2838
+    weight 1
   ]
   edge
   [
     source 3015
     target 2838
+    weight 1
   ]
   edge
   [
     source 3016
     target 2838
+    weight 1
   ]
   edge
   [
     source 3017
     target 2838
+    weight 1
   ]
   edge
   [
     source 3018
     target 2838
+    weight 1
   ]
   edge
   [
     source 3019
     target 2838
+    weight 1
   ]
   edge
   [
     source 3020
     target 2838
+    weight 1
   ]
   edge
   [
     source 3021
     target 2838
+    weight 1
   ]
   edge
   [
     source 3022
     target 2838
+    weight 1
   ]
   edge
   [
     source 3023
     target 2838
+    weight 1
   ]
   edge
   [
     source 3024
     target 2838
+    weight 1
   ]
   edge
   [
     source 3025
     target 2838
+    weight 1
   ]
   edge
   [
     source 3026
     target 2838
+    weight 1
   ]
   edge
   [
     source 3027
     target 2838
+    weight 1
   ]
   edge
   [
     source 3028
     target 2838
+    weight 1
   ]
   edge
   [
     source 3029
     target 2838
+    weight 1
   ]
   edge
   [
     source 3030
     target 2838
+    weight 1
   ]
   edge
   [
     source 3031
     target 2838
+    weight 1
   ]
   edge
   [
     source 3032
     target 2838
+    weight 1
   ]
   edge
   [
     source 3033
     target 2838
+    weight 1
   ]
   edge
   [
     source 3034
     target 2838
+    weight 1
   ]
   edge
   [
     source 3035
     target 2838
+    weight 1
   ]
   edge
   [
     source 3036
     target 2838
+    weight 1
   ]
   edge
   [
     source 3037
     target 2838
+    weight 1
   ]
   edge
   [
     source 3038
     target 2838
+    weight 1
   ]
   edge
   [
     source 3039
     target 2838
+    weight 1
   ]
   edge
   [
     source 3040
     target 2838
+    weight 1
   ]
   edge
   [
     source 3041
     target 2838
+    weight 1
   ]
   edge
   [
     source 3042
     target 2838
+    weight 1
   ]
   edge
   [
     source 3043
     target 2838
+    weight 1
   ]
   edge
   [
     source 3044
     target 2838
+    weight 1
   ]
   edge
   [
     source 3045
     target 2838
+    weight 1
   ]
   edge
   [
     source 3046
     target 2838
+    weight 1
   ]
   edge
   [
     source 3047
     target 2838
+    weight 1
   ]
   edge
   [
     source 3048
     target 2838
+    weight 1
   ]
   edge
   [
     source 3049
     target 2838
+    weight 1
   ]
   edge
   [
     source 3050
     target 2838
+    weight 1
   ]
   edge
   [
     source 3051
     target 2838
+    weight 1
   ]
   edge
   [
     source 3052
     target 2838
+    weight 1
   ]
   edge
   [
     source 3053
     target 2838
+    weight 1
   ]
   edge
   [
     source 3054
     target 2838
+    weight 1
   ]
   edge
   [
     source 3055
     target 2838
+    weight 1
   ]
   edge
   [
     source 3056
     target 2838
+    weight 1
   ]
   edge
   [
     source 3057
     target 2838
+    weight 1
   ]
   edge
   [
     source 3058
     target 2838
+    weight 1
   ]
   edge
   [
     source 3059
     target 2838
+    weight 1
   ]
   edge
   [
     source 3060
     target 2838
+    weight 1
   ]
   edge
   [
     source 3061
     target 2838
+    weight 1
   ]
   edge
   [
     source 3062
     target 2838
+    weight 1
   ]
   edge
   [
     source 3063
     target 2838
+    weight 1
   ]
   edge
   [
     source 3064
     target 2838
+    weight 1
   ]
   edge
   [
     source 3065
     target 2838
+    weight 1
   ]
   edge
   [
     source 3066
     target 2838
+    weight 1
   ]
   edge
   [
     source 3067
     target 2838
+    weight 1
   ]
   edge
   [
     source 3068
     target 2838
+    weight 1
   ]
   edge
   [
     source 3069
     target 2838
+    weight 1
   ]
   edge
   [
     source 3070
     target 2838
+    weight 1
   ]
   edge
   [
     source 3071
     target 2838
+    weight 1
   ]
   edge
   [
     source 3072
     target 2838
+    weight 1
   ]
   edge
   [
     source 3073
     target 2838
+    weight 1
   ]
   edge
   [
     source 3074
     target 2838
+    weight 1
   ]
   edge
   [
     source 3075
     target 2838
+    weight 1
   ]
   edge
   [
     source 3076
     target 2838
+    weight 1
   ]
   edge
   [
     source 3077
     target 2838
+    weight 1
   ]
   edge
   [
     source 3078
     target 2838
+    weight 1
   ]
   edge
   [
     source 3079
     target 2838
+    weight 1
   ]
   edge
   [
     source 3080
     target 2838
+    weight 1
   ]
   edge
   [
     source 3081
     target 2838
+    weight 1
   ]
   edge
   [
     source 3082
     target 2838
+    weight 1
   ]
   edge
   [
     source 3083
     target 2838
+    weight 1
   ]
   edge
   [
     source 3084
     target 2838
+    weight 1
   ]
   edge
   [
     source 3085
     target 2838
+    weight 1
   ]
   edge
   [
     source 3086
     target 2838
+    weight 1
   ]
   edge
   [
     source 3087
     target 2838
+    weight 1
   ]
   edge
   [
     source 3088
     target 2838
+    weight 1
   ]
   edge
   [
     source 3089
     target 2838
+    weight 1
   ]
   edge
   [
     source 3090
     target 2838
+    weight 1
   ]
   edge
   [
     source 3091
     target 2838
+    weight 1
   ]
   edge
   [
     source 3092
     target 2838
+    weight 1
   ]
   edge
   [
     source 3093
     target 2838
+    weight 1
   ]
   edge
   [
     source 3094
     target 2838
+    weight 1
   ]
   edge
   [
     source 3095
     target 2838
+    weight 1
   ]
   edge
   [
     source 3096
     target 2838
+    weight 1
   ]
   edge
   [
     source 3097
     target 2838
+    weight 1
   ]
   edge
   [
     source 3098
     target 2838
+    weight 1
   ]
   edge
   [
     source 3099
     target 2838
+    weight 1
   ]
   edge
   [
     source 3100
     target 2838
+    weight 1
   ]
   edge
   [
     source 3101
     target 2838
+    weight 1
   ]
   edge
   [
     source 3102
     target 2838
+    weight 1
   ]
   edge
   [
     source 3103
     target 2838
+    weight 1
   ]
   edge
   [
     source 3104
     target 2838
+    weight 1
   ]
   edge
   [
     source 3105
     target 2838
+    weight 1
   ]
   edge
   [
     source 3106
     target 2838
+    weight 1
   ]
   edge
   [
     source 3107
     target 2838
+    weight 1
   ]
   edge
   [
     source 3108
     target 2838
+    weight 1
   ]
   edge
   [
     source 3109
     target 2838
+    weight 1
   ]
   edge
   [
     source 3110
     target 2838
+    weight 1
   ]
   edge
   [
     source 3111
     target 2838
+    weight 1
   ]
   edge
   [
     source 3112
     target 2838
+    weight 1
   ]
   edge
   [
     source 3113
     target 2838
+    weight 1
   ]
   edge
   [
     source 3114
     target 2838
+    weight 1
   ]
   edge
   [
     source 3115
     target 2838
+    weight 1
   ]
   edge
   [
     source 3116
     target 2838
+    weight 1
   ]
   edge
   [
     source 3117
     target 2838
+    weight 1
   ]
   edge
   [
     source 3118
     target 2838
+    weight 1
   ]
   edge
   [
     source 3119
     target 2838
+    weight 1
   ]
   edge
   [
     source 3120
     target 2838
+    weight 1
   ]
   edge
   [
     source 3121
     target 2838
+    weight 1
   ]
   edge
   [
     source 3122
     target 2838
+    weight 1
   ]
   edge
   [
     source 3123
     target 2838
+    weight 1
   ]
   edge
   [
     source 3124
     target 2838
+    weight 1
   ]
   edge
   [
     source 3125
     target 2838
+    weight 1
   ]
   edge
   [
     source 3126
     target 2838
+    weight 1
   ]
   edge
   [
     source 3127
     target 2838
+    weight 1
   ]
   edge
   [
     source 4032
     target 2838
+    weight 1
   ]
   edge
   [
     source 4435
     target 2838
+    weight 1
   ]
   edge
   [
     source 2840
     target 2839
+    weight 1
   ]
   edge
   [
     source 2841
     target 2839
+    weight 1
   ]
   edge
   [
     source 2842
     target 2839
+    weight 1
   ]
   edge
   [
     source 2843
     target 2839
+    weight 1
   ]
   edge
   [
     source 2844
     target 2839
+    weight 1
   ]
   edge
   [
     source 3247
     target 2840
+    weight 1
   ]
   edge
   [
     source 3963
     target 2843
+    weight 1
   ]
   edge
   [
     source 2846
     target 2845
+    weight 1
   ]
   edge
   [
     source 2847
     target 2845
+    weight 1
   ]
   edge
   [
     source 2848
     target 2845
+    weight 1
   ]
   edge
   [
     source 2849
     target 2845
+    weight 1
   ]
   edge
   [
     source 2850
     target 2845
+    weight 1
   ]
   edge
   [
     source 2851
     target 2845
+    weight 1
   ]
   edge
   [
     source 2852
     target 2845
+    weight 1
   ]
   edge
   [
     source 2853
     target 2845
+    weight 1
   ]
   edge
   [
     source 2854
     target 2845
+    weight 1
   ]
   edge
   [
     source 2855
     target 2845
+    weight 1
   ]
   edge
   [
     source 2856
     target 2845
+    weight 1
   ]
   edge
   [
     source 2857
     target 2845
+    weight 1
   ]
   edge
   [
     source 4257
     target 2851
+    weight 1
   ]
   edge
   [
     source 2859
     target 2858
+    weight 1
   ]
   edge
   [
     source 2860
     target 2858
+    weight 1
   ]
   edge
   [
     source 2861
     target 2858
+    weight 1
   ]
   edge
   [
     source 2862
     target 2858
+    weight 1
   ]
   edge
   [
     source 2863
     target 2858
+    weight 1
   ]
   edge
   [
     source 2864
     target 2858
+    weight 1
   ]
   edge
   [
     source 2865
     target 2858
+    weight 1
   ]
   edge
   [
     source 2866
     target 2858
+    weight 1
   ]
   edge
   [
     source 2867
     target 2858
+    weight 1
   ]
   edge
   [
     source 2868
     target 2858
+    weight 1
   ]
   edge
   [
     source 2869
     target 2858
+    weight 1
   ]
   edge
   [
     source 2870
     target 2858
+    weight 1
   ]
   edge
   [
     source 2871
     target 2858
+    weight 1
   ]
   edge
   [
     source 2873
     target 2872
+    weight 1
   ]
   edge
   [
     source 2874
     target 2872
+    weight 1
   ]
   edge
   [
     source 3641
     target 2874
+    weight 1
   ]
   edge
   [
     source 4359
     target 2874
+    weight 1
   ]
   edge
   [
     source 2876
     target 2875
+    weight 1
   ]
   edge
   [
     source 2878
     target 2877
+    weight 1
   ]
   edge
   [
     source 2879
     target 2877
+    weight 1
   ]
   edge
   [
     source 2880
     target 2877
+    weight 1
   ]
   edge
   [
     source 2881
     target 2877
+    weight 1
   ]
   edge
   [
     source 2882
     target 2877
+    weight 1
   ]
   edge
   [
     source 2883
     target 2877
+    weight 1
   ]
   edge
   [
     source 2884
     target 2877
+    weight 1
   ]
   edge
   [
     source 2885
     target 2877
+    weight 1
   ]
   edge
   [
     source 2886
     target 2877
+    weight 1
   ]
   edge
   [
     source 2887
     target 2877
+    weight 1
   ]
   edge
   [
     source 2888
     target 2877
+    weight 1
   ]
   edge
   [
     source 3810
     target 2880
+    weight 1
   ]
   edge
   [
     source 2892
     target 2891
+    weight 1
   ]
   edge
   [
     source 2893
     target 2891
+    weight 1
   ]
   edge
   [
     source 3248
     target 2893
+    weight 1
   ]
   edge
   [
     source 3249
     target 2893
+    weight 1
   ]
   edge
   [
     source 3250
     target 2893
+    weight 1
   ]
   edge
   [
     source 3251
     target 2893
+    weight 1
   ]
   edge
   [
     source 3252
     target 2893
+    weight 1
   ]
   edge
   [
     source 3253
     target 2893
+    weight 1
   ]
   edge
   [
     source 3254
     target 2893
+    weight 1
   ]
   edge
   [
     source 3255
     target 2893
+    weight 1
   ]
   edge
   [
     source 3256
     target 2893
+    weight 1
   ]
   edge
   [
     source 3257
     target 2893
+    weight 1
   ]
   edge
   [
     source 3633
     target 2910
+    weight 1
   ]
   edge
   [
     source 3853
     target 2910
+    weight 1
   ]
   edge
   [
     source 3789
     target 2922
+    weight 1
   ]
   edge
   [
     source 4415
     target 2922
+    weight 1
   ]
   edge
   [
     source 3624
     target 2953
+    weight 1
   ]
   edge
   [
     source 4043
     target 2964
+    weight 1
   ]
   edge
   [
     source 4257
     target 2996
+    weight 1
   ]
   edge
   [
     source 3705
     target 3000
+    weight 1
   ]
   edge
   [
     source 4365
     target 3000
+    weight 1
   ]
   edge
   [
     source 4139
     target 3025
+    weight 1
   ]
   edge
   [
     source 3785
     target 3112
+    weight 1
   ]
   edge
   [
     source 3282
     target 3117
+    weight 1
   ]
   edge
   [
     source 3129
     target 3128
+    weight 1
   ]
   edge
   [
     source 3130
     target 3128
+    weight 1
   ]
   edge
   [
     source 3131
     target 3128
+    weight 1
   ]
   edge
   [
     source 3132
     target 3128
+    weight 1
   ]
   edge
   [
     source 3133
     target 3128
+    weight 1
   ]
   edge
   [
     source 3141
     target 3129
+    weight 1
   ]
   edge
   [
     source 3135
     target 3134
+    weight 1
   ]
   edge
   [
     source 3136
     target 3134
+    weight 1
   ]
   edge
   [
     source 3137
     target 3134
+    weight 1
   ]
   edge
   [
     source 3138
     target 3134
+    weight 1
   ]
   edge
   [
     source 4182
     target 3137
+    weight 1
   ]
   edge
   [
     source 3140
     target 3139
+    weight 1
   ]
   edge
   [
     source 3141
     target 3140
+    weight 1
   ]
   edge
   [
     source 3142
     target 3141
+    weight 1
   ]
   edge
   [
     source 3143
     target 3141
+    weight 1
   ]
   edge
   [
     source 3144
     target 3141
+    weight 1
   ]
   edge
   [
     source 3145
     target 3141
+    weight 1
   ]
   edge
   [
     source 3146
     target 3141
+    weight 1
   ]
   edge
   [
     source 3147
     target 3141
+    weight 1
   ]
   edge
   [
     source 3148
     target 3141
+    weight 1
   ]
   edge
   [
     source 3149
     target 3141
+    weight 1
   ]
   edge
   [
     source 3150
     target 3141
+    weight 1
   ]
   edge
   [
     source 3151
     target 3141
+    weight 1
   ]
   edge
   [
     source 3152
     target 3141
+    weight 1
   ]
   edge
   [
     source 3153
     target 3141
+    weight 1
   ]
   edge
   [
     source 3154
     target 3141
+    weight 1
   ]
   edge
   [
     source 3155
     target 3141
+    weight 1
   ]
   edge
   [
     source 3156
     target 3141
+    weight 1
   ]
   edge
   [
     source 3157
     target 3141
+    weight 1
   ]
   edge
   [
     source 3158
     target 3141
+    weight 1
   ]
   edge
   [
     source 3159
     target 3141
+    weight 1
   ]
   edge
   [
     source 3160
     target 3141
+    weight 1
   ]
   edge
   [
     source 3161
     target 3141
+    weight 1
   ]
   edge
   [
     source 3162
     target 3141
+    weight 1
   ]
   edge
   [
     source 3163
     target 3141
+    weight 1
   ]
   edge
   [
     source 3164
     target 3141
+    weight 1
   ]
   edge
   [
     source 3165
     target 3141
+    weight 1
   ]
   edge
   [
     source 3166
     target 3141
+    weight 1
   ]
   edge
   [
     source 3167
     target 3141
+    weight 1
   ]
   edge
   [
     source 3168
     target 3141
+    weight 1
   ]
   edge
   [
     source 3169
     target 3141
+    weight 1
   ]
   edge
   [
     source 3170
     target 3141
+    weight 1
   ]
   edge
   [
     source 3171
     target 3141
+    weight 1
   ]
   edge
   [
     source 3172
     target 3141
+    weight 1
   ]
   edge
   [
     source 3173
     target 3141
+    weight 1
   ]
   edge
   [
     source 3174
     target 3141
+    weight 1
   ]
   edge
   [
     source 3175
     target 3141
+    weight 1
   ]
   edge
   [
     source 3176
     target 3141
+    weight 1
   ]
   edge
   [
     source 3177
     target 3141
+    weight 1
   ]
   edge
   [
     source 3178
     target 3141
+    weight 1
   ]
   edge
   [
     source 3179
     target 3141
+    weight 1
   ]
   edge
   [
     source 3180
     target 3141
+    weight 1
   ]
   edge
   [
     source 3181
     target 3141
+    weight 1
   ]
   edge
   [
     source 3182
     target 3141
+    weight 1
   ]
   edge
   [
     source 3183
     target 3141
+    weight 1
   ]
   edge
   [
     source 3184
     target 3141
+    weight 1
   ]
   edge
   [
     source 3185
     target 3141
+    weight 1
   ]
   edge
   [
     source 3186
     target 3141
+    weight 1
   ]
   edge
   [
     source 3187
     target 3141
+    weight 1
   ]
   edge
   [
     source 3188
     target 3141
+    weight 1
   ]
   edge
   [
     source 3189
     target 3141
+    weight 1
   ]
   edge
   [
     source 3190
     target 3141
+    weight 1
   ]
   edge
   [
     source 3191
     target 3141
+    weight 1
   ]
   edge
   [
     source 3192
     target 3141
+    weight 1
   ]
   edge
   [
     source 3193
     target 3141
+    weight 1
   ]
   edge
   [
     source 3194
     target 3141
+    weight 1
   ]
   edge
   [
     source 3195
     target 3141
+    weight 1
   ]
   edge
   [
     source 3196
     target 3141
+    weight 1
   ]
   edge
   [
     source 3197
     target 3141
+    weight 1
   ]
   edge
   [
     source 3198
     target 3141
+    weight 1
   ]
   edge
   [
     source 3199
     target 3141
+    weight 1
   ]
   edge
   [
     source 3200
     target 3141
+    weight 1
   ]
   edge
   [
     source 3201
     target 3141
+    weight 1
   ]
   edge
   [
     source 3202
     target 3141
+    weight 1
   ]
   edge
   [
     source 4363
     target 3141
+    weight 1
   ]
   edge
   [
     source 4475
     target 3141
+    weight 1
   ]
   edge
   [
     source 3936
     target 3160
+    weight 1
   ]
   edge
   [
     source 3204
     target 3203
+    weight 1
   ]
   edge
   [
     source 3206
     target 3205
+    weight 1
   ]
   edge
   [
     source 3936
     target 3206
+    weight 1
   ]
   edge
   [
     source 3247
     target 3207
+    weight 1
   ]
   edge
   [
     source 3211
     target 3210
+    weight 1
   ]
   edge
   [
     source 3212
     target 3210
+    weight 1
   ]
   edge
   [
     source 3213
     target 3210
+    weight 1
   ]
   edge
   [
     source 3214
     target 3210
+    weight 1
   ]
   edge
   [
     source 3215
     target 3210
+    weight 1
   ]
   edge
   [
     source 3216
     target 3210
+    weight 1
   ]
   edge
   [
     source 3217
     target 3210
+    weight 1
   ]
   edge
   [
     source 3218
     target 3210
+    weight 1
   ]
   edge
   [
     source 3219
     target 3210
+    weight 1
   ]
   edge
   [
     source 3220
     target 3210
+    weight 1
   ]
   edge
   [
     source 3221
     target 3210
+    weight 1
   ]
   edge
   [
     source 3222
     target 3210
+    weight 1
   ]
   edge
   [
     source 3223
     target 3210
+    weight 1
   ]
   edge
   [
     source 3224
     target 3210
+    weight 1
   ]
   edge
   [
     source 3225
     target 3210
+    weight 1
   ]
   edge
   [
     source 3226
     target 3210
+    weight 1
   ]
   edge
   [
     source 3227
     target 3210
+    weight 1
   ]
   edge
   [
     source 3228
     target 3210
+    weight 1
   ]
   edge
   [
     source 3229
     target 3210
+    weight 1
   ]
   edge
   [
     source 3230
     target 3210
+    weight 1
   ]
   edge
   [
     source 3231
     target 3210
+    weight 1
   ]
   edge
   [
     source 3232
     target 3210
+    weight 1
   ]
   edge
   [
     source 3233
     target 3210
+    weight 1
   ]
   edge
   [
     source 3234
     target 3210
+    weight 1
   ]
   edge
   [
     source 3235
     target 3210
+    weight 1
   ]
   edge
   [
     source 3236
     target 3210
+    weight 1
   ]
   edge
   [
     source 3237
     target 3210
+    weight 1
   ]
   edge
   [
     source 3238
     target 3210
+    weight 1
   ]
   edge
   [
     source 3239
     target 3210
+    weight 1
   ]
   edge
   [
     source 3240
     target 3210
+    weight 1
   ]
   edge
   [
     source 3241
     target 3210
+    weight 1
   ]
   edge
   [
     source 3242
     target 3210
+    weight 1
   ]
   edge
   [
     source 3243
     target 3210
+    weight 1
   ]
   edge
   [
     source 4472
     target 3215
+    weight 1
   ]
   edge
   [
     source 3245
     target 3244
+    weight 1
   ]
   edge
   [
     source 4404
     target 3245
+    weight 1
   ]
   edge
   [
     source 3247
     target 3246
+    weight 1
   ]
   edge
   [
     source 4104
     target 3247
+    weight 1
   ]
   edge
   [
     source 4105
     target 3247
+    weight 1
   ]
   edge
   [
     source 4106
     target 3247
+    weight 1
   ]
   edge
   [
     source 4107
     target 3247
+    weight 1
   ]
   edge
   [
     source 4108
     target 3247
+    weight 1
   ]
   edge
   [
     source 4109
     target 3247
+    weight 1
   ]
   edge
   [
     source 4110
     target 3247
+    weight 1
   ]
   edge
   [
     source 4111
     target 3247
+    weight 1
   ]
   edge
   [
     source 4112
     target 3247
+    weight 1
   ]
   edge
   [
     source 4113
     target 3247
+    weight 1
   ]
   edge
   [
     source 4114
     target 3247
+    weight 1
   ]
   edge
   [
     source 4115
     target 3247
+    weight 1
   ]
   edge
   [
     source 4116
     target 3247
+    weight 1
   ]
   edge
   [
     source 4437
     target 3254
+    weight 1
   ]
   edge
   [
     source 3260
     target 3259
+    weight 1
   ]
   edge
   [
     source 3261
     target 3259
+    weight 1
   ]
   edge
   [
     source 4047
     target 3259
+    weight 1
   ]
   edge
   [
     source 3263
     target 3262
+    weight 1
   ]
   edge
   [
     source 3264
     target 3262
+    weight 1
   ]
   edge
   [
     source 3265
     target 3262
+    weight 1
   ]
   edge
   [
     source 3266
     target 3262
+    weight 1
   ]
   edge
   [
     source 3267
     target 3262
+    weight 1
   ]
   edge
   [
     source 3268
     target 3262
+    weight 1
   ]
   edge
   [
     source 3270
     target 3269
+    weight 1
   ]
   edge
   [
     source 3271
     target 3269
+    weight 1
   ]
   edge
   [
     source 3272
     target 3269
+    weight 1
   ]
   edge
   [
     source 3273
     target 3269
+    weight 1
   ]
   edge
   [
     source 3274
     target 3269
+    weight 1
   ]
   edge
   [
     source 3275
     target 3269
+    weight 1
   ]
   edge
   [
     source 3277
     target 3276
+    weight 1
   ]
   edge
   [
     source 3278
     target 3276
+    weight 1
   ]
   edge
   [
     source 3279
     target 3276
+    weight 1
   ]
   edge
   [
     source 4139
     target 3277
+    weight 1
   ]
   edge
   [
     source 4096
     target 3278
+    weight 1
   ]
   edge
   [
     source 3281
     target 3280
+    weight 1
   ]
   edge
   [
     source 4488
     target 3280
+    weight 1
   ]
   edge
   [
     source 3283
     target 3282
+    weight 1
   ]
   edge
   [
     source 3284
     target 3282
+    weight 1
   ]
   edge
   [
     source 3285
     target 3282
+    weight 1
   ]
   edge
   [
     source 3286
     target 3282
+    weight 1
   ]
   edge
   [
     source 3287
     target 3282
+    weight 1
   ]
   edge
   [
     source 3288
     target 3282
+    weight 1
   ]
   edge
   [
     source 3289
     target 3282
+    weight 1
   ]
   edge
   [
     source 3290
     target 3282
+    weight 1
   ]
   edge
   [
     source 3291
     target 3282
+    weight 1
   ]
   edge
   [
     source 3292
     target 3282
+    weight 1
   ]
   edge
   [
     source 3293
     target 3282
+    weight 1
   ]
   edge
   [
     source 3294
     target 3282
+    weight 1
   ]
   edge
   [
     source 3295
     target 3282
+    weight 1
   ]
   edge
   [
     source 3296
     target 3282
+    weight 1
   ]
   edge
   [
     source 3297
     target 3282
+    weight 1
   ]
   edge
   [
     source 3298
     target 3282
+    weight 1
   ]
   edge
   [
     source 3299
     target 3282
+    weight 1
   ]
   edge
   [
     source 3300
     target 3282
+    weight 1
   ]
   edge
   [
     source 3301
     target 3282
+    weight 1
   ]
   edge
   [
     source 3302
     target 3282
+    weight 1
   ]
   edge
   [
     source 3303
     target 3282
+    weight 1
   ]
   edge
   [
     source 3304
     target 3282
+    weight 1
   ]
   edge
   [
     source 3305
     target 3282
+    weight 1
   ]
   edge
   [
     source 3306
     target 3282
+    weight 1
   ]
   edge
   [
     source 3307
     target 3282
+    weight 1
   ]
   edge
   [
     source 3308
     target 3282
+    weight 1
   ]
   edge
   [
     source 3309
     target 3282
+    weight 1
   ]
   edge
   [
     source 3310
     target 3282
+    weight 1
   ]
   edge
   [
     source 3311
     target 3282
+    weight 1
   ]
   edge
   [
     source 3312
     target 3282
+    weight 1
   ]
   edge
   [
     source 3313
     target 3282
+    weight 1
   ]
   edge
   [
     source 3314
     target 3282
+    weight 1
   ]
   edge
   [
     source 3315
     target 3282
+    weight 1
   ]
   edge
   [
     source 3316
     target 3282
+    weight 1
   ]
   edge
   [
     source 3317
     target 3282
+    weight 1
   ]
   edge
   [
     source 3318
     target 3282
+    weight 1
   ]
   edge
   [
     source 3319
     target 3282
+    weight 1
   ]
   edge
   [
     source 3320
     target 3282
+    weight 1
   ]
   edge
   [
     source 3321
     target 3282
+    weight 1
   ]
   edge
   [
     source 3322
     target 3282
+    weight 1
   ]
   edge
   [
     source 3323
     target 3282
+    weight 1
   ]
   edge
   [
     source 3324
     target 3282
+    weight 1
   ]
   edge
   [
     source 3325
     target 3282
+    weight 1
   ]
   edge
   [
     source 3326
     target 3282
+    weight 1
   ]
   edge
   [
     source 3327
     target 3282
+    weight 1
   ]
   edge
   [
     source 3328
     target 3282
+    weight 1
   ]
   edge
   [
     source 3329
     target 3282
+    weight 1
   ]
   edge
   [
     source 3330
     target 3282
+    weight 1
   ]
   edge
   [
     source 3331
     target 3282
+    weight 1
   ]
   edge
   [
     source 3332
     target 3282
+    weight 1
   ]
   edge
   [
     source 3333
     target 3282
+    weight 1
   ]
   edge
   [
     source 3334
     target 3282
+    weight 1
   ]
   edge
   [
     source 3335
     target 3282
+    weight 1
   ]
   edge
   [
     source 3336
     target 3282
+    weight 1
   ]
   edge
   [
     source 3337
     target 3282
+    weight 1
   ]
   edge
   [
     source 3338
     target 3282
+    weight 1
   ]
   edge
   [
     source 3339
     target 3282
+    weight 1
   ]
   edge
   [
     source 3340
     target 3282
+    weight 1
   ]
   edge
   [
     source 3341
     target 3282
+    weight 1
   ]
   edge
   [
     source 3342
     target 3282
+    weight 1
   ]
   edge
   [
     source 3343
     target 3282
+    weight 1
   ]
   edge
   [
     source 3344
     target 3282
+    weight 1
   ]
   edge
   [
     source 3345
     target 3282
+    weight 1
   ]
   edge
   [
     source 3346
     target 3282
+    weight 1
   ]
   edge
   [
     source 3347
     target 3282
+    weight 1
   ]
   edge
   [
     source 3348
     target 3282
+    weight 1
   ]
   edge
   [
     source 3349
     target 3282
+    weight 1
   ]
   edge
   [
     source 3350
     target 3282
+    weight 1
   ]
   edge
   [
     source 3351
     target 3282
+    weight 1
   ]
   edge
   [
     source 3352
     target 3282
+    weight 1
   ]
   edge
   [
     source 3353
     target 3282
+    weight 1
   ]
   edge
   [
     source 3354
     target 3282
+    weight 1
   ]
   edge
   [
     source 3355
     target 3282
+    weight 1
   ]
   edge
   [
     source 3356
     target 3282
+    weight 1
   ]
   edge
   [
     source 3357
     target 3282
+    weight 1
   ]
   edge
   [
     source 3358
     target 3282
+    weight 1
   ]
   edge
   [
     source 3359
     target 3282
+    weight 1
   ]
   edge
   [
     source 3360
     target 3282
+    weight 1
   ]
   edge
   [
     source 3361
     target 3282
+    weight 1
   ]
   edge
   [
     source 3362
     target 3282
+    weight 1
   ]
   edge
   [
     source 3363
     target 3282
+    weight 1
   ]
   edge
   [
     source 3364
     target 3282
+    weight 1
   ]
   edge
   [
     source 3365
     target 3282
+    weight 1
   ]
   edge
   [
     source 3366
     target 3282
+    weight 1
   ]
   edge
   [
     source 3367
     target 3282
+    weight 1
   ]
   edge
   [
     source 3368
     target 3282
+    weight 1
   ]
   edge
   [
     source 3369
     target 3282
+    weight 1
   ]
   edge
   [
     source 3370
     target 3282
+    weight 1
   ]
   edge
   [
     source 3371
     target 3282
+    weight 1
   ]
   edge
   [
     source 3372
     target 3282
+    weight 1
   ]
   edge
   [
     source 3373
     target 3282
+    weight 1
   ]
   edge
   [
     source 3374
     target 3282
+    weight 1
   ]
   edge
   [
     source 3375
     target 3282
+    weight 1
   ]
   edge
   [
     source 3376
     target 3282
+    weight 1
   ]
   edge
   [
     source 3377
     target 3282
+    weight 1
   ]
   edge
   [
     source 3378
     target 3282
+    weight 1
   ]
   edge
   [
     source 3379
     target 3282
+    weight 1
   ]
   edge
   [
     source 3380
     target 3282
+    weight 1
   ]
   edge
   [
     source 3381
     target 3282
+    weight 1
   ]
   edge
   [
     source 3382
     target 3282
+    weight 1
   ]
   edge
   [
     source 3383
     target 3282
+    weight 1
   ]
   edge
   [
     source 3384
     target 3282
+    weight 1
   ]
   edge
   [
     source 3385
     target 3282
+    weight 1
   ]
   edge
   [
     source 3386
     target 3282
+    weight 1
   ]
   edge
   [
     source 3387
     target 3282
+    weight 1
   ]
   edge
   [
     source 3388
     target 3282
+    weight 1
   ]
   edge
   [
     source 3389
     target 3282
+    weight 1
   ]
   edge
   [
     source 3390
     target 3282
+    weight 1
   ]
   edge
   [
     source 3391
     target 3282
+    weight 1
   ]
   edge
   [
     source 3392
     target 3282
+    weight 1
   ]
   edge
   [
     source 3393
     target 3282
+    weight 1
   ]
   edge
   [
     source 3394
     target 3282
+    weight 1
   ]
   edge
   [
     source 3395
     target 3282
+    weight 1
   ]
   edge
   [
     source 3396
     target 3282
+    weight 1
   ]
   edge
   [
     source 3397
     target 3282
+    weight 1
   ]
   edge
   [
     source 3398
     target 3282
+    weight 1
   ]
   edge
   [
     source 3399
     target 3282
+    weight 1
   ]
   edge
   [
     source 3400
     target 3282
+    weight 1
   ]
   edge
   [
     source 3401
     target 3282
+    weight 1
   ]
   edge
   [
     source 3402
     target 3282
+    weight 1
   ]
   edge
   [
     source 3403
     target 3282
+    weight 1
   ]
   edge
   [
     source 3404
     target 3282
+    weight 1
   ]
   edge
   [
     source 3405
     target 3282
+    weight 1
   ]
   edge
   [
     source 3406
     target 3282
+    weight 1
   ]
   edge
   [
     source 3407
     target 3282
+    weight 1
   ]
   edge
   [
     source 3408
     target 3282
+    weight 1
   ]
   edge
   [
     source 3409
     target 3282
+    weight 1
   ]
   edge
   [
     source 3410
     target 3282
+    weight 1
   ]
   edge
   [
     source 3411
     target 3282
+    weight 1
   ]
   edge
   [
     source 3412
     target 3282
+    weight 1
   ]
   edge
   [
     source 3413
     target 3282
+    weight 1
   ]
   edge
   [
     source 3414
     target 3282
+    weight 1
   ]
   edge
   [
     source 3415
     target 3282
+    weight 1
   ]
   edge
   [
     source 3416
     target 3282
+    weight 1
   ]
   edge
   [
     source 3417
     target 3282
+    weight 1
   ]
   edge
   [
     source 3418
     target 3282
+    weight 1
   ]
   edge
   [
     source 3419
     target 3282
+    weight 1
   ]
   edge
   [
     source 3420
     target 3282
+    weight 1
   ]
   edge
   [
     source 3421
     target 3282
+    weight 1
   ]
   edge
   [
     source 3422
     target 3282
+    weight 1
   ]
   edge
   [
     source 3423
     target 3282
+    weight 1
   ]
   edge
   [
     source 3424
     target 3282
+    weight 1
   ]
   edge
   [
     source 3425
     target 3282
+    weight 1
   ]
   edge
   [
     source 3426
     target 3282
+    weight 1
   ]
   edge
   [
     source 3427
     target 3282
+    weight 1
   ]
   edge
   [
     source 3428
     target 3282
+    weight 1
   ]
   edge
   [
     source 3429
     target 3282
+    weight 1
   ]
   edge
   [
     source 3430
     target 3282
+    weight 1
   ]
   edge
   [
     source 3431
     target 3282
+    weight 1
   ]
   edge
   [
     source 3432
     target 3282
+    weight 1
   ]
   edge
   [
     source 3433
     target 3282
+    weight 1
   ]
   edge
   [
     source 3434
     target 3282
+    weight 1
   ]
   edge
   [
     source 3435
     target 3282
+    weight 1
   ]
   edge
   [
     source 3436
     target 3282
+    weight 1
   ]
   edge
   [
     source 3437
     target 3282
+    weight 1
   ]
   edge
   [
     source 3438
     target 3282
+    weight 1
   ]
   edge
   [
     source 3439
     target 3282
+    weight 1
   ]
   edge
   [
     source 3440
     target 3282
+    weight 1
   ]
   edge
   [
     source 3441
     target 3282
+    weight 1
   ]
   edge
   [
     source 3442
     target 3282
+    weight 1
   ]
   edge
   [
     source 3443
     target 3282
+    weight 1
   ]
   edge
   [
     source 3444
     target 3282
+    weight 1
   ]
   edge
   [
     source 3445
     target 3282
+    weight 1
   ]
   edge
   [
     source 3446
     target 3282
+    weight 1
   ]
   edge
   [
     source 3447
     target 3282
+    weight 1
   ]
   edge
   [
     source 3448
     target 3282
+    weight 1
   ]
   edge
   [
     source 3449
     target 3282
+    weight 1
   ]
   edge
   [
     source 3450
     target 3282
+    weight 1
   ]
   edge
   [
     source 3451
     target 3282
+    weight 1
   ]
   edge
   [
     source 3452
     target 3282
+    weight 1
   ]
   edge
   [
     source 3453
     target 3282
+    weight 1
   ]
   edge
   [
     source 3454
     target 3282
+    weight 1
   ]
   edge
   [
     source 3455
     target 3282
+    weight 1
   ]
   edge
   [
     source 3456
     target 3282
+    weight 1
   ]
   edge
   [
     source 3457
     target 3282
+    weight 1
   ]
   edge
   [
     source 3458
     target 3282
+    weight 1
   ]
   edge
   [
     source 3459
     target 3282
+    weight 1
   ]
   edge
   [
     source 3460
     target 3282
+    weight 1
   ]
   edge
   [
     source 3461
     target 3282
+    weight 1
   ]
   edge
   [
     source 3462
     target 3282
+    weight 1
   ]
   edge
   [
     source 3463
     target 3282
+    weight 1
   ]
   edge
   [
     source 3464
     target 3282
+    weight 1
   ]
   edge
   [
     source 3465
     target 3282
+    weight 1
   ]
   edge
   [
     source 3466
     target 3282
+    weight 1
   ]
   edge
   [
     source 3467
     target 3282
+    weight 1
   ]
   edge
   [
     source 3468
     target 3282
+    weight 1
   ]
   edge
   [
     source 3469
     target 3282
+    weight 1
   ]
   edge
   [
     source 3470
     target 3282
+    weight 1
   ]
   edge
   [
     source 3471
     target 3282
+    weight 1
   ]
   edge
   [
     source 3472
     target 3282
+    weight 1
   ]
   edge
   [
     source 3473
     target 3282
+    weight 1
   ]
   edge
   [
     source 3474
     target 3282
+    weight 1
   ]
   edge
   [
     source 3475
     target 3282
+    weight 1
   ]
   edge
   [
     source 3476
     target 3282
+    weight 1
   ]
   edge
   [
     source 3477
     target 3282
+    weight 1
   ]
   edge
   [
     source 3478
     target 3282
+    weight 1
   ]
   edge
   [
     source 3479
     target 3282
+    weight 1
   ]
   edge
   [
     source 3480
     target 3282
+    weight 1
   ]
   edge
   [
     source 3481
     target 3282
+    weight 1
   ]
   edge
   [
     source 3482
     target 3282
+    weight 1
   ]
   edge
   [
     source 3483
     target 3282
+    weight 1
   ]
   edge
   [
     source 3484
     target 3282
+    weight 1
   ]
   edge
   [
     source 3485
     target 3282
+    weight 1
   ]
   edge
   [
     source 3486
     target 3282
+    weight 1
   ]
   edge
   [
     source 3487
     target 3282
+    weight 1
   ]
   edge
   [
     source 3488
     target 3282
+    weight 1
   ]
   edge
   [
     source 3489
     target 3282
+    weight 1
   ]
   edge
   [
     source 3490
     target 3282
+    weight 1
   ]
   edge
   [
     source 3491
     target 3282
+    weight 1
   ]
   edge
   [
     source 3492
     target 3282
+    weight 1
   ]
   edge
   [
     source 3493
     target 3282
+    weight 1
   ]
   edge
   [
     source 3494
     target 3282
+    weight 1
   ]
   edge
   [
     source 3495
     target 3282
+    weight 1
   ]
   edge
   [
     source 3496
     target 3282
+    weight 1
   ]
   edge
   [
     source 3497
     target 3282
+    weight 1
   ]
   edge
   [
     source 3498
     target 3282
+    weight 1
   ]
   edge
   [
     source 3499
     target 3282
+    weight 1
   ]
   edge
   [
     source 3500
     target 3282
+    weight 1
   ]
   edge
   [
     source 3501
     target 3282
+    weight 1
   ]
   edge
   [
     source 3502
     target 3282
+    weight 1
   ]
   edge
   [
     source 3503
     target 3282
+    weight 1
   ]
   edge
   [
     source 3504
     target 3282
+    weight 1
   ]
   edge
   [
     source 3505
     target 3282
+    weight 1
   ]
   edge
   [
     source 3506
     target 3282
+    weight 1
   ]
   edge
   [
     source 3507
     target 3282
+    weight 1
   ]
   edge
   [
     source 3508
     target 3282
+    weight 1
   ]
   edge
   [
     source 3509
     target 3282
+    weight 1
   ]
   edge
   [
     source 3510
     target 3282
+    weight 1
   ]
   edge
   [
     source 3511
     target 3282
+    weight 1
   ]
   edge
   [
     source 3512
     target 3282
+    weight 1
   ]
   edge
   [
     source 3513
     target 3282
+    weight 1
   ]
   edge
   [
     source 3514
     target 3282
+    weight 1
   ]
   edge
   [
     source 3515
     target 3282
+    weight 1
   ]
   edge
   [
     source 3516
     target 3282
+    weight 1
   ]
   edge
   [
     source 3517
     target 3282
+    weight 1
   ]
   edge
   [
     source 3518
     target 3282
+    weight 1
   ]
   edge
   [
     source 3519
     target 3282
+    weight 1
   ]
   edge
   [
     source 3520
     target 3282
+    weight 1
   ]
   edge
   [
     source 3521
     target 3282
+    weight 1
   ]
   edge
   [
     source 3522
     target 3282
+    weight 1
   ]
   edge
   [
     source 3523
     target 3282
+    weight 1
   ]
   edge
   [
     source 3524
     target 3282
+    weight 1
   ]
   edge
   [
     source 3525
     target 3282
+    weight 1
   ]
   edge
   [
     source 3526
     target 3282
+    weight 1
   ]
   edge
   [
     source 3527
     target 3282
+    weight 1
   ]
   edge
   [
     source 3528
     target 3282
+    weight 1
   ]
   edge
   [
     source 3529
     target 3282
+    weight 1
   ]
   edge
   [
     source 3530
     target 3282
+    weight 1
   ]
   edge
   [
     source 3531
     target 3282
+    weight 1
   ]
   edge
   [
     source 3532
     target 3282
+    weight 1
   ]
   edge
   [
     source 3533
     target 3282
+    weight 1
   ]
   edge
   [
     source 3534
     target 3282
+    weight 1
   ]
   edge
   [
     source 3535
     target 3282
+    weight 1
   ]
   edge
   [
     source 3536
     target 3282
+    weight 1
   ]
   edge
   [
     source 3537
     target 3282
+    weight 1
   ]
   edge
   [
     source 3538
     target 3282
+    weight 1
   ]
   edge
   [
     source 3539
     target 3282
+    weight 1
   ]
   edge
   [
     source 3540
     target 3282
+    weight 1
   ]
   edge
   [
     source 3541
     target 3282
+    weight 1
   ]
   edge
   [
     source 3542
     target 3282
+    weight 1
   ]
   edge
   [
     source 3543
     target 3282
+    weight 1
   ]
   edge
   [
     source 3544
     target 3282
+    weight 1
   ]
   edge
   [
     source 3545
     target 3282
+    weight 1
   ]
   edge
   [
     source 3546
     target 3282
+    weight 1
   ]
   edge
   [
     source 3547
     target 3282
+    weight 1
   ]
   edge
   [
     source 3548
     target 3282
+    weight 1
   ]
   edge
   [
     source 3549
     target 3282
+    weight 1
   ]
   edge
   [
     source 3550
     target 3282
+    weight 1
   ]
   edge
   [
     source 3551
     target 3282
+    weight 1
   ]
   edge
   [
     source 3552
     target 3282
+    weight 1
   ]
   edge
   [
     source 3553
     target 3282
+    weight 1
   ]
   edge
   [
     source 3554
     target 3282
+    weight 1
   ]
   edge
   [
     source 3555
     target 3282
+    weight 1
   ]
   edge
   [
     source 3556
     target 3282
+    weight 1
   ]
   edge
   [
     source 3557
     target 3282
+    weight 1
   ]
   edge
   [
     source 3558
     target 3282
+    weight 1
   ]
   edge
   [
     source 3559
     target 3282
+    weight 1
   ]
   edge
   [
     source 3560
     target 3282
+    weight 1
   ]
   edge
   [
     source 3561
     target 3282
+    weight 1
   ]
   edge
   [
     source 3562
     target 3282
+    weight 1
   ]
   edge
   [
     source 3563
     target 3282
+    weight 1
   ]
   edge
   [
     source 3564
     target 3282
+    weight 1
   ]
   edge
   [
     source 3565
     target 3282
+    weight 1
   ]
   edge
   [
     source 3566
     target 3282
+    weight 1
   ]
   edge
   [
     source 3567
     target 3282
+    weight 1
   ]
   edge
   [
     source 3568
     target 3282
+    weight 1
   ]
   edge
   [
     source 3569
     target 3282
+    weight 1
   ]
   edge
   [
     source 3570
     target 3282
+    weight 1
   ]
   edge
   [
     source 3571
     target 3282
+    weight 1
   ]
   edge
   [
     source 3572
     target 3282
+    weight 1
   ]
   edge
   [
     source 3573
     target 3282
+    weight 1
   ]
   edge
   [
     source 3574
     target 3282
+    weight 1
   ]
   edge
   [
     source 3575
     target 3282
+    weight 1
   ]
   edge
   [
     source 3576
     target 3282
+    weight 1
   ]
   edge
   [
     source 3577
     target 3282
+    weight 1
   ]
   edge
   [
     source 3578
     target 3282
+    weight 1
   ]
   edge
   [
     source 3579
     target 3282
+    weight 1
   ]
   edge
   [
     source 3580
     target 3282
+    weight 1
   ]
   edge
   [
     source 3581
     target 3282
+    weight 1
   ]
   edge
   [
     source 3582
     target 3282
+    weight 1
   ]
   edge
   [
     source 3583
     target 3282
+    weight 1
   ]
   edge
   [
     source 3584
     target 3282
+    weight 1
   ]
   edge
   [
     source 3585
     target 3282
+    weight 1
   ]
   edge
   [
     source 3586
     target 3282
+    weight 1
   ]
   edge
   [
     source 3587
     target 3282
+    weight 1
   ]
   edge
   [
     source 3588
     target 3282
+    weight 1
   ]
   edge
   [
     source 3589
     target 3282
+    weight 1
   ]
   edge
   [
     source 3590
     target 3282
+    weight 1
   ]
   edge
   [
     source 3591
     target 3282
+    weight 1
   ]
   edge
   [
     source 3592
     target 3282
+    weight 1
   ]
   edge
   [
     source 3593
     target 3282
+    weight 1
   ]
   edge
   [
     source 3594
     target 3282
+    weight 1
   ]
   edge
   [
     source 3595
     target 3282
+    weight 1
   ]
   edge
   [
     source 3596
     target 3282
+    weight 1
   ]
   edge
   [
     source 3597
     target 3282
+    weight 1
   ]
   edge
   [
     source 3598
     target 3282
+    weight 1
   ]
   edge
   [
     source 3599
     target 3282
+    weight 1
   ]
   edge
   [
     source 3600
     target 3282
+    weight 1
   ]
   edge
   [
     source 3601
     target 3282
+    weight 1
   ]
   edge
   [
     source 3602
     target 3282
+    weight 1
   ]
   edge
   [
     source 3603
     target 3282
+    weight 1
   ]
   edge
   [
     source 3604
     target 3282
+    weight 1
   ]
   edge
   [
     source 3605
     target 3282
+    weight 1
   ]
   edge
   [
     source 3606
     target 3282
+    weight 1
   ]
   edge
   [
     source 3607
     target 3282
+    weight 1
   ]
   edge
   [
     source 3608
     target 3282
+    weight 1
   ]
   edge
   [
     source 3609
     target 3282
+    weight 1
   ]
   edge
   [
     source 3610
     target 3282
+    weight 1
   ]
   edge
   [
     source 3611
     target 3282
+    weight 1
   ]
   edge
   [
     source 3612
     target 3282
+    weight 1
   ]
   edge
   [
     source 3613
     target 3282
+    weight 1
   ]
   edge
   [
     source 3614
     target 3282
+    weight 1
   ]
   edge
   [
     source 3615
     target 3282
+    weight 1
   ]
   edge
   [
     source 3616
     target 3282
+    weight 1
   ]
   edge
   [
     source 3617
     target 3282
+    weight 1
   ]
   edge
   [
     source 3618
     target 3282
+    weight 1
   ]
   edge
   [
     source 3619
     target 3282
+    weight 1
   ]
   edge
   [
     source 3620
     target 3282
+    weight 1
   ]
   edge
   [
     source 3621
     target 3282
+    weight 1
   ]
   edge
   [
     source 3622
     target 3282
+    weight 1
   ]
   edge
   [
     source 3623
     target 3282
+    weight 1
   ]
   edge
   [
     source 4299
     target 3282
+    weight 1
   ]
   edge
   [
     source 4403
     target 3282
+    weight 1
   ]
   edge
   [
     source 4423
     target 3401
+    weight 1
   ]
   edge
   [
     source 3705
     target 3429
+    weight 1
   ]
   edge
   [
     source 4409
     target 3429
+    weight 1
   ]
   edge
   [
     source 3883
     target 3475
+    weight 1
   ]
   edge
   [
     source 3625
     target 3624
+    weight 1
   ]
   edge
   [
     source 3627
     target 3626
+    weight 1
   ]
   edge
   [
     source 3628
     target 3626
+    weight 1
   ]
   edge
   [
     source 3629
     target 3626
+    weight 1
   ]
   edge
   [
     source 3630
     target 3626
+    weight 1
   ]
   edge
   [
     source 3631
     target 3626
+    weight 1
   ]
   edge
   [
     source 3632
     target 3626
+    weight 1
   ]
   edge
   [
     source 3962
     target 3633
+    weight 1
   ]
   edge
   [
     source 3636
     target 3635
+    weight 1
   ]
   edge
   [
     source 3637
     target 3635
+    weight 1
   ]
   edge
   [
     source 3638
     target 3635
+    weight 1
   ]
   edge
   [
     source 3653
     target 3636
+    weight 1
   ]
   edge
   [
     source 3668
     target 3636
+    weight 1
   ]
   edge
   [
     source 3978
     target 3636
+    weight 1
   ]
   edge
   [
     source 4005
     target 3636
+    weight 1
   ]
   edge
   [
     source 4021
     target 3636
+    weight 1
   ]
   edge
   [
     source 4031
     target 3636
+    weight 1
   ]
   edge
   [
     source 4046
     target 3636
+    weight 1
   ]
   edge
   [
     source 4054
     target 3636
+    weight 1
   ]
   edge
   [
     source 4075
     target 3636
+    weight 1
   ]
   edge
   [
     source 4129
     target 3636
+    weight 1
   ]
   edge
   [
     source 4412
     target 3636
+    weight 1
   ]
   edge
   [
     source 4460
     target 3636
+    weight 1
   ]
   edge
   [
     source 3640
     target 3639
+    weight 1
   ]
   edge
   [
     source 3642
     target 3641
+    weight 1
   ]
   edge
   [
     source 3643
     target 3641
+    weight 1
   ]
   edge
   [
     source 3644
     target 3641
+    weight 1
   ]
   edge
   [
     source 3645
     target 3641
+    weight 1
   ]
   edge
   [
     source 3646
     target 3641
+    weight 1
   ]
   edge
   [
     source 3647
     target 3641
+    weight 1
   ]
   edge
   [
     source 3648
     target 3641
+    weight 1
   ]
   edge
   [
     source 3649
     target 3641
+    weight 1
   ]
   edge
   [
     source 3650
     target 3641
+    weight 1
   ]
   edge
   [
     source 3651
     target 3641
+    weight 1
   ]
   edge
   [
     source 3652
     target 3641
+    weight 1
   ]
   edge
   [
     source 4013
     target 3641
+    weight 1
   ]
   edge
   [
     source 3655
     target 3654
+    weight 1
   ]
   edge
   [
     source 3656
     target 3654
+    weight 1
   ]
   edge
   [
     source 3657
     target 3654
+    weight 1
   ]
   edge
   [
     source 3658
     target 3654
+    weight 1
   ]
   edge
   [
     source 3659
     target 3654
+    weight 1
   ]
   edge
   [
     source 3660
     target 3654
+    weight 1
   ]
   edge
   [
     source 3661
     target 3654
+    weight 1
   ]
   edge
   [
     source 3662
     target 3654
+    weight 1
   ]
   edge
   [
     source 3663
     target 3654
+    weight 1
   ]
   edge
   [
     source 3664
     target 3654
+    weight 1
   ]
   edge
   [
     source 3665
     target 3654
+    weight 1
   ]
   edge
   [
     source 3666
     target 3654
+    weight 1
   ]
   edge
   [
     source 3789
     target 3654
+    weight 1
   ]
   edge
   [
     source 3669
     target 3668
+    weight 1
   ]
   edge
   [
     source 3670
     target 3668
+    weight 1
   ]
   edge
   [
     source 3671
     target 3668
+    weight 1
   ]
   edge
   [
     source 3672
     target 3668
+    weight 1
   ]
   edge
   [
     source 3673
     target 3668
+    weight 1
   ]
   edge
   [
     source 3675
     target 3674
+    weight 1
   ]
   edge
   [
     source 3676
     target 3674
+    weight 1
   ]
   edge
   [
     source 3677
     target 3674
+    weight 1
   ]
   edge
   [
     source 3805
     target 3676
+    weight 1
   ]
   edge
   [
     source 3679
     target 3678
+    weight 1
   ]
   edge
   [
     source 3680
     target 3678
+    weight 1
   ]
   edge
   [
     source 3681
     target 3678
+    weight 1
   ]
   edge
   [
     source 3682
     target 3678
+    weight 1
   ]
   edge
   [
     source 3683
     target 3678
+    weight 1
   ]
   edge
   [
     source 3684
     target 3678
+    weight 1
   ]
   edge
   [
     source 3685
     target 3678
+    weight 1
   ]
   edge
   [
     source 3686
     target 3678
+    weight 1
   ]
   edge
   [
     source 3687
     target 3678
+    weight 1
   ]
   edge
   [
     source 3688
     target 3678
+    weight 1
   ]
   edge
   [
     source 3689
     target 3678
+    weight 1
   ]
   edge
   [
     source 3690
     target 3678
+    weight 1
   ]
   edge
   [
     source 3691
     target 3678
+    weight 1
   ]
   edge
   [
     source 3692
     target 3678
+    weight 1
   ]
   edge
   [
     source 3693
     target 3678
+    weight 1
   ]
   edge
   [
     source 3694
     target 3678
+    weight 1
   ]
   edge
   [
     source 3799
     target 3680
+    weight 1
   ]
   edge
   [
     source 3870
     target 3680
+    weight 1
   ]
   edge
   [
     source 3810
     target 3685
+    weight 1
   ]
   edge
   [
     source 3696
     target 3695
+    weight 1
   ]
   edge
   [
     source 3697
     target 3695
+    weight 1
   ]
   edge
   [
     source 3698
     target 3695
+    weight 1
   ]
   edge
   [
     source 3699
     target 3695
+    weight 1
   ]
   edge
   [
     source 3700
     target 3695
+    weight 1
   ]
   edge
   [
     source 3701
     target 3695
+    weight 1
   ]
   edge
   [
     source 3702
     target 3695
+    weight 1
   ]
   edge
   [
     source 3703
     target 3695
+    weight 1
   ]
   edge
   [
     source 3704
     target 3695
+    weight 1
   ]
   edge
   [
     source 3706
     target 3705
+    weight 1
   ]
   edge
   [
     source 3707
     target 3705
+    weight 1
   ]
   edge
   [
     source 3708
     target 3705
+    weight 1
   ]
   edge
   [
     source 3709
     target 3705
+    weight 1
   ]
   edge
   [
     source 3710
     target 3705
+    weight 1
   ]
   edge
   [
     source 3711
     target 3705
+    weight 1
   ]
   edge
   [
     source 3712
     target 3705
+    weight 1
   ]
   edge
   [
     source 3713
     target 3705
+    weight 1
   ]
   edge
   [
     source 3714
     target 3705
+    weight 1
   ]
   edge
   [
     source 3715
     target 3705
+    weight 1
   ]
   edge
   [
     source 3716
     target 3705
+    weight 1
   ]
   edge
   [
     source 3717
     target 3705
+    weight 1
   ]
   edge
   [
     source 3718
     target 3705
+    weight 1
   ]
   edge
   [
     source 3719
     target 3705
+    weight 1
   ]
   edge
   [
     source 3720
     target 3705
+    weight 1
   ]
   edge
   [
     source 3721
     target 3705
+    weight 1
   ]
   edge
   [
     source 3722
     target 3705
+    weight 1
   ]
   edge
   [
     source 3723
     target 3705
+    weight 1
   ]
   edge
   [
     source 3724
     target 3705
+    weight 1
   ]
   edge
   [
     source 3725
     target 3705
+    weight 1
   ]
   edge
   [
     source 3726
     target 3705
+    weight 1
   ]
   edge
   [
     source 3727
     target 3705
+    weight 1
   ]
   edge
   [
     source 3728
     target 3705
+    weight 1
   ]
   edge
   [
     source 3729
     target 3705
+    weight 1
   ]
   edge
   [
     source 3730
     target 3705
+    weight 1
   ]
   edge
   [
     source 3731
     target 3705
+    weight 1
   ]
   edge
   [
     source 3732
     target 3705
+    weight 1
   ]
   edge
   [
     source 3733
     target 3705
+    weight 1
   ]
   edge
   [
     source 3734
     target 3705
+    weight 1
   ]
   edge
   [
     source 3735
     target 3705
+    weight 1
   ]
   edge
   [
     source 3736
     target 3705
+    weight 1
   ]
   edge
   [
     source 3737
     target 3705
+    weight 1
   ]
   edge
   [
     source 3738
     target 3705
+    weight 1
   ]
   edge
   [
     source 3739
     target 3705
+    weight 1
   ]
   edge
   [
     source 3740
     target 3705
+    weight 1
   ]
   edge
   [
     source 3741
     target 3705
+    weight 1
   ]
   edge
   [
     source 3742
     target 3705
+    weight 1
   ]
   edge
   [
     source 3743
     target 3705
+    weight 1
   ]
   edge
   [
     source 3744
     target 3705
+    weight 1
   ]
   edge
   [
     source 3745
     target 3705
+    weight 1
   ]
   edge
   [
     source 3746
     target 3705
+    weight 1
   ]
   edge
   [
     source 3747
     target 3705
+    weight 1
   ]
   edge
   [
     source 3748
     target 3705
+    weight 1
   ]
   edge
   [
     source 3749
     target 3705
+    weight 1
   ]
   edge
   [
     source 3750
     target 3705
+    weight 1
   ]
   edge
   [
     source 3751
     target 3705
+    weight 1
   ]
   edge
   [
     source 3752
     target 3705
+    weight 1
   ]
   edge
   [
     source 3753
     target 3705
+    weight 1
   ]
   edge
   [
     source 3754
     target 3705
+    weight 1
   ]
   edge
   [
     source 3755
     target 3705
+    weight 1
   ]
   edge
   [
     source 3756
     target 3705
+    weight 1
   ]
   edge
   [
     source 3757
     target 3705
+    weight 1
   ]
   edge
   [
     source 3758
     target 3705
+    weight 1
   ]
   edge
   [
     source 3759
     target 3705
+    weight 1
   ]
   edge
   [
     source 3760
     target 3705
+    weight 1
   ]
   edge
   [
     source 3761
     target 3705
+    weight 1
   ]
   edge
   [
     source 3762
     target 3705
+    weight 1
   ]
   edge
   [
     source 3763
     target 3705
+    weight 1
   ]
   edge
   [
     source 3764
     target 3705
+    weight 1
   ]
   edge
   [
     source 3765
     target 3705
+    weight 1
   ]
   edge
   [
     source 3766
     target 3705
+    weight 1
   ]
   edge
   [
     source 3767
     target 3705
+    weight 1
   ]
   edge
   [
     source 3768
     target 3705
+    weight 1
   ]
   edge
   [
     source 3769
     target 3705
+    weight 1
   ]
   edge
   [
     source 3770
     target 3705
+    weight 1
   ]
   edge
   [
     source 3771
     target 3705
+    weight 1
   ]
   edge
   [
     source 3772
     target 3705
+    weight 1
   ]
   edge
   [
     source 3773
     target 3705
+    weight 1
   ]
   edge
   [
     source 3774
     target 3705
+    weight 1
   ]
   edge
   [
     source 3775
     target 3705
+    weight 1
   ]
   edge
   [
     source 3776
     target 3705
+    weight 1
   ]
   edge
   [
     source 3777
     target 3705
+    weight 1
   ]
   edge
   [
     source 4360
     target 3705
+    weight 1
   ]
   edge
   [
     source 3883
     target 3712
+    weight 1
   ]
   edge
   [
     source 4007
     target 3723
+    weight 1
   ]
   edge
   [
     source 3883
     target 3747
+    weight 1
   ]
   edge
   [
     source 3779
     target 3778
+    weight 1
   ]
   edge
   [
     source 3780
     target 3778
+    weight 1
   ]
   edge
   [
     source 3781
     target 3778
+    weight 1
   ]
   edge
   [
     source 3782
     target 3778
+    weight 1
   ]
   edge
   [
     source 3783
     target 3778
+    weight 1
   ]
   edge
   [
     source 3784
     target 3778
+    weight 1
   ]
   edge
   [
     source 4496
     target 3778
+    weight 1
   ]
   edge
   [
     source 3786
     target 3785
+    weight 1
   ]
   edge
   [
     source 3787
     target 3785
+    weight 1
   ]
   edge
   [
     source 3788
     target 3785
+    weight 1
   ]
   edge
   [
     source 3790
     target 3789
+    weight 1
   ]
   edge
   [
     source 3791
     target 3789
+    weight 1
   ]
   edge
   [
     source 3792
     target 3789
+    weight 1
   ]
   edge
   [
     source 3793
     target 3789
+    weight 1
   ]
   edge
   [
     source 3794
     target 3789
+    weight 1
   ]
   edge
   [
     source 3795
     target 3789
+    weight 1
   ]
   edge
   [
     source 3796
     target 3789
+    weight 1
   ]
   edge
   [
     source 3797
     target 3789
+    weight 1
   ]
   edge
   [
     source 3800
     target 3799
+    weight 1
   ]
   edge
   [
     source 3801
     target 3799
+    weight 1
   ]
   edge
   [
     source 3802
     target 3799
+    weight 1
   ]
   edge
   [
     source 3803
     target 3799
+    weight 1
   ]
   edge
   [
     source 4205
     target 3801
+    weight 1
   ]
   edge
   [
     source 3806
     target 3805
+    weight 1
   ]
   edge
   [
     source 3807
     target 3805
+    weight 1
   ]
   edge
   [
     source 3808
     target 3805
+    weight 1
   ]
   edge
   [
     source 3809
     target 3805
+    weight 1
   ]
   edge
   [
     source 3978
     target 3807
+    weight 1
   ]
   edge
   [
     source 4193
     target 3808
+    weight 1
   ]
   edge
   [
     source 3811
     target 3810
+    weight 1
   ]
   edge
   [
     source 3812
     target 3810
+    weight 1
   ]
   edge
   [
     source 3813
     target 3810
+    weight 1
   ]
   edge
   [
     source 3814
     target 3810
+    weight 1
   ]
   edge
   [
     source 3815
     target 3810
+    weight 1
   ]
   edge
   [
     source 3816
     target 3810
+    weight 1
   ]
   edge
   [
     source 3817
     target 3810
+    weight 1
   ]
   edge
   [
     source 3818
     target 3810
+    weight 1
   ]
   edge
   [
     source 3819
     target 3810
+    weight 1
   ]
   edge
   [
     source 3820
     target 3810
+    weight 1
   ]
   edge
   [
     source 3821
     target 3810
+    weight 1
   ]
   edge
   [
     source 3822
     target 3810
+    weight 1
   ]
   edge
   [
     source 3823
     target 3810
+    weight 1
   ]
   edge
   [
     source 3824
     target 3810
+    weight 1
   ]
   edge
   [
     source 3825
     target 3810
+    weight 1
   ]
   edge
   [
     source 3826
     target 3810
+    weight 1
   ]
   edge
   [
     source 3827
     target 3810
+    weight 1
   ]
   edge
   [
     source 3828
     target 3810
+    weight 1
   ]
   edge
   [
     source 3829
     target 3810
+    weight 1
   ]
   edge
   [
     source 3830
     target 3810
+    weight 1
   ]
   edge
   [
     source 3831
     target 3810
+    weight 1
   ]
   edge
   [
     source 3832
     target 3810
+    weight 1
   ]
   edge
   [
     source 3833
     target 3810
+    weight 1
   ]
   edge
   [
     source 3834
     target 3810
+    weight 1
   ]
   edge
   [
     source 3835
     target 3810
+    weight 1
   ]
   edge
   [
     source 3836
     target 3810
+    weight 1
   ]
   edge
   [
     source 3837
     target 3810
+    weight 1
   ]
   edge
   [
     source 3838
     target 3810
+    weight 1
   ]
   edge
   [
     source 3839
     target 3810
+    weight 1
   ]
   edge
   [
     source 3840
     target 3810
+    weight 1
   ]
   edge
   [
     source 3841
     target 3810
+    weight 1
   ]
   edge
   [
     source 3842
     target 3810
+    weight 1
   ]
   edge
   [
     source 3843
     target 3810
+    weight 1
   ]
   edge
   [
     source 3844
     target 3810
+    weight 1
   ]
   edge
   [
     source 3845
     target 3810
+    weight 1
   ]
   edge
   [
     source 3846
     target 3810
+    weight 1
   ]
   edge
   [
     source 4477
     target 3837
+    weight 1
   ]
   edge
   [
     source 4396
     target 3843
+    weight 1
   ]
   edge
   [
     source 4397
     target 3843
+    weight 1
   ]
   edge
   [
     source 3848
     target 3847
+    weight 1
   ]
   edge
   [
     source 3849
     target 3847
+    weight 1
   ]
   edge
   [
     source 3850
     target 3847
+    weight 1
   ]
   edge
   [
     source 3851
     target 3847
+    weight 1
   ]
   edge
   [
     source 3852
     target 3847
+    weight 1
   ]
   edge
   [
     source 4014
     target 3850
+    weight 1
   ]
   edge
   [
     source 4031
     target 3850
+    weight 1
   ]
   edge
   [
     source 4045
     target 3850
+    weight 1
   ]
   edge
   [
     source 3854
     target 3853
+    weight 1
   ]
   edge
   [
     source 3855
     target 3853
+    weight 1
   ]
   edge
   [
     source 3856
     target 3853
+    weight 1
   ]
   edge
   [
     source 3883
     target 3854
+    weight 1
   ]
   edge
   [
     source 3858
     target 3857
+    weight 1
   ]
   edge
   [
     source 3859
     target 3857
+    weight 1
   ]
   edge
   [
     source 3860
     target 3857
+    weight 1
   ]
   edge
   [
     source 3861
     target 3857
+    weight 1
   ]
   edge
   [
     source 3862
     target 3857
+    weight 1
   ]
   edge
   [
     source 3863
     target 3857
+    weight 1
   ]
   edge
   [
     source 3870
     target 3858
+    weight 1
   ]
   edge
   [
     source 3978
     target 3858
+    weight 1
   ]
   edge
   [
     source 4015
     target 3858
+    weight 1
   ]
   edge
   [
     source 4042
     target 3858
+    weight 1
   ]
   edge
   [
     source 4054
     target 3858
+    weight 1
   ]
   edge
   [
     source 4070
     target 3858
+    weight 1
   ]
   edge
   [
     source 4081
     target 3858
+    weight 1
   ]
   edge
   [
     source 4135
     target 3858
+    weight 1
   ]
   edge
   [
     source 4179
     target 3858
+    weight 1
   ]
   edge
   [
     source 4255
     target 3858
+    weight 1
   ]
   edge
   [
     source 4298
     target 3858
+    weight 1
   ]
   edge
   [
     source 3865
     target 3864
+    weight 1
   ]
   edge
   [
     source 3866
     target 3864
+    weight 1
   ]
   edge
   [
     source 3867
     target 3864
+    weight 1
   ]
   edge
   [
     source 3868
     target 3864
+    weight 1
   ]
   edge
   [
     source 3869
     target 3864
+    weight 1
   ]
   edge
   [
     source 3937
     target 3864
+    weight 1
   ]
   edge
   [
     source 3872
     target 3871
+    weight 1
   ]
   edge
   [
     source 3873
     target 3871
+    weight 1
   ]
   edge
   [
     source 3874
     target 3871
+    weight 1
   ]
   edge
   [
     source 3875
     target 3871
+    weight 1
   ]
   edge
   [
     source 3876
     target 3871
+    weight 1
   ]
   edge
   [
     source 3877
     target 3871
+    weight 1
   ]
   edge
   [
     source 3878
     target 3871
+    weight 1
   ]
   edge
   [
     source 3879
     target 3871
+    weight 1
   ]
   edge
   [
     source 3880
     target 3871
+    weight 1
   ]
   edge
   [
     source 3881
     target 3871
+    weight 1
   ]
   edge
   [
     source 4027
     target 3873
+    weight 1
   ]
   edge
   [
     source 4028
     target 3873
+    weight 1
   ]
   edge
   [
     source 4029
     target 3873
+    weight 1
   ]
   edge
   [
     source 4365
     target 3878
+    weight 1
   ]
   edge
   [
     source 3884
     target 3883
+    weight 1
   ]
   edge
   [
     source 3885
     target 3883
+    weight 1
   ]
   edge
   [
     source 3886
     target 3883
+    weight 1
   ]
   edge
   [
     source 3887
     target 3883
+    weight 1
   ]
   edge
   [
     source 3888
     target 3883
+    weight 1
   ]
   edge
   [
     source 3889
     target 3883
+    weight 1
   ]
   edge
   [
     source 3890
     target 3883
+    weight 1
   ]
   edge
   [
     source 3891
     target 3883
+    weight 1
   ]
   edge
   [
     source 3892
     target 3883
+    weight 1
   ]
   edge
   [
     source 3893
     target 3883
+    weight 1
   ]
   edge
   [
     source 3894
     target 3883
+    weight 1
   ]
   edge
   [
     source 3895
     target 3883
+    weight 1
   ]
   edge
   [
     source 3896
     target 3883
+    weight 1
   ]
   edge
   [
     source 3897
     target 3883
+    weight 1
   ]
   edge
   [
     source 3898
     target 3883
+    weight 1
   ]
   edge
   [
     source 3899
     target 3883
+    weight 1
   ]
   edge
   [
     source 3900
     target 3883
+    weight 1
   ]
   edge
   [
     source 3901
     target 3883
+    weight 1
   ]
   edge
   [
     source 3902
     target 3883
+    weight 1
   ]
   edge
   [
     source 3903
     target 3883
+    weight 1
   ]
   edge
   [
     source 3904
     target 3883
+    weight 1
   ]
   edge
   [
     source 3905
     target 3883
+    weight 1
   ]
   edge
   [
     source 3906
     target 3883
+    weight 1
   ]
   edge
   [
     source 3907
     target 3883
+    weight 1
   ]
   edge
   [
     source 3908
     target 3883
+    weight 1
   ]
   edge
   [
     source 3909
     target 3883
+    weight 1
   ]
   edge
   [
     source 3910
     target 3883
+    weight 1
   ]
   edge
   [
     source 3911
     target 3883
+    weight 1
   ]
   edge
   [
     source 3912
     target 3883
+    weight 1
   ]
   edge
   [
     source 3913
     target 3883
+    weight 1
   ]
   edge
   [
     source 3914
     target 3883
+    weight 1
   ]
   edge
   [
     source 3915
     target 3883
+    weight 1
   ]
   edge
   [
     source 3916
     target 3883
+    weight 1
   ]
   edge
   [
     source 3917
     target 3883
+    weight 1
   ]
   edge
   [
     source 3918
     target 3883
+    weight 1
   ]
   edge
   [
     source 3919
     target 3883
+    weight 1
   ]
   edge
   [
     source 3920
     target 3883
+    weight 1
   ]
   edge
   [
     source 3921
     target 3883
+    weight 1
   ]
   edge
   [
     source 3922
     target 3883
+    weight 1
   ]
   edge
   [
     source 3923
     target 3883
+    weight 1
   ]
   edge
   [
     source 3924
     target 3883
+    weight 1
   ]
   edge
   [
     source 3925
     target 3883
+    weight 1
   ]
   edge
   [
     source 3926
     target 3883
+    weight 1
   ]
   edge
   [
     source 3927
     target 3883
+    weight 1
   ]
   edge
   [
     source 3928
     target 3883
+    weight 1
   ]
   edge
   [
     source 3929
     target 3883
+    weight 1
   ]
   edge
   [
     source 3930
     target 3883
+    weight 1
   ]
   edge
   [
     source 3931
     target 3883
+    weight 1
   ]
   edge
   [
     source 3932
     target 3883
+    weight 1
   ]
   edge
   [
     source 3933
     target 3883
+    weight 1
   ]
   edge
   [
     source 4139
     target 3886
+    weight 1
   ]
   edge
   [
     source 4471
     target 3886
+    weight 1
   ]
   edge
   [
     source 4409
     target 3902
+    weight 1
   ]
   edge
   [
     source 3981
     target 3910
+    weight 1
   ]
   edge
   [
     source 4259
     target 3925
+    weight 1
   ]
   edge
   [
     source 3936
     target 3935
+    weight 1
   ]
   edge
   [
     source 4300
     target 3936
+    weight 1
   ]
   edge
   [
     source 4301
     target 3936
+    weight 1
   ]
   edge
   [
     source 4302
     target 3936
+    weight 1
   ]
   edge
   [
     source 4303
     target 3936
+    weight 1
   ]
   edge
   [
     source 4304
     target 3936
+    weight 1
   ]
   edge
   [
     source 4305
     target 3936
+    weight 1
   ]
   edge
   [
     source 4306
     target 3936
+    weight 1
   ]
   edge
   [
     source 4307
     target 3936
+    weight 1
   ]
   edge
   [
     source 4308
     target 3936
+    weight 1
   ]
   edge
   [
     source 4309
     target 3936
+    weight 1
   ]
   edge
   [
     source 4310
     target 3936
+    weight 1
   ]
   edge
   [
     source 4311
     target 3936
+    weight 1
   ]
   edge
   [
     source 4312
     target 3936
+    weight 1
   ]
   edge
   [
     source 4313
     target 3936
+    weight 1
   ]
   edge
   [
     source 4314
     target 3936
+    weight 1
   ]
   edge
   [
     source 4315
     target 3936
+    weight 1
   ]
   edge
   [
     source 4316
     target 3936
+    weight 1
   ]
   edge
   [
     source 4317
     target 3936
+    weight 1
   ]
   edge
   [
     source 4318
     target 3936
+    weight 1
   ]
   edge
   [
     source 4319
     target 3936
+    weight 1
   ]
   edge
   [
     source 4320
     target 3936
+    weight 1
   ]
   edge
   [
     source 4321
     target 3936
+    weight 1
   ]
   edge
   [
     source 4322
     target 3936
+    weight 1
   ]
   edge
   [
     source 4323
     target 3936
+    weight 1
   ]
   edge
   [
     source 4324
     target 3936
+    weight 1
   ]
   edge
   [
     source 4325
     target 3936
+    weight 1
   ]
   edge
   [
     source 4326
     target 3936
+    weight 1
   ]
   edge
   [
     source 4327
     target 3936
+    weight 1
   ]
   edge
   [
     source 4328
     target 3936
+    weight 1
   ]
   edge
   [
     source 4329
     target 3936
+    weight 1
   ]
   edge
   [
     source 4330
     target 3936
+    weight 1
   ]
   edge
   [
     source 4331
     target 3936
+    weight 1
   ]
   edge
   [
     source 4332
     target 3936
+    weight 1
   ]
   edge
   [
     source 4333
     target 3936
+    weight 1
   ]
   edge
   [
     source 4334
     target 3936
+    weight 1
   ]
   edge
   [
     source 4335
     target 3936
+    weight 1
   ]
   edge
   [
     source 4336
     target 3936
+    weight 1
   ]
   edge
   [
     source 4337
     target 3936
+    weight 1
   ]
   edge
   [
     source 4338
     target 3936
+    weight 1
   ]
   edge
   [
     source 4339
     target 3936
+    weight 1
   ]
   edge
   [
     source 4340
     target 3936
+    weight 1
   ]
   edge
   [
     source 4341
     target 3936
+    weight 1
   ]
   edge
   [
     source 4342
     target 3936
+    weight 1
   ]
   edge
   [
     source 4343
     target 3936
+    weight 1
   ]
   edge
   [
     source 4344
     target 3936
+    weight 1
   ]
   edge
   [
     source 4345
     target 3936
+    weight 1
   ]
   edge
   [
     source 4346
     target 3936
+    weight 1
   ]
   edge
   [
     source 4347
     target 3936
+    weight 1
   ]
   edge
   [
     source 4348
     target 3936
+    weight 1
   ]
   edge
   [
     source 4349
     target 3936
+    weight 1
   ]
   edge
   [
     source 4350
     target 3936
+    weight 1
   ]
   edge
   [
     source 4351
     target 3936
+    weight 1
   ]
   edge
   [
     source 3939
     target 3938
+    weight 1
   ]
   edge
   [
     source 3940
     target 3938
+    weight 1
   ]
   edge
   [
     source 3941
     target 3938
+    weight 1
   ]
   edge
   [
     source 3942
     target 3938
+    weight 1
   ]
   edge
   [
     source 3943
     target 3938
+    weight 1
   ]
   edge
   [
     source 3944
     target 3938
+    weight 1
   ]
   edge
   [
     source 3945
     target 3938
+    weight 1
   ]
   edge
   [
     source 3952
     target 3939
+    weight 1
   ]
   edge
   [
     source 3953
     target 3939
+    weight 1
   ]
   edge
   [
     source 3954
     target 3939
+    weight 1
   ]
   edge
   [
     source 3955
     target 3939
+    weight 1
   ]
   edge
   [
     source 3956
     target 3939
+    weight 1
   ]
   edge
   [
     source 3957
     target 3939
+    weight 1
   ]
   edge
   [
     source 3958
     target 3939
+    weight 1
   ]
   edge
   [
     source 3959
     target 3939
+    weight 1
   ]
   edge
   [
     source 3960
     target 3939
+    weight 1
   ]
   edge
   [
     source 3961
     target 3939
+    weight 1
   ]
   edge
   [
     source 4047
     target 3941
+    weight 1
   ]
   edge
   [
     source 3948
     target 3947
+    weight 1
   ]
   edge
   [
     source 3949
     target 3947
+    weight 1
   ]
   edge
   [
     source 3950
     target 3947
+    weight 1
   ]
   edge
   [
     source 3951
     target 3947
+    weight 1
   ]
   edge
   [
     source 3964
     target 3963
+    weight 1
   ]
   edge
   [
     source 3965
     target 3963
+    weight 1
   ]
   edge
   [
     source 4034
     target 3973
+    weight 1
   ]
   edge
   [
     source 4035
     target 3973
+    weight 1
   ]
   edge
   [
     source 4036
     target 3973
+    weight 1
   ]
   edge
   [
     source 4037
     target 3973
+    weight 1
   ]
   edge
   [
     source 4038
     target 3973
+    weight 1
   ]
   edge
   [
     source 4039
     target 3973
+    weight 1
   ]
   edge
   [
     source 4040
     target 3973
+    weight 1
   ]
   edge
   [
     source 4041
     target 3973
+    weight 1
   ]
   edge
   [
     source 3979
     target 3978
+    weight 1
   ]
   edge
   [
     source 3980
     target 3978
+    weight 1
   ]
   edge
   [
     source 3982
     target 3981
+    weight 1
   ]
   edge
   [
     source 3983
     target 3981
+    weight 1
   ]
   edge
   [
     source 3984
     target 3981
+    weight 1
   ]
   edge
   [
     source 3985
     target 3981
+    weight 1
   ]
   edge
   [
     source 3986
     target 3981
+    weight 1
   ]
   edge
   [
     source 3987
     target 3981
+    weight 1
   ]
   edge
   [
     source 3988
     target 3981
+    weight 1
   ]
   edge
   [
     source 3989
     target 3981
+    weight 1
   ]
   edge
   [
     source 3990
     target 3981
+    weight 1
   ]
   edge
   [
     source 3991
     target 3981
+    weight 1
   ]
   edge
   [
     source 3992
     target 3981
+    weight 1
   ]
   edge
   [
     source 3993
     target 3981
+    weight 1
   ]
   edge
   [
     source 3994
     target 3981
+    weight 1
   ]
   edge
   [
     source 3995
     target 3981
+    weight 1
   ]
   edge
   [
     source 3996
     target 3981
+    weight 1
   ]
   edge
   [
     source 3997
     target 3981
+    weight 1
   ]
   edge
   [
     source 3998
     target 3981
+    weight 1
   ]
   edge
   [
     source 3999
     target 3981
+    weight 1
   ]
   edge
   [
     source 4000
     target 3981
+    weight 1
   ]
   edge
   [
     source 4001
     target 3981
+    weight 1
   ]
   edge
   [
     source 4002
     target 3981
+    weight 1
   ]
   edge
   [
     source 4003
     target 3981
+    weight 1
   ]
   edge
   [
     source 4004
     target 3981
+    weight 1
   ]
   edge
   [
     source 4008
     target 4007
+    weight 1
   ]
   edge
   [
     source 4009
     target 4007
+    weight 1
   ]
   edge
   [
     source 4010
     target 4007
+    weight 1
   ]
   edge
   [
     source 4017
     target 4016
+    weight 1
   ]
   edge
   [
     source 4018
     target 4016
+    weight 1
   ]
   edge
   [
     source 4019
     target 4016
+    weight 1
   ]
   edge
   [
     source 4023
     target 4022
+    weight 1
   ]
   edge
   [
     source 4365
     target 4023
+    weight 1
   ]
   edge
   [
     source 4025
     target 4024
+    weight 1
   ]
   edge
   [
     source 4026
     target 4024
+    weight 1
   ]
   edge
   [
     source 4139
     target 4025
+    weight 1
   ]
   edge
   [
     source 4295
     target 4030
+    weight 1
   ]
   edge
   [
     source 4088
     target 4036
+    weight 1
   ]
   edge
   [
     source 4089
     target 4036
+    weight 1
   ]
   edge
   [
     source 4090
     target 4036
+    weight 1
   ]
   edge
   [
     source 4178
     target 4036
+    weight 1
   ]
   edge
   [
     source 4044
     target 4043
+    weight 1
   ]
   edge
   [
     source 4048
     target 4047
+    weight 1
   ]
   edge
   [
     source 4049
     target 4047
+    weight 1
   ]
   edge
   [
     source 4050
     target 4047
+    weight 1
   ]
   edge
   [
     source 4051
     target 4047
+    weight 1
   ]
   edge
   [
     source 4052
     target 4047
+    weight 1
   ]
   edge
   [
     source 4053
     target 4047
+    weight 1
   ]
   edge
   [
     source 4055
     target 4054
+    weight 1
   ]
   edge
   [
     source 4058
     target 4057
+    weight 1
   ]
   edge
   [
     source 4059
     target 4057
+    weight 1
   ]
   edge
   [
     source 4060
     target 4057
+    weight 1
   ]
   edge
   [
     source 4061
     target 4057
+    weight 1
   ]
   edge
   [
     source 4062
     target 4057
+    weight 1
   ]
   edge
   [
     source 4063
     target 4057
+    weight 1
   ]
   edge
   [
     source 4064
     target 4057
+    weight 1
   ]
   edge
   [
     source 4065
     target 4057
+    weight 1
   ]
   edge
   [
     source 4066
     target 4057
+    weight 1
   ]
   edge
   [
     source 4067
     target 4057
+    weight 1
   ]
   edge
   [
     source 4068
     target 4057
+    weight 1
   ]
   edge
   [
     source 4069
     target 4057
+    weight 1
   ]
   edge
   [
     source 4139
     target 4072
+    weight 1
   ]
   edge
   [
     source 4076
     target 4075
+    weight 1
   ]
   edge
   [
     source 4077
     target 4075
+    weight 1
   ]
   edge
   [
     source 4078
     target 4075
+    weight 1
   ]
   edge
   [
     source 4079
     target 4075
+    weight 1
   ]
   edge
   [
     source 4082
     target 4081
+    weight 1
   ]
   edge
   [
     source 4085
     target 4084
+    weight 1
   ]
   edge
   [
     source 4087
     target 4086
+    weight 1
   ]
   edge
   [
     source 4131
     target 4087
+    weight 1
   ]
   edge
   [
     source 4132
     target 4087
+    weight 1
   ]
   edge
   [
     source 4133
     target 4087
+    weight 1
   ]
   edge
   [
     source 4092
     target 4091
+    weight 1
   ]
   edge
   [
     source 4094
     target 4093
+    weight 1
   ]
   edge
   [
     source 4095
     target 4093
+    weight 1
   ]
   edge
   [
     source 4097
     target 4096
+    weight 1
   ]
   edge
   [
     source 4098
     target 4096
+    weight 1
   ]
   edge
   [
     source 4099
     target 4096
+    weight 1
   ]
   edge
   [
     source 4100
     target 4096
+    weight 1
   ]
   edge
   [
     source 4103
     target 4102
+    weight 1
   ]
   edge
   [
     source 4206
     target 4102
+    weight 1
   ]
   edge
   [
     source 4437
     target 4109
+    weight 1
   ]
   edge
   [
     source 4118
     target 4117
+    weight 1
   ]
   edge
   [
     source 4119
     target 4117
+    weight 1
   ]
   edge
   [
     source 4120
     target 4117
+    weight 1
   ]
   edge
   [
     source 4121
     target 4117
+    weight 1
   ]
   edge
   [
     source 4122
     target 4117
+    weight 1
   ]
   edge
   [
     source 4123
     target 4117
+    weight 1
   ]
   edge
   [
     source 4124
     target 4117
+    weight 1
   ]
   edge
   [
     source 4125
     target 4117
+    weight 1
   ]
   edge
   [
     source 4126
     target 4117
+    weight 1
   ]
   edge
   [
     source 4140
     target 4139
+    weight 1
   ]
   edge
   [
     source 4141
     target 4139
+    weight 1
   ]
   edge
   [
     source 4142
     target 4139
+    weight 1
   ]
   edge
   [
     source 4143
     target 4139
+    weight 1
   ]
   edge
   [
     source 4144
     target 4139
+    weight 1
   ]
   edge
   [
     source 4145
     target 4139
+    weight 1
   ]
   edge
   [
     source 4146
     target 4139
+    weight 1
   ]
   edge
   [
     source 4147
     target 4139
+    weight 1
   ]
   edge
   [
     source 4148
     target 4139
+    weight 1
   ]
   edge
   [
     source 4149
     target 4139
+    weight 1
   ]
   edge
   [
     source 4150
     target 4139
+    weight 1
   ]
   edge
   [
     source 4151
     target 4139
+    weight 1
   ]
   edge
   [
     source 4152
     target 4139
+    weight 1
   ]
   edge
   [
     source 4153
     target 4139
+    weight 1
   ]
   edge
   [
     source 4154
     target 4139
+    weight 1
   ]
   edge
   [
     source 4155
     target 4139
+    weight 1
   ]
   edge
   [
     source 4156
     target 4139
+    weight 1
   ]
   edge
   [
     source 4157
     target 4139
+    weight 1
   ]
   edge
   [
     source 4158
     target 4139
+    weight 1
   ]
   edge
   [
     source 4159
     target 4139
+    weight 1
   ]
   edge
   [
     source 4160
     target 4139
+    weight 1
   ]
   edge
   [
     source 4161
     target 4139
+    weight 1
   ]
   edge
   [
     source 4162
     target 4139
+    weight 1
   ]
   edge
   [
     source 4163
     target 4139
+    weight 1
   ]
   edge
   [
     source 4164
     target 4139
+    weight 1
   ]
   edge
   [
     source 4165
     target 4139
+    weight 1
   ]
   edge
   [
     source 4166
     target 4139
+    weight 1
   ]
   edge
   [
     source 4167
     target 4139
+    weight 1
   ]
   edge
   [
     source 4168
     target 4139
+    weight 1
   ]
   edge
   [
     source 4169
     target 4139
+    weight 1
   ]
   edge
   [
     source 4170
     target 4139
+    weight 1
   ]
   edge
   [
     source 4171
     target 4139
+    weight 1
   ]
   edge
   [
     source 4172
     target 4139
+    weight 1
   ]
   edge
   [
     source 4173
     target 4139
+    weight 1
   ]
   edge
   [
     source 4174
     target 4139
+    weight 1
   ]
   edge
   [
     source 4175
     target 4139
+    weight 1
   ]
   edge
   [
     source 4176
     target 4139
+    weight 1
   ]
   edge
   [
     source 4177
     target 4139
+    weight 1
   ]
   edge
   [
     source 4382
     target 4139
+    weight 1
   ]
   edge
   [
     source 4455
     target 4139
+    weight 1
   ]
   edge
   [
     source 4354
     target 4140
+    weight 1
   ]
   edge
   [
     source 4382
     target 4154
+    weight 1
   ]
   edge
   [
     source 4353
     target 4161
+    weight 1
   ]
   edge
   [
     source 4354
     target 4161
+    weight 1
   ]
   edge
   [
     source 4355
     target 4161
+    weight 1
   ]
   edge
   [
     source 4356
     target 4167
+    weight 1
   ]
   edge
   [
     source 4258
     target 4178
+    weight 1
   ]
   edge
   [
     source 4181
     target 4180
+    weight 1
   ]
   edge
   [
     source 4183
     target 4182
+    weight 1
   ]
   edge
   [
     source 4184
     target 4182
+    weight 1
   ]
   edge
   [
     source 4185
     target 4182
+    weight 1
   ]
   edge
   [
     source 4186
     target 4182
+    weight 1
   ]
   edge
   [
     source 4187
     target 4182
+    weight 1
   ]
   edge
   [
     source 4188
     target 4182
+    weight 1
   ]
   edge
   [
     source 4189
     target 4182
+    weight 1
   ]
   edge
   [
     source 4190
     target 4182
+    weight 1
   ]
   edge
   [
     source 4191
     target 4182
+    weight 1
   ]
   edge
   [
     source 4206
     target 4186
+    weight 1
   ]
   edge
   [
     source 4206
     target 4188
+    weight 1
   ]
   edge
   [
     source 4195
     target 4194
+    weight 1
   ]
   edge
   [
     source 4196
     target 4194
+    weight 1
   ]
   edge
   [
     source 4197
     target 4194
+    weight 1
   ]
   edge
   [
     source 4198
     target 4194
+    weight 1
   ]
   edge
   [
     source 4199
     target 4194
+    weight 1
   ]
   edge
   [
     source 4202
     target 4201
+    weight 1
   ]
   edge
   [
     source 4203
     target 4201
+    weight 1
   ]
   edge
   [
     source 4204
     target 4201
+    weight 1
   ]
   edge
   [
     source 4365
     target 4204
+    weight 1
   ]
   edge
   [
     source 4437
     target 4205
+    weight 1
   ]
   edge
   [
     source 4207
     target 4206
+    weight 1
   ]
   edge
   [
     source 4208
     target 4206
+    weight 1
   ]
   edge
   [
     source 4209
     target 4206
+    weight 1
   ]
   edge
   [
     source 4210
     target 4206
+    weight 1
   ]
   edge
   [
     source 4211
     target 4206
+    weight 1
   ]
   edge
   [
     source 4212
     target 4206
+    weight 1
   ]
   edge
   [
     source 4213
     target 4206
+    weight 1
   ]
   edge
   [
     source 4214
     target 4206
+    weight 1
   ]
   edge
   [
     source 4215
     target 4206
+    weight 1
   ]
   edge
   [
     source 4216
     target 4206
+    weight 1
   ]
   edge
   [
     source 4217
     target 4206
+    weight 1
   ]
   edge
   [
     source 4218
     target 4206
+    weight 1
   ]
   edge
   [
     source 4219
     target 4206
+    weight 1
   ]
   edge
   [
     source 4220
     target 4206
+    weight 1
   ]
   edge
   [
     source 4221
     target 4206
+    weight 1
   ]
   edge
   [
     source 4222
     target 4206
+    weight 1
   ]
   edge
   [
     source 4223
     target 4206
+    weight 1
   ]
   edge
   [
     source 4224
     target 4206
+    weight 1
   ]
   edge
   [
     source 4225
     target 4206
+    weight 1
   ]
   edge
   [
     source 4226
     target 4206
+    weight 1
   ]
   edge
   [
     source 4227
     target 4206
+    weight 1
   ]
   edge
   [
     source 4228
     target 4206
+    weight 1
   ]
   edge
   [
     source 4229
     target 4206
+    weight 1
   ]
   edge
   [
     source 4230
     target 4206
+    weight 1
   ]
   edge
   [
     source 4231
     target 4206
+    weight 1
   ]
   edge
   [
     source 4232
     target 4206
+    weight 1
   ]
   edge
   [
     source 4233
     target 4206
+    weight 1
   ]
   edge
   [
     source 4234
     target 4206
+    weight 1
   ]
   edge
   [
     source 4235
     target 4206
+    weight 1
   ]
   edge
   [
     source 4236
     target 4206
+    weight 1
   ]
   edge
   [
     source 4237
     target 4206
+    weight 1
   ]
   edge
   [
     source 4238
     target 4206
+    weight 1
   ]
   edge
   [
     source 4239
     target 4206
+    weight 1
   ]
   edge
   [
     source 4240
     target 4206
+    weight 1
   ]
   edge
   [
     source 4241
     target 4206
+    weight 1
   ]
   edge
   [
     source 4242
     target 4206
+    weight 1
   ]
   edge
   [
     source 4243
     target 4206
+    weight 1
   ]
   edge
   [
     source 4244
     target 4206
+    weight 1
   ]
   edge
   [
     source 4245
     target 4206
+    weight 1
   ]
   edge
   [
     source 4246
     target 4206
+    weight 1
   ]
   edge
   [
     source 4247
     target 4206
+    weight 1
   ]
   edge
   [
     source 4248
     target 4206
+    weight 1
   ]
   edge
   [
     source 4249
     target 4206
+    weight 1
   ]
   edge
   [
     source 4250
     target 4206
+    weight 1
   ]
   edge
   [
     source 4251
     target 4206
+    weight 1
   ]
   edge
   [
     source 4252
     target 4206
+    weight 1
   ]
   edge
   [
     source 4253
     target 4206
+    weight 1
   ]
   edge
   [
     source 4254
     target 4206
+    weight 1
   ]
   edge
   [
     source 4256
     target 4255
+    weight 1
   ]
   edge
   [
     source 4260
     target 4259
+    weight 1
   ]
   edge
   [
     source 4261
     target 4259
+    weight 1
   ]
   edge
   [
     source 4262
     target 4259
+    weight 1
   ]
   edge
   [
     source 4263
     target 4259
+    weight 1
   ]
   edge
   [
     source 4264
     target 4259
+    weight 1
   ]
   edge
   [
     source 4265
     target 4259
+    weight 1
   ]
   edge
   [
     source 4266
     target 4259
+    weight 1
   ]
   edge
   [
     source 4267
     target 4259
+    weight 1
   ]
   edge
   [
     source 4268
     target 4259
+    weight 1
   ]
   edge
   [
     source 4269
     target 4259
+    weight 1
   ]
   edge
   [
     source 4270
     target 4259
+    weight 1
   ]
   edge
   [
     source 4271
     target 4259
+    weight 1
   ]
   edge
   [
     source 4272
     target 4259
+    weight 1
   ]
   edge
   [
     source 4273
     target 4259
+    weight 1
   ]
   edge
   [
     source 4274
     target 4259
+    weight 1
   ]
   edge
   [
     source 4275
     target 4259
+    weight 1
   ]
   edge
   [
     source 4276
     target 4259
+    weight 1
   ]
   edge
   [
     source 4277
     target 4259
+    weight 1
   ]
   edge
   [
     source 4278
     target 4259
+    weight 1
   ]
   edge
   [
     source 4279
     target 4259
+    weight 1
   ]
   edge
   [
     source 4280
     target 4259
+    weight 1
   ]
   edge
   [
     source 4281
     target 4259
+    weight 1
   ]
   edge
   [
     source 4282
     target 4259
+    weight 1
   ]
   edge
   [
     source 4283
     target 4259
+    weight 1
   ]
   edge
   [
     source 4284
     target 4259
+    weight 1
   ]
   edge
   [
     source 4285
     target 4259
+    weight 1
   ]
   edge
   [
     source 4286
     target 4259
+    weight 1
   ]
   edge
   [
     source 4287
     target 4259
+    weight 1
   ]
   edge
   [
     source 4288
     target 4259
+    weight 1
   ]
   edge
   [
     source 4289
     target 4259
+    weight 1
   ]
   edge
   [
     source 4290
     target 4259
+    weight 1
   ]
   edge
   [
     source 4291
     target 4259
+    weight 1
   ]
   edge
   [
     source 4292
     target 4259
+    weight 1
   ]
   edge
   [
     source 4293
     target 4259
+    weight 1
   ]
   edge
   [
     source 4294
     target 4259
+    weight 1
   ]
   edge
   [
     source 4388
     target 4354
+    weight 1
   ]
   edge
   [
     source 4389
     target 4354
+    weight 1
   ]
   edge
   [
     source 4390
     target 4354
+    weight 1
   ]
   edge
   [
     source 4391
     target 4354
+    weight 1
   ]
   edge
   [
     source 4392
     target 4354
+    weight 1
   ]
   edge
   [
     source 4393
     target 4354
+    weight 1
   ]
   edge
   [
     source 4394
     target 4354
+    weight 1
   ]
   edge
   [
     source 4395
     target 4354
+    weight 1
   ]
   edge
   [
     source 4357
     target 4356
+    weight 1
   ]
   edge
   [
     source 4358
     target 4356
+    weight 1
   ]
   edge
   [
     source 4366
     target 4365
+    weight 1
   ]
   edge
   [
     source 4367
     target 4365
+    weight 1
   ]
   edge
   [
     source 4368
     target 4365
+    weight 1
   ]
   edge
   [
     source 4369
     target 4365
+    weight 1
   ]
   edge
   [
     source 4370
     target 4365
+    weight 1
   ]
   edge
   [
     source 4371
     target 4365
+    weight 1
   ]
   edge
   [
     source 4372
     target 4365
+    weight 1
   ]
   edge
   [
     source 4373
     target 4365
+    weight 1
   ]
   edge
   [
     source 4374
     target 4365
+    weight 1
   ]
   edge
   [
     source 4375
     target 4365
+    weight 1
   ]
   edge
   [
     source 4398
     target 4365
+    weight 1
   ]
   edge
   [
     source 4377
     target 4376
+    weight 1
   ]
   edge
   [
     source 4378
     target 4376
+    weight 1
   ]
   edge
   [
     source 4379
     target 4376
+    weight 1
   ]
   edge
   [
     source 4383
     target 4382
+    weight 1
   ]
   edge
   [
     source 4385
     target 4384
+    weight 1
   ]
   edge
   [
     source 4386
     target 4384
+    weight 1
   ]
   edge
   [
     source 4400
     target 4399
+    weight 1
   ]
   edge
   [
     source 4401
     target 4399
+    weight 1
   ]
   edge
   [
     source 4402
     target 4399
+    weight 1
   ]
   edge
   [
     source 4405
     target 4404
+    weight 1
   ]
   edge
   [
     source 4406
     target 4404
+    weight 1
   ]
   edge
   [
     source 4407
     target 4404
+    weight 1
   ]
   edge
   [
     source 4410
     target 4409
+    weight 1
   ]
   edge
   [
     source 4411
     target 4409
+    weight 1
   ]
   edge
   [
     source 4458
     target 4409
+    weight 1
   ]
   edge
   [
     source 4413
     target 4412
+    weight 1
   ]
   edge
   [
     source 4416
     target 4415
+    weight 1
   ]
   edge
   [
     source 4417
     target 4415
+    weight 1
   ]
   edge
   [
     source 4418
     target 4415
+    weight 1
   ]
   edge
   [
     source 4419
     target 4415
+    weight 1
   ]
   edge
   [
     source 4420
     target 4415
+    weight 1
   ]
   edge
   [
     source 4421
     target 4415
+    weight 1
   ]
   edge
   [
     source 4424
     target 4423
+    weight 1
   ]
   edge
   [
     source 4425
     target 4423
+    weight 1
   ]
   edge
   [
     source 4426
     target 4423
+    weight 1
   ]
   edge
   [
     source 4427
     target 4423
+    weight 1
   ]
   edge
   [
     source 4428
     target 4423
+    weight 1
   ]
   edge
   [
     source 4429
     target 4423
+    weight 1
   ]
   edge
   [
     source 4430
     target 4423
+    weight 1
   ]
   edge
   [
     source 4431
     target 4423
+    weight 1
   ]
   edge
   [
     source 4432
     target 4423
+    weight 1
   ]
   edge
   [
     source 4433
     target 4423
+    weight 1
   ]
   edge
   [
     source 4438
     target 4437
+    weight 1
   ]
   edge
   [
     source 4439
     target 4437
+    weight 1
   ]
   edge
   [
     source 4440
     target 4437
+    weight 1
   ]
   edge
   [
     source 4441
     target 4437
+    weight 1
   ]
   edge
   [
     source 4442
     target 4437
+    weight 1
   ]
   edge
   [
     source 4443
     target 4437
+    weight 1
   ]
   edge
   [
     source 4444
     target 4437
+    weight 1
   ]
   edge
   [
     source 4445
     target 4437
+    weight 1
   ]
   edge
   [
     source 4446
     target 4437
+    weight 1
   ]
   edge
   [
     source 4452
     target 4451
+    weight 1
   ]
   edge
   [
     source 4453
     target 4451
+    weight 1
   ]
   edge
   [
     source 4463
     target 4462
+    weight 1
   ]
   edge
   [
     source 4464
     target 4462
+    weight 1
   ]
   edge
   [
     source 4465
     target 4462
+    weight 1
   ]
   edge
   [
     source 4466
     target 4462
+    weight 1
   ]
   edge
   [
     source 4467
     target 4462
+    weight 1
   ]
   edge
   [
     source 4468
     target 4462
+    weight 1
   ]
   edge
   [
     source 4469
     target 4462
+    weight 1
   ]
   edge
   [
     source 4470
     target 4462
+    weight 1
   ]
   edge
   [
     source 4478
     target 4477
+    weight 1
   ]
   edge
   [
     source 4479
     target 4477
+    weight 1
   ]
   edge
   [
     source 4480
     target 4477
+    weight 1
   ]
   edge
   [
     source 4481
     target 4477
+    weight 1
   ]
   edge
   [
     source 4482
     target 4477
+    weight 1
   ]
   edge
   [
     source 4483
     target 4477
+    weight 1
   ]
 ]
