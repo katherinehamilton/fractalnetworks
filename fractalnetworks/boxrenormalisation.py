@@ -250,7 +250,7 @@ def find_boxes_and_renormalise_iteration(G, lB, iter_count=1, filepath="graph", 
     nx_renormalisedG = renormalisedG.to_networkx()
 
     # Export the renormalised graph to gephi.
-    # export_to_gephi(renormalisedG, gephi_dict, renormalised_file_path)
+    export_to_gephi(renormalisedG, gephi_dict, renormalised_file_path)
 
     # If draw is True then display the graphs.
     if draw:

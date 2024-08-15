@@ -115,7 +115,7 @@ def is_fractal(results_filepath, plot=False, verbose=False, save_path=None):
 
     # Plot the exponential and power law relationship
     if plot:
-        fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(8, 3))
+        fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(10, 3))
         axes[0].plot(loglB, logNB, color='navy')
         axes[0].plot(loglB, [(frac_c) * l + frac_A for l in loglB], ':', color='crimson')
         axes[0].set_xlabel('$\ln \ell_B$')
@@ -128,7 +128,7 @@ def is_fractal(results_filepath, plot=False, verbose=False, save_path=None):
         axes[1].set_title('Exponential Relationship')
         # If a save path is given, save the png file.
         if save_path:
-            plt.savefig(save_path)
+            plt.savefig(save_path, bbox_inches='tight')
         plt.show()
 
     plt.close()

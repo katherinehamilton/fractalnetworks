@@ -11,6 +11,8 @@ import numpy as np
 import os
 from itertools import combinations
 
+from .nestedBAmodel import *
+
 
 # SHM Model
 

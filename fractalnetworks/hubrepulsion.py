@@ -251,7 +251,7 @@ def find_hub_hub_path_node_occurrences(G, hubs=None, hub_method=identify_hubs, d
     return hub_hub_path_nodes, occurrences
 
 
-def calculate_HCS(G, hubs=None, hub_method=identify_hubs, degrees=None):
+def calculate_HCS(G, hubs=None, hub_method=identify_hubs, degrees=None, normalised=False):
     """
     Calculate the Hub Connectivity Score (HCS) of the network. This is the average number of hubs each hub is adjacent to.
 
@@ -260,6 +260,7 @@ def calculate_HCS(G, hubs=None, hub_method=identify_hubs, degrees=None):
         hubs (list) (opt): A list of hubs in the network, If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function finds the hubs.
         hub_method (func) (opt): If the hubs are to be calculated, then this parameter specifies the method used to find hubs. Default is identify_hubs, which uses the Z score.
         degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.
+        normalised (bool) (opt): If True, the Hub Connectivity Score is normalised by the number of hubs in the network.
 
     Returns:
         (float): The Hub Connectivity Score of the network.
@@ -283,5 +284,11 @@ def calculate_HCS(G, hubs=None, hub_method=identify_hubs, degrees=None):
     # Find the number of hubs
     N_hub = len(hubs)
 
+    # Calculate the HCS
+    HCS = 2 * E_hub / N_hub
+
+    if normalised:
+        HCS = HCS / N_hub
+
     # Return the HCS
-    return 2 * E_hub / N_hub
+    return HCS
