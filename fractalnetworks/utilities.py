@@ -786,3 +786,15 @@ def read_lB_NB_from_csv(filepath):
             count += 1
 
     return lB, NB
+
+
+def preprocess_network(filepath, save=True):
+    # Need to add function to normalise edge weights
+    G = Graph.Load(filepath)
+    G = G.simplify()
+    components = G.connected_components(mode='weak')
+    giant_component = G.induced_subgraph(components[0])
+    if save:
+        save_path = filepath.replace('.gml','_processed.gml')
+        giant_component.write_gml(save_path)
+    return giant_component
