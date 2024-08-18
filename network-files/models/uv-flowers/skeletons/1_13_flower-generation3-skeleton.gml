@@ -1,4 +1,4 @@
-Creator "igraph version 0.10.12 Mon Aug  5 18:13:15 2024"
+Creator "igraph version 0.10.12 Sat Aug 17 21:21:29 2024"
 Version 1
 graph
 [
