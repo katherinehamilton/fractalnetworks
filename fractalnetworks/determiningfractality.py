@@ -70,7 +70,7 @@ def calculate_lB_NB_dist(G, diam=None, normalise=False, lB_min=2, save_path=None
     return lB, NB
 
 
-def is_fractal(results_filepath, plot=False, verbose=False, save_path=None):
+def is_fractal(results_filepath, plot=False, verbose=False, save_path=None, p_list=[0.6,0.7,0.8,0.9,1.0]):
     """
     Tests if a given lB-NB distribution is a power-law or exponential, thus determining if a network is fractal or non-fractal.
 
@@ -137,13 +137,15 @@ def is_fractal(results_filepath, plot=False, verbose=False, save_path=None):
     if frac_score > exp_score:
         # If verbose is True, print the results.
         if verbose:
-            A, dB, _ = find_fractal_dimension(loglB, logNB)
+            A, dB, _ = find_fractal_dimension(loglB, logNB, p_list=p_list)
             # Plot the fractal dimension
-            plt.plot(loglB, logNB, color='navy')
-            plt.plot(loglB, [A + dB * l for l in loglB], ':', color='crimson')
-            plt.xlabel('$\ln \ell_B$')
-            plt.ylabel('$\ln N_B$')
-            plt.show()
+            if plot:
+                plt.plot(loglB, logNB, color='navy')
+                plt.plot(loglB, [A + dB * l for l in loglB], ':', color='crimson')
+                plt.xlabel('$\ln \ell_B$')
+                plt.ylabel('$\ln N_B$')
+                plt.show()
+            plt.close()
             print("This network is fractal with box dimension {:.4f}.".format(-1 * dB))
             print("Power law score: {:.4f}.".format(frac_score))
             print("Exponential score: {:.4f}.".format(exp_score))
@@ -157,7 +159,7 @@ def is_fractal(results_filepath, plot=False, verbose=False, save_path=None):
             print("Exponential score: {:.4f}.".format(exp_score))
         return False
 
-def find_fractal_dimension(loglB, logNB):
+def find_fractal_dimension(loglB, logNB, p_list=[0.8,0.9,1.0]):
     """
     Finds the fractal dimension of a fractal network given the lB, NB distribution.
     """
@@ -167,7 +169,7 @@ def find_fractal_dimension(loglB, logNB):
     best_c = None
 
     # Look at sections of the curve at least 70% of the full length.
-    for p in [0.7, 0.8, 0.9, 1.0]:
+    for p in p_list:
         # Find the best score over portions of that width
         (A, c), score = find_best_range(loglB, logNB, percentage=p)
         # If this is better than the previous portion, then update the variables.
@@ -196,16 +198,16 @@ def find_best_range(x, y, percentage=0.5):
         model.fit(sublist_array_x, sublist_array_y)
 
         score = model.score(sublist_array_x, sublist_array_y)
+        if model.coef_ != 0:
+            if best_score == None:
+                best_score = score
+                best_A = model.intercept_
+                best_c = model.coef_
 
-        if best_score == None:
-            best_score = score
-            best_A = model.intercept_
-            best_c = model.coef_
-
-        elif score > best_score:
-            best_score = score
-            best_A = model.intercept_
-            best_c = model.coef_
+            elif score > best_score:
+                best_score = score
+                best_A = model.intercept_
+                best_c = model.coef_
 
         i += 1
     return (best_A, best_c), best_score

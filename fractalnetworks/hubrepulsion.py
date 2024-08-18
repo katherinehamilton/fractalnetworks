@@ -251,7 +251,7 @@ def find_hub_hub_path_node_occurrences(G, hubs=None, hub_method=identify_hubs, d
     return hub_hub_path_nodes, occurrences
 
 
-def calculate_HCS(G, hubs=None, hub_method=identify_hubs, degrees=None, normalised=False):
+def calculate_HCS(G, hubs=None, hub_method=identify_hubs, degrees=None, normalise_by_number_of_hubs=False, normalise_by_mean_hub_degree=False, normalise_by_mean_degree=False, normalise_by_number_of_edges=False):
     """
     Calculate the Hub Connectivity Score (HCS) of the network. This is the average number of hubs each hub is adjacent to.
 
@@ -287,8 +287,20 @@ def calculate_HCS(G, hubs=None, hub_method=identify_hubs, degrees=None, normalis
     # Calculate the HCS
     HCS = 2 * E_hub / N_hub
 
-    if normalised:
+    if normalise_by_number_of_hubs:
         HCS = HCS / N_hub
+
+    if normalise_by_mean_hub_degree:
+        mean_k = mean_hub_degree(G, hubs=hubs, degrees=degrees)
+        HCS = HCS / mean_k
+
+    if normalise_by_mean_degree:
+        mean_k = np.mean(G.degree())
+        HCS = HCS / mean_k
+
+    if normalise_by_number_of_edges:
+        HCS = HCS / G.ecount()
+
 
     # Return the HCS
     return HCS
