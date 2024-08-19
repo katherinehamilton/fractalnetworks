@@ -413,7 +413,7 @@ def accelerated_MEMB(G, lB):
             maiden = False
 
         # Take the label of the node to be the next p.
-        p = int(p_value[0]["label"])
+        p = p_value[0].index
         # Add p to the list of centres.
         centres.append(p)
         # Remove p from the list of non-centres.
