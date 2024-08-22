@@ -9,13 +9,13 @@ import numpy as np
 
 def smallest_last(G):
     """
-    Orders nodes using the smallest last [3] method.
+    Orders nodes using the smallest last (Matula and Beck, 1983) method.
 
     Args:
-        G (igraph.Graph): The network being ordered.
+        G (igraph.Graph) : The network being ordered.
 
     Returns:
-        ordering (list): A list of the nodes in order.
+        (list) : A list of the nodes in order.
     """
     # Find the number of nodes.
     N = G.vcount()
@@ -47,15 +47,18 @@ def smallest_last(G):
 
 def greedy_box_covering(G, lB, node_order=None):
     """
-    Colours the network in boxes of diameter lB using the greedy algorithm.
+    Colours the network in boxes of diameter lB using the greedy algorithm (Song, Gallos, et al., 2007).
 
     Args:
-        G (igraph.Graph): The network to be analysed.
-        lB (int): The diameter of the boxes for the box covering.
+        G (igraph.Graph)                   : The network to be analysed.
+        lB (int)                           : The diameter of the boxes for the box covering.
+        node_order (:obj:`list`, optional) : The order of the nodes in which the greedy colouring is applied.
+                                             If None, the nodes are coloured in lexicographical order.
+                                             Default is None.
 
     Returns:
-        colouring (dict): The greedy colouring, with the nodes as keys and the colours as values.
-        NB (int): The number of boxes of diameter lB needed to cover the network.
+        (dict) : The greedy colouring, with the nodes as keys and the colours as values.
+        (int)  : The number of boxes of diameter lB needed to cover the network.
     """
     # Find the dual graph
     dual_G = make_dual_graph(G, lB)
@@ -72,13 +75,16 @@ def greedy_box_covering(G, lB, node_order=None):
 
 def greedy_colouring(G, node_order=None):
     """
-    Colour a graph by the greedy colouring algorithm.
+    Colour a graph by the greedy colouring algorithm (Song, Gallos, et al., 2007).
 
     Args:
-        G (igraph.Graph): The graph to be analysed.
+        G (igraph.Graph)                   : The graph to be analysed.
+        node_order (:obj:`list`, optional) : The order of the nodes in which the greedy colouring is applied.
+                                             If None, the nodes are coloured in lexicographical order.
+                                             Default is None.
 
     Returns:
-        colouring (dict): A dictionary with nodes as keys and the colours they are assigned as values.
+        (dict): A dictionary with nodes as keys and the colours they are assigned as values.
     """
 
     # Find the number of nodes.
@@ -90,7 +96,7 @@ def greedy_colouring(G, node_order=None):
     colouring = dict.fromkeys(nodes)
 
     # Apply the ordering method to the nodes, if one is given.
-    if node_order == None:
+    if not node_order:
         node_order = nodes
 
     # Iterate through all the nodes.
@@ -126,21 +132,23 @@ def greedy_colouring(G, node_order=None):
 
 def make_dual_graph(graph, lB):
     """
-    Finds the dual graph as defined under the greedy colouring algorithm.
+    Finds the dual graph as defined under the greedy colouring algorithm (Song, Gallos, et al., 2007).
     In the dual graph, two nodes are connected if the distance between them is at least lB.
 
     Args:
-        graph (igraph.Graph): The graph to be analysed.
-        lB (int): The diameter of the boxes for the box covering.
+        graph (igraph.Graph) : The graph to be analysed.
+        lB (int)             : The diameter of the boxes for the box covering.
 
     Returns:
-        dual_graph (igraph.Graph): The dual graph.
+        (igraph.Graph) : The dual graph.
     """
     # Calculate the matrix of shortest paths between each pair of nodes in the network, and convert it to a numpy array.
     distance_matrix = graph.distances()
     distance_np_array = np.array(distance_matrix)
 
-    # The following lines of code convert the distance matrix into a matrix with ones if the nodes are a distance of at least lB apart, and zeroes otherwise.
+    # The following lines of code convert the distance matrix into a matrix where the entries are:
+    #   one if the nodes are a distance of at least lB apart, and
+    #   zero otherwise.
     distance_np_array[distance_np_array < lB] = 0
     distance_np_array[distance_np_array > 0] = 1
 
