@@ -2,7 +2,8 @@
 This module contains functions for the analysis of fractal networks."""
 
 # Other module imports
-from .calculatingreach import *
+from .utilities import *
+from .networkproperties import *
 from .networkskeleton import *
 from .boxrenormalisation import *
 from .modelanalysis import *

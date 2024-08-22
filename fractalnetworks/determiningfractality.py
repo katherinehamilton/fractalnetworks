@@ -1,4 +1,4 @@
-"""This module contians the functions needed to determine if a given network is fractal or non-fractal"""
+"""This module contains the functions needed to determine if a given network is fractal or non-fractal"""
 
 from .maximumexcludedmassburning import *
 from .utilities import *
@@ -8,17 +8,29 @@ from tqdm import tqdm
 from sklearn.linear_model import LinearRegression
 
 
+# Calculating lB
+
 def calculate_lB_NB_dist(G, diam=None, normalise=False, lB_min=2, save_path=None, colouring_ordering_method=None):
     """
     Finds the distribution of the optimal number of boxes NB against the diameter of these boxes lB.
 
     Args:
-        G (igraph.Graph): The network to be analysed.
-        diam (:obj:`int`, optional): The diameter of the network G. The default is None, and note that if no diameter is given the algorithm will calculate it which is expensive for large networks.
-        normalise (:obj:`bool`, optional): If True, normalises the number of boxes over the total number of nodes in the network. Default is False.
-        lB_min (:obj:`int`, optional): The minimum value of box diameter used to cover the network. Default is 2.
-        save_path (:obj:`str`, optional): The filepath to save the results of the lB-NB distribution to. If none given, results are not saved.
-        colouring_ordering_method (:obj:`func`, optional): The method by which to order the nodes for the greedy colouring algorithm. If none given, nodes are ordered lexicographically.
+        G (igraph.Graph)                                      : The network to be analysed.
+        diam (:obj:`int`, optional)                           : The diameter of the network G.
+                                                                If none given, the diameter is calculated.
+                                                                Default is None.
+        normalise (:obj:`bool`, optional)                     : If True, normalises the number of boxes over the total
+                                                                    number of nodes in the network.
+                                                                Default is False.
+        lB_min (:obj:`int`, optional)                         : The minimum value of lB used to cover the network.
+                                                                Default is 2.
+        save_path (:obj:`str`, optional)                      : The filepath to save the results to.
+                                                                If none given, results are not saved.
+                                                                Default is None.
+        colouring_ordering_method (:obj:`function`, optional) : The method by which to order the nodes for the greedy
+                                                                    colouring algorithm.
+                                                                If none given, nodes are ordered lexicographically.
+                                                                Default is None.
 
     Returns:
         (list): List of values for the box diameters lB.
@@ -26,11 +38,11 @@ def calculate_lB_NB_dist(G, diam=None, normalise=False, lB_min=2, save_path=None
     """
 
     # If no diameter is given for the network then it is calculated using networkX.
-    if diam == None:
+    if not diam:
         diam = G.diameter()
 
     # If an ordering method is specified, order nodes according to that scheme.
-    # Otherwise the nodes are handled in lexicographical order.
+    # Otherwise, the nodes are handled in lexicographical order.
     if colouring_ordering_method:
         ordering = colouring_ordering_method(G)
     else:
@@ -58,7 +70,7 @@ def calculate_lB_NB_dist(G, diam=None, normalise=False, lB_min=2, save_path=None
         NB.append(N)
 
     # If normalise is True, normalise each result over the number of nodes in the network.
-    if normalise == True:
+    if normalise:
         N = G.vcount()
         NB = [x / N for x in NB]
 
@@ -70,18 +82,26 @@ def calculate_lB_NB_dist(G, diam=None, normalise=False, lB_min=2, save_path=None
     return lB, NB
 
 
-def is_fractal(results_filepath, plot=False, verbose=False, save_path=None, p_list=[0.6,0.7,0.8,0.9,1.0]):
+def is_fractal(results_filepath, plot=False, verbose=False, save_path=None, p_list=None):
     """
-    Tests if a given lB-NB distribution is a power-law or exponential, thus determining if a network is fractal or non-fractal.
+    Tests if a given lB-NB distribution is a power-law or exponential, thus determining if a network is fractal or not.
 
     Args:
-        results_filepath (str): The filepath for the csv file storing the lB-NB distribution.
-        plot (:obj:`bool`, optional): If True, a comparison of the relationship between lB and NB is plotted on a log-log scale and a log scale.
-        verbose (:obj:`bool`, optional): If True, the results are displayed.
-        save_path (:obj:`str`, optional): The figure generated is saved to the file path, if given. Default is None.
+        results_filepath (str)           : The filepath for the csv file storing the lB-NB distribution.
+        plot (:obj:`bool`, optional)     : If True, a comparison of the relationship between lB and NB is plotted.
+        verbose (:obj:`bool`, optional)  : If True, the results are printed.
+        save_path (:obj:`str`, optional) : The figure generated is saved to the file path, if given. Default is None.
+        p_list (:obj:`list`, optional)   : A list of percentages p.
+                                           The fractal dimension is given by the gradient of the best fit over p% of the
+                                                distribution.
+                                           Default is None.
     Returns:
-        bool: True if the network is fractal, False otherwise.
+        bool : True if the network is fractal, False otherwise.
     """
+    # Initialise p_list as [1.0] if none given.
+    if not p_list:
+        p_list = [1.0]
+
     # Read the lB-NB distribution from the csv file.
     lB, NB = read_lB_NB_from_csv(results_filepath)
 
@@ -117,12 +137,12 @@ def is_fractal(results_filepath, plot=False, verbose=False, save_path=None, p_li
     if plot:
         fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(10, 3))
         axes[0].plot(loglB, logNB, color='navy')
-        axes[0].plot(loglB, [(frac_c) * l + frac_A for l in loglB], ':', color='crimson')
+        axes[0].plot(loglB, [frac_c * l + frac_A for l in loglB], ':', color='crimson')
         axes[0].set_xlabel('$\ln \ell_B$')
         axes[0].set_ylabel('$\ln N_B$')
         axes[0].set_title('Power-Law Relationship')
         axes[1].plot(lB, logNB, color='navy')
-        axes[1].plot(lB, [(exp_c) * l + exp_A for l in lB], ':', color='crimson')
+        axes[1].plot(lB, [exp_c * l + exp_A for l in lB], ':', color='crimson')
         axes[1].set_xlabel('$\ell_B$')
         axes[1].set_ylabel('$\ln N_B$')
         axes[1].set_title('Exponential Relationship')
@@ -159,10 +179,28 @@ def is_fractal(results_filepath, plot=False, verbose=False, save_path=None, p_li
             print("Exponential score: {:.4f}.".format(exp_score))
         return False
 
-def find_fractal_dimension(loglB, logNB, p_list=[0.8,0.9,1.0]):
+
+def find_fractal_dimension(loglB, logNB, p_list=None):
     """
-    Finds the fractal dimension of a fractal network given the lB, NB distribution.
+    Finds the fractal dimension of a fractal network given the log(lB)-log(NB) distribution.
+    Fits a linear distribution of the form log(NB) = clog(lB) + A, where c is the fractal dimension dB.
+
+    Args:
+        loglB (list)                     : A list of values of log(lB)
+        logNB (list)                     : A list of values of log(NB)
+        p_list (:obj:`list`, optional)   : A list of percentages p.
+                                           The fractal dimension is given by the gradient of the best fit over p% of the
+                                                distribution.
+                                           Default is None.
+    Returns:
+        float : The optimal value of the intercept A.
+        float : The optimal value of the gradient c=dB, which is the fractal dimension.
+        float : The coefficient of determination of the linear fit with parameters A and c.
     """
+    # Initialise p_list as [1.0] if none given.
+    if not p_list:
+        p_list = [1.0]
+
     # Initialise the variables to store the best fit
     best_score = 0
     best_A = None
@@ -171,7 +209,7 @@ def find_fractal_dimension(loglB, logNB, p_list=[0.8,0.9,1.0]):
     # Look at sections of the curve at least 70% of the full length.
     for p in p_list:
         # Find the best score over portions of that width
-        (A, c), score = find_best_range(loglB, logNB, percentage=p)
+        A, c, score = find_best_range(loglB, logNB, percentage=p)
         # If this is better than the previous portion, then update the variables.
         if score > best_score:
             best_score = score
@@ -181,25 +219,50 @@ def find_fractal_dimension(loglB, logNB, p_list=[0.8,0.9,1.0]):
     return best_A, best_c, best_score
 
 
-def find_best_range(x, y, percentage=0.5):
+def find_best_range(x, y, percentage=1.0):
+    """
+    Finds the portion of the distribution which covers percentage% of the total distribution which best fits a linear
+        distribution.
+
+    Args:
+        x (list)                              : A list of values of x
+        y (list)                              : A list of values of y
+        percentage (:obj:`float`, optional)   : The percentage of the distribution to test.
+                                                Default is 1.0
+    Returns:
+        float : The optimal value of the intercept A.
+        float : The optimal value of the gradient c=dB, which is the fractal dimension.
+        float : The coefficient of determination of the linear fit with parameters A and c.
+    """
+    # Initialise variables as None.
     best_score = None
     best_A = None
     best_c = None
 
+    # Find the width of a window which covers percentage% of the distribution.
     sample_width = int(len(x) * percentage)
 
+    # Initialise a counter to track the window which is being searched.
     i = 0
+    # Consider a moving window across the distribution.
     while i + sample_width <= len(x):
+        # Find the values of x and y in the window.
         sublist_x = x[i:int(i + sample_width)]
         sublist_y = y[i:int(i + sample_width)]
         sublist_array_x = np.array(sublist_x).reshape((-1, 1))
         sublist_array_y = np.array(sublist_y).reshape((-1, 1))
+
+        # Fit a linear model to the window.
         model = LinearRegression()
         model.fit(sublist_array_x, sublist_array_y)
 
+        # Find the score of the new fit.
         score = model.score(sublist_array_x, sublist_array_y)
+
+        # Ignore false fits.
         if model.coef_ != 0:
-            if best_score == None:
+            # Update the best fit each time a better one is found.
+            if not best_score:
                 best_score = score
                 best_A = model.intercept_
                 best_c = model.coef_
@@ -209,5 +272,7 @@ def find_best_range(x, y, percentage=0.5):
                 best_A = model.intercept_
                 best_c = model.coef_
 
+        # Increment the counter
         i += 1
-    return (best_A, best_c), best_score
+    # Return the best fits.
+    return best_A, best_c, best_score
