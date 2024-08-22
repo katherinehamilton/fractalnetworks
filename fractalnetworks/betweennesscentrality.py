@@ -1,4 +1,6 @@
-"""This module contains functions to analyse the betweenness centralities of nodes and edges in fractal and non-fractal networks."""
+"""
+This module contains functions to analyse the betweenness centralities of nodes and edges in fractal networks.
+"""
 
 # Other module imports
 from .hubrepulsion import *
@@ -8,14 +10,21 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 
+# Calculating and visualising degree and node betweenness centrality distributions.
+
 def find_betweenness_centralities(G):
     """
     Calculates the normalised betweenness centrality distribution of the network.
 
+    Args:
+        G (igraph.Graph) : The network to be analysed.
+
     Returns:
-        (list): A list of betweenness centralities in the network. The i-th value is the betweenness centrality of the i-th node.
+        (list) : A list of betweenness centralities in the network.
+                 The i-th value is the betweenness centrality of the i-th node.
 
     """
+
     # Calculate the normalising constant for the betweenness centrality.
     N = G.vcount()
     normalising_constant = 2 / ((N - 2) * (N - 1))
@@ -34,13 +43,14 @@ def plot_degree_distribution(G, degrees=None, save_path=None, plot=True):
     Plots the degree distribution of a given network on a histogram.
 
     Args:
-        G (igraph.Graph): The network to be analysed.
-        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.
-        save_path (str) (opt): If a save path is given then the histogram is saved as a .png file. Default is None.
-        plot (Bool) (opt): If True, the histogram is displayed. Default is True.
-
-    Returns:
-        None
+        G (igraph.Graph)                 : The network to be analysed.
+        degrees (:obj:`list`, optional)  : A list of degrees in the network.
+                                           If already calculated, this parameter can be passed to prevent duplication.
+                                           Default is None, in which case the distribution is calculated.
+        save_path (:obj:`str`, optional) : If a save path is given then the histogram is saved as a .png file.
+                                           Default is None.
+        plot (:obj:`bool`, optional)     : If True, a histogram of the degree distribution is displayed.
+                                           Default is True.
     """
 
     # Find the degree distribution of the network.
@@ -54,7 +64,7 @@ def plot_degree_distribution(G, degrees=None, save_path=None, plot=True):
     plt.xlabel("Degree $k$")
     plt.ylabel("Frequency")
 
-    # If a save path is given, then save the file in that location.
+    # If a save path is given, then save the plot in that location.
     if save_path:
         plt.savefig(save_path)
 
@@ -71,13 +81,14 @@ def plot_betweenness_centralities(G, bcs=None, save_path=None, plot=True):
     Plots the betweenness centrality distribution of a given network on a histogram.
 
     Args:
-        G (igraph.Graph): The network to be analysed.
-        bcs (list) (opt): A list of betweenness centralities in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.
-        save_path (str) (opt): If a save path is given then the histogram is saved as a .png file. Default is None.
-        plot (Bool) (opt): If True, the histogram is displayed. Default is True.
-
-    Returns:
-        None
+        G (igraph.Graph)                 : The network to be analysed.
+        bcs (:obj:`list`, optional)      : A list of betweenness centralities in the network.
+                                           If already calculated, this parameter can be passed to prevent duplication.
+                                           Default is None, in which case the distribution is calculated.
+        save_path (:obj:`str`, optional) : If a save path is given then the histogram is saved as a .png file.
+                                           Default is None.
+        plot (:obj:`bool`, optional)     : If True, a histogram of the betweenness centrality distribution is displayed.
+                                           Default is True.
     """
     # Find the betweenness centrality distribution of the network.
     if not bcs:
@@ -102,19 +113,24 @@ def plot_betweenness_centralities(G, bcs=None, save_path=None, plot=True):
     plt.close()
 
 
+# Calculating the correlation between the degree and betweenness centrality of nodes.
+
 def calc_betweenness_degree_correlation(G, bcs=None, degrees=None):
     """
     Calculates the Pearson correlation coefficient for the degree and betweenness centrality of the nodes in a network.
     Fractal networks are hypothesised to be less correlated in this regard than non-fractal networks.
 
     Args:
-        G (igraph.Graph): The network to be analysed.
-        bcs (list) (opt): A list of betweenness centralities in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.
-        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.
-
+        G (igraph.Graph)                : The network to be analysed.
+        bcs (:obj:`list`, optional)     : A list of betweenness centralities in the network.
+                                          If already calculated, this parameter can be passed to prevent duplication.
+                                          Default is None, in which case the betweenness distribution is calculated.
+        degrees (:obj:`list`, optional) : A list of degrees in the network.
+                                          If already calculated, this parameter can be passed to prevent duplication.
+                                          Default is None, in which case the degree distribution is calculated
 
     Returns:
-        (float): Pearson's correlation coefficient.
+        (float) : Pearson's correlation coefficient of the degree and betweenness centrality distributions.
     """
 
     # Find the betweenness centrality distribution of the network.
@@ -135,17 +151,23 @@ def calc_betweenness_degree_correlation(G, bcs=None, degrees=None):
 
 def calc_betweenness_degree_correlation_non_hubs(G, hubs=None, hub_method=identify_hubs, bcs=None, degrees=None):
     """
-    Calculates the Pearson correlation coefficient for the degree and betweenness centrality of the non-hub nodes in a network.
+    Calculates the Pearson correlation coefficient for the degree and betweenness centrality of non-hub nodes.
 
     Args:
-        G (igraph.Graph): The network to be analysed.
-        hubs (list) (opt): A list of nodes indexes for hubs in the network. If no list is passed, the function with find the hubs with hub_method.
-        hub_method (func): The method by which to calculate hubs, if not give. Default is identify_hubs.
-        bcs (list) (opt): A list of betweenness centralities in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.
-        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.
+        G (igraph.Graph)                : The network to be analysed.
+        hubs (:obj:`list`, optional)    : A list of nodes indexes for hubs in the network.
+                                          If no list is passed, hubs are found using the hub_method.
+        hub_method (function)           : The method by which to calculate hubs, if hubs are not given.
+                                          Default is identify_hubs.
+        bcs (:obj:`list`, optional)     : A list of betweenness centralities in the network.
+                                          If already calculated, this parameter can be passed to prevent duplication.
+                                          Default is None, in which case the betweenness distribution is calculated.
+        degrees (:obj:`list`, optional) : A list of degrees in the network.
+                                          If already calculated, this parameter can be passed to prevent duplication.
+                                          Default is None, in which case the degree distribution is calculated.
 
     Returns:
-        (float): Pearson's correlation coefficient.
+        (float): Pearson's correlation coefficient of the degree and betweenness centrality distributions.
     """
     # Find the hubs of the network
     if not hubs:
@@ -174,17 +196,23 @@ def calc_betweenness_degree_correlation_non_hubs(G, hubs=None, hub_method=identi
 
 def calc_betweenness_degree_correlation_hubs(G, hubs=None, hub_method=identify_hubs, bcs=None, degrees=None):
     """
-    Calculates the Pearson correlation coefficient for the degree and betweenness centrality of the hub nodes in a network.
+    Calculates the Pearson correlation coefficient for the degree and betweenness centrality of the hubs in a network.
 
     Args:
-        G (igraph.Graph): The network to be analysed.
-        hubs (list) (opt): A list of nodes indexes for hubs in the network. If no list is passed, the function with find the hubs with hub_method.
-        hub_method (func): The method by which to calculate hubs, if not give. Default is identify_hubs.
-        bcs (list) (opt): A list of betweenness centralities in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.
-        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.
+        G (igraph.Graph)                       : The network to be analysed.
+        hubs (:obj:`list`, optional)           : A list of nodes indexes for hubs in the network.
+                                                 If no list is passed, hubs are found using the hub_method.
+        hub_method (:obj:`function`, optional) : The method by which to calculate hubs, if hubs are not given.
+                                                 Default is identify_hubs.
+        bcs (:obj:`list`, optional)            : A list of betweenness centralities in the network.
+                                                 If already calculated, passing this parameter prevents duplication.
+                                                 Default is None, in which case the distribution is calculated.
+        degrees (:obj:`list`, optional)        : A list of degrees in the network.
+                                                 If already calculated, passing this parameter prevents duplication.
+                                                 Default is None, in which case the degree distribution is calculated.
 
     Returns:
-        (float): Pearson's correlation coefficient.
+        (float): Pearson's correlation coefficient of the degree and betweenness centrality distributions.
     """
     # Find the hubs of the network
     if not hubs:
@@ -211,22 +239,27 @@ def calc_betweenness_degree_correlation_hubs(G, hubs=None, hub_method=identify_h
     return bc_series.corr(dd_series)
 
 
+# Finding characteristics of the betweenness centrality distribution.
+
 def analyse_betweenness_centrality(G, bcs=None):
     """
     Returns key attributes of the betweenness centrality distribution of a network.
-    Namely, finds the maximum, minimum and mean betweenness centrality, as well as the standard deviation and number of outliers with greater than expected betweenness.
+    Finds the maximum, minimum and mean betweenness centrality.
+    Also calculates the standard deviation and number of outliers with greater than expected betweenness centrality.
 
     Args:
-        G (igraph.Graph): Network to be analysed.
-        bcs (list) (opt): A list of betweenness centralities in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.
+        G (igraph.Graph)            : The network to be analysed.
+        bcs (:obj:`list`, optional) : A list of betweenness centralities in the network.
+                                      If already calculated, this parameter can be passed to prevent duplication.
+                                      Default is None, in which case the distribution is calculated.
 
     Returns:
-        max_bc (float): The maximum betweenness centrality in the network.
-        min_bc (float): The minimum betweenness centrality in the network.
-        mean_bc (float): The mean betweenness centrality in the network.
-        stdv_bc (float): The standard deviation of the betweenness centrality distribution in the network.
-        no_of_high_bc_nodes (int): Number of nodes with significantly higher betweenness centrality than expected.
-        mean_max_bc (float): The mean betweenness centrality of the top 10% of nodes in the network.
+        (float) : The maximum betweenness centrality in the network.
+        (float) : The minimum betweenness centrality in the network.
+        (float) : The mean betweenness centrality in the network.
+        (float) : The standard deviation of the betweenness centrality distribution in the network.
+        (int)   : Number of nodes with significantly higher betweenness centrality than expected.
+        (float) : The mean betweenness centrality of the top 10% of nodes in the network.
     """
     # Find the betweenness centrality distribution of the network.
     if not bcs:
@@ -256,16 +289,22 @@ def analyse_betweenness_centrality(G, bcs=None):
     # Find the mean of these values.
     mean_max_bc = np.mean(top_10_percent)
 
-    # Return the maximum, minimum, mean, standard deviation, number of outliers and mean of the top 10% of betweenness centralities.
+    # Return the maximum, minimum, mean, standard deviation, number of outliers and mean of the top 10% of values.
     return max_bc, min_bc, mean_bc, stdv_bc, no_of_high_bc_nodes, mean_max_bc
 
 
+# Analysing the edge betweenness centrality.
+
 def find_edge_betweenness_centralities(G):
     """
-    Calculates the normalised betweenness centrality distribution of the network.
+    Calculates the normalised edge betweenness centrality distribution of the network.
+
+    Args:
+        G (igraph.Graph) : The network to be analysed.
 
     Returns:
-        (list): A list of betweenness centralities in the network. The i-th value is the betweenness centrality of the i-th node.
+        (list) : A list of edge betweenness centralities in the network.
+                 The i-th value is the betweenness centrality of the i-th edge.
 
     """
     # Calculate the normalising constant for the betweenness centrality.
@@ -283,13 +322,20 @@ def find_edge_betweenness_centralities(G):
 
 def edge_vertex_betweenness_correlation(G, bcs=None, ebcs=None):
     """
-    Calculates the correlation between the betweenness centrality of edges and the betweenness centrality of its endpoints.
+    Calculates the correlation between the betweenness centrality of edges and the betweenness centrality of its
+        endpoints.
 
     Args:
-        G (igraph.Graph): The network to be analysed.
-        bcs (list) (opt): A list of betweenness centralities in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.
-        ebcs (list) (opt): A list of betweenness centralities in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.
+        G (igraph.Graph)             : The network to be analysed.
+        bcs (:obj:`list`, optional)  : A list of betweenness centralities in the network.
+                                       If already calculated, this parameter can be passed to prevent duplication.
+                                       Default is None, in which case the distribution is calculated.
+        ebcs (:obj:`list`, optional) : A list of edge betweenness centralities in the network.
+                                       If already calculated, this parameter can be passed to prevent duplication.
+                                       Default is None, in which case the distribution is calculated.
 
+    Returns:
+        (float): Pearson's correlation coefficient of the endpoint and edge betweenness centrality distributions.
     """
 
     # Find the betweenness centralities
@@ -338,10 +384,16 @@ def edge_betweenness_degree_correlation(G, degrees=None, ebcs=None):
     Calculates the correlation between the betweenness centrality of edges and the degree of its endpoints.
 
     Args:
-        G (igraph.Graph): The network to be analysed.
-        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.
-        ebcs (list) (opt): A list of betweenness centralities in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.
+        G (igraph.Graph)                : The network to be analysed.
+        degrees (:obj:`list`, optional) : A list of node degrees in the network.
+                                          If already calculated, this parameter can be passed to prevent duplication.
+                                          Default is None, in which case the distribution is calculated.
+        ebcs (:obj:`list`, optional)    : A list of edge betweenness centralities in the network.
+                                          If already calculated, this parameter can be passed to prevent duplication.
+                                          Default is None, in which case the distribution is calculated.
 
+    Returns:
+        (float): Pearson's correlation coefficient of the endpoint degree and edge betweenness centrality distributions.
     """
 
     # Find the degrees of nodes
@@ -387,17 +439,22 @@ def edge_betweenness_degree_correlation(G, degrees=None, ebcs=None):
 
 def find_hub_betweenness(G, hubs=None, hub_method=identify_hubs, bcs=None):
     """
-    Finds lists of betweenness centrality for the hubs and non-hubs in the network.
+    Finds lists of betweenness centralities for the hub and non-hub nodes in the network.
 
     Args:
-        G (igraph.Graph): The network to be analysed.
-        hubs (list) (opt): A list of hubs in the network, If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function finds the hubs.
-        hub_method (func) (opt): If the hubs are to be calculated, then this parameter specifies the method used to find hubs. Default is identify_hubs, which uses the Z score.
-        bcs (list) (opt): A list of betweenness centralities in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.
+        G (igraph.Graph)                       : The network to be analysed.
+        hubs (:obj:`list`, optional)           : A list of hubs in the network.
+                                                 If already calculated, passing this parameter prevents duplication.
+                                                 Default is None, in which case the hubs are found using hub_method.
+        hub_method (:obj:`function`, optional) : Specifies the method used to calculate hubs if hubs are not given.
+                                                 Default is identify_hubs.
+        bcs (:obj:`list`, optional)            : A list of betweenness centralities in the network.
+                                                 If already calculated, passing this parameter prevents duplication.
+                                                 Default is None, in which case the distribution is calculated.
 
     Returns:
-        hub_bcs (list): A list of betweenness centralities of hubs.
-        non_hub_bcs (list): A list of betweenness centralities of non-hubs.
+        (list) : A list of betweenness centralities of hubs.
+        (list) : A list of betweenness centralities of non-hubs.
     """
 
     # Find the hubs of the network
@@ -425,22 +482,31 @@ def find_hub_betweenness(G, hubs=None, hub_method=identify_hubs, bcs=None):
     return hub_bcs, non_hub_bcs
 
 
+# Analysing the paths between hubs.
+
 def hub_hub_path_betweenness(G, bcs=None, degrees=None, hubs=None, hub_method=identify_hubs, hub_hub_path_nodes=None):
     """
-    Analyses the betweenness of nodes on the paths between hubs with the number of their occurrences.
-    Returns a list of the betweenness centralities of these nodes, and the Pearson correlation coefficient between the number of occurrences on such a path and their centrality.
+    Analyses the betweenness of nodes on the paths between hubs.
+    Returns a list of the betweenness centralities of these nodes.
 
     Args:
-        G (igraph.Graph): The network to be analysed.
-        bcs (list) (opt): A list of betweenness centralities in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.
-        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.
-        hubs (list) (opt): A list of hubs in the network, If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function finds the hubs.
-        hub_method (func) (opt): If the hubs are to be calculated, then this parameter specifies the method used to find hubs. Default is identify_hubs, which uses the Z score.
-        hub_hub_path_nodes (list) (opt): A list of nodes on the paths between hubs. If None, this is calculated internally.
-        occurrences (dict) (opt): A dictionary of hub path nodes and their number of occurrences. If None, this is calculated internally.
+        G (igraph.Graph)                           : The network to be analysed.
+        bcs (:obj:`list`, optional)                : A list of betweenness centralities in the network.
+                                                     If already calculated, passing this parameter prevents duplication.
+                                                     Default is None, in which case the distribution is calculated.
+        degrees (:obj:`list`, optional)            : A list of degrees in the network.
+                                                     If already calculated, passing this parameter prevents duplication.
+                                                     Default is None, in which case the distribution is calculated.
+        hubs (:obj:`list`, optional)               : A list of hubs in the network.
+                                                     If already calculated, passing this parameter prevents duplication.
+                                                     Default is None, in which case the function finds the hubs.
+        hub_method (:obj:`function`, optional)     : Specifies the method used to calculate hubs if hubs are not given.
+                                                     Default is identify_hubs.
+        hub_hub_path_nodes (:obj:`list`, optional) : A list of nodes on the paths between hubs.
+                                                     If None given the function calculates them.
 
     Returns:
-        bcs_list (list): A list of betweenness centralities belonging to nodes found on the paths between hubs.
+        (list) : A list of betweenness centralities belonging to nodes found on the paths between hubs.
     """
 
     # Find the betweenness centrality distribution of the network.
@@ -456,10 +522,10 @@ def hub_hub_path_betweenness(G, bcs=None, degrees=None, hubs=None, hub_method=id
 
         # Find the hubs of the network
         if not hubs:
-            hubs = hub_method(G, degrees=None)
+            hubs = hub_method(G, degrees=degrees)
 
         # Find the hub path nodes and their occurrences
-        hub_hub_path_nodes = find_hub_hub_path_nodes(G, hubs=hubs, hub_method=hub_method, degrees=None)
+        hub_hub_path_nodes = find_hub_hub_path_nodes(G, hubs=hubs, hub_method=hub_method, degrees=degrees)
 
     # Find lists of betweenness centralities for the hub path nodes
     bcs_list = [bcs[i] for i in hub_hub_path_nodes]
@@ -472,19 +538,31 @@ def hub_hub_path_betweenness_by_occurrence(G, bcs=None, degrees=None, hubs=None,
                                            hub_hub_path_nodes=None, occurrences=None):
     """
     Analyses the betweenness of nodes on the paths between hubs with the number of their occurrences.
-    Returns a list of the betweenness centralities of these nodes, and the Pearson correlation coefficient between the number of occurrences on such a path and their centrality.
+    Returns a list of the betweenness centralities of these nodes,
+        and the Pearson correlation coefficient between the number of occurrences on such a path and their centrality.
 
     Args:
-        G (igraph.Graph): The network to be analysed.
-        bcs (list) (opt): A list of betweenness centralities in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.
-        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.
-        hubs (list) (opt): A list of hubs in the network, If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function finds the hubs.
-        hub_method (func) (opt): If the hubs are to be calculated, then this parameter specifies the method used to find hubs. Default is identify_hubs, which uses the Z score.
-        hub_hub_path_nodes (list) (opt): A list of nodes on the paths between hubs. If None, this is calculated internally.
-        occurrences (dict) (opt): A dictionary of hub path nodes and their number of occurrences. If None, this is calculated internally.
+        G (igraph.Graph)                           : The network to be analysed.
+        bcs (:obj:`list`, optional)                : A list of betweenness centralities in the network.
+                                                     If already calculated, passing this parameter prevents duplication.
+                                                     Default is None, in which case the distribution is calculated.
+        degrees (:obj:`list`, optional)            : A list of degrees in the network.
+                                                     If already calculated, passing this parameter prevents duplication.
+                                                     Default is None, in which case the distribution is calculated.
+        hubs (:obj:`list`, optional)               : A list of hubs in the network.
+                                                     If already calculated, passing this parameter prevents duplication.
+                                                     Default is None, in which case the function finds the hubs.
+        hub_method (:obj:`function`, optional)     : Specifies the method used to calculate hubs if hubs are not given.
+                                                     Default is identify_hubs.
+        hub_hub_path_nodes (:obj:`list`, optional) : A list of nodes on the paths between hubs.
+                                                     If None given the function calculates them.
+        occurrences (:obj:`dict`, optional)        : A dictionary of hub path nodes and their number of occurrences.
+                                                     If None given the function calculated them.
 
     Returns:
-        bcs_list (list): A list of betweenness centralities belonging to nodes found on the paths between hubs.
+        (list)  : A list of betweenness centralities belonging to nodes found on the paths between hubs.
+        (float) : Pearson's correlation coefficient of the betweenness centrality and number of occurrences on paths
+                  between hubs of nodes.
     """
 
     # Find the betweenness centrality distribution of the network.
@@ -500,7 +578,7 @@ def hub_hub_path_betweenness_by_occurrence(G, bcs=None, degrees=None, hubs=None,
 
         # Find the hubs of the network
         if not hubs:
-            hubs = hub_method(G, degrees=None)
+            hubs = hub_method(G, degrees=degrees)
 
         # Find the hub path nodes and their occurrences
         hub_hub_path_nodes, occurrences = find_hub_hub_path_node_occurrences(G, hubs=hubs, hub_method=hub_method,
@@ -516,22 +594,3 @@ def hub_hub_path_betweenness_by_occurrence(G, bcs=None, degrees=None, hubs=None,
 
     # Return the correlation coefficient for the variables.
     return bcs_list, bcs_series.corr(occ_series)
-
-
-def calculate_r1(G, degrees=None):
-    # Find the degree distribution
-    if not degrees:
-        degrees = find_degree_distribution(G)
-
-    # Initialise an empty list to store the reach of nodes.
-    r1 = []
-
-    # Find the degree of each node.
-    for node in G.vs():
-        d = G.degree(node)
-
-        # The reach of node v is d(v)+1
-        r1.append(d + 1)
-
-    # Return the r1 distribution
-    return r1

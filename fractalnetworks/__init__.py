@@ -1,5 +1,5 @@
 """Import fractalnetworks to use the fractal network toolkit.
-This module contains functions for the analysis of fractal networks. """
+This module contains functions for the analysis of fractal networks."""
 
 # Other module imports
 from .calculatingreach import *
