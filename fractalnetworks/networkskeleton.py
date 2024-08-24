@@ -14,7 +14,7 @@ def find_skel(G, ebcs=None):
                                        Default is None, meaning it will be calculated internally.
 
     Returns:
-        H (igraph.Graph) : The skeleton of the network G
+        (igraph.Graph) : The skeleton of the network G
     """
 
     # Find the edge betweenness centralities
@@ -56,7 +56,7 @@ def find_skeleton_eids(G, H=None, ebcs=None):
         ebcs (:obj:`list`, optional)      : The edge betweenness centralities of the network, if known. Default is None.
 
     Returns:
-        skeleton_edges (list) : List of IDs of edges in G which are in the skeleton of G.
+        (list) : List of IDs of edges in G which are in the skeleton of G.
     """
 
     # Find the skeleton of the network
@@ -87,8 +87,9 @@ def find_skeleton_edge_betweenness(G, H=None, ebcs=None):
         ebcs (:obj:`list`, optional)      : The edge betweenness centralities of the network, if known. Default is None.
 
     Returns:
-        skeleton_ebcs (list)     : A list of edge betweenness centralities of edges in the skeleton.
-        non_skeleton_ebcs (list) : A list of edge betweenness centralities of edges not in the skeleton.
+        (tuple) : A tuple containing two lists, specifically:
+                    a list of edge betweenness centralities of edges in the skeleton;
+                    and a list of edge betweenness centralities of edges not in the skeleton.
     """
 
     # Find the betweenness centrality distribution of the network.

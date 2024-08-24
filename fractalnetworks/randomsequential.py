@@ -3,17 +3,19 @@
 # Mathematics modules
 import random
 
+
 def random_sequential(G, lB):
     """
     Implements the random sequential box covering algorithm.
 
     Args:
-        G (igraph.Graph): The network to be analysed.
-        lB (int): The diameter of the boxes.
+        G (igraph.Graph) : The network to be analysed.
+        lB (int)         : The diameter of the boxes.
 
     Returns:
-        centres (list): A list of centre nodes found by the algorithm.
-        boxes (list): A list of lists, where each sublist is a box under the box-covering algorithm.
+        (tuple) : A tuple containing two lists, specifically:
+                    a list of centre nodes found by the algorithm;
+                    and a list of lists, where each sublist is a box under the box-covering algorithm.
     """
     # Find the radius of the boxes
     rB = int((lB - 1) / 2)
