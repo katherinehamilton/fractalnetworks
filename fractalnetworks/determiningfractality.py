@@ -230,9 +230,10 @@ def find_best_range(x, y, percentage=1.0):
         percentage (:obj:`float`, optional)   : The percentage of the distribution to test.
                                                 Default is 1.0
     Returns:
-        float : The optimal value of the intercept A.
-        float : The optimal value of the gradient c=dB, which is the fractal dimension.
-        float : The coefficient of determination of the linear fit with parameters A and c.
+        (tuple) : Tuple containing 3 floats.
+                    The first is the optimal value of the intercept A.
+                    The second is the optimal value of the gradient c=dB, which is the fractal dimension.
+                    The third is the coefficient of determination of the linear fit with parameters A and c.
     """
     # Initialise variables as None.
     best_score = None

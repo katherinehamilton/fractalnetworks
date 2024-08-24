@@ -254,12 +254,13 @@ def analyse_betweenness_centrality(G, bcs=None):
                                       Default is None, in which case the distribution is calculated.
 
     Returns:
-        (float) : The maximum betweenness centrality in the network.
-        (float) : The minimum betweenness centrality in the network.
-        (float) : The mean betweenness centrality in the network.
-        (float) : The standard deviation of the betweenness centrality distribution in the network.
-        (int)   : Number of nodes with significantly higher betweenness centrality than expected.
-        (float) : The mean betweenness centrality of the top 10% of nodes in the network.
+        (tuple) : Tuple containing a float, float, float, float, int and float, in order:
+                    the maximum betweenness centrality in the network;
+                    the minimum betweenness centrality in the network;
+                    the mean betweenness centrality in the network;
+                    the standard deviation of the betweenness centrality distribution in the network;
+                    number of nodes with significantly higher betweenness centrality than expected;
+                    the mean betweenness centrality of the top 10% of nodes in the network.
     """
     # Find the betweenness centrality distribution of the network.
     if not bcs:
@@ -453,8 +454,9 @@ def find_hub_betweenness(G, hubs=None, hub_method=identify_hubs, bcs=None):
                                                  Default is None, in which case the distribution is calculated.
 
     Returns:
-        (list) : A list of betweenness centralities of hubs.
-        (list) : A list of betweenness centralities of non-hubs.
+        (tuple) : Tuple containing two lists.
+                    The first is a list of betweenness centralities of hubs.
+                    The second is a list of betweenness centralities of non-hubs.
     """
 
     # Find the hubs of the network
@@ -560,9 +562,10 @@ def hub_hub_path_betweenness_by_occurrence(G, bcs=None, degrees=None, hubs=None,
                                                      If None given the function calculated them.
 
     Returns:
-        (list)  : A list of betweenness centralities belonging to nodes found on the paths between hubs.
-        (float) : Pearson's correlation coefficient of the betweenness centrality and number of occurrences on paths
-                  between hubs of nodes.
+        (tuple) : Tuple containing a list and a float.
+                    The list is alist of betweenness centralities belonging to nodes found on the paths between hubs.
+                    The float is the Pearson's correlation coefficient of the betweenness centrality and number of
+                    occurrences on paths sbetween hubs of nodes.
     """
 
     # Find the betweenness centrality distribution of the network.

@@ -245,8 +245,9 @@ def find_hub_hub_path_node_occurrences(G, hubs=None, hub_method=identify_hubs, d
                                                  Default is None, in which case the distribution is calculated.
 
     Returns:
-        (list): A list of nodes on the paths between hubs.
-        (dict): A dictionary with nodes as keys and the number of times they appear on shortest paths as values.
+        (tuple) : Tuple containing a list and dict, specifically:
+                    a list of nodes on the paths between hubs;
+                    and a dictionary with nodes as keys and the number of times they appear on shortest paths as values.
     """
 
     # Find the degree distribution of the network.

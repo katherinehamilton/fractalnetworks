@@ -57,8 +57,9 @@ def greedy_box_covering(G, lB, node_order=None):
                                              Default is None.
 
     Returns:
-        (dict) : The greedy colouring, with the nodes as keys and the colours as values.
-        (int)  : The number of boxes of diameter lB needed to cover the network.
+        (tuple) : Tuple containing a dict and int.
+                    The dict represents the greedy colouring, with the nodes as keys and the colours as values.
+                    The int is the number of boxes of diameter lB needed to cover the network.
     """
     # Find the dual graph
     dual_G = make_dual_graph(G, lB)
