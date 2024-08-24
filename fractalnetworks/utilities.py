@@ -87,8 +87,8 @@ def exact_log(x, y):
     Finds the exact logarithm of x base y.
 
     Args:
-        x (int): The value of x.
-        y (int): The logarithm base.
+        x (float): The value of x.
+        y (float): The logarithm base.
 
     Returns:
         power (int): The floor of the power, where y^power = x.

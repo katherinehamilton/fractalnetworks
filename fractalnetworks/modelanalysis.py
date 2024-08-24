@@ -9,18 +9,20 @@ import random
 import math
 import matplotlib.pyplot as plt
 
+
 def SHM_no_of_edges(m, n):
     """
     Finds the number of edges in an n-th generation SHM network with parameter m.
 
     Args:
-        m (int): The number of offspring added at each stage, as defined by the SHM model [2].
-        n (int): The number of iterations to perform of the SHM generative process [2].
+        m (int) : The number of offspring added at each stage,
+                    as defined by the SHM model (Song, Havlin, and Makse, 2006).
+        n (int) : The number of iterations to perform of the SHM generative process (Song, Havlin, and Makse, 2006).
 
     Returns:
-        (int): The number of edges in the network.
+        (int) : The number of edges in the network.
     """
-    # A SHM network has (1+2m)^(n-1) edges.
+    # An SHM network has (1+2m)^(n-1) edges.
     return (1 + 2 * m) ** (n - 1)
 
 
@@ -29,28 +31,30 @@ def SHM_no_of_nodes(m, n):
     Finds the number of nodes in an n-th generation SHM network with parameter m.
 
     Args:
-        m (int): The number of offspring added at each stage, as defined by the SHM model [2].
-        n (int): The number of iterations to perform of the SHM generative process [2].
+        m (int) : The number of offspring added at each stage,
+                    as defined by the SHM model (Song, Havlin, and Makse, 2006).
+        n (int) : The number of iterations to perform of the SHM generative process  (Song, Havlin, and Makse, 2006).
 
     Returns:
-        (int): The number of nodes in the network.
+        (int) : The number of nodes in the network.
     """
-    # A SHM network has (1+2m)^(n-1)+1 nodes.
+    # An SHM network has (1+2m)^(n-1)+1 nodes.
     return (1 + 2 * m) ** (n - 1) + 1
 
 
 def check_SHM_no_of_edges(m, n):
     """
-    Checks the validity of the number of edges of a SHM network calculating according to analytical arguments in [1]
+    Checks the validity of the number of edges of an SHM network calculating according to analytical arguments in [1]
 
     Args:
-        m (int): The parameter m in the SHM network model [3]
-         n(int): The parameter n in the SHM network model [3]
+        m (int) : The parameter m in the SHM network model (Song, Havlin, and Makse, 2006)
+        n (int) : The parameter n in the SHM network model (Song, Havlin, and Makse, 2006)
 
     Returns:
-        (Bool): True if the analytical and empirical value agree, False otherwise.
+        (bool) : True if the analytical and empirical value agree, False otherwise.
     """
-    # Generate an SHM network. The number of edges is independent of the probability p, so p is chosen randomly on the interval [0,1]
+    # Generate an SHM network.
+    # The number of edges is independent of the probability p, so p is chosen randomly on the interval [0,1]
     G = generate_SHM_model(m, random.random(), n, save=False)
 
     eG = len(G.edges())  # Empirical number of edges
@@ -62,16 +66,17 @@ def check_SHM_no_of_edges(m, n):
 
 def check_SHM_no_of_nodes(m, n):
     """
-    Checks the validity of the number of nodes of a SHM network calculating according to analytical arguments in [1]
+    Checks the validity of the number of nodes of an SHM network calculating according to analytical arguments in [1]
 
     Args:
-        m (int): The parameter m in the SHM network model [3]
-        n (int): The parameter n in the SHM network model [3]
+        m (int) : The parameter m in the SHM network model (Song, Havlin, and Makse, 2006)
+        n (int) : The parameter n in the SHM network model (Song, Havlin, and Makse, 2006)
 
     Returns:
-        (Bool): True if the analytical and empirical value agree, False otherwise.
+        (bool) : True if the analytical and empirical value agree, False otherwise.
     """
-    # Generate an SHM network. The number of nodes is independent of the probability p, so p is chosen randomly on the interval [0,1]
+    # Generate an SHM network.
+    # The number of nodes is independent of the probability p, so p is chosen randomly on the interval [0,1]
     G = generate_SHM_model(m, random.random(), n, save=False)
 
     N = len(G.nodes())  # Empirical number of nodes
@@ -83,22 +88,22 @@ def check_SHM_no_of_nodes(m, n):
 
 def SHM_p0_degree_prob(m, d, n):
     """
-    Calculates the probability P(d) for a given degree d in a SHM network with parameters m, n and p=0.
+    Calculates the probability P(d) for a given degree d in an SHM network with parameters m, n and p=0.
 
     Args:
-        m (int): The parameter m in the SHM network model [3]
-        d (int): The degree to find the probability density P(d) for.
-        n (int): The parameter N in the SHM network model [3]
+        m (int) : The parameter m in the SHM network model (Song, Havlin, and Makse, 2006).
+        d (int) : The degree to find the probability density P(d) for.
+        n (int) : The parameter N in the SHM network model (Song, Havlin, and Makse, 2006).
 
     Returns:
-        (float): The probability P(d) from the degree distribution.
+        (float) : The probability P(d) from the degree distribution.
     """
     # The maximum degree in a network with parameters m, N is (1+m)^(N-1) [4].
-    # Thus for any larger degree d, the probability of a node having degree d is 0.
+    # Thus, for any larger degree d, the probability of a node having degree d is 0.
     if d > (1 + m) ** (n - 1):
         return 0
 
-    # All degrees in a SHM network with p=0 are powers of (1+m)
+    # All degrees in an SHM network with p=0 are powers of (1+m)
     power, is_power = exact_log(d, (1 + m))  # Check if d is a power of (1+m) and find the exponent.
 
     # If d is a power, then we can find P(d).
@@ -117,7 +122,7 @@ def SHM_p0_degree_prob(m, d, n):
         # Find the total number of nodes in the network.
         total = SHM_no_of_nodes(m, n)
 
-        # The probability that a node has degree d is the number of nodes with degree d divided by the total number of nodes.
+        # The probability that a node has degree d is the number of nodes with degree d divided by the number of nodes.
         return no_deg_d / total
 
     # For all other degrees, return 0.
@@ -127,17 +132,17 @@ def SHM_p0_degree_prob(m, d, n):
 
 def check_SHM_p0_degree_prob(m, d, n):
     """
-    Checks the accuracy of the calculated degree probability, according to analytical arguments in [1].
+    Checks the accuracy of the calculated degree probability, according to analytical arguments.
 
     Args:
-        m (int): The parameter m in the SHM network model [2]
-        d (int): The degree to find the probability density P(d) for.
-        n (int): The parameter N in the SHM network model [2]
+        m (int) : The parameter m in the SHM network model (Song, Havlin, and Makse, 2006).
+        d (int) : The degree to find the probability density P(d) for.
+        n (int) : The parameter N in the SHM network model (Song, Havlin, and Makse, 2006).
 
     Returns:
-        (Bool): True if the two values agree, and False if they disagree.
+        (bool) : True if the two values agree, and False if they disagree.
     """
-    # Generate a SHM network with parameters m, n, p=0.
+    # Generate an SHM network with parameters m, n, p=0.
     G = generate_SHM_model(m, 0, n, save=False)
 
     # Find a list of the degrees in the network.
@@ -145,7 +150,7 @@ def check_SHM_p0_degree_prob(m, d, n):
 
     # Count the number of nodes with degree d.
     no_deg_d = degrees.count(d)
-    # The probability that a node has degree d is the number of nodes with degree d divided by the total number of nodes.
+    # The probability that a node has degree d is the number of nodes with degree d divided by the number of nodes.
     prob = no_deg_d / len(degrees)
 
     # Find the calculated probability according to the analytical arguments.
@@ -157,15 +162,16 @@ def check_SHM_p0_degree_prob(m, d, n):
 
 def SHM_p0_degree_dist(m, n):
     """
-    Calculates the degree distribution of a SHM network with p=0
+    Calculates the degree distribution of an SHM network with p=0
 
     Args:
-        m (int): The parameter m in the SHM network model to test [2]
-        n (int): The parameter N in the SHM network model [2]
+        m (int) : The parameter m in the SHM network model to test (Song, Havlin, and Makse, 2006).
+        n (int) : The parameter N in the SHM network model (Song, Havlin, and Makse, 2006).
 
     Returns:
-        degrees (list): A list of the degrees in the network.
-        degree_dist (list): A list of probabilities of a node having a given degree.
+        (tuple) : Tuple containing two lists, specifically:
+                    a list of the degrees in the network;
+                    a list of probabilities of a node having a given degree.
     """
     # Initialise empty lists for the degrees and the degree distribution
     degrees = []
@@ -186,16 +192,16 @@ def SHM_p0_degree_dist(m, n):
 
 def check_SHM_p0_degree_dist(m, n):
     """
-    Checks the accuracy of the calculated degree distribution, according to analytical arguments in [4].
+    Checks the accuracy of the calculated degree distribution, according to analytical arguments.
 
     Args:
-        m (int): The parameter m in the SHM network model [2]
-        n (int): The parameter n in the SHM network model [2]
+        m (int) : The parameter m in the SHM network model (Song, Havlin, and Makse, 2006).
+        n (int) : The parameter n in the SHM network model (Song, Havlin, and Makse, 2006).
 
     Returns:
-        (Bool): True if the two distributions agree, and False if they disagree.
+        (bool) : True if the two distributions agree, and False if they disagree.
     """
-    # Generate a SHM network with parameters m, N, p=0.
+    # Generate an SHM network with parameters m, N, p=0.
     G = generate_SHM_model(m, 0, n, save=False)
     # Find the degree distribution.
     degrees = [deg[1] for deg in G.degree()]
@@ -223,24 +229,24 @@ def check_SHM_p0_degree_dist(m, n):
 
 def SHM_p1_degree_prob(m, d, n):
     """
-    Calculates the probability P(d) for a given degree d in a SHM network with parameters m, N and p=1.
+    Calculates the probability P(d) for a given degree d in an SHM network with parameters m, N and p=1.
 
     Args:
-        m (int): The parameter m in the SHM network model [2]
-        d (int): The degree to find the probability density P(d) for.
-        n (int): The parameter n in the SHM network model [2]
+        m (int) : The parameter m in the SHM network model (Song, Havlin, and Makse, 2006).
+        d (int) : The degree to find the probability density P(d) for.
+        n (int) : The parameter n in the SHM network model (Song, Havlin, and Makse, 2006).
 
     Returns:
-        (float): The probability P(d) from the degree distribution.
+        (float) : The probability P(d) from the degree distribution.
     """
     # The maximum degree in a network with parameters m, N is m^(N-1) [4].
-    # Thus for any larger degree d, the probability of a node having degree d is 0.
-    if d > (m) ** (n - 1):
+    # Thus, for any larger degree d, the probability of a node having degree d is 0.
+    if d > m ** (n - 1):
         return 0
 
-    # All degrees in a SHM network are powers of m or 2 times a power of m.
+    # All degrees in an SHM network are powers of m or 2 times a power of m.
     power, is_power = exact_log(d, m)  # Check if d is a power of m, and find the exponent.
-    double_power, is_double_power = exact_log(d / 2, m)  # Check if 1/2 d is a power of m, and find the exponent.
+    double_power, is_double_power = exact_log(d/2, m)  # Check if 1/2 d is a power of m, and find the exponent.
 
     # The only case where d and 1/2 are both powers of m is when m = 2.
     # In this case, the calculation of the degree distribution is different.
@@ -262,7 +268,8 @@ def SHM_p1_degree_prob(m, d, n):
 
             # Find the total number of nodes.
         total = SHM_no_of_nodes(m, n)
-        # The probability of a given node having degree d is the number of nodes with that degree divided by the total number of nodes.
+        # The probability of a given node having degree d is the number of nodes with that degree
+        #   divided by the total number of nodes.
         return no_deg_d / total
 
     # The remaining code deals with all other cases when m != 2.
@@ -284,7 +291,8 @@ def SHM_p1_degree_prob(m, d, n):
 
         # Find the total number of nodes.
         total = SHM_no_of_nodes(m, n)
-        # The probability of a given node having degree d is the number of nodes with that degree divided by the total number of nodes.
+        # The probability of a given node having degree d is the number of nodes with
+        #   that degree divided by the total number of nodes.
         return no_deg_d / total
 
     # If 1/2 d is a power of m, then d is the degree of a node added in the k-th stage which is rewired,
@@ -298,28 +306,29 @@ def SHM_p1_degree_prob(m, d, n):
 
         # Find the total number of nodes.
         total = SHM_no_of_nodes(m, n)
-        # The probability of a given node having degree d is the number of nodes with that degree divided by the total number of nodes.
+        # The probability of a given node having degree d is the number of nodes
+        #   with that degree divided by the total number of nodes.
         return no_deg_d / total
 
     # If the degree d is a not a power of m, or 1/2 d is not a power of m, then no nodes will have degree d.
-    # Thus the probability is 0.
+    # Thus, the probability is 0.
     else:
         return 0
 
 
 def check_SHM_p1_degree_prob(m, d, n):
     """
-    Checks the accuracy of the calculated degree probability, according to analytical arguments in [4].
+    Checks the accuracy of the calculated degree probability, according to analytical arguments.
 
     Args:
-        m (int): The parameter m in the SHM network model [2]
-        d (int): The degree to find the probability density P(d) for.
-        n (int): The parameter n in the SHM network model [2]
+        m (int) : The parameter m in the SHM network model (Song, Havlin, and Makse, 2006).
+        d (int) : The degree to find the probability density P(d) for.
+        n (int) : The parameter n in the SHM network model (Song, Havlin, and Makse, 2006).
 
     Returns:
-        (Bool): True if the two values agree, and False if they disagree.
+        (bool) : True if the two values agree, and False if they disagree.
     """
-    # Generate a SHM network with parameters m, N, p=1.
+    # Generate an SHM network with parameters m, N, p=1.
     G = generate_SHM_model(m, 1, n, save=False)
 
     # Find a list of the degrees in the network.
@@ -327,7 +336,8 @@ def check_SHM_p1_degree_prob(m, d, n):
 
     # Count the number of nodes with degree d.
     no_deg_d = degrees.count(d)
-    # The probability that a node has degree d is the number of nodes with degree d divided by the total number of nodes.
+    # The probability that a node has degree d is the number of nodes
+    #   with degree d divided by the total number of nodes.
     prob = no_deg_d / len(degrees)
 
     # Find the calculated probability according to the analytical arguments.
@@ -339,15 +349,16 @@ def check_SHM_p1_degree_prob(m, d, n):
 
 def SHM_p1_degree_dist(m, n):
     """
-    Calculates the degree distribution of a SHM network with p=0
+    Calculates the degree distribution of an SHM network with p=0
 
     Args:
-        m (int): The parameter m in the SHM network model to test [2]
-        n (int): The parameter n in the SHM network model [2]
+        m (int): The parameter m in the SHM network model to test (Song, Havlin, and Makse, 2006)
+        n (int): The parameter n in the SHM network model (Song, Havlin, and Makse, 2006)
 
     Returns:
-        degrees (list): A list of the degrees in the network.
-        degree_dist (list): A list of probabilities of a node having a given degree, where degree_dist[i] is P(degrees[i])
+        (tuple) : A tuple containing two lists, specifically:
+                    a list of the degrees in the network;
+                    and a list of probabilities of a node having a given degree, where degree_dist[i] is P(degrees[i])
     """
     # Initialise empty lists for the degrees and degree distribution.
     degrees = []
@@ -359,7 +370,7 @@ def SHM_p1_degree_dist(m, n):
         for k in range(n, 0, -1):
             # The degree of nodes generated at stage k is m^(N-k)
             # For m=2, nodes generates at stage k+1 which are rewired also have degree m^(N-k)
-            d = (m) ** (n - k)
+            d = m ** (n - k)
 
             # Add the degree d to the list of degrees, and the probability P(d) to the degree distribution.
             degrees.append(d)
@@ -371,7 +382,7 @@ def SHM_p1_degree_dist(m, n):
         for k in range(n, 0, -1):
 
             # The degree of nodes generated at stage k is m^(N-k)
-            d = (m) ** (n - k)
+            d = m ** (n - k)
             # Add the degree d to the list of degrees, and the probability P(d) to the degree distribution.
             degrees.append(d)
             degree_dist.append(SHM_p1_degree_prob(m, d, n))
@@ -379,7 +390,7 @@ def SHM_p1_degree_dist(m, n):
             # For all stages except the first, there are also some nodes which are rewired.
             # These have degree 2m^(N-k)
             if not k == 1:
-                d = 2 * (m) ** (n - k)
+                d = 2 * (m ** (n - k))
 
                 # Add the degree d to the list of degrees, and the probability P(d) to the degree distribution.
                 degrees.append(d)
@@ -391,16 +402,16 @@ def SHM_p1_degree_dist(m, n):
 
 def check_SHM_p1_degree_dist(m, n):
     """
-    Checks the accuracy of the calculated degree distribution, according to analytical arguments in [4].
+    Checks the accuracy of the calculated degree distribution, according to analytical arguments.
 
     Args:
-        m (int): The parameter m in the SHM network model [2]
-        n (int): The parameter n in the SHM network model [2]
+        m (int) : The parameter m in the SHM network model (Song, Havlin, and Makse, 2006).
+        n (int) : The parameter n in the SHM network model (Song, Havlin, and Makse, 2006).
 
     Returns:
-        (Bool): True if the two distributions agree, and False if they disagree.
+        (bool) : True if the two distributions agree, and False if they disagree.
     """
-    # Generate a SHM network with parameters m, N, p=1.
+    # Generate an SHM network with parameters m, N, p=1.
     G = generate_SHM_model(m, 1, n, save=False)
     # Find the degree distribution.
     degrees = [deg[1] for deg in G.degree()]
@@ -428,23 +439,23 @@ def check_SHM_p1_degree_dist(m, n):
 
 def check_SHM_p0_lambda(m_max, n, plot=False, verbose=False):
     """
-    Verfies that the analytical result for lambda agrees with the empirical result.
+    Verifies that the analytical result for lambda agrees with the empirical result (Song, Havlin, and Makse, 2006).
 
     Args:
-        m (int): The maximum value of parameter m in the SHM network model to test [2]
-        n (int): The parameter n in the SHM network model [2]
-        plot (Bool) (opt): If True, plots a comparison of the results. Default is False.
-        verbose (Bool) (opt): If True, prints results to terminal. Default is False.
+        m_max (int)                     : The maximum value of parameter m in the SHM network model to test.
+        n (int)                         : The parameter n in the SHM network model.
+        plot (:obj:`bool`, optional)    : If True, plots a comparison of the results. Default is False.
+        verbose (:obj:`bool`, optional) : If True, prints results to terminal. Default is False.
 
     Returns:
-        empirical (list): A list of the values of lambda found by fitting a power law distribution to empirical data.
-        analystical (list): A list of the values of lambda determined by the analytical argument in [4]
+        (tuple) : Tuple containing two lists, specifically:
+                    a list of the values of lambda found by fitting a power law distribution to empirical data;
+                    and a list of the values of lambda determined by the analytical argument.
     """
 
     # Initialise empty lists to store the empirical and analytical results.
     empirical = []
     analytical = []
-    power = []
 
     # Create a list of all possible values of m
     ms = [m for m in range(2, m_max + 1)]
@@ -487,14 +498,14 @@ def check_SHM_p0_lambda(m_max, n, plot=False, verbose=False):
 
 def HADG_no_of_edges(m, n):
     """
-    Finds the number of edges in an n-th generation HADG network with parameter m.
+    Finds the number of edges in an n-th generation HADG network with parameter m (Kuang et al., 2013).
 
     Args:
-        m (int): The number of offspring added at each stage, as defined by the HADG model [2].
-        n (int): The number of iterations to perform of the HADG generative process [2].
+        m (int) : The number of offspring added at each stage, as defined by the HADG model (Kuang et al., 2013).
+        n (int) : The number of iterations to perform of the HADG generative process (Kuang et al., 2013).
 
     Returns:
-        (int): The number of edges in the network.
+        (int) : The number of edges in the network.
     """
     # A HADG network has (3+2m)^(n-1) edges.
     return (3 + 2 * m) ** (n - 1)
@@ -502,14 +513,14 @@ def HADG_no_of_edges(m, n):
 
 def HADG_no_of_nodes(m, n):
     """
-    Finds the number of nodes in an n-th generation HADG network with parameter m.
+    Finds the number of nodes in an n-th generation HADG network with parameter m (Kuang et al., 2013).
 
     Args:
-        m (int): The number of offspring added at each stage, as defined by the HADG model [2].
-        n (int): The number of iterations to perform of the HADG generative process [2].
+        m (int) : The number of offspring added at each stage, as defined by the HADG model (Kuang et al., 2013).
+        n (int) : The number of iterations to perform of the HADG generative process (Kuang et al., 2013).
 
     Returns:
-        N (int): The number of nodes in the network.
+        N (int) : The number of nodes in the network.
     """
     # Calculate the number of nodes
     N = 2
@@ -522,16 +533,17 @@ def HADG_no_of_nodes(m, n):
 
 def check_HADG_no_of_edges(m, n):
     """
-    Checks the validity of the number of edges of a HADG network calculating according to analytical arguments in [1]
+    Checks the validity of the number of edges of a HADG network calculating according to analytical arguments.
 
     Args:
-        m (int): The parameter m in the HADG network model [3]
-        n(int): The parameter n in the HADG network model [3]
+        m (int) : The parameter m in the HADG network model (Kuang et al., 2013).
+        n (int) : The parameter n in the HADG network model (Kuang et al., 2013).
 
     Returns:
-        (Bool): True if the analytical and empirical value agree, False otherwise.
+        (bool) : True if the analytical and empirical value agree, False otherwise.
     """
-    # Generate an SHM network. The number of edges is independent of the parameters a, b and T, so they are chosen randomly on the interval [0,1]
+    # Generate an SHM network.
+    # The number of edges is independent of the parameters a, b and T, so they are chosen randomly on the interval [0,1]
     G = generate_HADG_model(m, random.random(), random.random(), random.random(), n, save=False)
 
     eG = len(G.edges())  # Empirical number of edges
@@ -543,16 +555,17 @@ def check_HADG_no_of_edges(m, n):
 
 def check_HADG_no_of_nodes(m, n):
     """
-    Checks the validity of the number of nodes of a HADG network calculating according to analytical arguments in [1]
+    Checks the validity of the number of nodes of a HADG network calculating according to analytical arguments.
 
     Args:
-        m (int): The parameter m in the HADG network model [3]
-        n(int): The parameter n in the HADG network model [3]
+        m (int) : The parameter m in the HADG network model (Kuang et al., 2013).
+        n (int) : The parameter n in the HADG network model (Kuang et al., 2013).
 
     Returns:
-        (Bool): True if the analytical and empirical value agree, False otherwise.
+        (bool) : True if the analytical and empirical value agree, False otherwise.
     """
-    # Generate an SHM network. The number of edges is independent of the parameters a, b and T, so they are chosen randomly on the interval [0,1]
+    # Generate an SHM network.
+    # The number of edges is independent of the parameters a, b and T, so they are chosen randomly on the interval [0,1]
     G = generate_HADG_model(m, random.random(), random.random(), random.random(), n, save=False)
 
     N = len(G.nodes())  # Empirical number of edges
@@ -564,7 +577,7 @@ def check_HADG_no_of_nodes(m, n):
 
 def uv_flower_no_of_edges(u, v, n):
     """
-    Finds the number of edges in an n-th generation (u,v)-flower network.
+    Finds the number of edges in an n-th generation (u,v)-flower network (Rozenfeld, Havlin, and ben-Avraham, 2007).
 
     Args:
         u (int): Value of u, i.e. path length of one of the parallel paths.
@@ -580,7 +593,7 @@ def uv_flower_no_of_edges(u, v, n):
 
 def uv_flower_no_of_nodes(u, v, n):
     """
-    Finds the number of nodes in an n-th generation (u,v)-flower network.
+    Finds the number of nodes in an n-th generation (u,v)-flower network (Rozenfeld, Havlin, and ben-Avraham, 2007).
 
     Args:
         u (int): Value of u, i.e. path length of one of the parallel paths.
@@ -598,7 +611,7 @@ def uv_flower_no_of_nodes(u, v, n):
 
 def check_uv_flower_no_of_edges(u, v, n):
     """
-    Checks the validity of the number of edges of a (u,v)-flower network calculating according to analytical arguments in [1]
+    Checks the validity of the number of edges of a (u,v)-flower network calculating according to analytical arguments.
 
     Args:
         u (int): Value of u, i.e. path length of one of the parallel paths.
@@ -606,9 +619,9 @@ def check_uv_flower_no_of_edges(u, v, n):
         n (int): Number of generations.
 
     Returns:
-        (Bool): True if the analytical and empirical value agree, False otherwise.
+        (bool) : True if the analytical and empirical value agree, False otherwise.
     """
-    # Generate an SHM network. The number of edges is independent of the parameters a, b and T, so they are chosen randomly on the interval [0,1]
+    # Generate a (u,v)-flower network
     G = generate_uv_flower(u, v, n)
 
     eG = len(G.edges())  # Empirical number of edges
@@ -620,17 +633,17 @@ def check_uv_flower_no_of_edges(u, v, n):
 
 def check_uv_flower_no_of_nodes(u, v, n):
     """
-    Checks the validity of the number of edges of a (u,v)-flower network calculating according to analytical arguments in [1]
+    Checks the validity of the number of edges of a (u,v)-flower network calculating according to analytical arguments.
 
     Args:
-        u (int): Value of u, i.e. path length of one of the parallel paths.
-        v (int): Value of v, i.e. path length of one of the parallel paths.
-        n (int): Number of generations.
+        u (int) : Value of u, i.e. path length of one of the parallel paths.
+        v (int) : Value of v, i.e. path length of one of the parallel paths.
+        n (int) : Number of generations.
 
     Returns:
-        (Bool): True if the analytical and empirical value agree, False otherwise.
+        (bool) : True if the analytical and empirical value agree, False otherwise.
     """
-    # Generate an SHM network. The number of edges is independent of the parameters a, b and T, so they are chosen randomly on the interval [0,1]
+    # Generate a (u,v)-flower network.
     G = generate_uv_flower(u, v, n)
 
     N = len(G.nodes())  # Empirical number of edges
