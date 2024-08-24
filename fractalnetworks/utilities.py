@@ -22,13 +22,13 @@ def read_graph(filepath):
     """
     Checks the filetype and calls the correct function to read the graph.
     For any file not in .gml format, an additional .gml file is created.
-    Currently supports .mtx, .txt, .edge (.EDGE) and .gml filetypes.
+    Supports .mtx, .txt, .edge (.EDGE) and .gml filetypes.
 
     Args:
-        filepath (str): Path for the network file.
+        filepath (str) : Path for the network file.
 
     Returns:
-        G (igraph.Graph): The network from the file stored as a graph.
+        (igraph.Graph) : The network from the file stored as a graph.
     """
 
     # .gml files
@@ -65,14 +65,16 @@ def read_graph(filepath):
 
 def read_mtx_graph_format(filepath):
     """
-    Reads graphs stored in the .mtx file format. Use with, for example, graphs from www.networkrepository.com.
-    Note: Some files may need to be edited to make sure that scipy.io can read them. Files should have a header starting with %%MatrixMarket and a single line denoted the number of values in each column.
+    Reads graphs stored in the .mtx file format.
+    Use with, for example, graphs from www.networkrepository.com.
+    Some files may need to be edited to make sure that scipy.io can read them.
+    Files should have a header starting with %%MatrixMarket and a single line with the number of values in each column.
 
     Args:
-        filepath (str): Filepath to .mtx file
+        filepath (str) : Filepath to .mtx file
 
     Returns:
-        G (networkx.Graph): Network read from file.
+        (networkx.Graph) : Network read from file.
     """
     # Read the file using the scipy.io file reader.
     mmf = mmread(filepath)
@@ -87,15 +89,16 @@ def exact_log(x, y):
     Finds the exact logarithm of x base y.
 
     Args:
-        x (float): The value of x.
-        y (float): The logarithm base.
+        x (float) : The value of x.
+        y (float) : The logarithm base.
 
     Returns:
-        power (int): The floor of the power, where y^power = x.
-        x==1 (Bool): True if x is an exact power of y, False otherwise.
+        (tuple) : Tuple containing an int and bool, specifically:
+                    the floor of the power, where y^power = x;
+                    and value True if x is an exact power of y, False otherwise.
     """
     power = 0
-    while (x % y == 0):
+    while x % y == 0:
         x = x / y
         power += 1
     return power, x == 1
@@ -106,37 +109,45 @@ def find_best_power_law_fit(x, y, A_min=0, A_max=10000, c_min=0, c_max=12.5, lin
     Finds the best exponential fit according to the sum of squares deviation of the form y = Ax^{-c}
 
     Args:
-        x (list): The values of x in the distribution.
-        y (list): The values of y in the distribution.
-        A_min (int) (opt): The minimum value of A to be tested. Can be adjusted to find more accurate results. Default is 0.
-        A_max (int) (opt): The maximum value of A to be tested. Can be adjusted to find more accurate results. Default is 10000.
-        c_min (int) (opt): The minimum value of c to be tested. Can be adjusted to find more accurate results. Default is 0.
-        c_max (int) (opt): The maximum value of c to be tested. Can be adjusted to find more accurate results. Default is 12.5.
-        linspace_N (int) (opt): The number of values of A and c to be checked in the respective ranges. Default is 100.
+        x (list)                          : The values of x in the distribution.
+        y (list)                          : The values of y in the distribution.
+        A_min (:obj:`int`, optional)      : The minimum value of A to be tested.
+                                            Can be adjusted to find more accurate results. Default is 0.
+        A_max (:obj:`int`, optional)      : The maximum value of A to be tested.
+                                            Can be adjusted to find more accurate results. Default is 10000.
+        c_min (:obj:`int`, optional)      : The minimum value of c to be tested.
+                                            Can be adjusted to find more accurate results. Default is 0.
+        c_max (:obj:`int`, optional)      : The maximum value of c to be tested.
+                                            Can be adjusted to find more accurate results. Default is 12.5.
+        linspace_N (:obj:`int`, optional) : The number of values of A and c to be checked in the respective ranges.
+                                            Default is 100.
 
     Returns:
-        best_fit (tuple): The coefficients A and c from the best power law approximation.
-        best_score (float): The sum of squares regression of this approximation.
+        (tuple) : A tuple containing a tuple and float, specifically:
+                    a tuple of the coefficients A and c from the best power law approximation;
+                    and the sum of squares regression of this approximation.
     """
-    # Initialise empty variables for the best fit (i.e. best A and c) and the best SSR score.
+    # Initialise empty variables for the best fit (i.e. the best A and c) and the best SSR score.
     best_fit = (None, None)
     best_score = None
 
     # Iterate through linspace_N values of A in the range [A_min, A_max].
-    for A in np.linspace(A_min, A_max, 100):
+    for A in np.linspace(A_min, A_max, linspace_N):
         # Iterate through linspace_N values of c in the range [c_min, c_max].
-        for c in np.linspace(c_min, c_max, 100):
+        for c in np.linspace(c_min, c_max, linspace_N):
 
             # Find the values of y according to the power law fractal model with parameters A and c.
             est_y = [A * i ** (-c) for i in x]
             # Calculate the sum of squares regression.
             score = sum_of_squares_error(y, est_y)
 
-            # If the best score is yet to be updated (i.e. this is the first iteration) then set the current A, c and SSR to the best fit values.
-            if best_score == None:
+            # If the best score is yet to be updated (i.e. this is the first iteration)
+            #   then set the current A, c and SSR to the best fit values.
+            if not best_score:
                 best_score = score
                 best_fit = (A, c)
-            # If the new SSR score is smaller than the current best, then update the best score and update the best fit to the current A and c.
+            # If the new SSR score is smaller than the current best,
+            #   then update the best score and update the best fit to the current A and c.
             elif score < best_score:
                 best_score = score
                 best_fit = (A, c)
@@ -150,11 +161,11 @@ def sum_of_squares_error(y, est_y):
     Finds the value SSR for the sum of squares regression method using a true and model distribution.
 
     Args:
-        y (list): The true or measured distribution.
-        est_y (list): The model distribution to be compared.
+        y (list)     : The true or measured distribution.
+        est_y (list) : The model distribution to be compared.
 
     Returns:
-        sum_of_squares (float): The sum of squares regression
+        (float) : The sum of squares regression
     """
     sum_of_squares = 0  # Initialise the sum as zero.
     # Iterate for each pair of values in the true/model distributions.
@@ -171,19 +182,26 @@ def swap_edges_at_random(G, number_edges_to_swap):
     Removes two randomly chosen edges (a,b) and (c,d) and replaces them with edges (a,d) and (c,b).
 
     Args:
-        G (igraph.Graph): The original network.
-        number_edges_to_swap (int): The number of edges to swap.
+        G (igraph.Graph)           : The original network.
+        number_edges_to_swap (int) : The number of edges to swap.
 
     Returns:
-        H (igraph.Graph): The new, uncorrelated network with the same degree distribution as G.
+        (igraph.Graph) : The new, uncorrelated network with the same degree distribution as G.
     """
+    # Create a copy of the graph
+    H = G.copy()
+
     # Iterate number_edges_to_swap times.
     for i in range(number_edges_to_swap):
 
-        # Create a copy of the graph
-        H = G.copy()
+        # Reset variables for a, b, c and d.
+        a = None
+        b = None
+        c = None
+        d = None
 
-        # There are certain bad swaps we could make, e.g. swapping (a,b), (c,a) would create a self loop and an edge (c,b) might already exist.
+        # There are certain bad swaps we could make,
+        #   e.g. swapping (a,b), (c,a) would create a self loop and an edge (c,b) might already exist.
         # Set this flag to False until we find a good swap.
         good_swap = False
 
@@ -219,19 +237,19 @@ def plot_scatter_graph(fractal_attribute, non_fractal_attribute, fractal_Ns, non
     Plots a comparison of the properties of fractal and non-fractal networks on a scatter graph.
 
     Args:
-        fractal_attributes (list): A list of an attribute of fractal networks.
-        non_fractal_attributes (list): A list of an attribute of non-fractal networks.
-        fractal_Ns (list): A list of fractal network orders.
-        non_fractal_Ns (list): A list of non-fractal network orders.
-        y_label (str): Label for the y-axis, i.e. the attribute being plotted.
-        save_path (str) (opt): The file path to save the figure to, if given. Default is None.
-        plot (Bool) (opt): If True, display the network. Default is True.
+        fractal_attribute (list)         : A list of an attribute of fractal networks.
+        non_fractal_attribute (list)     : A list of an attribute of non-fractal networks.
+        fractal_Ns (list)                : A list of fractal network orders.
+        non_fractal_Ns (list)            : A list of non-fractal network orders.
+        y_label (str)                    : Label for the y-axis, i.e. the attribute being plotted.
+        save_path (:obj:`str`, optional) : The file path to save the figure to, if given. Default is None.
+        plot (:obj:`bool`, optional)     : If True, display the network. Default is True.
     """
     # Find the median of both sets
     fractal_median = np.median(fractal_attribute)
     non_fractal_median = np.median(non_fractal_attribute)
 
-    # The x axis ranges from the smallest network order N to the largest.
+    # The x-axis ranges from the smallest network order N to the largest.
     x = np.linspace(min(min(fractal_Ns), min(non_fractal_Ns)), max(max(fractal_Ns), max(non_fractal_Ns)), 1001)
 
     # Plot the fractal attribute
@@ -264,67 +282,16 @@ def plot_scatter_graph(fractal_attribute, non_fractal_attribute, fractal_Ns, non
     plt.close()
 
 
-def plot_scatter_graph_random_networks(fractal_attribute, random_attribute, fractal_Ns, random_Ns, y_label,
-                                       save_path=None, plot=True):
-    """
-    Plots a comparison of the properties of fractal networks and their random counterparts on a scatter graph.
-
-    Args:
-        fractal_attributes (list): A list of an attribute of fractal networks.
-        random_attributes (list): A list of an attribute of the random networks.
-        fractal_Ns (list): A list of fractal network orders.
-        random_Ns (list): A list of random network orders.
-        y_label (str): Label for the y-axis, i.e. the attribute being plotted.
-        save_path (str) (opt): The file path to save the figure to, if given. Default is None.
-        plot (Bool) (opt): If True, display the network. Default is True.
-    """
-    # Find the median of both sets
-    fractal_median = np.median(fractal_attribute)
-    random_median = np.median(random_attribute)
-
-    # The x axis ranges from the smallest network order N to the largest.
-    x = np.linspace(min(min(fractal_Ns, random_Ns)), max(max(fractal_Ns, random_Ns)), 1001)
-
-    # Plot the fractal attribute
-    plt.scatter(fractal_Ns, fractal_attribute, marker="o", facecolors='none', edgecolors='navy', label="Fractal")
-    # Plot the non-fractal attribute
-    plt.scatter(random_Ns, random_attribute, marker="x", facecolors='seagreen', label="Random")
-
-    # Plot fractal median
-    plt.plot(x, [fractal_median] * len(x), ':', color="navy")
-    # Plot non-fractal median
-    plt.plot(x, [random_median] * len(x), ':', color="seagreen")
-
-    # Label the axes
-    plt.xlabel("$|G|$")
-    plt.ylabel(y_label)
-
-    # Add a legend
-    plt.legend()
-
-    # If a save path is given, then save the file in that location.
-    if save_path:
-        plt.savefig(save_path)
-
-    # If plot is True display the graph
-    if plot:
-        plt.show()
-
-    # Close the figure
-    plt.close()
-
-
 def clean_lists_of_NaNs(list1, list2):
     """
     Cleans lists of NaN values before plotting.
 
     Args:
-        list1 (list): The list to be plotted on the x-axis.
-        list2 (list): The list to be plotted on the y-axis, to be checked for NaN values.
+        list1 (list) : The list to be plotted on the x-axis.
+        list2 (list) : The list to be plotted on the y-axis, to be checked for NaN values.
 
     Returns:
-        list1_clean (list): A clean version of list1.
-        list2_clean (list): A clean version of list2.
+        (tuple) : A tuple of two lists, specifically a clean version of list1 and a clean version of list2.
     """
 
     # Find a list of indexes where the value in the second list is NaN
@@ -343,9 +310,9 @@ def display_network(G, save_path=None, plot=True):
     Displays a given network.
 
     Args:
-        G (igraph.Graph): The network to be displayed.
-        save_path (str) (opt): The filepath to save the figure to, if given. Default is None.
-        plot (Bool) (opt): If True, the network is displayed inline. Default is True.
+        G (igraph.Graph)                 : The network to be displayed.
+        save_path (:obj:`str`, optional) : The filepath to save the figure to, if given. Default is None.
+        plot (:obj:`bool`, optional)     : If True, the network is displayed inline. Default is True.
     """
     # Plot the network
     fig, ax = plt.subplots()
@@ -375,17 +342,23 @@ def find_best_exp_fit(x, y, A_min=0, A_max=10000, c_min=0, c_max=12.5, linspace_
     Args:
         x (list): The values of x in the distribution.
         y (list): The values of y in the distribution.
-        A_min (int) (opt): The minimum value of A to be tested. Can be adjusted to find more accurate results. Default is 0.
-        A_max (int) (opt): The maximum value of A to be tested. Can be adjusted to find more accurate results. Default is 100.
-        c_min (int) (opt): The minimum value of c to be tested. Can be adjusted to find more accurate results. Default is 0.
-        c_max (int) (opt): The maximum value of c to be tested. Can be adjusted to find more accurate results. Default is 2.
-        linspace_N (int) (opt): The number of values of A and c to be checked in the respective ranges. Default is 100.
+        A_min (:obj:`int`, optional)      : The minimum value of A to be tested.
+                                            Can be adjusted to find more accurate results. Default is 0.
+        A_max (:obj:`int`, optional)      : The maximum value of A to be tested.
+                                            Can be adjusted to find more accurate results. Default is 100.
+        c_min (:obj:`int`, optional)      : The minimum value of c to be tested.
+                                            Can be adjusted to find more accurate results. Default is 0.
+        c_max (:obj:`int`, optional)      : The maximum value of c to be tested.
+                                            Can be adjusted to find more accurate results. Default is 2.
+        linspace_N (:obj:`int`, optional) : The number of values of A and c to be checked in the respective ranges.
+                                            Default is 100.
 
     Returns:
-        best_fit (tuple): The coefficients A and c from the best exponential approximation.
-        best_score (float): The sum of squares regression of this approximation.
+        (tuple) : A tuple containing a tuple and float, specifically:
+                    the coefficients A and c from the best exponential approximation;
+                    and the sum of squares regression of this approximation.
     """
-    # Initialise empty variables for the best fit (i.e. best A and c) and the best SSR score.
+    # Initialise empty variables for the best fit (i.e. the best A and c) and the best SSR score.
     best_fit = (None, None)
     best_score = None
 
@@ -399,11 +372,13 @@ def find_best_exp_fit(x, y, A_min=0, A_max=10000, c_min=0, c_max=12.5, linspace_
             # Calculate the sum of squares regression.
             score = sum_of_squares_error(y, est_y)
 
-            # If the best score is yet to be updated (i.e. this is the first iteration) then set the current A, c and SSR to the best fit values.
-            if best_score == None:
+            # If the best score is yet to be updated (i.e. this is the first iteration)
+            #   then set the current A, c and SSR to the best fit values.
+            if not best_score:
                 best_score = score
                 best_fit = (A, c)
-            # If the new SSR score is smaller than the current best, then update the best score and update the best fit to the current A and c.
+            # If the new SSR score is smaller than the current best,
+            #   then update the best score and update the best fit to the current A and c.
             elif score < best_score:
                 best_score = score
                 best_fit = (A, c)
@@ -417,37 +392,44 @@ def find_best_fractal_fit(x, y, A_min=0, A_max=10000, c_min=0, c_max=12.5, linsp
     Finds the best exponential fit according to the sum of squares deviation of the form y = Ax^{-c}
 
     Args:
-        x (list): The values of x in the distribution.
-        y (list): The values of y in the distribution.
-        A_min (int) (opt): The minimum value of A to be tested. Can be adjusted to find more accurate results. Default is 0.
-        A_max (int) (opt): The maximum value of A to be tested. Can be adjusted to find more accurate results. Default is 10000.
-        c_min (int) (opt): The minimum value of c to be tested. Can be adjusted to find more accurate results. Default is 0.
-        c_max (int) (opt): The maximum value of c to be tested. Can be adjusted to find more accurate results. Default is 12.5.
-        linspace_N (int) (opt): The number of values of A and c to be checked in the respective ranges. Default is 100.
+        x (list)                          : The values of x in the distribution.
+        y (list)                          : The values of y in the distribution.
+        A_min (:obj:`int`, optional)      : The minimum value of A to be tested.
+                                            Can be adjusted to find more accurate results. Default is 0.
+        A_max (:obj:`int`, optional)      : The maximum value of A to be tested.
+                                            Can be adjusted to find more accurate results. Default is 10000.
+        c_min (:obj:`int`, optional)      : The minimum value of c to be tested.
+                                            Can be adjusted to find more accurate results. Default is 0.
+        c_max (:obj:`int`, optional)      : The maximum value of c to be tested.
+                                            Can be adjusted to find more accurate results. Default is 12.5.
+        linspace_N (:obj:`int`, optional) : The number of values of A and c to be checked in the respective ranges.
+                                            Default is 100.
 
     Returns:
-        best_fit (tuple): The coefficients A and c from the best power law approximation.
-        best_score (float): The sum of squares regression of this approximation.
+        best_fit (tuple)   : The coefficients A and c from the best power law approximation.
+        best_score (float) : The sum of squares regression of this approximation.
     """
-    # Initialise empty variables for the best fit (i.e. best A and c) and the best SSR score.
+    # Initialise empty variables for the best fit (i.e. the best A and c) and the best SSR score.
     best_fit = (None, None)
     best_score = None
 
     # Iterate through linspace_N values of A in the range [A_min, A_max].
-    for A in np.linspace(A_min, A_max, 100):
+    for A in np.linspace(A_min, A_max, linspace_N):
         # Iterate through linspace_N values of c in the range [c_min, c_max].
-        for c in np.linspace(c_min, c_max, 100):
+        for c in np.linspace(c_min, c_max, linspace_N):
 
             # Find the values of y according to the power law fractal model with parameters A and c.
             est_y = [A * i ** (-c) for i in x]
             # Calculate the sum of squares regression.
             score = sum_of_squares_error(y, est_y)
 
-            # If the best score is yet to be updated (i.e. this is the first iteration) then set the current A, c and SSR to the best fit values.
-            if best_score == None:
+            # If the best score is yet to be updated (i.e. this is the first iteration)
+            #   then set the current A, c and SSR to the best fit values.
+            if not best_score:
                 best_score = score
                 best_fit = (A, c)
-            # If the new SSR score is smaller than the current best, then update the best score and update the best fit to the current A and c.
+            # If the new SSR score is smaller than the current best,
+            #   then update the best score and update the best fit to the current A and c.
             elif score < best_score:
                 best_score = score
                 best_fit = (A, c)
@@ -461,19 +443,25 @@ def find_best_linear_fit(x, y, A_min=0, A_max=100, c_min=0, c_max=10, linspace_N
     Finds the best exponential fit according to the sum of squares deviation of the form y = Ax^{-c}
 
     Args:
-        x (list): The values of x in the distribution.
-        y (list): The values of y in the distribution.
-        A_min (int) (opt): The minimum value of A to be tested. Can be adjusted to find more accurate results. Default is 0.
-        A_max (int) (opt): The maximum value of A to be tested. Can be adjusted to find more accurate results. Default is 10000.
-        c_min (int) (opt): The minimum value of c to be tested. Can be adjusted to find more accurate results. Default is 0.
-        c_max (int) (opt): The maximum value of c to be tested. Can be adjusted to find more accurate results. Default is 12.5.
-        linspace_N (int) (opt): The number of values of A and c to be checked in the respective ranges. Default is 100.
+        x (list)                          : The values of x in the distribution.
+        y (list)                          : The values of y in the distribution.
+        A_min (:obj:`int`, optional)      : The minimum value of A to be tested.
+                                            Can be adjusted to find more accurate results. Default is 0.
+        A_max (:obj:`int`, optional)      : The maximum value of A to be tested.
+                                            Can be adjusted to find more accurate results. Default is 10000.
+        c_min (:obj:`int`, optional)      : The minimum value of c to be tested.
+                                            Can be adjusted to find more accurate results. Default is 0.
+        c_max (:obj:`int`, optional)      : The maximum value of c to be tested.
+                                            Can be adjusted to find more accurate results. Default is 12.5.
+        linspace_N (:obj:`int`, optional) : The number of values of A and c to be checked in the respective ranges.
+                                            Default is 100.
 
     Returns:
-        best_fit (tuple): The coefficients A and c from the best power law approximation.
-        best_score (float): The sum of squares regression of this approximation.
+        (tuple) : A tuple containing a tuple and float, specifically:
+                    the coefficients A and c from the best power law approximation;
+                    and the sum of squares regression of this approximation.
     """
-    # Initialise empty variables for the best fit (i.e. best A and c) and the best SSR score.
+    # Initialise empty variables for the best fit (i.e. the best A and c) and the best SSR score.
     best_fit = (None, None)
     best_score = None
 
@@ -483,15 +471,17 @@ def find_best_linear_fit(x, y, A_min=0, A_max=100, c_min=0, c_max=10, linspace_N
         for c in np.linspace(c_min, c_max, linspace_N):
 
             # Find the values of y according to the power law fractal model with parameters A and c.
-            est_y = [-c * i + (A) for i in x]
+            est_y = [(-c * i) + A for i in x]
             # Calculate the sum of squares regression.
             score = sum_of_squares_error(y, est_y)
 
-            # If the best score is yet to be updated (i.e. this is the first iteration) then set the current A, c and SSR to the best fit values.
-            if best_score == None:
+            # If the best score is yet to be updated (i.e. this is the first iteration)
+            #   then set the current A, c and SSR to the best fit values.
+            if not best_score:
                 best_score = score
                 best_fit = (A, c)
-            # If the new SSR score is smaller than the current best, then update the best score and update the best fit to the current A and c.
+            # If the new SSR score is smaller than the current best,
+            #   then update the best score and update the best fit to the current A and c.
             elif score < best_score:
                 best_score = score
                 best_fit = (A, c)
@@ -505,24 +495,35 @@ def find_best_fit_iteratively(x, y, method, linspace_N=100, A_min=0, A_max=10000
     Finds the best fit according to a given model by iteratively reducing the range of values checked for A and c.
 
     Args:
-        x (list): The values of x in the distribution.
-        y (list): The values of y in the distribution.
-        method (func): A function which finds the best fit to the given distribution according to a given model.
-        linspace_N (int) (opt): The number of values of A and c to be checked in the respective ranges. Default is 100.
-        A_min (int) (opt): The minimum value of A to be tested. Can be adjusted to find more accurate results. Default is 0.
-        A_max (int) (opt): The maximum value of A to be tested. Can be adjusted to find more accurate results. Default is 10000.
-        c_min (int) (opt): The minimum value of c to be tested. Can be adjusted to find more accurate results. Default is 0.
-        c_max (int) (opt): The maximum value of c to be tested. Can be adjusted to find more accurate results. Default is 12.5.
-        iter_num (int) (opt): The number of iterations to complete.
+        x (list)                          : The values of x in the distribution.
+        y (list)                          : The values of y in the distribution.
+        method (func)                     : A function which finds the best fit to the given distribution
+                                                according to a given model.
+        linspace_N (:obj:`int`, optional) : The number of values of A and c to be checked in the respective ranges.
+                                            Default is 100.
+        A_min (:obj:`int`, optional)      : The minimum value of A to be tested.
+                                            Can be adjusted to find more accurate results. Default is 0.
+        A_max (:obj:`int`, optional)      : The maximum value of A to be tested.
+                                            Can be adjusted to find more accurate results. Default is 10000.
+        c_min (:obj:`int`, optional)      : The minimum value of c to be tested.
+                                            Can be adjusted to find more accurate results. Default is 0.
+        c_max (:obj:`int`, optional)      : The maximum value of c to be tested.
+                                            Can be adjusted to find more accurate results. Default is 12.5.
+        iter_num (:obj:`int`, optional)   : The number of iterations to complete.
 
     Returns:
-        best_fit (tuple): The coefficients A and c from the best approximation.
-        best_score (float): The sum of squares regression of this approximation.
+        (tuple) : A tuple containing a tuple and a float, specifically:
+            the coefficients A and c from the best approximation;
+            and the sum of squares regression of this approximation.
     """
 
     # Find the current range of the intervals for A and c.
     A_diff = A_max - A_min
     c_diff = c_max - c_min
+
+    # Reset the variables for best fit and best score
+    best_fit = None
+    best_score = None
 
     # Iterate as many times as dictated by the iter_num variable.
     for i in range(iter_num):
@@ -554,11 +555,8 @@ def plot_lB_NB(lB, NB):
     Plots the distribution of the optimal number of boxes NB against the diameter of the boxes lB.
 
     Args:
-        lB (list): List of the values of lB.
-        NB (list): List of the corresponding values of NB.
-
-    Returns:
-        None
+        lB (list) : List of the values of lB.
+        NB (list) : List of the corresponding values of NB.
     """
     # Plots distribution using matplotlib.
     plt.plot(lB, NB, color='#C00000')
@@ -570,14 +568,11 @@ def plot_lB_NB(lB, NB):
 
 def plot_loglog_lB_NB(lB, NB):
     """
-    Plots the distribution of the optimal number of boxes NB against the diameter of the boxes lB on a log log scale.
+    Plots the distribution of the optimal number of boxes NB against the diameter of the boxes lB on a log-log scale.
 
     Args:
-        lB (list): List of the values of lB.
-        NB (list): List of the corresponding values of NB.
-
-    Returns:
-        None
+        lB (list) : List of the values of lB.
+        NB (list) : List of the corresponding values of NB.
     """
     # Plots distribution on log log scale using matplotlib.
     plt.loglog(lB, NB, color='#C00000')
@@ -592,14 +587,14 @@ def plot_best_fit_comparison(lB, NB, exp_A, exp_c, exp_score, frac_A, frac_c, fr
     Plots a comparison of the best power law (fractal) and exponential (non-fractal) fit for a given distribution.
 
     Args:
-        lB (list): List of the values of lB.
-        NB (list): List of the corresponding values of NB.
-        exp_A (float): The optimal value of A according to the exponential fit.
-        exp_c (float): The optimal value of c according to the exponential fit.
-        exp_score (float): The sum of squares regression for the exponential best fit.
-        frac_A (float): The optimal value of A according to the power law fit.
-        frac_c (float): The optimal value of c according to the power law fit.
-        frac_score (float): The sum of squares regression for the power law best fit.
+        lB (list)          : List of the values of lB.
+        NB (list)          : List of the corresponding values of NB.
+        exp_A (float)      : The optimal value of A according to the exponential fit.
+        exp_c (float)      : The optimal value of c according to the exponential fit.
+        exp_score (float)  : The sum of squares regression for the exponential best fit.
+        frac_A (float)     : The optimal value of A according to the power law fit.
+        frac_c (float)     : The optimal value of c according to the power law fit.
+        frac_score (float) : The sum of squares regression for the power law best fit.
     """
     # The lists lB and NB need to be converted to numpy arrays.
     lB = np.array(lB)
@@ -620,8 +615,6 @@ def plot_best_fit_comparison(lB, NB, exp_A, exp_c, exp_score, frac_A, frac_c, fr
     axes[1].plot(lB, NB, color='#000066')
     axes[1].plot(lB, est_NB_exp, color='#C00000')
 
-    # fig.suptitle('Non-Fractal Network Model', fontsize=16) # Title the plot.
-
     # Find the maximum x and y values.
     max_lB = max(lB)
     max_NB = max(NB)
@@ -631,14 +624,14 @@ def plot_best_fit_comparison(lB, NB, exp_A, exp_c, exp_score, frac_A, frac_c, fr
     axes[0].set_title('Power-Law Relation')
     axes[0].set_ylabel('$N_B$')
     axes[0].text(0.7 * max_lB, 0.95 * max_NB,
-                 r"$SSR \approx ${0}".format(frac_score.round(4)))  # Write the SSR score on the plot.
+                 r"$SSR \approx ${0}".format(round(frac_score, 4)))  # Write the SSR score on the plot.
 
     # Label the axes and title the subplot.
     axes[1].set_xlabel('$\ell_B$')
     axes[1].set_title('Exponential Relation')
     axes[1].set_ylabel('$N_B$')
     axes[1].text(0.7 * max_lB, 0.95 * max_NB,
-                 r"$SSR \approx ${0}".format(exp_score.round(4)))  # Write the SSR score on the plot.
+                 r"$SSR \approx ${0}".format(round(exp_score, 4)))  # Write the SSR score on the plot.
 
     fig.legend(loc="upper left")  # Add the legend.
     fig.tight_layout()
@@ -649,14 +642,14 @@ def plot_best_fit_comparison_by_logarithm(lB, NB, exp_A, exp_c, exp_score, frac_
     Plots a comparison of the best power law (fractal) and exponential (non-fractal) fit for a given distribution.
 
     Args:
-        lB (list): List of the values of lB.
-        NB (list): List of the corresponding values of NB.
-        exp_A (float): The optimal value of A according to the exponential fit.
-        exp_c (float): The optimal value of c according to the exponential fit.
-        exp_score (float): The sum of squares regression for the exponential best fit.
-        frac_A (float): The optimal value of A according to the power law fit.
-        frac_c (float): The optimal value of c according to the power law fit.
-        frac_score (float): The sum of squares regression for the power law best fit.
+        lB (list)          : List of the values of lB.
+        NB (list)          : List of the corresponding values of NB.
+        exp_A (float)      : The optimal value of A according to the exponential fit.
+        exp_c (float)      : The optimal value of c according to the exponential fit.
+        exp_score (float)  : The sum of squares regression for the exponential best fit.
+        frac_A (float)     : The optimal value of A according to the power law fit.
+        frac_c (float)     : The optimal value of c according to the power law fit.
+        frac_score (float) : The sum of squares regression for the power law best fit.
     """
     loglB = [math.log(l) for l in lB]
     logNB = [math.log(n) for n in NB]
@@ -682,8 +675,6 @@ def plot_best_fit_comparison_by_logarithm(lB, NB, exp_A, exp_c, exp_score, frac_
     axes[1].plot(loglB, logNB, color='#000066')
     axes[1].plot(loglB, est_NB_exp, color='#C00000')
 
-    # fig.suptitle('Non-Fractal Network Model', fontsize=16) # Title the plot.
-
     # Find the maximum x and y values.
     max_lB = max(lB)
     max_NB = max(NB)
@@ -693,14 +684,14 @@ def plot_best_fit_comparison_by_logarithm(lB, NB, exp_A, exp_c, exp_score, frac_
     axes[0].set_title('Power-Law Relation')
     axes[0].set_ylabel('$N_B$')
     axes[0].text(0.7 * max_lB, 0.95 * max_NB,
-                 r"$SSR \approx ${0}".format(frac_score.round(4)))  # Write the SSR score on the plot.
+                 r"$SSR \approx ${0}".format(round(frac_score, 4)))  # Write the SSR score on the plot.
 
     # Label the axes and title the subplot.
     axes[1].set_xlabel('$\ell_B$')
     axes[1].set_title('Exponential Relation')
     axes[1].set_ylabel('$N_B$')
     axes[1].text(0.7 * max_lB, 0.95 * max_NB,
-                 r"$SSR \approx ${0}".format(exp_score.round(4)))  # Write the SSR score on the plot.
+                 r"$SSR \approx ${0}".format(round(exp_score, 4)))  # Write the SSR score on the plot.
 
     fig.legend(loc="upper left")  # Add the legend.
     fig.tight_layout()
@@ -711,16 +702,13 @@ def draw_box_covering(G, nodes_to_boxes):
     Displays the network with nodes coloured according to the box covering.
 
     Args:
-        G (networkx.Graph): The network to be analysed.
-        nodes_to_boxes (dict): A dictionary with nodes as keys and their corresponding boxes as values.
-
-    Returns:
-        None
+        G (igraph.Graph)    : The network to be analysed.
+        nodes_to_boxes (dict) : A dictionary with nodes as keys and their corresponding boxes as values.
     """
 
     G = G.to_networkx()
 
-    # Initialise an empty colour map for the box covering visualiation.
+    # Initialise an empty colour map for the box covering visualisation.
     colourmap = []
 
     # For each node, assign it the colour of its box ID.
@@ -737,12 +725,9 @@ def export_to_gephi(G, nodes_to_boxes, file_path):
     Puts graphs in a format readable to Gephi including attributes for the boxes found under box coverings.
 
     Args:
-        G (networkx.Graph): The network to be analysed.
-        nodes_to_boxes (dict): A dictionary with nodes as keys and their corresponding boxes as values.
-        file_path (str): The path for the gml file to be saved to.
-
-    Returns:
-        None
+        G (networkx.Graph)    : The network to be analysed.
+        nodes_to_boxes (dict) : A dictionary with nodes as keys and their corresponding boxes as values.
+        file_path (str)       : The path for the gml file to be saved to.
     """
     H = G.copy()  # Create a copy of the network.
 
@@ -755,14 +740,14 @@ def export_to_gephi(G, nodes_to_boxes, file_path):
 
 def chi_squared_error(observed_y, expected_y):
     """
-    Finds the value SSR for the sum of squares regression method using a true and model distribution.
+    Finds the chi squared value using a true and model distribution.
 
     Args:
-        y (list): The true or measured distribution.
-        est_y (list): The model distribution to be compared.
+        observed_y (list) : The true or measured distribution.
+        expected_y (list) : The model distribution to be compared.
 
     Returns:
-        sum_of_squares (float): The sum of squares regression
+        (float) : The chi squared value.
     """
     chi = 0  # Initialise the sum as zero.
     # Iterate for each pair of values in the true/model distributions.
@@ -775,6 +760,17 @@ def chi_squared_error(observed_y, expected_y):
 
 
 def read_lB_NB_from_csv(filepath):
+    """
+    Reads the lB-NB distribution from a csv file.
+
+    Args:
+        filepath (str) : The filepath to the .csv file.
+
+    Returns:
+        (tuple) : A tuple of two lists.
+                    The first contains all box diameters lB, the second contains the corresponding values of NB.
+    """
+    # Find csv file.
     with open(filepath, newline='') as csvfile:
         reader = csv.reader(csvfile, delimiter=',')
         count = 1
@@ -785,16 +781,29 @@ def read_lB_NB_from_csv(filepath):
                 NB = [float(i) for i in row]
             count += 1
 
+    # Return lists
     return lB, NB
 
 
 def preprocess_network(filepath, save=True):
-    # Need to add function to normalise edge weights
+    """
+    Preprocesses a network to simplify and take the giant component.
+
+    Args:
+        filepath (str)               : The filepath of the network .gml file.
+        save (:obj:`bool`, optional) : If True, saves the processed network to a new gml file.
+
+    Returns:
+        (igraph.Graph) : The processed network.
+    """
+    # Find network
     G = Graph.Load(filepath)
+    # Remove multi-edges and self-loops
     G = G.simplify()
+    # Find the giant component. 
     components = G.connected_components(mode='weak')
     giant_component = G.induced_subgraph(components[0])
     if save:
-        save_path = filepath.replace('.gml','_processed.gml')
+        save_path = filepath.replace('.gml', '_processed.gml')
         giant_component.write_gml(save_path)
     return giant_component
