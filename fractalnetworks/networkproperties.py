@@ -9,12 +9,11 @@ def summarise_graph(G, skip_diam=False, skip_aspl=False):
     Summarises the key attributes of a given network.
 
     Args:
-        G (igraph.Graph): The network to be analysed.
-        skip_diam (Bool) (opt): If True, then do not calculate the diameter of the graph. This is recommended for large graphs. The default is False.
-        skip_aspl (Bool) (opt): If True, then do not calculate the average shortest path length of the graph. This is recommended for large graphs. The default is False.
-
-    Returns:
-        None
+        G (igraph.Graph)                  : The network to be analysed.
+        skip_diam (:obj:`bool`, optional) : If True, then do not calculate the diameter of the graph.
+                                                This is recommended for large graphs. The default is False.
+        skip_aspl (:obj:`bool`, optional) : If True, then do not calculate the average shortest path length.
+                                                This is recommended for large graphs. The default is False.
     """
     # Display the size and order of the network.
     print("Network has {0} nodes and {1} edges.".format(G.vcount(), G.ecount()))
@@ -38,11 +37,12 @@ def find_distances(G):
     Finds the diameter and average shortest path length of a network.
 
     Args:
-        G (igraph.Graph): The network to be analysed.
+        G (igraph.Graph) : The network to be analysed.
 
     Returns:
-        diam (int): The diameter of the network.
-        aspl (float): The average shortest path length of the network.
+        (tuple) : A tuple containing an int and a float, specifically:
+                    the diameter of the network;
+                    and the average shortest path length of the network.
     """
     # Calculate the diameter
     diam = G.diameter()
@@ -56,18 +56,26 @@ def find_distances(G):
 def mean_hub_distance(G, hubs=None, hub_method=identify_hubs, normalised=False, degrees=None):
     """
     Finds the mean distance between hubs.
-    The normalised mean distance is the mean distance between hubs over the mean distance between any pair of nodes in the network.
+    The normalised mean distance is the mean distance between hubs over
+        the mean distance between any pair of nodes in the network.
 
     Args:
-        G (igraph.Graph): The network to be analysed.
-        hubs (list) (opt): A list of hubs in the network, If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function finds the hubs.
-        hub_method (func) (opt): If the hubs are to be calculated, then this parameter specifies the method used to find hubs. Default is identify_hubs, which uses the Z score.
-        normalised (Bool) (opt): If true, the distances are normalised over the average distance in the network. Default is False.
-        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.
+        G (igraph.Graph)                       : The network to be analysed.
+        hubs (:obj:`list`, optional)           : A list of hubs in the network.
+                                                 If already calculated, passing this parameter prevents duplication.
+                                                 Default is None, in which case the function finds the hubs.
+        hub_method (:obj:`function`, optional) : Specifies the method used to identify hubs.
+                                                 Default is identify_hubs.
+        normalised (:obj:`bool`, optional)     : If true, the distances are normalised over the average distance.
+                                                 Default is False.
+        degrees (:obj:`list`, optional)        : A list of degrees in the network.
+                                                 If already calculated, passing this parameter prevents duplication.
+                                                 Default is None, in which case the distribution is calculated.
 
     Returns:
-        mean_distance (float): The mean distance between pairs of hubs in the network.
-        hub_distances (list): A list of distances between pairs of hubs.
+        (tuple) : Tuple containing a float and list, specifically:
+                    the mean distance between pairs of hubs in the network;
+                    and a list of distances between pairs of hubs.
     """
     # Find the hubs of the network
     if not hubs:
@@ -99,13 +107,19 @@ def hub_distance_distribution(G, hubs=None, hub_method=identify_hubs, degrees=No
     Find the distribution of distances between hubs.
 
     Args:
-        G (igraph.Graph): The network to be analysed.
-        hubs (list) (opt): A list of hubs in the network, If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function finds the hubs.
-        hub_method (func) (opt): If the hubs are to be calculated, then this parameter specifies the method used to find hubs. Default is identify_hubs, which uses the Z score.
-        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.
+        G (igraph.Graph)                       : The network to be analysed.
+        hubs (:obj:`list `, optional)          : A list of hubs in the network.
+                                                 If already calculated, passing this parameter prevents duplication.
+                                                 Default is None, in which case the function finds the hubs.
+        hub_method (:obj:`function`, optional) : Specifies the method used to find hubs.
+                                                 Default is identify_hubs.
+        degrees (:obj:`list`, optional)        : A list of degrees in the network.
+                                                 If already calculated, passing this parameter prevents duplication.
+                                                    Default is None, in which case the distribution is calculated.
 
     Returns:
-        distance_distributions (dict): A dictionary with distances as keys, the probability of two hubs being separated by that distance as the values.
+        distance_distributions (dict) : A dictionary with distances as keys and
+                                            the probability of two hubs being separated by that distance as the values.
     """
     # Find the hubs of the network
     if not hubs:
@@ -137,9 +151,9 @@ def find_clustering_coefficient(G):
     Finds the clustering coefficient T of a given network.
 
     Args:
-        G (igraph.Graph): The network to be analysed.
+        G (igraph.Graph) : The network to be analysed.
 
     Returns:
-        (float): The clustering coefficient (transitivity) T of the network.
+        (float) : The clustering coefficient (transitivity) T of the network.
     """
     return G.transitivity_undirected()
