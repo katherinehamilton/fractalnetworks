@@ -800,7 +800,7 @@ def preprocess_network(filepath, save=True):
     G = Graph.Load(filepath)
     # Remove multi-edges and self-loops
     G = G.simplify()
-    # Find the giant component. 
+    # Find the giant component.
     components = G.connected_components(mode='weak')
     giant_component = G.induced_subgraph(components[0])
     if save:

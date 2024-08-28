@@ -348,7 +348,7 @@ def calculate_HCS(G, hubs=None, hub_method=identify_hubs, degrees=None, normalis
         HCS = HCS / mean_k
 
     if normalise_by_number_of_edges:
-        HCS = HCS / G.ecount()
+        HCS = HCS / (2*G.ecount())
 
     # Return the HCS
     return HCS

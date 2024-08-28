@@ -4,7 +4,7 @@
 import itertools
 
 # Other module imports
-from SHMmodel import *
+from .SHMmodel import *
 
 
 def generate_HADG_model(m, a, b, T, n, save=False):

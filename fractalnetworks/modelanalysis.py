@@ -349,7 +349,7 @@ def check_SHM_p1_degree_prob(m, d, n):
 
 def SHM_p1_degree_dist(m, n):
     """
-    Calculates the degree distribution of an SHM network with p=0
+    Calculates the degree distribution of an SHM network with p=1
 
     Args:
         m (int): The parameter m in the SHM network model to test (Song, Havlin, and Makse, 2006)
@@ -580,12 +580,12 @@ def uv_flower_no_of_edges(u, v, n):
     Finds the number of edges in an n-th generation (u,v)-flower network (Rozenfeld, Havlin, and ben-Avraham, 2007).
 
     Args:
-        u (int): Value of u, i.e. path length of one of the parallel paths.
-        v (int): Value of v, i.e. path length of one of the parallel paths.
-        n (int): Number of generations.
+        u (int) : Value of u, i.e. path length of one of the parallel paths.
+        v (int) : Value of v, i.e. path length of one of the parallel paths.
+        n (int) : Number of generations.
 
     Returns:
-        (int): The number of edges in the network.
+        (int) : The number of edges in the network.
     """
     # A (u,v)-flower has (u+v)^n edges.
     return (u + v) ** n
@@ -596,12 +596,12 @@ def uv_flower_no_of_nodes(u, v, n):
     Finds the number of nodes in an n-th generation (u,v)-flower network (Rozenfeld, Havlin, and ben-Avraham, 2007).
 
     Args:
-        u (int): Value of u, i.e. path length of one of the parallel paths.
-        v (int): Value of v, i.e. path length of one of the parallel paths.
-        n (int): Number of generations.
+        u (int) : Value of u, i.e. path length of one of the parallel paths.
+        v (int) : Value of v, i.e. path length of one of the parallel paths.
+        n (int) : Number of generations.
 
     Returns:
-        (int): The number of nodes in the network.
+        (int) : The number of nodes in the network.
     """
     # Calculate the number of nodes
 
@@ -614,9 +614,9 @@ def check_uv_flower_no_of_edges(u, v, n):
     Checks the validity of the number of edges of a (u,v)-flower network calculating according to analytical arguments.
 
     Args:
-        u (int): Value of u, i.e. path length of one of the parallel paths.
-        v (int): Value of v, i.e. path length of one of the parallel paths.
-        n (int): Number of generations.
+        u (int) : Value of u, i.e. path length of one of the parallel paths.
+        v (int) : Value of v, i.e. path length of one of the parallel paths.
+        n (int) : Number of generations.
 
     Returns:
         (bool) : True if the analytical and empirical value agree, False otherwise.
@@ -633,7 +633,7 @@ def check_uv_flower_no_of_edges(u, v, n):
 
 def check_uv_flower_no_of_nodes(u, v, n):
     """
-    Checks the validity of the number of edges of a (u,v)-flower network calculating according to analytical arguments.
+    Checks the validity of the number of nodes of a (u,v)-flower network calculating according to analytical arguments.
 
     Args:
         u (int) : Value of u, i.e. path length of one of the parallel paths.
