@@ -6,6 +6,8 @@ This repository contains the code which accompanies my MSc Thesis titled *Origin
     - [Dependencies](#dependencies)
     - [Installation](#installation)
 - [Usage](#usage)
+    - [Tutorials](#tutorials)
+    - [Documentation](#documentation)
 
 ## Getting Started
 This section explains how to install and use the `fractalnetworks` package locally, and the prerequisites you need to get started. 
@@ -42,6 +44,8 @@ import fractalnetworks as fn
 ## Usage
 For help using the `fractalnetworks` package, several tutorials are available in the format of Jupyter notebooks. 
 
+### Tutorials
+
 [Tutorial 1](https://github.com/katherinehamilton/fractalnetworks/blob/main/box-covering.ipynb) explains the use of box-covering algorithms, functions to determine the fractality of networks and box-renormalisation methods. 
 
 [Tutorial 2](https://github.com/katherinehamilton/fractalnetworks/blob/main/model-generator.ipynb) can be used to generate and analyse fractal network models. 
@@ -50,6 +54,9 @@ For help using the `fractalnetworks` package, several tutorials are available in
 
 If reviewing this module as part of the corresponding thesis, [Thesis Tutorial](https://github.com/katherinehamilton/fractalnetworks/blob/main/thesis-results.ipynb) explains all methods used in the results analysed in the final report. 
 
+### Documentation
 
 For any more help, please refer to the [Documentation](https://github.com/katherinehamilton/fractalnetworks/tree/main/docs). 
+
+
 
