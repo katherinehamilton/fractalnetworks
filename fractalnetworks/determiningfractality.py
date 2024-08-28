@@ -64,7 +64,7 @@ def calculate_lB_NB_dist(G, diam=None, normalise=False, lB_min=2, save_path=None
                 N = min(previous_N, N)
         # If l is odd, use the accelerated MEMB method.
         else:
-            centres, _ = accelerated_MEMB(G, l)
+            centres = accelerated_MEMB(G, l)
             N = len(centres)
         # Add the new value of NB to the list
         NB.append(N)

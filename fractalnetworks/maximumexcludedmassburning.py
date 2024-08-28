@@ -222,7 +222,7 @@ def accelerated_MEMB(G, lB):
         # If it is not the first iteration, then find the values for the next iteration.
         if not maiden:
             # Find the next p using the method described above.
-            ordered_list, p_value, number_EM_calcs = find_next_centre(G, covered, rB, ordered_list)
+            ordered_list, p_value = find_next_centre(G, covered, rB, ordered_list)
             # Reorder the list according to decreasing excluded mass.
             ordered_list = sorted(ordered_list, key=lambda x: x[1], reverse=True).copy()
         else:
