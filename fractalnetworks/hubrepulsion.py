@@ -352,3 +352,38 @@ def calculate_HCS(G, hubs=None, hub_method=identify_hubs, degrees=None, normalis
 
     # Return the HCS
     return HCS
+
+
+def find_hub_hub_path_edges(G, hubs=None, hub_method=identify_hubs):
+    """
+    Finds the edges on the shortest paths between pairs of hubs.
+
+    Args:
+        G (igraph.Graph)                   : The network to be analysed.
+        hubs (:obj:`list`, optional)       : A list of hubs in the network.
+                                             If already calculated, this parameter can be passed to prevent duplication.
+                                             Default is None, in which case the function finds the hubs.
+        hub_method (:obj:`func`, optional) : Specifies the method used to find hubs.
+                                             Default is identify_hubs.
+
+    Returns:
+        (list) : A list of edges on the paths between hubs.
+    """
+
+    # Find the hubs of the network
+    if not hubs:
+        hubs = hub_method(G, degrees=None)
+
+    # Initialise an empty set to store the nodes.
+    hub_hub_path_edges = set()
+
+    # Iterate through each possible pair of hubs
+    for hub_u, hub_v in itertools.combinations(hubs, 2):
+        # Find all the shortest paths between this pair of hubs.
+        for path in G.get_all_shortest_paths(hub_u, to=hub_v):
+            for i in range(len(path) - 1):
+                edge = G.get_eid(path[i], path[i + 1])
+                hub_hub_path_edges.add(edge)
+
+    # Return the list of nodes.
+    return hub_hub_path_edges
