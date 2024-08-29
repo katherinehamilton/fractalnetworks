@@ -43,12 +43,11 @@
 <span class="sd">    Summarises the key attributes of a given network.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
-<span class="sd">        skip_diam (Bool) (opt): If True, then do not calculate the diameter of the graph. This is recommended for large graphs. The default is False.</span>
-<span class="sd">        skip_aspl (Bool) (opt): If True, then do not calculate the average shortest path length of the graph. This is recommended for large graphs. The default is False.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        None</span>
+<span class="sd">        G (igraph.Graph)                  : The network to be analysed.</span>
+<span class="sd">        skip_diam (:obj:`bool`, optional) : If True, then do not calculate the diameter of the graph.</span>
+<span class="sd">                                                This is recommended for large graphs. The default is False.</span>
+<span class="sd">        skip_aspl (:obj:`bool`, optional) : If True, then do not calculate the average shortest path length.</span>
+<span class="sd">                                                This is recommended for large graphs. The default is False.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Display the size and order of the network.</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Network has </span><span class="si">{0}</span><span class="s2"> nodes and </span><span class="si">{1}</span><span class="s2"> edges.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">(),</span> <span class="n">G</span><span class="o">.</span><span class="n">ecount</span><span class="p">()))</span>
@@ -75,11 +74,12 @@
 <span class="sd">    Finds the diameter and average shortest path length of a network.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        G (igraph.Graph) : The network to be analysed.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        diam (int): The diameter of the network.</span>
-<span class="sd">        aspl (float): The average shortest path length of the network.</span>
+<span class="sd">        (tuple) : A tuple containing an int and a float, specifically:</span>
+<span class="sd">                    the diameter of the network;</span>
+<span class="sd">                    and the average shortest path length of the network.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Calculate the diameter</span>
     <span class="n">diam</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">diameter</span><span class="p">()</span>
@@ -96,18 +96,26 @@
 <span class="k">def</span> <span class="nf">mean_hub_distance</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">hubs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hub_method</span><span class="o">=</span><span class="n">identify_hubs</span><span class="p">,</span> <span class="n">normalised</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Finds the mean distance between hubs.</span>
-<span class="sd">    The normalised mean distance is the mean distance between hubs over the mean distance between any pair of nodes in the network.</span>
+<span class="sd">    The normalised mean distance is the mean distance between hubs over</span>
+<span class="sd">        the mean distance between any pair of nodes in the network.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
-<span class="sd">        hubs (list) (opt): A list of hubs in the network, If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function finds the hubs.</span>
-<span class="sd">        hub_method (func) (opt): If the hubs are to be calculated, then this parameter specifies the method used to find hubs. Default is identify_hubs, which uses the Z score.</span>
-<span class="sd">        normalised (Bool) (opt): If true, the distances are normalised over the average distance in the network. Default is False.</span>
-<span class="sd">        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+<span class="sd">        G (igraph.Graph)                       : The network to be analysed.</span>
+<span class="sd">        hubs (:obj:`list`, optional)           : A list of hubs in the network.</span>
+<span class="sd">                                                 If already calculated, passing this parameter prevents duplication.</span>
+<span class="sd">                                                 Default is None, in which case the function finds the hubs.</span>
+<span class="sd">        hub_method (:obj:`function`, optional) : Specifies the method used to identify hubs.</span>
+<span class="sd">                                                 Default is identify_hubs.</span>
+<span class="sd">        normalised (:obj:`bool`, optional)     : If true, the distances are normalised over the average distance.</span>
+<span class="sd">                                                 Default is False.</span>
+<span class="sd">        degrees (:obj:`list`, optional)        : A list of degrees in the network.</span>
+<span class="sd">                                                 If already calculated, passing this parameter prevents duplication.</span>
+<span class="sd">                                                 Default is None, in which case the distribution is calculated.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        mean_distance (float): The mean distance between pairs of hubs in the network.</span>
-<span class="sd">        hub_distances (list): A list of distances between pairs of hubs.</span>
+<span class="sd">        (tuple) : Tuple containing a float and list, specifically:</span>
+<span class="sd">                    the mean distance between pairs of hubs in the network;</span>
+<span class="sd">                    and a list of distances between pairs of hubs.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Find the hubs of the network</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">hubs</span><span class="p">:</span>
@@ -115,7 +123,7 @@
 
     <span class="c1"># If there are no hubs in the network, then there is no mean distance.</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">hubs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">NaN</span><span class="p">(),</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">NaN</span><span class="p">,</span> <span class="p">[]</span>
 
     <span class="c1"># Initialise an empty list for hub distances</span>
     <span class="n">hub_distances</span> <span class="o">=</span> <span class="p">[]</span>
@@ -142,13 +150,19 @@
 <span class="sd">    Find the distribution of distances between hubs.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
-<span class="sd">        hubs (list) (opt): A list of hubs in the network, If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function finds the hubs.</span>
-<span class="sd">        hub_method (func) (opt): If the hubs are to be calculated, then this parameter specifies the method used to find hubs. Default is identify_hubs, which uses the Z score.</span>
-<span class="sd">        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+<span class="sd">        G (igraph.Graph)                       : The network to be analysed.</span>
+<span class="sd">        hubs (:obj:`list `, optional)          : A list of hubs in the network.</span>
+<span class="sd">                                                 If already calculated, passing this parameter prevents duplication.</span>
+<span class="sd">                                                 Default is None, in which case the function finds the hubs.</span>
+<span class="sd">        hub_method (:obj:`function`, optional) : Specifies the method used to find hubs.</span>
+<span class="sd">                                                 Default is identify_hubs.</span>
+<span class="sd">        degrees (:obj:`list`, optional)        : A list of degrees in the network.</span>
+<span class="sd">                                                 If already calculated, passing this parameter prevents duplication.</span>
+<span class="sd">                                                    Default is None, in which case the distribution is calculated.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        distance_distributions (dict): A dictionary with distances as keys, the probability of two hubs being separated by that distance as the values.</span>
+<span class="sd">        distance_distributions (dict) : A dictionary with distances as keys and</span>
+<span class="sd">                                            the probability of two hubs being separated by that distance as the values.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Find the hubs of the network</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">hubs</span><span class="p">:</span>
@@ -156,7 +170,7 @@
 
     <span class="c1"># If there are no hubs in the network, then there is no mean distance.</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">hubs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">NaN</span><span class="p">(),</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">NaN</span><span class="p">,</span> <span class="p">[]</span>
 
     <span class="c1"># Find the number of possible edges.</span>
     <span class="n">no_of_possible_edges</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">hubs</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">hubs</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span>
@@ -183,10 +197,10 @@
 <span class="sd">    Finds the clustering coefficient T of a given network.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
+<span class="sd">        G (igraph.Graph) : The network to be analysed.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        (float): The clustering coefficient (transitivity) T of the network.</span>
+<span class="sd">        (float) : The clustering coefficient (transitivity) T of the network.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">G</span><span class="o">.</span><span class="n">transitivity_undirected</span><span class="p">()</span></div>
 

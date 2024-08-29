@@ -30,235 +30,296 @@
           <div class="body" role="main">
             
   <h1>Source code for fractalnetworks.determiningfractality</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;This module contians the functions needed to determine if a given network is fractal or non-fractal&quot;&quot;&quot;</span>
+<span></span><span class="sd">&quot;&quot;&quot;This module contains the functions needed to determine if a given network is fractal or non-fractal&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">.maximumexcludedmassburning</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">.utilities</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">.greedyalgorithm</span> <span class="kn">import</span> <span class="o">*</span>
 
-<span class="kn">import</span> <span class="nn">tqdm</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+
+
+<span class="c1"># Calculating lB</span>
 
 <div class="viewcode-block" id="calculate_lB_NB_dist">
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.determiningfractality.calculate_lB_NB_dist">[docs]</a>
-<span class="k">def</span> <span class="nf">calculate_lB_NB_dist</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">diam</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">degree_based_MEMB</span><span class="p">,</span> <span class="n">min_lB</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">calculate_lB_NB_dist</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">diam</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">normalise</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">lB_min</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">save_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">colouring_ordering_method</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Finds the distribution of the optimal number of boxes NB against the diameter of these boxes lB.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
-<span class="sd">        diam (int) (opt): The diameter of the network G. The default is None, and note that if no diameter is given the algorithm will calculate it which is expensive for large networks.</span>
-<span class="sd">        method (func): The method used to calculate the box covering. Default is the degree based amended MEMB algorithm (see [2]).</span>
-<span class="sd">        min_lB (int): The first value of lB to calculate NB from. Default is 3.</span>
+<span class="sd">        G (igraph.Graph)                                      : The network to be analysed.</span>
+<span class="sd">        diam (:obj:`int`, optional)                           : The diameter of the network G.</span>
+<span class="sd">                                                                If none given, the diameter is calculated.</span>
+<span class="sd">                                                                Default is None.</span>
+<span class="sd">        normalise (:obj:`bool`, optional)                     : If True, normalises the number of boxes over the total</span>
+<span class="sd">                                                                    number of nodes in the network.</span>
+<span class="sd">                                                                Default is False.</span>
+<span class="sd">        lB_min (:obj:`int`, optional)                         : The minimum value of lB used to cover the network.</span>
+<span class="sd">                                                                Default is 2.</span>
+<span class="sd">        save_path (:obj:`str`, optional)                      : The filepath to save the results to.</span>
+<span class="sd">                                                                If none given, results are not saved.</span>
+<span class="sd">                                                                Default is None.</span>
+<span class="sd">        colouring_ordering_method (:obj:`function`, optional) : The method by which to order the nodes for the greedy</span>
+<span class="sd">                                                                    colouring algorithm.</span>
+<span class="sd">                                                                If none given, nodes are ordered lexicographically.</span>
+<span class="sd">                                                                Default is None.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        lB (list): List of values for the box diameters lB.</span>
-<span class="sd">        NB (list): List of the corresponding optimal number of boxes.</span>
+<span class="sd">        (list): List of values for the box diameters lB.</span>
+<span class="sd">        (list): List of the corresponding optimal number of boxes NB.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># If no diameter is given for the network then it is calculated using networkX.</span>
-    <span class="k">if</span> <span class="n">diam</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">diam</span><span class="p">:</span>
         <span class="n">diam</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">diameter</span><span class="p">()</span>
 
-    <span class="c1"># The MEMB algorithm only works for odd numbers (see MEMB function docstrings or [2] for explanation).</span>
-    <span class="c1"># Therefore, find the next biggest odd number.</span>
-    <span class="n">nearest_odd</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">diam</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># If an ordering method is specified, order nodes according to that scheme.</span>
+    <span class="c1"># Otherwise, the nodes are handled in lexicographical order.</span>
+    <span class="k">if</span> <span class="n">colouring_ordering_method</span><span class="p">:</span>
+        <span class="n">ordering</span> <span class="o">=</span> <span class="n">colouring_ordering_method</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ordering</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">())]</span>
 
-    <span class="c1"># Take all possible (odd) values of lB from 1 to the diameter of the network.</span>
-    <span class="n">lB</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">min_lB</span><span class="p">,</span> <span class="n">nearest_odd</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span>
-
-    <span class="c1"># Initialise an empty list for the values of NB.</span>
+    <span class="c1"># Calculate NB for all lB with the given method and diameter.</span>
     <span class="n">NB</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">lB</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">lB_min</span><span class="p">,</span> <span class="n">diam</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)]</span>
 
-    <span class="n">N</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">()</span>
+    <span class="c1"># Iterate through all the possible values of l</span>
+    <span class="k">for</span> <span class="n">l</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">lB</span><span class="p">,</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lB</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))):</span>
+        <span class="c1"># If l is even, apply the greedy box covering algorithm.</span>
+        <span class="k">if</span> <span class="n">l</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Find the number of boxes.</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="n">greedy_box_covering</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">node_order</span><span class="o">=</span><span class="n">ordering</span><span class="p">)</span>
+            <span class="c1"># Take the minimum of this value and the previous calculated NB as the next NB</span>
+            <span class="k">if</span> <span class="n">l</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">previous_N</span> <span class="o">=</span> <span class="n">NB</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">N</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">previous_N</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+        <span class="c1"># If l is odd, use the accelerated MEMB method.</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">centres</span> <span class="o">=</span> <span class="n">accelerated_MEMB</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>
+            <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">centres</span><span class="p">)</span>
+        <span class="c1"># Add the new value of NB to the list</span>
+        <span class="n">NB</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
 
-    <span class="c1"># Iterate through all possible values of lB.</span>
-    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">lB</span><span class="p">:</span>
-        <span class="n">centres</span> <span class="o">=</span> <span class="n">method</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span> <span class="c1"># Find the list of centres using the given method.</span>
-        <span class="n">NB</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">centres</span><span class="p">))</span> <span class="c1"># Add the number of boxes (length of the list of centres) to the list NB.</span>
+    <span class="c1"># If normalise is True, normalise each result over the number of nodes in the network.</span>
+    <span class="k">if</span> <span class="n">normalise</span><span class="p">:</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">()</span>
+        <span class="n">NB</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">/</span> <span class="n">N</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">NB</span><span class="p">]</span>
 
-    <span class="c1"># Return the complete list of lB and NB values.</span>
+    <span class="c1"># If a save path is given, save the results to a csv file.</span>
+    <span class="k">if</span> <span class="n">save_path</span><span class="p">:</span>
+        <span class="n">to_write</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">row_stack</span><span class="p">((</span><span class="n">lB</span><span class="p">,</span> <span class="n">NB</span><span class="p">))</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="n">to_write</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+
     <span class="k">return</span> <span class="n">lB</span><span class="p">,</span> <span class="n">NB</span></div>
 
 
 
 <div class="viewcode-block" id="is_fractal">
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.determiningfractality.is_fractal">[docs]</a>
-<span class="k">def</span> <span class="nf">is_fractal</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">diam</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">normalise</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">lB_min</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">save_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-               <span class="n">colouring_ordering_method</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">is_fractal</span><span class="p">(</span><span class="n">results_filepath</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">save_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">p_list</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Determines whether a network is fractal or not depending on the sum of squares regression score for the fractal and exponential fits.</span>
+<span class="sd">    Tests if a given lB-NB distribution is a power-law or exponential, thus determining if a network is fractal or not.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
-<span class="sd">        diam (int): The diameter of the graph. If None, calculates the diameter. Default is None.</span>
-<span class="sd">        plot (Bool): If True, plot a comparison of the best fits. Default is False.</span>
-<span class="sd">        verbose (Bool): If True, print statements with the fractal and non fractal values. Default is False.</span>
-
+<span class="sd">        results_filepath (str)           : The filepath for the csv file storing the lB-NB distribution.</span>
+<span class="sd">        plot (:obj:`bool`, optional)     : If True, a comparison of the relationship between lB and NB is plotted.</span>
+<span class="sd">        verbose (:obj:`bool`, optional)  : If True, the results are printed.</span>
+<span class="sd">        save_path (:obj:`str`, optional) : The figure generated is saved to the file path, if given. Default is None.</span>
+<span class="sd">        p_list (:obj:`list`, optional)   : A list of percentages p.</span>
+<span class="sd">                                           The fractal dimension is given by the gradient of the best fit over p% of the</span>
+<span class="sd">                                                distribution.</span>
+<span class="sd">                                           Default is None.</span>
 <span class="sd">    Returns:</span>
-<span class="sd">        lB (list): A list of box diameters for the covering.</span>
-<span class="sd">        NB (list): A list of the number of boxes needed to cover the network.</span>
-<span class="sd">        (Bool): True if the network is determined to be fractal, False otherwise.</span>
+<span class="sd">        bool : True if the network is fractal, False otherwise.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Initialise p_list as [1.0] if none given.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">p_list</span><span class="p">:</span>
+        <span class="n">p_list</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]</span>
 
-    <span class="k">if</span> <span class="n">diam</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">diam</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">diameter</span><span class="p">()</span>
+    <span class="c1"># Read the lB-NB distribution from the csv file.</span>
+    <span class="n">lB</span><span class="p">,</span> <span class="n">NB</span> <span class="o">=</span> <span class="n">read_lB_NB_from_csv</span><span class="p">(</span><span class="n">results_filepath</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">colouring_ordering_method</span><span class="p">:</span>
-        <span class="n">ordering</span> <span class="o">=</span> <span class="n">colouring_ordering_method</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">ordering</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">())]</span>
-
-    <span class="c1"># Calculate NB for all lB with the given method and diameter.</span>
-    <span class="n">NB</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">lB</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">lB_min</span><span class="p">,</span> <span class="n">diam</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)]</span>
-
-    <span class="k">for</span> <span class="n">l</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">lB</span><span class="p">,</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lB</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">step</span><span class="p">))):</span>
-        <span class="k">if</span> <span class="n">l</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">_</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="n">greedy_box_covering</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">node_order</span><span class="o">=</span><span class="n">ordering</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">l</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
-                <span class="n">previous_N</span> <span class="o">=</span> <span class="n">NB</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-                <span class="n">N</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">previous_N</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">centres</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">accelerated_MEMB</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>
-            <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">centres</span><span class="p">)</span>
-        <span class="n">NB</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">save_path</span><span class="p">:</span>
-        <span class="n">to_write</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">row_stack</span><span class="p">((</span><span class="n">lB</span><span class="p">,</span> <span class="n">NB</span><span class="p">))</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="n">to_write</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">normalise</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
-        <span class="n">N</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">()</span>
-        <span class="n">NB</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">/</span> <span class="n">N</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">NB</span><span class="p">]</span>
-
-    <span class="c1"># Find the best fractal fit.</span>
-    <span class="p">(</span><span class="n">frac_A</span><span class="p">,</span> <span class="n">frac_c</span><span class="p">),</span> <span class="n">frac_score</span> <span class="o">=</span> <span class="n">find_best_fit_iteratively</span><span class="p">(</span><span class="n">lB</span><span class="p">,</span> <span class="n">NB</span><span class="p">,</span> <span class="n">find_best_fractal_fit</span><span class="p">)</span>
-
-    <span class="c1"># Find the best exponential fit.</span>
-    <span class="p">(</span><span class="n">exp_A</span><span class="p">,</span> <span class="n">exp_c</span><span class="p">),</span> <span class="n">exp_score</span> <span class="o">=</span> <span class="n">find_best_fit_iteratively</span><span class="p">(</span><span class="n">lB</span><span class="p">,</span> <span class="n">NB</span><span class="p">,</span> <span class="n">find_best_exp_fit</span><span class="p">)</span>
-
-    <span class="nb">print</span><span class="p">(</span><span class="n">frac_score</span> <span class="o">/</span> <span class="n">exp_score</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">exp_score</span> <span class="o">/</span> <span class="n">frac_score</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Power Law Parameters&quot;</span><span class="p">,</span> <span class="n">frac_A</span><span class="p">,</span> <span class="n">frac_c</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exponential Parameters&quot;</span><span class="p">,</span> <span class="n">exp_A</span><span class="p">,</span> <span class="n">exp_c</span><span class="p">)</span>
-
-    <span class="c1"># If verbose, print a statement with both scores.</span>
-    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The SSR score for the fractal model is </span><span class="si">{0}</span><span class="s2"> and for the non-fractal model is </span><span class="si">{1}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">frac_score</span><span class="p">,</span>
-                                                                                                        <span class="n">exp_score</span><span class="p">))</span>
-
-    <span class="c1"># If the fractal score is less than the exponential score, then the network is fractal.</span>
-    <span class="k">if</span> <span class="n">frac_score</span> <span class="o">&lt;</span> <span class="n">exp_score</span><span class="p">:</span>
-        <span class="c1"># If verbose, print such a statement.</span>
-        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This network is fractal.&quot;</span><span class="p">)</span>
-        <span class="c1"># If plot is True then plot a comparison of the best fits (see Section 4).</span>
-        <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
-            <span class="n">plot_best_fit_comparison</span><span class="p">(</span><span class="n">lB</span><span class="p">,</span> <span class="n">NB</span><span class="p">,</span> <span class="n">exp_A</span><span class="p">,</span> <span class="n">exp_c</span><span class="p">,</span> <span class="n">exp_score</span><span class="p">,</span> <span class="n">frac_A</span><span class="p">,</span> <span class="n">frac_c</span><span class="p">,</span> <span class="n">frac_score</span><span class="p">)</span>
-        <span class="c1"># Return True if the network is fractal.</span>
-        <span class="k">return</span> <span class="n">lB</span><span class="p">,</span> <span class="n">NB</span><span class="p">,</span> <span class="kc">True</span>
-    <span class="c1"># If the fractal score is greater than the exponential score, then the network is non-fractal.</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="c1"># If verbose, print such a statement.</span>
-        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This network is non-fractal.&quot;</span><span class="p">)</span>
-        <span class="c1"># If plot is True then plot a comparison of the best fits (see Section 4).</span>
-        <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
-            <span class="n">plot_best_fit_comparison</span><span class="p">(</span><span class="n">lB</span><span class="p">,</span> <span class="n">NB</span><span class="p">,</span> <span class="n">exp_A</span><span class="p">,</span> <span class="n">exp_c</span><span class="p">,</span> <span class="n">exp_score</span><span class="p">,</span> <span class="n">frac_A</span><span class="p">,</span> <span class="n">frac_c</span><span class="p">,</span> <span class="n">frac_score</span><span class="p">)</span>
-        <span class="c1"># Return False if the network is fractal.</span>
-        <span class="k">return</span> <span class="n">lB</span><span class="p">,</span> <span class="n">NB</span><span class="p">,</span> <span class="kc">False</span></div>
-
-
-
-<div class="viewcode-block" id="is_fractal_by_logarithm">
-<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.determiningfractality.is_fractal_by_logarithm">[docs]</a>
-<span class="k">def</span> <span class="nf">is_fractal_by_logarithm</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">diam</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">normalise</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">lB_min</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">save_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                            <span class="n">colouring_ordering_method</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Determines whether a network is fractal or not depending on the sum of squares regression score for the fractal and exponential fits.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
-<span class="sd">        diam (int): The diameter of the graph. If None, calculates the diameter. Default is None.</span>
-<span class="sd">        plot (Bool): If True, plot a comparison of the best fits. Default is False.</span>
-<span class="sd">        verbose (Bool): If True, print statements with the fractal and non fractal values. Default is False.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        lB (list): A list of box diameters for the covering.</span>
-<span class="sd">        NB (list): A list of the number of boxes needed to cover the network.</span>
-<span class="sd">        (Bool): True if the network is determined to be fractal, False otherwise.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">if</span> <span class="n">diam</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">diam</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">diameter</span><span class="p">()</span>
-
-    <span class="k">if</span> <span class="n">colouring_ordering_method</span><span class="p">:</span>
-        <span class="n">ordering</span> <span class="o">=</span> <span class="n">colouring_ordering_method</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">ordering</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">())]</span>
-
-    <span class="c1"># Calculate NB for all lB with the given method and diameter.</span>
-    <span class="n">NB</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">lB</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">lB_min</span><span class="p">,</span> <span class="n">diam</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)]</span>
-
-    <span class="k">for</span> <span class="n">l</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">lB</span><span class="p">,</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lB</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))):</span>
-        <span class="k">if</span> <span class="n">l</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">_</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="n">greedy_box_covering</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">node_order</span><span class="o">=</span><span class="n">ordering</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">l</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
-                <span class="n">previous_N</span> <span class="o">=</span> <span class="n">NB</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-                <span class="n">N</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">previous_N</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">centres</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">accelerated_MEMB</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>
-            <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">centres</span><span class="p">)</span>
-        <span class="n">NB</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">save_path</span><span class="p">:</span>
-        <span class="n">to_write</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">row_stack</span><span class="p">((</span><span class="n">lB</span><span class="p">,</span> <span class="n">NB</span><span class="p">))</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="n">to_write</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">normalise</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
-        <span class="n">N</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">()</span>
-        <span class="n">NB</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">/</span> <span class="n">N</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">NB</span><span class="p">]</span>
-
+    <span class="c1"># Find the logarithms of the box diameter lB and the number of boxes NB.</span>
     <span class="n">loglB</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">lB</span><span class="p">]</span>
     <span class="n">logNB</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">NB</span><span class="p">]</span>
 
-    <span class="c1"># Find the best fractal fit.</span>
-    <span class="p">(</span><span class="n">frac_A</span><span class="p">,</span> <span class="n">frac_c</span><span class="p">),</span> <span class="n">frac_score</span> <span class="o">=</span> <span class="n">find_best_fit_iteratively</span><span class="p">(</span><span class="n">loglB</span><span class="p">,</span> <span class="n">logNB</span><span class="p">,</span> <span class="n">find_best_linear_fit</span><span class="p">)</span>
+    <span class="c1"># Convert the lists to arrays.</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">loglB</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">logNB</span><span class="p">)</span>
 
-    <span class="c1"># Find the best exponential fit.</span>
-    <span class="p">(</span><span class="n">exp_A</span><span class="p">,</span> <span class="n">exp_c</span><span class="p">),</span> <span class="n">exp_score</span> <span class="o">=</span> <span class="n">find_best_fit_iteratively</span><span class="p">(</span><span class="n">lB</span><span class="p">,</span> <span class="n">logNB</span><span class="p">,</span> <span class="n">find_best_linear_fit</span><span class="p">)</span>
+    <span class="c1"># Fit a linear model</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="c1"># Find the regression score of the model</span>
+    <span class="n">frac_score</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">frac_A</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">intercept_</span>
+    <span class="n">frac_c</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="n">frac_score</span> <span class="o">/</span> <span class="n">exp_score</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">exp_score</span> <span class="o">/</span> <span class="n">frac_score</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Power Law Parameters&quot;</span><span class="p">,</span> <span class="n">frac_A</span><span class="p">,</span> <span class="n">frac_c</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exponential Parameters&quot;</span><span class="p">,</span> <span class="n">exp_A</span><span class="p">,</span> <span class="n">exp_c</span><span class="p">)</span>
+    <span class="c1"># Convert the lists to arrays.</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lB</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">logNB</span><span class="p">)</span>
 
-    <span class="c1"># If verbose, print a statement with both scores.</span>
-    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The SSR score for the fractal model is </span><span class="si">{0}</span><span class="s2"> and for the non-fractal model is </span><span class="si">{1}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">frac_score</span><span class="p">,</span>
-                                                                                                        <span class="n">exp_score</span><span class="p">))</span>
+    <span class="c1"># Fit a linear model</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="c1"># Find the regression score of the model</span>
+    <span class="n">exp_score</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">exp_A</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">intercept_</span>
+    <span class="n">exp_c</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-    <span class="c1"># If the fractal score is less than the exponential score, then the network is fractal.</span>
-    <span class="k">if</span> <span class="n">frac_score</span> <span class="o">&lt;</span> <span class="n">exp_score</span><span class="p">:</span>
-        <span class="c1"># If verbose, print such a statement.</span>
+    <span class="c1"># Plot the exponential and power law relationship</span>
+    <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
+        <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">loglB</span><span class="p">,</span> <span class="n">logNB</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;navy&#39;</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">loglB</span><span class="p">,</span> <span class="p">[</span><span class="n">frac_c</span> <span class="o">*</span> <span class="n">l</span> <span class="o">+</span> <span class="n">frac_A</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">loglB</span><span class="p">],</span> <span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;crimson&#39;</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$\ln \ell_B$&#39;</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$\ln N_B$&#39;</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Power-Law Relationship&#39;</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lB</span><span class="p">,</span> <span class="n">logNB</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;navy&#39;</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lB</span><span class="p">,</span> <span class="p">[</span><span class="n">exp_c</span> <span class="o">*</span> <span class="n">l</span> <span class="o">+</span> <span class="n">exp_A</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">lB</span><span class="p">],</span> <span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;crimson&#39;</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$\ell_B$&#39;</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$\ln N_B$&#39;</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Exponential Relationship&#39;</span><span class="p">)</span>
+        <span class="c1"># If a save path is given, save the png file.</span>
+        <span class="k">if</span> <span class="n">save_path</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">save_path</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="c1"># If the fractal power-law fit is better than the exponential fit, then the network is fractal.</span>
+    <span class="k">if</span> <span class="n">frac_score</span> <span class="o">&gt;</span> <span class="n">exp_score</span><span class="p">:</span>
+        <span class="c1"># If verbose is True, print the results.</span>
         <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This network is fractal.&quot;</span><span class="p">)</span>
-        <span class="c1"># If plot is True then plot a comparison of the best fits (see Section 4).</span>
-        <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
-            <span class="n">plot_best_fit_comparison_by_logarithm</span><span class="p">(</span><span class="n">lB</span><span class="p">,</span> <span class="n">NB</span><span class="p">,</span> <span class="n">exp_A</span><span class="p">,</span> <span class="n">exp_c</span><span class="p">,</span> <span class="n">exp_score</span><span class="p">,</span> <span class="n">frac_A</span><span class="p">,</span> <span class="n">frac_c</span><span class="p">,</span> <span class="n">frac_score</span><span class="p">)</span>
-        <span class="c1"># Return True if the network is fractal.</span>
-        <span class="k">return</span> <span class="n">lB</span><span class="p">,</span> <span class="n">NB</span><span class="p">,</span> <span class="kc">True</span>
-    <span class="c1"># If the fractal score is greater than the exponential score, then the network is non-fractal.</span>
+            <span class="n">A</span><span class="p">,</span> <span class="n">dB</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">find_fractal_dimension</span><span class="p">(</span><span class="n">loglB</span><span class="p">,</span> <span class="n">logNB</span><span class="p">,</span> <span class="n">p_list</span><span class="o">=</span><span class="n">p_list</span><span class="p">)</span>
+            <span class="c1"># Plot the fractal dimension</span>
+            <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">loglB</span><span class="p">,</span> <span class="n">logNB</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;navy&#39;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">loglB</span><span class="p">,</span> <span class="p">[</span><span class="n">A</span> <span class="o">+</span> <span class="n">dB</span> <span class="o">*</span> <span class="n">l</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">loglB</span><span class="p">],</span> <span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;crimson&#39;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$\ln \ell_B$&#39;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$\ln N_B$&#39;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This network is fractal with box dimension </span><span class="si">{:.4f}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">dB</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Power law score: </span><span class="si">{:.4f}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">frac_score</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exponential score: </span><span class="si">{:.4f}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">exp_score</span><span class="p">))</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="c1"># If the exponential fit is better than the power-law then the network is non-fractal.</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="c1"># If verbose, print such a statement.</span>
+        <span class="c1"># If verbose is True, print the results.</span>
         <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This network is non-fractal.&quot;</span><span class="p">)</span>
-        <span class="c1"># If plot is True then plot a comparison of the best fits (see Section 4).</span>
-        <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
-            <span class="n">plot_best_fit_comparison_by_logarithm</span><span class="p">(</span><span class="n">lB</span><span class="p">,</span> <span class="n">NB</span><span class="p">,</span> <span class="n">exp_A</span><span class="p">,</span> <span class="n">exp_c</span><span class="p">,</span> <span class="n">exp_score</span><span class="p">,</span> <span class="n">frac_A</span><span class="p">,</span> <span class="n">frac_c</span><span class="p">,</span> <span class="n">frac_score</span><span class="p">)</span>
-        <span class="c1"># Return False if the network is fractal.</span>
-        <span class="k">return</span> <span class="n">lB</span><span class="p">,</span> <span class="n">NB</span><span class="p">,</span> <span class="kc">False</span></div>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Power law score: </span><span class="si">{:.4f}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">frac_score</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exponential score: </span><span class="si">{:.4f}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">exp_score</span><span class="p">))</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+
+<div class="viewcode-block" id="find_fractal_dimension">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.determiningfractality.find_fractal_dimension">[docs]</a>
+<span class="k">def</span> <span class="nf">find_fractal_dimension</span><span class="p">(</span><span class="n">loglB</span><span class="p">,</span> <span class="n">logNB</span><span class="p">,</span> <span class="n">p_list</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds the fractal dimension of a fractal network given the log(lB)-log(NB) distribution.</span>
+<span class="sd">    Fits a linear distribution of the form log(NB) = clog(lB) + A, where c is the fractal dimension dB.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        loglB (list)                     : A list of values of log(lB)</span>
+<span class="sd">        logNB (list)                     : A list of values of log(NB)</span>
+<span class="sd">        p_list (:obj:`list`, optional)   : A list of percentages p.</span>
+<span class="sd">                                           The fractal dimension is given by the gradient of the best fit over p% of the</span>
+<span class="sd">                                                distribution.</span>
+<span class="sd">                                           Default is None.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        float : The optimal value of the intercept A.</span>
+<span class="sd">        float : The optimal value of the gradient c=dB, which is the fractal dimension.</span>
+<span class="sd">        float : The coefficient of determination of the linear fit with parameters A and c.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Initialise p_list as [1.0] if none given.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">p_list</span><span class="p">:</span>
+        <span class="n">p_list</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]</span>
+
+    <span class="c1"># Initialise the variables to store the best fit</span>
+    <span class="n">best_score</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">best_A</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">best_c</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># Look at sections of the curve at least 70% of the full length.</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">p_list</span><span class="p">:</span>
+        <span class="c1"># Find the best score over portions of that width</span>
+        <span class="n">A</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">score</span> <span class="o">=</span> <span class="n">find_best_range</span><span class="p">(</span><span class="n">loglB</span><span class="p">,</span> <span class="n">logNB</span><span class="p">,</span> <span class="n">percentage</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
+        <span class="c1"># If this is better than the previous portion, then update the variables.</span>
+        <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;</span> <span class="n">best_score</span><span class="p">:</span>
+            <span class="n">best_score</span> <span class="o">=</span> <span class="n">score</span>
+            <span class="n">best_A</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">best_c</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">best_A</span><span class="p">,</span> <span class="n">best_c</span><span class="p">,</span> <span class="n">best_score</span></div>
+
+
+
+<div class="viewcode-block" id="find_best_range">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.determiningfractality.find_best_range">[docs]</a>
+<span class="k">def</span> <span class="nf">find_best_range</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">percentage</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds the portion of the distribution which covers percentage% of the total distribution which best fits a linear</span>
+<span class="sd">        distribution.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (list)                              : A list of values of x</span>
+<span class="sd">        y (list)                              : A list of values of y</span>
+<span class="sd">        percentage (:obj:`float`, optional)   : The percentage of the distribution to test.</span>
+<span class="sd">                                                Default is 1.0</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        (tuple) : Tuple containing 3 floats.</span>
+<span class="sd">                    The first is the optimal value of the intercept A.</span>
+<span class="sd">                    The second is the optimal value of the gradient c=dB, which is the fractal dimension.</span>
+<span class="sd">                    The third is the coefficient of determination of the linear fit with parameters A and c.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Initialise variables as None.</span>
+    <span class="n">best_score</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">best_A</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">best_c</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># Find the width of a window which covers percentage% of the distribution.</span>
+    <span class="n">sample_width</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">percentage</span><span class="p">)</span>
+
+    <span class="c1"># Initialise a counter to track the window which is being searched.</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># Consider a moving window across the distribution.</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">+</span> <span class="n">sample_width</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="c1"># Find the values of x and y in the window.</span>
+        <span class="n">sublist_x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">sample_width</span><span class="p">)]</span>
+        <span class="n">sublist_y</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">sample_width</span><span class="p">)]</span>
+        <span class="n">sublist_array_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sublist_x</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">sublist_array_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sublist_y</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+        <span class="c1"># Fit a linear model to the window.</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">sublist_array_x</span><span class="p">,</span> <span class="n">sublist_array_y</span><span class="p">)</span>
+
+        <span class="c1"># Find the score of the new fit.</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">sublist_array_x</span><span class="p">,</span> <span class="n">sublist_array_y</span><span class="p">)</span>
+
+        <span class="c1"># Ignore false fits.</span>
+        <span class="k">if</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Update the best fit each time a better one is found.</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">best_score</span><span class="p">:</span>
+                <span class="n">best_score</span> <span class="o">=</span> <span class="n">score</span>
+                <span class="n">best_A</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">intercept_</span>
+                <span class="n">best_c</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span>
+
+            <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;</span> <span class="n">best_score</span><span class="p">:</span>
+                <span class="n">best_score</span> <span class="o">=</span> <span class="n">score</span>
+                <span class="n">best_A</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">intercept_</span>
+                <span class="n">best_c</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span>
+
+        <span class="c1"># Increment the counter</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="c1"># Return the best fits.</span>
+    <span class="k">return</span> <span class="n">best_A</span><span class="p">,</span> <span class="n">best_c</span><span class="p">,</span> <span class="n">best_score</span></div>
 
 </pre></div>
 

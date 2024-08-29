@@ -43,13 +43,13 @@
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.greedyalgorithm.smallest_last">[docs]</a>
 <span class="k">def</span> <span class="nf">smallest_last</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Orders nodes using the smallest last [3] method.</span>
+<span class="sd">    Orders nodes using the smallest last (Matula and Beck, 1983) method.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        G (igraph.Graph): The network being ordered.</span>
+<span class="sd">        G (igraph.Graph) : The network being ordered.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        ordering (list): A list of the nodes in order.</span>
+<span class="sd">        (list) : A list of the nodes in order.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Find the number of nodes.</span>
     <span class="n">N</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">()</span>
@@ -84,15 +84,19 @@
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.greedyalgorithm.greedy_box_covering">[docs]</a>
 <span class="k">def</span> <span class="nf">greedy_box_covering</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">lB</span><span class="p">,</span> <span class="n">node_order</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Colours the network in boxes of diameter lB using the greedy algorithm.</span>
+<span class="sd">    Colours the network in boxes of diameter lB using the greedy algorithm (Song, Gallos, et al., 2007).</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
-<span class="sd">        lB (int): The diameter of the boxes for the box covering.</span>
+<span class="sd">        G (igraph.Graph)                   : The network to be analysed.</span>
+<span class="sd">        lB (int)                           : The diameter of the boxes for the box covering.</span>
+<span class="sd">        node_order (:obj:`list`, optional) : The order of the nodes in which the greedy colouring is applied.</span>
+<span class="sd">                                             If None, the nodes are coloured in lexicographical order.</span>
+<span class="sd">                                             Default is None.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        colouring (dict): The greedy colouring, with the nodes as keys and the colours as values.</span>
-<span class="sd">        NB (int): The number of boxes of diameter lB needed to cover the network.</span>
+<span class="sd">        (tuple) : Tuple containing a dict and int.</span>
+<span class="sd">                    The dict represents the greedy colouring, with the nodes as keys and the colours as values.</span>
+<span class="sd">                    The int is the number of boxes of diameter lB needed to cover the network.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Find the dual graph</span>
     <span class="n">dual_G</span> <span class="o">=</span> <span class="n">make_dual_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">lB</span><span class="p">)</span>
@@ -112,13 +116,16 @@
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.greedyalgorithm.greedy_colouring">[docs]</a>
 <span class="k">def</span> <span class="nf">greedy_colouring</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">node_order</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Colour a graph by the greedy colouring algorithm.</span>
+<span class="sd">    Colour a graph by the greedy colouring algorithm (Song, Gallos, et al., 2007).</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        G (igraph.Graph): The graph to be analysed.</span>
+<span class="sd">        G (igraph.Graph)                   : The graph to be analysed.</span>
+<span class="sd">        node_order (:obj:`list`, optional) : The order of the nodes in which the greedy colouring is applied.</span>
+<span class="sd">                                             If None, the nodes are coloured in lexicographical order.</span>
+<span class="sd">                                             Default is None.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        colouring (dict): A dictionary with nodes as keys and the colours they are assigned as values.</span>
+<span class="sd">        (dict): A dictionary with nodes as keys and the colours they are assigned as values.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Find the number of nodes.</span>
@@ -130,7 +137,7 @@
     <span class="n">colouring</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
 
     <span class="c1"># Apply the ordering method to the nodes, if one is given.</span>
-    <span class="k">if</span> <span class="n">node_order</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">node_order</span><span class="p">:</span>
         <span class="n">node_order</span> <span class="o">=</span> <span class="n">nodes</span>
 
     <span class="c1"># Iterate through all the nodes.</span>
@@ -169,21 +176,23 @@
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.greedyalgorithm.make_dual_graph">[docs]</a>
 <span class="k">def</span> <span class="nf">make_dual_graph</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">lB</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Finds the dual graph as defined under the greedy colouring algorithm.</span>
+<span class="sd">    Finds the dual graph as defined under the greedy colouring algorithm (Song, Gallos, et al., 2007).</span>
 <span class="sd">    In the dual graph, two nodes are connected if the distance between them is at least lB.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        graph (igraph.Graph): The graph to be analysed.</span>
-<span class="sd">        lB (int): The diameter of the boxes for the box covering.</span>
+<span class="sd">        graph (igraph.Graph) : The graph to be analysed.</span>
+<span class="sd">        lB (int)             : The diameter of the boxes for the box covering.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        dual_graph (igraph.Graph): The dual graph.</span>
+<span class="sd">        (igraph.Graph) : The dual graph.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Calculate the matrix of shortest paths between each pair of nodes in the network, and convert it to a numpy array.</span>
     <span class="n">distance_matrix</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">distances</span><span class="p">()</span>
     <span class="n">distance_np_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">distance_matrix</span><span class="p">)</span>
 
-    <span class="c1"># The following lines of code convert the distance matrix into a matrix with ones if the nodes are a distance of at least lB apart, and zeroes otherwise.</span>
+    <span class="c1"># The following lines of code convert the distance matrix into a matrix where the entries are:</span>
+    <span class="c1">#   one if the nodes are a distance of at least lB apart, and</span>
+    <span class="c1">#   zero otherwise.</span>
     <span class="n">distance_np_array</span><span class="p">[</span><span class="n">distance_np_array</span> <span class="o">&lt;</span> <span class="n">lB</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">distance_np_array</span><span class="p">[</span><span class="n">distance_np_array</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 

@@ -41,6 +41,7 @@
 <span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
+
 <div class="viewcode-block" id="SHM_no_of_edges">
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.modelanalysis.SHM_no_of_edges">[docs]</a>
 <span class="k">def</span> <span class="nf">SHM_no_of_edges</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
@@ -48,13 +49,14 @@
 <span class="sd">    Finds the number of edges in an n-th generation SHM network with parameter m.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        m (int): The number of offspring added at each stage, as defined by the SHM model [2].</span>
-<span class="sd">        n (int): The number of iterations to perform of the SHM generative process [2].</span>
+<span class="sd">        m (int) : The number of offspring added at each stage,</span>
+<span class="sd">                    as defined by the SHM model (Song, Havlin, and Makse, 2006).</span>
+<span class="sd">        n (int) : The number of iterations to perform of the SHM generative process (Song, Havlin, and Makse, 2006).</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        (int): The number of edges in the network.</span>
+<span class="sd">        (int) : The number of edges in the network.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># A SHM network has (1+2m)^(n-1) edges.</span>
+    <span class="c1"># An SHM network has (1+2m)^(n-1) edges.</span>
     <span class="k">return</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">m</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span></div>
 
 
@@ -66,13 +68,14 @@
 <span class="sd">    Finds the number of nodes in an n-th generation SHM network with parameter m.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        m (int): The number of offspring added at each stage, as defined by the SHM model [2].</span>
-<span class="sd">        n (int): The number of iterations to perform of the SHM generative process [2].</span>
+<span class="sd">        m (int) : The number of offspring added at each stage,</span>
+<span class="sd">                    as defined by the SHM model (Song, Havlin, and Makse, 2006).</span>
+<span class="sd">        n (int) : The number of iterations to perform of the SHM generative process  (Song, Havlin, and Makse, 2006).</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        (int): The number of nodes in the network.</span>
+<span class="sd">        (int) : The number of nodes in the network.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># A SHM network has (1+2m)^(n-1)+1 nodes.</span>
+    <span class="c1"># An SHM network has (1+2m)^(n-1)+1 nodes.</span>
     <span class="k">return</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">m</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span></div>
 
 
@@ -81,16 +84,17 @@
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.modelanalysis.check_SHM_no_of_edges">[docs]</a>
 <span class="k">def</span> <span class="nf">check_SHM_no_of_edges</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Checks the validity of the number of edges of a SHM network calculating according to analytical arguments in [1]</span>
+<span class="sd">    Checks the validity of the number of edges of an SHM network calculating according to analytical arguments in [1]</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        m (int): The parameter m in the SHM network model [3]</span>
-<span class="sd">         n(int): The parameter n in the SHM network model [3]</span>
+<span class="sd">        m (int) : The parameter m in the SHM network model (Song, Havlin, and Makse, 2006)</span>
+<span class="sd">        n (int) : The parameter n in the SHM network model (Song, Havlin, and Makse, 2006)</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        (Bool): True if the analytical and empirical value agree, False otherwise.</span>
+<span class="sd">        (bool) : True if the analytical and empirical value agree, False otherwise.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Generate an SHM network. The number of edges is independent of the probability p, so p is chosen randomly on the interval [0,1]</span>
+    <span class="c1"># Generate an SHM network.</span>
+    <span class="c1"># The number of edges is independent of the probability p, so p is chosen randomly on the interval [0,1]</span>
     <span class="n">G</span> <span class="o">=</span> <span class="n">generate_SHM_model</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(),</span> <span class="n">n</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="n">eG</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span>  <span class="c1"># Empirical number of edges</span>
@@ -105,16 +109,17 @@
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.modelanalysis.check_SHM_no_of_nodes">[docs]</a>
 <span class="k">def</span> <span class="nf">check_SHM_no_of_nodes</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Checks the validity of the number of nodes of a SHM network calculating according to analytical arguments in [1]</span>
+<span class="sd">    Checks the validity of the number of nodes of an SHM network calculating according to analytical arguments in [1]</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        m (int): The parameter m in the SHM network model [3]</span>
-<span class="sd">        n (int): The parameter n in the SHM network model [3]</span>
+<span class="sd">        m (int) : The parameter m in the SHM network model (Song, Havlin, and Makse, 2006)</span>
+<span class="sd">        n (int) : The parameter n in the SHM network model (Song, Havlin, and Makse, 2006)</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        (Bool): True if the analytical and empirical value agree, False otherwise.</span>
+<span class="sd">        (bool) : True if the analytical and empirical value agree, False otherwise.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Generate an SHM network. The number of nodes is independent of the probability p, so p is chosen randomly on the interval [0,1]</span>
+    <span class="c1"># Generate an SHM network.</span>
+    <span class="c1"># The number of nodes is independent of the probability p, so p is chosen randomly on the interval [0,1]</span>
     <span class="n">G</span> <span class="o">=</span> <span class="n">generate_SHM_model</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(),</span> <span class="n">n</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">())</span>  <span class="c1"># Empirical number of nodes</span>
@@ -129,22 +134,22 @@
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.modelanalysis.SHM_p0_degree_prob">[docs]</a>
 <span class="k">def</span> <span class="nf">SHM_p0_degree_prob</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Calculates the probability P(d) for a given degree d in a SHM network with parameters m, n and p=0.</span>
+<span class="sd">    Calculates the probability P(d) for a given degree d in an SHM network with parameters m, n and p=0.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        m (int): The parameter m in the SHM network model [3]</span>
-<span class="sd">        d (int): The degree to find the probability density P(d) for.</span>
-<span class="sd">        n (int): The parameter N in the SHM network model [3]</span>
+<span class="sd">        m (int) : The parameter m in the SHM network model (Song, Havlin, and Makse, 2006).</span>
+<span class="sd">        d (int) : The degree to find the probability density P(d) for.</span>
+<span class="sd">        n (int) : The parameter N in the SHM network model (Song, Havlin, and Makse, 2006).</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        (float): The probability P(d) from the degree distribution.</span>
+<span class="sd">        (float) : The probability P(d) from the degree distribution.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># The maximum degree in a network with parameters m, N is (1+m)^(N-1) [4].</span>
-    <span class="c1"># Thus for any larger degree d, the probability of a node having degree d is 0.</span>
+    <span class="c1"># Thus, for any larger degree d, the probability of a node having degree d is 0.</span>
     <span class="k">if</span> <span class="n">d</span> <span class="o">&gt;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">m</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
         <span class="k">return</span> <span class="mi">0</span>
 
-    <span class="c1"># All degrees in a SHM network with p=0 are powers of (1+m)</span>
+    <span class="c1"># All degrees in an SHM network with p=0 are powers of (1+m)</span>
     <span class="n">power</span><span class="p">,</span> <span class="n">is_power</span> <span class="o">=</span> <span class="n">exact_log</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">m</span><span class="p">))</span>  <span class="c1"># Check if d is a power of (1+m) and find the exponent.</span>
 
     <span class="c1"># If d is a power, then we can find P(d).</span>
@@ -163,7 +168,7 @@
         <span class="c1"># Find the total number of nodes in the network.</span>
         <span class="n">total</span> <span class="o">=</span> <span class="n">SHM_no_of_nodes</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
 
-        <span class="c1"># The probability that a node has degree d is the number of nodes with degree d divided by the total number of nodes.</span>
+        <span class="c1"># The probability that a node has degree d is the number of nodes with degree d divided by the number of nodes.</span>
         <span class="k">return</span> <span class="n">no_deg_d</span> <span class="o">/</span> <span class="n">total</span>
 
     <span class="c1"># For all other degrees, return 0.</span>
@@ -176,17 +181,17 @@
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.modelanalysis.check_SHM_p0_degree_prob">[docs]</a>
 <span class="k">def</span> <span class="nf">check_SHM_p0_degree_prob</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Checks the accuracy of the calculated degree probability, according to analytical arguments in [1].</span>
+<span class="sd">    Checks the accuracy of the calculated degree probability, according to analytical arguments.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        m (int): The parameter m in the SHM network model [2]</span>
-<span class="sd">        d (int): The degree to find the probability density P(d) for.</span>
-<span class="sd">        n (int): The parameter N in the SHM network model [2]</span>
+<span class="sd">        m (int) : The parameter m in the SHM network model (Song, Havlin, and Makse, 2006).</span>
+<span class="sd">        d (int) : The degree to find the probability density P(d) for.</span>
+<span class="sd">        n (int) : The parameter N in the SHM network model (Song, Havlin, and Makse, 2006).</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        (Bool): True if the two values agree, and False if they disagree.</span>
+<span class="sd">        (bool) : True if the two values agree, and False if they disagree.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Generate a SHM network with parameters m, n, p=0.</span>
+    <span class="c1"># Generate an SHM network with parameters m, n, p=0.</span>
     <span class="n">G</span> <span class="o">=</span> <span class="n">generate_SHM_model</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="c1"># Find a list of the degrees in the network.</span>
@@ -194,7 +199,7 @@
 
     <span class="c1"># Count the number of nodes with degree d.</span>
     <span class="n">no_deg_d</span> <span class="o">=</span> <span class="n">degrees</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-    <span class="c1"># The probability that a node has degree d is the number of nodes with degree d divided by the total number of nodes.</span>
+    <span class="c1"># The probability that a node has degree d is the number of nodes with degree d divided by the number of nodes.</span>
     <span class="n">prob</span> <span class="o">=</span> <span class="n">no_deg_d</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">degrees</span><span class="p">)</span>
 
     <span class="c1"># Find the calculated probability according to the analytical arguments.</span>
@@ -209,15 +214,16 @@
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.modelanalysis.SHM_p0_degree_dist">[docs]</a>
 <span class="k">def</span> <span class="nf">SHM_p0_degree_dist</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Calculates the degree distribution of a SHM network with p=0</span>
+<span class="sd">    Calculates the degree distribution of an SHM network with p=0</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        m (int): The parameter m in the SHM network model to test [2]</span>
-<span class="sd">        n (int): The parameter N in the SHM network model [2]</span>
+<span class="sd">        m (int) : The parameter m in the SHM network model to test (Song, Havlin, and Makse, 2006).</span>
+<span class="sd">        n (int) : The parameter N in the SHM network model (Song, Havlin, and Makse, 2006).</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        degrees (list): A list of the degrees in the network.</span>
-<span class="sd">        degree_dist (list): A list of probabilities of a node having a given degree.</span>
+<span class="sd">        (tuple) : Tuple containing two lists, specifically:</span>
+<span class="sd">                    a list of the degrees in the network;</span>
+<span class="sd">                    a list of probabilities of a node having a given degree.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Initialise empty lists for the degrees and the degree distribution</span>
     <span class="n">degrees</span> <span class="o">=</span> <span class="p">[]</span>
@@ -241,16 +247,16 @@
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.modelanalysis.check_SHM_p0_degree_dist">[docs]</a>
 <span class="k">def</span> <span class="nf">check_SHM_p0_degree_dist</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Checks the accuracy of the calculated degree distribution, according to analytical arguments in [4].</span>
+<span class="sd">    Checks the accuracy of the calculated degree distribution, according to analytical arguments.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        m (int): The parameter m in the SHM network model [2]</span>
-<span class="sd">        n (int): The parameter n in the SHM network model [2]</span>
+<span class="sd">        m (int) : The parameter m in the SHM network model (Song, Havlin, and Makse, 2006).</span>
+<span class="sd">        n (int) : The parameter n in the SHM network model (Song, Havlin, and Makse, 2006).</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        (Bool): True if the two distributions agree, and False if they disagree.</span>
+<span class="sd">        (bool) : True if the two distributions agree, and False if they disagree.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Generate a SHM network with parameters m, N, p=0.</span>
+    <span class="c1"># Generate an SHM network with parameters m, N, p=0.</span>
     <span class="n">G</span> <span class="o">=</span> <span class="n">generate_SHM_model</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="c1"># Find the degree distribution.</span>
     <span class="n">degrees</span> <span class="o">=</span> <span class="p">[</span><span class="n">deg</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">deg</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">degree</span><span class="p">()]</span>
@@ -281,24 +287,24 @@
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.modelanalysis.SHM_p1_degree_prob">[docs]</a>
 <span class="k">def</span> <span class="nf">SHM_p1_degree_prob</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Calculates the probability P(d) for a given degree d in a SHM network with parameters m, N and p=1.</span>
+<span class="sd">    Calculates the probability P(d) for a given degree d in an SHM network with parameters m, N and p=1.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        m (int): The parameter m in the SHM network model [2]</span>
-<span class="sd">        d (int): The degree to find the probability density P(d) for.</span>
-<span class="sd">        n (int): The parameter n in the SHM network model [2]</span>
+<span class="sd">        m (int) : The parameter m in the SHM network model (Song, Havlin, and Makse, 2006).</span>
+<span class="sd">        d (int) : The degree to find the probability density P(d) for.</span>
+<span class="sd">        n (int) : The parameter n in the SHM network model (Song, Havlin, and Makse, 2006).</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        (float): The probability P(d) from the degree distribution.</span>
+<span class="sd">        (float) : The probability P(d) from the degree distribution.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># The maximum degree in a network with parameters m, N is m^(N-1) [4].</span>
-    <span class="c1"># Thus for any larger degree d, the probability of a node having degree d is 0.</span>
-    <span class="k">if</span> <span class="n">d</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="c1"># Thus, for any larger degree d, the probability of a node having degree d is 0.</span>
+    <span class="k">if</span> <span class="n">d</span> <span class="o">&gt;</span> <span class="n">m</span> <span class="o">**</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
         <span class="k">return</span> <span class="mi">0</span>
 
-    <span class="c1"># All degrees in a SHM network are powers of m or 2 times a power of m.</span>
+    <span class="c1"># All degrees in an SHM network are powers of m or 2 times a power of m.</span>
     <span class="n">power</span><span class="p">,</span> <span class="n">is_power</span> <span class="o">=</span> <span class="n">exact_log</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>  <span class="c1"># Check if d is a power of m, and find the exponent.</span>
-    <span class="n">double_power</span><span class="p">,</span> <span class="n">is_double_power</span> <span class="o">=</span> <span class="n">exact_log</span><span class="p">(</span><span class="n">d</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>  <span class="c1"># Check if 1/2 d is a power of m, and find the exponent.</span>
+    <span class="n">double_power</span><span class="p">,</span> <span class="n">is_double_power</span> <span class="o">=</span> <span class="n">exact_log</span><span class="p">(</span><span class="n">d</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>  <span class="c1"># Check if 1/2 d is a power of m, and find the exponent.</span>
 
     <span class="c1"># The only case where d and 1/2 are both powers of m is when m = 2.</span>
     <span class="c1"># In this case, the calculation of the degree distribution is different.</span>
@@ -320,7 +326,8 @@
 
             <span class="c1"># Find the total number of nodes.</span>
         <span class="n">total</span> <span class="o">=</span> <span class="n">SHM_no_of_nodes</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-        <span class="c1"># The probability of a given node having degree d is the number of nodes with that degree divided by the total number of nodes.</span>
+        <span class="c1"># The probability of a given node having degree d is the number of nodes with that degree</span>
+        <span class="c1">#   divided by the total number of nodes.</span>
         <span class="k">return</span> <span class="n">no_deg_d</span> <span class="o">/</span> <span class="n">total</span>
 
     <span class="c1"># The remaining code deals with all other cases when m != 2.</span>
@@ -342,7 +349,8 @@
 
         <span class="c1"># Find the total number of nodes.</span>
         <span class="n">total</span> <span class="o">=</span> <span class="n">SHM_no_of_nodes</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-        <span class="c1"># The probability of a given node having degree d is the number of nodes with that degree divided by the total number of nodes.</span>
+        <span class="c1"># The probability of a given node having degree d is the number of nodes with</span>
+        <span class="c1">#   that degree divided by the total number of nodes.</span>
         <span class="k">return</span> <span class="n">no_deg_d</span> <span class="o">/</span> <span class="n">total</span>
 
     <span class="c1"># If 1/2 d is a power of m, then d is the degree of a node added in the k-th stage which is rewired,</span>
@@ -356,11 +364,12 @@
 
         <span class="c1"># Find the total number of nodes.</span>
         <span class="n">total</span> <span class="o">=</span> <span class="n">SHM_no_of_nodes</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-        <span class="c1"># The probability of a given node having degree d is the number of nodes with that degree divided by the total number of nodes.</span>
+        <span class="c1"># The probability of a given node having degree d is the number of nodes</span>
+        <span class="c1">#   with that degree divided by the total number of nodes.</span>
         <span class="k">return</span> <span class="n">no_deg_d</span> <span class="o">/</span> <span class="n">total</span>
 
     <span class="c1"># If the degree d is a not a power of m, or 1/2 d is not a power of m, then no nodes will have degree d.</span>
-    <span class="c1"># Thus the probability is 0.</span>
+    <span class="c1"># Thus, the probability is 0.</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">0</span></div>
 
@@ -370,17 +379,17 @@
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.modelanalysis.check_SHM_p1_degree_prob">[docs]</a>
 <span class="k">def</span> <span class="nf">check_SHM_p1_degree_prob</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Checks the accuracy of the calculated degree probability, according to analytical arguments in [4].</span>
+<span class="sd">    Checks the accuracy of the calculated degree probability, according to analytical arguments.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        m (int): The parameter m in the SHM network model [2]</span>
-<span class="sd">        d (int): The degree to find the probability density P(d) for.</span>
-<span class="sd">        n (int): The parameter n in the SHM network model [2]</span>
+<span class="sd">        m (int) : The parameter m in the SHM network model (Song, Havlin, and Makse, 2006).</span>
+<span class="sd">        d (int) : The degree to find the probability density P(d) for.</span>
+<span class="sd">        n (int) : The parameter n in the SHM network model (Song, Havlin, and Makse, 2006).</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        (Bool): True if the two values agree, and False if they disagree.</span>
+<span class="sd">        (bool) : True if the two values agree, and False if they disagree.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Generate a SHM network with parameters m, N, p=1.</span>
+    <span class="c1"># Generate an SHM network with parameters m, N, p=1.</span>
     <span class="n">G</span> <span class="o">=</span> <span class="n">generate_SHM_model</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="c1"># Find a list of the degrees in the network.</span>
@@ -388,7 +397,8 @@
 
     <span class="c1"># Count the number of nodes with degree d.</span>
     <span class="n">no_deg_d</span> <span class="o">=</span> <span class="n">degrees</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-    <span class="c1"># The probability that a node has degree d is the number of nodes with degree d divided by the total number of nodes.</span>
+    <span class="c1"># The probability that a node has degree d is the number of nodes</span>
+    <span class="c1">#   with degree d divided by the total number of nodes.</span>
     <span class="n">prob</span> <span class="o">=</span> <span class="n">no_deg_d</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">degrees</span><span class="p">)</span>
 
     <span class="c1"># Find the calculated probability according to the analytical arguments.</span>
@@ -403,15 +413,16 @@
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.modelanalysis.SHM_p1_degree_dist">[docs]</a>
 <span class="k">def</span> <span class="nf">SHM_p1_degree_dist</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Calculates the degree distribution of a SHM network with p=0</span>
+<span class="sd">    Calculates the degree distribution of an SHM network with p=1</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        m (int): The parameter m in the SHM network model to test [2]</span>
-<span class="sd">        n (int): The parameter n in the SHM network model [2]</span>
+<span class="sd">        m (int): The parameter m in the SHM network model to test (Song, Havlin, and Makse, 2006)</span>
+<span class="sd">        n (int): The parameter n in the SHM network model (Song, Havlin, and Makse, 2006)</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        degrees (list): A list of the degrees in the network.</span>
-<span class="sd">        degree_dist (list): A list of probabilities of a node having a given degree, where degree_dist[i] is P(degrees[i])</span>
+<span class="sd">        (tuple) : A tuple containing two lists, specifically:</span>
+<span class="sd">                    a list of the degrees in the network;</span>
+<span class="sd">                    and a list of probabilities of a node having a given degree, where degree_dist[i] is P(degrees[i])</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Initialise empty lists for the degrees and degree distribution.</span>
     <span class="n">degrees</span> <span class="o">=</span> <span class="p">[]</span>
@@ -423,7 +434,7 @@
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
             <span class="c1"># The degree of nodes generated at stage k is m^(N-k)</span>
             <span class="c1"># For m=2, nodes generates at stage k+1 which are rewired also have degree m^(N-k)</span>
-            <span class="n">d</span> <span class="o">=</span> <span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">k</span><span class="p">)</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">m</span> <span class="o">**</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">k</span><span class="p">)</span>
 
             <span class="c1"># Add the degree d to the list of degrees, and the probability P(d) to the degree distribution.</span>
             <span class="n">degrees</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
@@ -435,7 +446,7 @@
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
 
             <span class="c1"># The degree of nodes generated at stage k is m^(N-k)</span>
-            <span class="n">d</span> <span class="o">=</span> <span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">k</span><span class="p">)</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">m</span> <span class="o">**</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">k</span><span class="p">)</span>
             <span class="c1"># Add the degree d to the list of degrees, and the probability P(d) to the degree distribution.</span>
             <span class="n">degrees</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
             <span class="n">degree_dist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">SHM_p1_degree_prob</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
@@ -443,7 +454,7 @@
             <span class="c1"># For all stages except the first, there are also some nodes which are rewired.</span>
             <span class="c1"># These have degree 2m^(N-k)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="n">d</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">k</span><span class="p">)</span>
+                <span class="n">d</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">m</span> <span class="o">**</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">k</span><span class="p">))</span>
 
                 <span class="c1"># Add the degree d to the list of degrees, and the probability P(d) to the degree distribution.</span>
                 <span class="n">degrees</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
@@ -458,16 +469,16 @@
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.modelanalysis.check_SHM_p1_degree_dist">[docs]</a>
 <span class="k">def</span> <span class="nf">check_SHM_p1_degree_dist</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Checks the accuracy of the calculated degree distribution, according to analytical arguments in [4].</span>
+<span class="sd">    Checks the accuracy of the calculated degree distribution, according to analytical arguments.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        m (int): The parameter m in the SHM network model [2]</span>
-<span class="sd">        n (int): The parameter n in the SHM network model [2]</span>
+<span class="sd">        m (int) : The parameter m in the SHM network model (Song, Havlin, and Makse, 2006).</span>
+<span class="sd">        n (int) : The parameter n in the SHM network model (Song, Havlin, and Makse, 2006).</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        (Bool): True if the two distributions agree, and False if they disagree.</span>
+<span class="sd">        (bool) : True if the two distributions agree, and False if they disagree.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Generate a SHM network with parameters m, N, p=1.</span>
+    <span class="c1"># Generate an SHM network with parameters m, N, p=1.</span>
     <span class="n">G</span> <span class="o">=</span> <span class="n">generate_SHM_model</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="c1"># Find the degree distribution.</span>
     <span class="n">degrees</span> <span class="o">=</span> <span class="p">[</span><span class="n">deg</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">deg</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">degree</span><span class="p">()]</span>
@@ -498,23 +509,23 @@
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.modelanalysis.check_SHM_p0_lambda">[docs]</a>
 <span class="k">def</span> <span class="nf">check_SHM_p0_lambda</span><span class="p">(</span><span class="n">m_max</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Verfies that the analytical result for lambda agrees with the empirical result.</span>
+<span class="sd">    Verifies that the analytical result for lambda agrees with the empirical result (Song, Havlin, and Makse, 2006).</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        m (int): The maximum value of parameter m in the SHM network model to test [2]</span>
-<span class="sd">        n (int): The parameter n in the SHM network model [2]</span>
-<span class="sd">        plot (Bool) (opt): If True, plots a comparison of the results. Default is False.</span>
-<span class="sd">        verbose (Bool) (opt): If True, prints results to terminal. Default is False.</span>
+<span class="sd">        m_max (int)                     : The maximum value of parameter m in the SHM network model to test.</span>
+<span class="sd">        n (int)                         : The parameter n in the SHM network model.</span>
+<span class="sd">        plot (:obj:`bool`, optional)    : If True, plots a comparison of the results. Default is False.</span>
+<span class="sd">        verbose (:obj:`bool`, optional) : If True, prints results to terminal. Default is False.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        empirical (list): A list of the values of lambda found by fitting a power law distribution to empirical data.</span>
-<span class="sd">        analystical (list): A list of the values of lambda determined by the analytical argument in [4]</span>
+<span class="sd">        (tuple) : Tuple containing two lists, specifically:</span>
+<span class="sd">                    a list of the values of lambda found by fitting a power law distribution to empirical data;</span>
+<span class="sd">                    and a list of the values of lambda determined by the analytical argument.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Initialise empty lists to store the empirical and analytical results.</span>
     <span class="n">empirical</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">analytical</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">power</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="c1"># Create a list of all possible values of m</span>
     <span class="n">ms</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">m_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
@@ -560,14 +571,14 @@
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.modelanalysis.HADG_no_of_edges">[docs]</a>
 <span class="k">def</span> <span class="nf">HADG_no_of_edges</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Finds the number of edges in an n-th generation HADG network with parameter m.</span>
+<span class="sd">    Finds the number of edges in an n-th generation HADG network with parameter m (Kuang et al., 2013).</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        m (int): The number of offspring added at each stage, as defined by the HADG model [2].</span>
-<span class="sd">        n (int): The number of iterations to perform of the HADG generative process [2].</span>
+<span class="sd">        m (int) : The number of offspring added at each stage, as defined by the HADG model (Kuang et al., 2013).</span>
+<span class="sd">        n (int) : The number of iterations to perform of the HADG generative process (Kuang et al., 2013).</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        (int): The number of edges in the network.</span>
+<span class="sd">        (int) : The number of edges in the network.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># A HADG network has (3+2m)^(n-1) edges.</span>
     <span class="k">return</span> <span class="p">(</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">m</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span></div>
@@ -578,14 +589,14 @@
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.modelanalysis.HADG_no_of_nodes">[docs]</a>
 <span class="k">def</span> <span class="nf">HADG_no_of_nodes</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Finds the number of nodes in an n-th generation HADG network with parameter m.</span>
+<span class="sd">    Finds the number of nodes in an n-th generation HADG network with parameter m (Kuang et al., 2013).</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        m (int): The number of offspring added at each stage, as defined by the HADG model [2].</span>
-<span class="sd">        n (int): The number of iterations to perform of the HADG generative process [2].</span>
+<span class="sd">        m (int) : The number of offspring added at each stage, as defined by the HADG model (Kuang et al., 2013).</span>
+<span class="sd">        n (int) : The number of iterations to perform of the HADG generative process (Kuang et al., 2013).</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        N (int): The number of nodes in the network.</span>
+<span class="sd">        N (int) : The number of nodes in the network.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Calculate the number of nodes</span>
     <span class="n">N</span> <span class="o">=</span> <span class="mi">2</span>
@@ -601,16 +612,17 @@
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.modelanalysis.check_HADG_no_of_edges">[docs]</a>
 <span class="k">def</span> <span class="nf">check_HADG_no_of_edges</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Checks the validity of the number of edges of a HADG network calculating according to analytical arguments in [1]</span>
+<span class="sd">    Checks the validity of the number of edges of a HADG network calculating according to analytical arguments.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        m (int): The parameter m in the HADG network model [3]</span>
-<span class="sd">        n(int): The parameter n in the HADG network model [3]</span>
+<span class="sd">        m (int) : The parameter m in the HADG network model (Kuang et al., 2013).</span>
+<span class="sd">        n (int) : The parameter n in the HADG network model (Kuang et al., 2013).</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        (Bool): True if the analytical and empirical value agree, False otherwise.</span>
+<span class="sd">        (bool) : True if the analytical and empirical value agree, False otherwise.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Generate an SHM network. The number of edges is independent of the parameters a, b and T, so they are chosen randomly on the interval [0,1]</span>
+    <span class="c1"># Generate an SHM network.</span>
+    <span class="c1"># The number of edges is independent of the parameters a, b and T, so they are chosen randomly on the interval [0,1]</span>
     <span class="n">G</span> <span class="o">=</span> <span class="n">generate_HADG_model</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(),</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(),</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(),</span> <span class="n">n</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="n">eG</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span>  <span class="c1"># Empirical number of edges</span>
@@ -625,16 +637,17 @@
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.modelanalysis.check_HADG_no_of_nodes">[docs]</a>
 <span class="k">def</span> <span class="nf">check_HADG_no_of_nodes</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Checks the validity of the number of nodes of a HADG network calculating according to analytical arguments in [1]</span>
+<span class="sd">    Checks the validity of the number of nodes of a HADG network calculating according to analytical arguments.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        m (int): The parameter m in the HADG network model [3]</span>
-<span class="sd">        n(int): The parameter n in the HADG network model [3]</span>
+<span class="sd">        m (int) : The parameter m in the HADG network model (Kuang et al., 2013).</span>
+<span class="sd">        n (int) : The parameter n in the HADG network model (Kuang et al., 2013).</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        (Bool): True if the analytical and empirical value agree, False otherwise.</span>
+<span class="sd">        (bool) : True if the analytical and empirical value agree, False otherwise.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Generate an SHM network. The number of edges is independent of the parameters a, b and T, so they are chosen randomly on the interval [0,1]</span>
+    <span class="c1"># Generate an SHM network.</span>
+    <span class="c1"># The number of edges is independent of the parameters a, b and T, so they are chosen randomly on the interval [0,1]</span>
     <span class="n">G</span> <span class="o">=</span> <span class="n">generate_HADG_model</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(),</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(),</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(),</span> <span class="n">n</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">())</span>  <span class="c1"># Empirical number of edges</span>
@@ -649,15 +662,15 @@
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.modelanalysis.uv_flower_no_of_edges">[docs]</a>
 <span class="k">def</span> <span class="nf">uv_flower_no_of_edges</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Finds the number of edges in an n-th generation (u,v)-flower network.</span>
+<span class="sd">    Finds the number of edges in an n-th generation (u,v)-flower network (Rozenfeld, Havlin, and ben-Avraham, 2007).</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        u (int): Value of u, i.e. path length of one of the parallel paths.</span>
-<span class="sd">        v (int): Value of v, i.e. path length of one of the parallel paths.</span>
-<span class="sd">        n (int): Number of generations.</span>
+<span class="sd">        u (int) : Value of u, i.e. path length of one of the parallel paths.</span>
+<span class="sd">        v (int) : Value of v, i.e. path length of one of the parallel paths.</span>
+<span class="sd">        n (int) : Number of generations.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        (int): The number of edges in the network.</span>
+<span class="sd">        (int) : The number of edges in the network.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># A (u,v)-flower has (u+v)^n edges.</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">u</span> <span class="o">+</span> <span class="n">v</span><span class="p">)</span> <span class="o">**</span> <span class="n">n</span></div>
@@ -668,15 +681,15 @@
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.modelanalysis.uv_flower_no_of_nodes">[docs]</a>
 <span class="k">def</span> <span class="nf">uv_flower_no_of_nodes</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Finds the number of nodes in an n-th generation (u,v)-flower network.</span>
+<span class="sd">    Finds the number of nodes in an n-th generation (u,v)-flower network (Rozenfeld, Havlin, and ben-Avraham, 2007).</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        u (int): Value of u, i.e. path length of one of the parallel paths.</span>
-<span class="sd">        v (int): Value of v, i.e. path length of one of the parallel paths.</span>
-<span class="sd">        n (int): Number of generations.</span>
+<span class="sd">        u (int) : Value of u, i.e. path length of one of the parallel paths.</span>
+<span class="sd">        v (int) : Value of v, i.e. path length of one of the parallel paths.</span>
+<span class="sd">        n (int) : Number of generations.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        (int): The number of nodes in the network.</span>
+<span class="sd">        (int) : The number of nodes in the network.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Calculate the number of nodes</span>
 
@@ -689,17 +702,17 @@
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.modelanalysis.check_uv_flower_no_of_edges">[docs]</a>
 <span class="k">def</span> <span class="nf">check_uv_flower_no_of_edges</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Checks the validity of the number of edges of a (u,v)-flower network calculating according to analytical arguments in [1]</span>
+<span class="sd">    Checks the validity of the number of edges of a (u,v)-flower network calculating according to analytical arguments.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        u (int): Value of u, i.e. path length of one of the parallel paths.</span>
-<span class="sd">        v (int): Value of v, i.e. path length of one of the parallel paths.</span>
-<span class="sd">        n (int): Number of generations.</span>
+<span class="sd">        u (int) : Value of u, i.e. path length of one of the parallel paths.</span>
+<span class="sd">        v (int) : Value of v, i.e. path length of one of the parallel paths.</span>
+<span class="sd">        n (int) : Number of generations.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        (Bool): True if the analytical and empirical value agree, False otherwise.</span>
+<span class="sd">        (bool) : True if the analytical and empirical value agree, False otherwise.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Generate an SHM network. The number of edges is independent of the parameters a, b and T, so they are chosen randomly on the interval [0,1]</span>
+    <span class="c1"># Generate a (u,v)-flower network</span>
     <span class="n">G</span> <span class="o">=</span> <span class="n">generate_uv_flower</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
 
     <span class="n">eG</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span>  <span class="c1"># Empirical number of edges</span>
@@ -714,17 +727,17 @@
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.modelanalysis.check_uv_flower_no_of_nodes">[docs]</a>
 <span class="k">def</span> <span class="nf">check_uv_flower_no_of_nodes</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Checks the validity of the number of edges of a (u,v)-flower network calculating according to analytical arguments in [1]</span>
+<span class="sd">    Checks the validity of the number of nodes of a (u,v)-flower network calculating according to analytical arguments.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        u (int): Value of u, i.e. path length of one of the parallel paths.</span>
-<span class="sd">        v (int): Value of v, i.e. path length of one of the parallel paths.</span>
-<span class="sd">        n (int): Number of generations.</span>
+<span class="sd">        u (int) : Value of u, i.e. path length of one of the parallel paths.</span>
+<span class="sd">        v (int) : Value of v, i.e. path length of one of the parallel paths.</span>
+<span class="sd">        n (int) : Number of generations.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        (Bool): True if the analytical and empirical value agree, False otherwise.</span>
+<span class="sd">        (bool) : True if the analytical and empirical value agree, False otherwise.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Generate an SHM network. The number of edges is independent of the parameters a, b and T, so they are chosen randomly on the interval [0,1]</span>
+    <span class="c1"># Generate a (u,v)-flower network.</span>
     <span class="n">G</span> <span class="o">=</span> <span class="n">generate_uv_flower</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
 
     <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">())</span>  <span class="c1"># Empirical number of edges</span>

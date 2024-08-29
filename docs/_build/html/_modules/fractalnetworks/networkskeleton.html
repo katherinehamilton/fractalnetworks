@@ -42,11 +42,13 @@
 <span class="sd">    Finds the skeleton of the given network.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
-<span class="sd">        ebcs (list) (opt): A list of edge betweenness centralities. If already calculated, it can be passed as an argument to prevent duplication. Default is None, meaning it will be calculated internally.</span>
+<span class="sd">        G (igraph.Graph)             : The network to be analysed.</span>
+<span class="sd">        ebcs (:obj:`list`, optional) : A list of edge betweenness centralities.</span>
+<span class="sd">                                       If already calculated, passing this parameter prevents duplication.</span>
+<span class="sd">                                       Default is None, meaning it will be calculated internally.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        H (igraph.Graph): The skeleton of the network G</span>
+<span class="sd">        (igraph.Graph) : The skeleton of the network G</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Find the edge betweenness centralities</span>
@@ -86,12 +88,12 @@
 <span class="sd">    Finds a list of edge IDs for edges in the skeleton of G.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
-<span class="sd">        H (igraph.Graph) (opt): The skeleton of the network, if known. Default is None.</span>
-<span class="sd">        ebcs (list) (opt): The edge betweenness centralities of the network, if known. Default is None.</span>
+<span class="sd">        G (igraph.Graph)                  : The network to be analysed.</span>
+<span class="sd">        H (:obj:`igraph.Graph`, optional) : The skeleton of the network, if known. Default is None.</span>
+<span class="sd">        ebcs (:obj:`list`, optional)      : The edge betweenness centralities of the network, if known. Default is None.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        skeleton_edges (list): List of IDs of edges in G which are in the skeleton of G.</span>
+<span class="sd">        (list) : List of IDs of edges in G which are in the skeleton of G.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Find the skeleton of the network</span>
@@ -120,13 +122,14 @@
 <span class="sd">    Finds the edge betweenness centralities of edges in the skeleton of the network.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
-<span class="sd">        H (igraph.Graph) (opt): The skeleton of the network, if known. Default is None.</span>
-<span class="sd">        ebcs (list) (opt): The edge betweenness centralities of the network, if known. Default is None.</span>
+<span class="sd">        G (igraph.Graph)                  : The network to be analysed.</span>
+<span class="sd">        H (:obj:`igraph.Graph`, optional) : The skeleton of the network, if known. Default is None.</span>
+<span class="sd">        ebcs (:obj:`list`, optional)      : The edge betweenness centralities of the network, if known. Default is None.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        skeleton_ebcs (list): A list of edge betweenness centralities of edges in the skeleton.</span>
-<span class="sd">        non_skeleton_ebcs (list): A list of edge betweenness centralities of edges not in the skeleton.</span>
+<span class="sd">        (tuple) : A tuple containing two lists, specifically:</span>
+<span class="sd">                    a list of edge betweenness centralities of edges in the skeleton;</span>
+<span class="sd">                    and a list of edge betweenness centralities of edges not in the skeleton.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Find the betweenness centrality distribution of the network.</span>

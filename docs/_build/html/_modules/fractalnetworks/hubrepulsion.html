@@ -38,6 +38,7 @@
 <span class="c1"># Utility imports</span>
 <span class="kn">import</span> <span class="nn">itertools</span>
 
+
 <div class="viewcode-block" id="find_degree_distribution">
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.hubrepulsion.find_degree_distribution">[docs]</a>
 <span class="k">def</span> <span class="nf">find_degree_distribution</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
@@ -51,6 +52,7 @@
     <span class="k">return</span> <span class="n">G</span><span class="o">.</span><span class="n">degree</span><span class="p">()</span></div>
 
 
+
 <div class="viewcode-block" id="identify_hubs">
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.hubrepulsion.identify_hubs">[docs]</a>
 <span class="k">def</span> <span class="nf">identify_hubs</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -58,8 +60,10 @@
 <span class="sd">    Identify the hubs of the network using the Z-score, where hubs are those nodes with Z &gt; 3.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
-<span class="sd">        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+<span class="sd">        G (igraph.Graph)                : The network to be analysed.</span>
+<span class="sd">        degrees (:obj:`list`, optional) : A list of degrees in the network.</span>
+<span class="sd">                                          If already calculated, passing this parameter prevents duplication.</span>
+<span class="sd">                                          Default is None, in which case the distribution is calculated.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        (list): A list of nodes with Z &gt; 3.</span>
@@ -91,15 +95,18 @@
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.hubrepulsion.identify_hubs_by_mean">[docs]</a>
 <span class="k">def</span> <span class="nf">identify_hubs_by_mean</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Identify the hubs of the network using the mean, where hubs are those nodes with degree greater than some factor (usually 2) times the mean.</span>
+<span class="sd">    Identify the hubs of the network using the mean, where hubs are those nodes with degree greater than some factor</span>
+<span class="sd">        (usually 2) times the mean.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
-<span class="sd">        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
-<span class="sd">        factor (int) (opt): The factor by which the mean is multiplied to identify hubs. Default is 2.</span>
+<span class="sd">        G (igraph.Graph)                : The network to be analysed.</span>
+<span class="sd">        degrees (:obj:`list`, optional) : A list of degrees in the network.</span>
+<span class="sd">                                          If already calculated, passing this parameter prevents duplication.</span>
+<span class="sd">                                          Default is None, in which case the distribution is calculated.</span>
+<span class="sd">        factor (:obj:`int`, optional)   : The factor by which the mean is multiplied to identify hubs. Default is 2.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        (list): A list of hubs.</span>
+<span class="sd">        (list) : A list of hubs.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Find the degree distribution of the network.</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">degrees</span><span class="p">:</span>
@@ -108,6 +115,7 @@
     <span class="c1"># Find the mean degree</span>
     <span class="n">mean_degree</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">degrees</span><span class="p">)</span>
 
+    <span class="c1"># Find those hubs with degree greater than the factor than the mean.</span>
     <span class="n">dd_dict_filtered</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">degrees</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">())</span> <span class="k">if</span> <span class="n">degrees</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">factor</span> <span class="o">*</span> <span class="n">mean_degree</span><span class="p">}</span>
 
     <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">dd_dict_filtered</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
@@ -118,12 +126,14 @@
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.hubrepulsion.identify_hubs_by_percentile">[docs]</a>
 <span class="k">def</span> <span class="nf">identify_hubs_by_percentile</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">percentile</span><span class="o">=</span><span class="mi">90</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Identify the hubs of the network by percentile, where hubs are those in some percentile of the degree distribution (normally 90%)</span>
+<span class="sd">    Identify the hubs of the network by percentile, where hubs are those in some percentile of the degree distribution.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
-<span class="sd">        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
-<span class="sd">        percentile (int) (opt): The percentile hubs belong to. Default is 90.</span>
+<span class="sd">        G (igraph.Graph)                  : The network to be analysed.</span>
+<span class="sd">        degrees (:obj:`list`, optional)   : A list of degrees in the network.</span>
+<span class="sd">                                            If already calculated, passing this parameter prevents duplication.</span>
+<span class="sd">                                            Default is None, in which case the distribution is calculated.</span>
+<span class="sd">        percentile (:obj:`int`, optional) : The percentile hubs belong to. Default is 90.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        (list): A list of hubs.</span>
@@ -153,10 +163,18 @@
 <span class="sd">    Calculates the mean hub degree in the network.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
-<span class="sd">        hubs (list) (opt): A list of hubs in the network, If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function finds the hubs.</span>
-<span class="sd">        hub_method (func) (opt): If the hubs are to be calculated, then this parameter specifies the method used to find hubs. Default is identify_hubs, which uses the Z score.</span>
-<span class="sd">        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+<span class="sd">        G (igraph.Graph)                       : The network to be analysed.</span>
+<span class="sd">        hubs (:obj:`list`, optional)           : A list of hubs in the network.</span>
+<span class="sd">                                                 If already calculated, passing this parameter prevents duplication.</span>
+<span class="sd">                                                 Default is None, in which case the function finds the hubs.</span>
+<span class="sd">        hub_method (:obj:`function`, optional) : Specifies the method used to find hubs.</span>
+<span class="sd">                                                 Default is identify_hubs.</span>
+<span class="sd">        degrees (:obj:`list`, optional)        : A list of degrees in the network.</span>
+<span class="sd">                                                 If already calculated, passing this parameter prevents duplication.</span>
+<span class="sd">                                                 Default is None, in which case the distribution is calculated.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (float) : The mean degree of hubs in the network.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Find the degree distribution of the network.</span>
@@ -179,16 +197,21 @@
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.hubrepulsion.find_hub_hub_edges">[docs]</a>
 <span class="k">def</span> <span class="nf">find_hub_hub_edges</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">hubs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hub_method</span><span class="o">=</span><span class="n">identify_hubs</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Finds the number of edges which connect hubs to other hubs.</span>
+<span class="sd">    Finds the number of edges in a network which connect hubs to other hubs.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
-<span class="sd">        hubs (list) (opt): A list of hubs in the network, If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function finds the hubs.</span>
-<span class="sd">        hub_method (func) (opt): If the hubs are to be calculated, then this parameter specifies the method used to find hubs. Default is identify_hubs, which uses the Z score.</span>
-<span class="sd">        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+<span class="sd">        G (igraph.Graph)                       : The network to be analysed.</span>
+<span class="sd">        hubs (:obj:`list`, optional)           : A list of hubs in the network.</span>
+<span class="sd">                                                 If already calculated, passing this parameter prevents duplication.</span>
+<span class="sd">                                                 Default is None, in which case the function finds the hubs.</span>
+<span class="sd">        hub_method (:obj:`function`, optional) : Specifies the method used to find hubs.</span>
+<span class="sd">                                                 Default is identify_hubs.</span>
+<span class="sd">        degrees (:obj:`list`, optional)        : A list of degrees in the network.</span>
+<span class="sd">                                                 If already calculated, passing this parameter prevents duplication.</span>
+<span class="sd">                                                 Default is None, in which case the distribution is calculated.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        no_of_hub_edges (int): The number of edges between hubs.</span>
+<span class="sd">        (int): The number of edges between hubs.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Find the degree distribution of the network.</span>
@@ -197,7 +220,7 @@
 
     <span class="c1"># Find the hubs of the network</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">hubs</span><span class="p">:</span>
-        <span class="n">hubs</span> <span class="o">=</span> <span class="n">hub_method</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="n">hubs</span> <span class="o">=</span> <span class="n">hub_method</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="n">degrees</span><span class="p">)</span>
 
     <span class="c1"># Initialise a variable to count the number of hub-hub edges</span>
     <span class="n">no_of_hub_edges</span> <span class="o">=</span> <span class="mi">0</span>
@@ -217,16 +240,20 @@
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.hubrepulsion.find_hub_hub_path_nodes">[docs]</a>
 <span class="k">def</span> <span class="nf">find_hub_hub_path_nodes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">hubs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hub_method</span><span class="o">=</span><span class="n">identify_hubs</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Finds the nodes on the shortest paths between pairs of hubs.</span>
+<span class="sd">    Finds the nodes on the shortest paths between pairs of hubs in the network.</span>
 
-<span class="sd">    Args:</span>
-<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
-<span class="sd">        hubs (list) (opt): A list of hubs in the network, If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function finds the hubs.</span>
-<span class="sd">        hub_method (func) (opt): If the hubs are to be calculated, then this parameter specifies the method used to find hubs. Default is identify_hubs, which uses the Z score.</span>
-<span class="sd">        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
-
+<span class="sd">        Args:</span>
+<span class="sd">        G (igraph.Graph)                       : The network to be analysed.</span>
+<span class="sd">        hubs (:obj:`list`, optional)           : A list of hubs in the network.</span>
+<span class="sd">                                                 If already calculated, passing this parameter prevents duplication.</span>
+<span class="sd">                                                 Default is None, in which case the function finds the hubs.</span>
+<span class="sd">        hub_method (:obj:`function`, optional) : Specifies the method used to find hubs.</span>
+<span class="sd">                                                 Default is identify_hubs.</span>
+<span class="sd">        degrees (:obj:`list`, optional)        : A list of degrees in the network.</span>
+<span class="sd">                                                 If already calculated, passing this parameter prevents duplication.</span>
+<span class="sd">                                                 Default is None, in which case the distribution is calculated.</span>
 <span class="sd">    Returns:</span>
-<span class="sd">        hub_hub_path_nodes (list): A list of nodes on the paths between hubs.</span>
+<span class="sd">        (list): A list of nodes on the paths between hubs.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Find the degree distribution of the network.</span>
@@ -235,7 +262,7 @@
 
     <span class="c1"># Find the hubs of the network</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">hubs</span><span class="p">:</span>
-        <span class="n">hubs</span> <span class="o">=</span> <span class="n">hub_method</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="n">hubs</span> <span class="o">=</span> <span class="n">hub_method</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="n">degrees</span><span class="p">)</span>
 
     <span class="c1"># Initialise an empty set to store the nodes.</span>
     <span class="n">hub_hub_path_nodes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
@@ -262,14 +289,20 @@
 <span class="sd">    Finds the nodes on the shortest paths between pairs of hubs, and the number of times they appear.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
-<span class="sd">        hubs (list) (opt): A list of hubs in the network, If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function finds the hubs.</span>
-<span class="sd">        hub_method (func) (opt): If the hubs are to be calculated, then this parameter specifies the method used to find hubs. Default is identify_hubs, which uses the Z score.</span>
-<span class="sd">        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+<span class="sd">        G (igraph.Graph)                       : The network to be analysed.</span>
+<span class="sd">        hubs (:obj:`list`, optional)           : A list of hubs in the network.</span>
+<span class="sd">                                                 If already calculated, passing this parameter prevents duplication.</span>
+<span class="sd">                                                 Default is None, in which case the function finds the hubs.</span>
+<span class="sd">        hub_method (:obj:`function`, optional) : Specifies the method used to find hubs.</span>
+<span class="sd">                                                 Default is identify_hubs.</span>
+<span class="sd">        degrees (:obj:`list`, optional)        : A list of degrees in the network.</span>
+<span class="sd">                                                 If already calculated, passing this parameter prevents duplication.</span>
+<span class="sd">                                                 Default is None, in which case the distribution is calculated.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        hub_hub_path_nodes (list): A list of nodes on the paths between hubs.</span>
-<span class="sd">        occurrences (dict): A dictionary with nodes as keys and the number of times they appear on shortest paths as values.</span>
+<span class="sd">        (tuple) : Tuple containing a list and dict, specifically:</span>
+<span class="sd">                    a list of nodes on the paths between hubs;</span>
+<span class="sd">                    and a dictionary with nodes as keys and the number of times they appear on shortest paths as values.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Find the degree distribution of the network.</span>
@@ -278,7 +311,7 @@
 
     <span class="c1"># Find the hubs of the network</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">hubs</span><span class="p">:</span>
-        <span class="n">hubs</span> <span class="o">=</span> <span class="n">hub_method</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="n">hubs</span> <span class="o">=</span> <span class="n">hub_method</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="n">degrees</span><span class="p">)</span>
 
     <span class="c1"># Initialise a set to store the nodes.</span>
     <span class="n">hub_hub_path_nodes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
@@ -309,15 +342,31 @@
 
 <div class="viewcode-block" id="calculate_HCS">
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.hubrepulsion.calculate_HCS">[docs]</a>
-<span class="k">def</span> <span class="nf">calculate_HCS</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">hubs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hub_method</span><span class="o">=</span><span class="n">identify_hubs</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">calculate_HCS</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">hubs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hub_method</span><span class="o">=</span><span class="n">identify_hubs</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">normalise_by_number_of_hubs</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                  <span class="n">normalise_by_mean_hub_degree</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">normalise_by_mean_degree</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                  <span class="n">normalise_by_number_of_edges</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Calculate the Hub Connectivity Score (HCS) of the network. This is the average number of hubs each hub is adjacent to.</span>
+<span class="sd">    Calculate the Hub Connectivity Score (HCS) of the network.</span>
+<span class="sd">    This is the average number of hubs each hub is adjacent to (Zakar-Polyák, Nagy, and Molontay, 2022).</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
-<span class="sd">        hubs (list) (opt): A list of hubs in the network, If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function finds the hubs.</span>
-<span class="sd">        hub_method (func) (opt): If the hubs are to be calculated, then this parameter specifies the method used to find hubs. Default is identify_hubs, which uses the Z score.</span>
-<span class="sd">        degrees (list) (opt): A list of degrees in the network. If already calculated, this parameter can be passed to prevent duplication. Default is None, in which case the function calculates the distribution internally.</span>
+<span class="sd">        G (igraph.Graph)                       : The network to be analysed.</span>
+<span class="sd">        hubs (:obj:`list`, optional)           : A list of hubs in the network.</span>
+<span class="sd">                                                 If already calculated, passing this parameter prevents duplication.</span>
+<span class="sd">                                                 Default is None, in which case the function finds the hubs.</span>
+<span class="sd">        hub_method (:obj:`function`, optional) : Specifies the method used to find hubs.</span>
+<span class="sd">                                                 Default is identify_hubs.</span>
+<span class="sd">        degrees (:obj:`list`, optional)        : A list of degrees in the network.</span>
+<span class="sd">                                                 If already calculated, passing this parameter prevents duplication.</span>
+<span class="sd">                                                 Default is None, in which case the distribution is calculated.</span>
+<span class="sd">        normalise_by_number_of_hubs (:obj:`bool`, optional)  : If True, normalises the HCS by the number of hubs.</span>
+<span class="sd">                                                               Default is False.</span>
+<span class="sd">        normalise_by_mean_hub_degree (:obj:`bool`, optional) : If True, normalises the HCS by the mean hub degree.</span>
+<span class="sd">                                                               Default is False.</span>
+<span class="sd">        normalise_by_mean_degree (:obj:`bool`, optional)     : If True, normalises the HCS by the mean degree.</span>
+<span class="sd">                                                               Default is False.</span>
+<span class="sd">        normalise_by_number_of_edges (:obj:`bool`, optional) : If True, normalises the HCS by the number of edges.</span>
+<span class="sd">                                                               Default is False.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        (float): The Hub Connectivity Score of the network.</span>
@@ -341,8 +390,64 @@
     <span class="c1"># Find the number of hubs</span>
     <span class="n">N_hub</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">hubs</span><span class="p">)</span>
 
+    <span class="c1"># Calculate the HCS</span>
+    <span class="n">HCS</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">E_hub</span> <span class="o">/</span> <span class="n">N_hub</span>
+
+    <span class="c1"># If the HCS should be normalised, apply the relevant normalisation method.</span>
+    <span class="k">if</span> <span class="n">normalise_by_number_of_hubs</span><span class="p">:</span>
+        <span class="n">HCS</span> <span class="o">=</span> <span class="n">HCS</span> <span class="o">/</span> <span class="n">N_hub</span>
+
+    <span class="k">if</span> <span class="n">normalise_by_mean_hub_degree</span><span class="p">:</span>
+        <span class="n">mean_k</span> <span class="o">=</span> <span class="n">mean_hub_degree</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">hubs</span><span class="o">=</span><span class="n">hubs</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="n">degrees</span><span class="p">)</span>
+        <span class="n">HCS</span> <span class="o">=</span> <span class="n">HCS</span> <span class="o">/</span> <span class="n">mean_k</span>
+
+    <span class="k">if</span> <span class="n">normalise_by_mean_degree</span><span class="p">:</span>
+        <span class="n">mean_k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">degree</span><span class="p">())</span>
+        <span class="n">HCS</span> <span class="o">=</span> <span class="n">HCS</span> <span class="o">/</span> <span class="n">mean_k</span>
+
+    <span class="k">if</span> <span class="n">normalise_by_number_of_edges</span><span class="p">:</span>
+        <span class="n">HCS</span> <span class="o">=</span> <span class="n">HCS</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">G</span><span class="o">.</span><span class="n">ecount</span><span class="p">())</span>
+
     <span class="c1"># Return the HCS</span>
-    <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">E_hub</span> <span class="o">/</span> <span class="n">N_hub</span></div>
+    <span class="k">return</span> <span class="n">HCS</span></div>
+
+
+
+<div class="viewcode-block" id="find_hub_hub_path_edges">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.hubrepulsion.find_hub_hub_path_edges">[docs]</a>
+<span class="k">def</span> <span class="nf">find_hub_hub_path_edges</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">hubs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hub_method</span><span class="o">=</span><span class="n">identify_hubs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds the edges on the shortest paths between pairs of hubs.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        G (igraph.Graph)                   : The network to be analysed.</span>
+<span class="sd">        hubs (:obj:`list`, optional)       : A list of hubs in the network.</span>
+<span class="sd">                                             If already calculated, this parameter can be passed to prevent duplication.</span>
+<span class="sd">                                             Default is None, in which case the function finds the hubs.</span>
+<span class="sd">        hub_method (:obj:`func`, optional) : Specifies the method used to find hubs.</span>
+<span class="sd">                                             Default is identify_hubs.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (list) : A list of edges on the paths between hubs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Find the hubs of the network</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">hubs</span><span class="p">:</span>
+        <span class="n">hubs</span> <span class="o">=</span> <span class="n">hub_method</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+    <span class="c1"># Initialise an empty set to store the nodes.</span>
+    <span class="n">hub_hub_path_edges</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+    <span class="c1"># Iterate through each possible pair of hubs</span>
+    <span class="k">for</span> <span class="n">hub_u</span><span class="p">,</span> <span class="n">hub_v</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">hubs</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="c1"># Find all the shortest paths between this pair of hubs.</span>
+        <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">get_all_shortest_paths</span><span class="p">(</span><span class="n">hub_u</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="n">hub_v</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">edge</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">get_eid</span><span class="p">(</span><span class="n">path</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">path</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+                <span class="n">hub_hub_path_edges</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">edge</span><span class="p">)</span>
+
+    <span class="c1"># Return the list of nodes.</span>
+    <span class="k">return</span> <span class="n">hub_hub_path_edges</span></div>
 
 </pre></div>
 

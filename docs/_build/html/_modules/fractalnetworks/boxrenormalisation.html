@@ -32,15 +32,17 @@
   <h1>Source code for fractalnetworks.boxrenormalisation</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;This module contains the code to renormalise a network using a box covering&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">random</span>
-<span class="kn">from</span> <span class="nn">igraph</span> <span class="kn">import</span> <span class="n">Graph</span>
-<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="c1"># Network analysis modules</span>
 <span class="kn">import</span> <span class="nn">igraph</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Utility modules</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">operator</span>
 
+<span class="c1"># Other module imports</span>
 <span class="kn">from</span> <span class="nn">.maximumexcludedmassburning</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.utilities</span> <span class="kn">import</span> <span class="o">*</span>
 
 
 <div class="viewcode-block" id="find_central_distance">
@@ -50,11 +52,11 @@
 <span class="sd">    Finds the central distance for each node in a network given a list of centres.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
-<span class="sd">        centres (list): A list of centre nodes from the MEMB algorithm.</span>
+<span class="sd">        G (igraph.Graph) : The network to be analysed.</span>
+<span class="sd">        centres (list)   : A list of centre nodes from the MEMB algorithm.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        central_distance (dict): A dictionary containing nodes as keys and their central distance as values.</span>
+<span class="sd">        (dict) : A dictionary containing nodes as keys and their central distance as values.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Initialise an empty dictionary to store the values for the central distance.</span>
@@ -66,23 +68,24 @@
         <span class="c1"># Initialise an empty variable for the shortest path length.</span>
         <span class="n">shortest_path_len</span> <span class="o">=</span> <span class="kc">None</span>
 
-        <span class="c1"># If the node v is a centre then it must have central distance 0, so check for this case to speed up the algorithm.</span>
-        <span class="k">if</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">centres</span><span class="p">:</span>
-            <span class="n">central_distance</span><span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># If the node v is a centre then it must have central distance 0,</span>
+        <span class="c1">#   so check for this case to speed up the algorithm.</span>
+        <span class="k">if</span> <span class="n">v</span><span class="o">.</span><span class="n">index</span> <span class="ow">in</span> <span class="n">centres</span><span class="p">:</span>
+            <span class="n">central_distance</span><span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 
         <span class="c1"># For all non-centre nodes v, iterate through the list of all centres.</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">vs</span><span class="p">():</span>
-                <span class="k">if</span> <span class="n">u</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">centres</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">u</span><span class="o">.</span><span class="n">index</span> <span class="ow">in</span> <span class="n">centres</span><span class="p">:</span>
                     <span class="c1"># Find the shortest path length between the node v and a centre u.</span>
                     <span class="n">path_len</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">distances</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">v</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">u</span><span class="p">)</span>
 
                     <span class="c1"># If this is a new minimum, then update the shortest path variable</span>
-                    <span class="k">if</span> <span class="n">shortest_path_len</span> <span class="o">==</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">shortest_path_len</span> <span class="o">&gt;</span> <span class="n">path_len</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">shortest_path_len</span> <span class="ow">or</span> <span class="n">shortest_path_len</span> <span class="o">&gt;</span> <span class="n">path_len</span><span class="p">:</span>
                         <span class="n">shortest_path_len</span> <span class="o">=</span> <span class="n">path_len</span>
 
             <span class="c1"># Assign the value of the shortest path length to the node in the dictionary.</span>
-            <span class="n">central_distance</span><span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">shortest_path_len</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">central_distance</span><span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">shortest_path_len</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="c1"># Once all nodes are checked return the values in the dictionary.</span>
     <span class="k">return</span> <span class="n">central_distance</span></div>
@@ -96,36 +99,32 @@
 <span class="sd">    Generates a dictionary assigning each node to a box under the MEMB algorithm.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
-<span class="sd">        centres (list): A list of centre nodes according to the MEMB algorithm.</span>
-<span class="sd">        central_distance (dict): A dictionary containing nodes as keys and their central distance as values.</span>
+<span class="sd">        G (igraph.Graph)        : The network to be analysed.</span>
+<span class="sd">        centres (list)          : A list of centre nodes according to the MEMB algorithm.</span>
+<span class="sd">        central_distance (dict) : A dictionary containing nodes as keys and their central distance as values.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        nodes_to_boxes (dict): A dictionary containing nodes as keys and the box they are assigned to as the value.</span>
+<span class="sd">        (dict) : A dictionary containing nodes as keys and the box they are assigned to as the value.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Initialise an empty dictionary to store the boxes for each node.</span>
     <span class="n">nodes_to_boxes</span> <span class="o">=</span> <span class="p">{}</span>
 
-    <span class="c1"># Find the list of all nodes which are non-centres.</span>
-    <span class="n">nodes</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">vs</span><span class="p">()</span>
-    <span class="n">node_labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">vs</span><span class="p">()]</span>
-    <span class="n">non_centres</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">node_labels</span><span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">centres</span><span class="p">))</span>
-
     <span class="c1"># The following section of code produces a list of non-centres in order of increasing central distance.</span>
     <span class="n">sorted_non_centres</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># Initialise an empty list of non-centres.</span>
+    <span class="c1"># Sort the dictionary of central distances into increasing order.</span>
     <span class="n">sorted_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">central_distance</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span>
-                              <span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>  <span class="c1"># Sort the dictionary of central distances into increasing order.</span>
+                              <span class="n">key</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
     <span class="c1"># Add each node to the list of sorted non-centres in order.</span>
     <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">sorted_dict</span><span class="p">:</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">centres</span><span class="p">:</span>
-            <span class="n">sorted_non_centres</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">int</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="ow">in</span> <span class="n">centres</span><span class="p">:</span>
+            <span class="n">sorted_non_centres</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
 
-    <span class="nb">id</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># The ID of the first box is zero.</span>
+    <span class="n">box_id</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># The ID of the first box is zero.</span>
     <span class="c1"># For each of the centres assign a unique box ID.</span>
     <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">centres</span><span class="p">:</span>
-        <span class="n">nodes_to_boxes</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="nb">id</span>
-        <span class="nb">id</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># Increment the box ID.</span>
+        <span class="n">nodes_to_boxes</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="n">box_id</span>
+        <span class="n">box_id</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># Increment the box ID.</span>
 
     <span class="c1"># Iterate through each of the non-centres</span>
     <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">sorted_non_centres</span><span class="p">:</span>
@@ -133,9 +132,9 @@
         <span class="n">possible_boxes</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="c1"># Find the neighbours which have central distance strictly less than the current node.</span>
         <span class="k">for</span> <span class="n">neighbour</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">node</span><span class="p">)):</span>
-            <span class="k">if</span> <span class="n">central_distance</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">central_distance</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">neighbour</span><span class="p">)]:</span>
+            <span class="k">if</span> <span class="n">central_distance</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">central_distance</span><span class="p">[</span><span class="n">neighbour</span><span class="p">]:</span>
                 <span class="c1"># For each, add their box to the list of possible boxes for the current node.</span>
-                <span class="n">possible_boxes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nodes_to_boxes</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">neighbour</span><span class="p">)])</span>
+                <span class="n">possible_boxes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nodes_to_boxes</span><span class="p">[</span><span class="n">neighbour</span><span class="p">])</span>
         <span class="c1"># Make a random choice from the list of possible boxes and assign that box to the node.</span>
         <span class="n">nodes_to_boxes</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">possible_boxes</span><span class="p">)</span>
 
@@ -151,11 +150,11 @@
 <span class="sd">    Finds a list of nodes assigned to each box in a network.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        nodes_to_boxes (dict): A dictionary with nodes as keys and their corresponding boxes as values.</span>
-<span class="sd">        centres (list): A list of the nodes found as centres under the MEMB algorithm.</span>
+<span class="sd">        nodes_to_boxes (dict) : A dictionary with nodes as keys and their corresponding boxes as values.</span>
+<span class="sd">        centres (list)        : A list of the nodes found as centres under the MEMB algorithm.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        boxes (dict): A dictionary with boxes as keys and a list of nodes in that box as the value.</span>
+<span class="sd">        (dict) : A dictionary with boxes as keys and a list of nodes in that box as the value.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Initialise an empty dictionary to store the boxes.</span>
     <span class="n">boxes</span> <span class="o">=</span> <span class="p">{}</span>
@@ -185,13 +184,13 @@
 <span class="sd">    Renormalise a graph under a given box-covering.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
-<span class="sd">        boxes (dict): A dictionary with boxes as keys and a list of nodes in that box as the value.</span>
-<span class="sd">        nodes_to_boxes (dict): A dictionary with nodes as keys and their corresponding boxes as values.</span>
-<span class="sd">        draw (Bool) (opt): If True then displays the renormalised graph. Default is False.</span>
+<span class="sd">        G (igraph.Graph)             : The network to be analysed.</span>
+<span class="sd">        boxes (dict)                 : A dictionary with boxes as keys and a list of nodes in that box as the value.</span>
+<span class="sd">        nodes_to_boxes (dict)        : A dictionary with nodes as keys and their corresponding boxes as values.</span>
+<span class="sd">        draw (:obj:`bool`, optional) : If True then displays the renormalised graph. Default is False.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        renormalisedG (networkx.Graph): The network under renormalisation.</span>
+<span class="sd">        (igraph.Graph) : The network after renormalisation.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Initialise an empty graph to be the renormalised graph of G.</span>
     <span class="n">renormalisedG</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">()</span>
@@ -212,8 +211,8 @@
         <span class="n">target</span> <span class="o">=</span> <span class="n">edge</span><span class="o">.</span><span class="n">target</span>
 
         <span class="c1"># Find the supernodes these nodes now belong to.</span>
-        <span class="n">renormalised_source</span> <span class="o">=</span> <span class="n">nodes_to_boxes</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">source</span><span class="p">)]</span>
-        <span class="n">renormalised_target</span> <span class="o">=</span> <span class="n">nodes_to_boxes</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">target</span><span class="p">)]</span>
+        <span class="n">renormalised_source</span> <span class="o">=</span> <span class="n">nodes_to_boxes</span><span class="p">[</span><span class="n">source</span><span class="p">]</span>
+        <span class="n">renormalised_target</span> <span class="o">=</span> <span class="n">nodes_to_boxes</span><span class="p">[</span><span class="n">target</span><span class="p">]</span>
 
         <span class="c1"># Create a new edge between the supernodes.</span>
         <span class="n">renormalisedG</span><span class="o">.</span><span class="n">add_edges</span><span class="p">([(</span><span class="n">renormalised_source</span><span class="p">,</span> <span class="n">renormalised_target</span><span class="p">)])</span>
@@ -239,15 +238,17 @@
 <span class="sd">    Stores all results in new files.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
-<span class="sd">        lB (int): The diameter of the boxes for the box covering.</span>
-<span class="sd">        iter_count (int) (opt): The current iteration number. Default is 1 if no value is given.</span>
-<span class="sd">        filepath (str) (opt): The path to which the resulting box covered and renormalised graphs will be saved. Default is &quot;graph&quot;.</span>
-<span class="sd">        method (func) (opt): The MEMB method used to find the box covering. Default is degree_based_MEMB.</span>
-<span class="sd">        draw (Bool) (opt): If True then display the networks. Default is False.</span>
+<span class="sd">        G (igraph.Graph)                   : The network to be analysed.</span>
+<span class="sd">        lB (int)                           : The diameter of the boxes for the box covering.</span>
+<span class="sd">        iter_count (:obj:`int`, optional)  : The current iteration number. Default is 1 if no value is given.</span>
+<span class="sd">        filepath (:obj:`str`, optional)    : The path to which the box-covered and renormalised graphs will be saved.</span>
+<span class="sd">                                                Default is &quot;graph&quot;.</span>
+<span class="sd">        method (:obj:`function`, optional) : The MEMB method used to find the box covering.</span>
+<span class="sd">                                                Default is degree_based_MEMB.</span>
+<span class="sd">        draw (:obj:`bool`, optional)       : If True then display the networks. Default is False.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        renormalisedG (igraph.Graph): The network after box renormalisation.</span>
+<span class="sd">        (igraph.Graph) : The network after box renormalisation.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Find the list of centres using the given MEMB method.</span>
@@ -259,12 +260,12 @@
     <span class="c1"># Assign each node to a box.</span>
     <span class="n">nodes_to_boxes</span> <span class="o">=</span> <span class="n">assign_nodes_to_boxes</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">centres</span><span class="p">,</span> <span class="n">central_distance</span><span class="p">)</span>
 
-    <span class="c1"># Initialise an empty colour map for the box covering visualiation.</span>
+    <span class="c1"># Initialise an empty colour map for the box covering visualisation.</span>
     <span class="n">colourmap</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="c1"># For each node, assign it the colour of its box ID.</span>
     <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">vcount</span><span class="p">()):</span>
-        <span class="n">colourmap</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nodes_to_boxes</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">node</span><span class="p">)])</span>
+        <span class="n">colourmap</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nodes_to_boxes</span><span class="p">[</span><span class="n">node</span><span class="p">])</span>
 
     <span class="n">nxG</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">to_networkx</span><span class="p">()</span>
 
@@ -277,26 +278,20 @@
     <span class="c1"># Find a list of nodes for each of the boxes.</span>
     <span class="n">boxes</span> <span class="o">=</span> <span class="n">find_boxes</span><span class="p">(</span><span class="n">nodes_to_boxes</span><span class="p">,</span> <span class="n">centres</span><span class="p">)</span>
 
-    <span class="c1"># Create a file path to store the graph with the box covering.</span>
-    <span class="n">boxes_file_path</span> <span class="o">=</span> <span class="n">filepath</span> <span class="o">+</span> <span class="s2">&quot;/boxes_iter_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">iter_count</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.gml&quot;</span>
-    <span class="c1"># Export the graph to gephi using the boxes to colour the nodes.</span>
-    <span class="c1"># export_to_gephi(nxG, nodes_to_boxes, boxes_file_path)</span>
-
     <span class="c1"># Create a file path to store the renormalised graph.</span>
     <span class="n">renormalised_file_path</span> <span class="o">=</span> <span class="n">filepath</span> <span class="o">+</span> <span class="s2">&quot;/renormalised_iter_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">iter_count</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.gml&quot;</span>
     <span class="c1"># Find the renormalised graph and draw it if draw is true.</span>
     <span class="n">renormalisedG</span> <span class="o">=</span> <span class="n">renormalise_graph</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">nodes_to_boxes</span><span class="p">,</span> <span class="n">draw</span><span class="o">=</span><span class="n">draw</span><span class="p">)</span>
 
     <span class="c1"># The nodes in the renormalised graph should be coloured the same as the boxes they originated from.</span>
-    <span class="c1"># Create a dictionary which assigns each node the colour of the box (which is the same as the name of the supernode/box)</span>
+    <span class="c1"># Create a dictionary which assigns each node the colour of the box</span>
+    <span class="c1">#   (which is the same as the name of the supernode/box)</span>
     <span class="n">gephi_dict</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">renormalisedG</span><span class="o">.</span><span class="n">vcount</span><span class="p">()):</span>
         <span class="n">gephi_dict</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="n">node</span>
 
-    <span class="n">nx_renormalisedG</span> <span class="o">=</span> <span class="n">renormalisedG</span><span class="o">.</span><span class="n">to_networkx</span><span class="p">()</span>
-
     <span class="c1"># Export the renormalised graph to gephi.</span>
-    <span class="c1"># export_to_gephi(renormalisedG, gephi_dict, renormalised_file_path)</span>
+    <span class="n">export_to_gephi</span><span class="p">(</span><span class="n">renormalisedG</span><span class="p">,</span> <span class="n">gephi_dict</span><span class="p">,</span> <span class="n">renormalised_file_path</span><span class="p">)</span>
 
     <span class="c1"># If draw is True then display the graphs.</span>
     <span class="k">if</span> <span class="n">draw</span><span class="p">:</span>
@@ -314,31 +309,29 @@
 <span class="sd">    Iteratively finds the box covering and then renormalises the network until only one node is left.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        filepath (str): The filepath to the network file.</span>
-<span class="sd">        lB (int): The diameter of the boxes for the box covering.</span>
-<span class="sd">        method (func) (opt): The MEMB method used to find the box covering. Default is degree_based_MEMB.</span>
-<span class="sd">        draw (Bool) (opt): If True then display the networks. Default is False.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        None</span>
+<span class="sd">        filepath (str)                     : The filepath to the network file.</span>
+<span class="sd">        lB (int)                           : The diameter of the boxes for the box covering.</span>
+<span class="sd">        method (:obj:`function`, optional) : The MEMB method used to find the box covering.</span>
+<span class="sd">                                              Default is degree_based_MEMB.</span>
+<span class="sd">        draw (:obj:`bool`, optional)       : If True then display the networks. Default is False.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Read the graph in from the given filepath.</span>
     <span class="n">G</span> <span class="o">=</span> <span class="n">Graph</span><span class="o">.</span><span class="n">Load</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
 
     <span class="c1"># Take the name of the file without the file type extension and folders as the path to save the results to.</span>
-    <span class="n">savepath</span> <span class="o">=</span> <span class="n">filepath</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Remove type extension</span>
-    <span class="n">savepath</span> <span class="o">=</span> <span class="n">savepath</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># Remove the network-files folder</span>
-    <span class="n">savepath</span> <span class="o">=</span> <span class="s2">&quot;result-files/&quot;</span> <span class="o">+</span> <span class="n">savepath</span>  <span class="c1"># Add the path to the result files</span>
-    <span class="n">savepath</span> <span class="o">=</span> <span class="n">savepath</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span>
-        <span class="s1">&#39;</span><span class="si">%d</span><span class="s1">-%m-%Y&#39;</span><span class="p">)</span>  <span class="c1"># Add todays date to the filepath in case of duplicates.</span>
+    <span class="n">save_path</span> <span class="o">=</span> <span class="n">filepath</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Remove type extension</span>
+    <span class="n">save_path</span> <span class="o">=</span> <span class="n">save_path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># Remove the network-files folder</span>
+    <span class="n">save_path</span> <span class="o">=</span> <span class="s2">&quot;result-files/&quot;</span> <span class="o">+</span> <span class="n">save_path</span>  <span class="c1"># Add the path to the result files</span>
+    <span class="n">save_path</span> <span class="o">=</span> <span class="n">save_path</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span>
+        <span class="s1">&#39;</span><span class="si">%d</span><span class="s1">-%m-%Y&#39;</span><span class="p">)</span>  <span class="c1"># Add today&#39;s date to the filepath in case of duplicates.</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">savepath</span><span class="p">):</span>
-        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">savepath</span><span class="p">)</span>  <span class="c1"># Make a new folder to store the results</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">save_path</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">save_path</span><span class="p">)</span>  <span class="c1"># Make a new folder to store the results</span>
     <span class="k">else</span><span class="p">:</span>  <span class="c1"># If such a folder already exists then raise an error.</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="s1">&#39;A folder </span><span class="si">{0}</span><span class="s1"> already exists for this graph today. Please change the name of this folder manually and try again.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="n">savepath</span><span class="p">))</span>
+                <span class="n">save_path</span><span class="p">))</span>
 
     <span class="c1"># Start with the graph given.</span>
     <span class="n">current_graph</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -348,7 +341,7 @@
     <span class="c1"># Keep renormalising while there are multiple nodes in the graph.</span>
     <span class="k">while</span> <span class="n">current_graph</span><span class="o">.</span><span class="n">vcount</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
         <span class="c1"># Find the box covering and renormalise the graph.</span>
-        <span class="n">new_graph</span> <span class="o">=</span> <span class="n">find_boxes_and_renormalise_iteration</span><span class="p">(</span><span class="n">current_graph</span><span class="p">,</span> <span class="n">lB</span><span class="p">,</span> <span class="n">iter_count</span><span class="o">=</span><span class="n">iter_count</span><span class="p">,</span> <span class="n">filepath</span><span class="o">=</span><span class="n">savepath</span><span class="p">,</span>
+        <span class="n">new_graph</span> <span class="o">=</span> <span class="n">find_boxes_and_renormalise_iteration</span><span class="p">(</span><span class="n">current_graph</span><span class="p">,</span> <span class="n">lB</span><span class="p">,</span> <span class="n">iter_count</span><span class="o">=</span><span class="n">iter_count</span><span class="p">,</span> <span class="n">filepath</span><span class="o">=</span><span class="n">save_path</span><span class="p">,</span>
                                                          <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span> <span class="n">draw</span><span class="o">=</span><span class="n">draw</span><span class="p">)</span>
 
         <span class="c1"># Update the current graph.</span>

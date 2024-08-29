@@ -45,6 +45,7 @@
 
 <span class="c1"># Utility modules</span>
 <span class="kn">from</span> <span class="nn">scipy.io</span> <span class="kn">import</span> <span class="n">mmread</span>
+<span class="kn">import</span> <span class="nn">csv</span>
 
 <span class="c1"># Reading Graphs</span>
 
@@ -55,13 +56,13 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Checks the filetype and calls the correct function to read the graph.</span>
 <span class="sd">    For any file not in .gml format, an additional .gml file is created.</span>
-<span class="sd">    Currently supports .mtx, .txt, .edge (.EDGE) and .gml filetypes.</span>
+<span class="sd">    Supports .mtx, .txt, .edge (.EDGE) and .gml filetypes.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        filepath (str): Path for the network file.</span>
+<span class="sd">        filepath (str) : Path for the network file.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        G (igraph.Graph): The network from the file stored as a graph.</span>
+<span class="sd">        (igraph.Graph) : The network from the file stored as a graph.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># .gml files</span>
@@ -101,14 +102,16 @@
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.utilities.read_mtx_graph_format">[docs]</a>
 <span class="k">def</span> <span class="nf">read_mtx_graph_format</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Reads graphs stored in the .mtx file format. Use with, for example, graphs from www.networkrepository.com.</span>
-<span class="sd">    Note: Some files may need to be edited to make sure that scipy.io can read them. Files should have a header starting with %%MatrixMarket and a single line denoted the number of values in each column.</span>
+<span class="sd">    Reads graphs stored in the .mtx file format.</span>
+<span class="sd">    Use with, for example, graphs from www.networkrepository.com.</span>
+<span class="sd">    Some files may need to be edited to make sure that scipy.io can read them.</span>
+<span class="sd">    Files should have a header starting with %%MatrixMarket and a single line with the number of values in each column.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        filepath (str): Filepath to .mtx file</span>
+<span class="sd">        filepath (str) : Filepath to .mtx file</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        G (networkx.Graph): Network read from file.</span>
+<span class="sd">        (networkx.Graph) : Network read from file.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Read the file using the scipy.io file reader.</span>
     <span class="n">mmf</span> <span class="o">=</span> <span class="n">mmread</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
@@ -126,15 +129,16 @@
 <span class="sd">    Finds the exact logarithm of x base y.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        x (int): The value of x.</span>
-<span class="sd">        y (int): The logarithm base.</span>
+<span class="sd">        x (float) : The value of x.</span>
+<span class="sd">        y (float) : The logarithm base.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        power (int): The floor of the power, where y^power = x.</span>
-<span class="sd">        x==1 (Bool): True if x is an exact power of y, False otherwise.</span>
+<span class="sd">        (tuple) : Tuple containing an int and bool, specifically:</span>
+<span class="sd">                    the floor of the power, where y^power = x;</span>
+<span class="sd">                    and value True if x is an exact power of y, False otherwise.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">power</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">x</span> <span class="o">%</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+    <span class="k">while</span> <span class="n">x</span> <span class="o">%</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span>
         <span class="n">power</span> <span class="o">+=</span> <span class="mi">1</span>
     <span class="k">return</span> <span class="n">power</span><span class="p">,</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">1</span></div>
@@ -148,37 +152,45 @@
 <span class="sd">    Finds the best exponential fit according to the sum of squares deviation of the form y = Ax^{-c}</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        x (list): The values of x in the distribution.</span>
-<span class="sd">        y (list): The values of y in the distribution.</span>
-<span class="sd">        A_min (int) (opt): The minimum value of A to be tested. Can be adjusted to find more accurate results. Default is 0.</span>
-<span class="sd">        A_max (int) (opt): The maximum value of A to be tested. Can be adjusted to find more accurate results. Default is 10000.</span>
-<span class="sd">        c_min (int) (opt): The minimum value of c to be tested. Can be adjusted to find more accurate results. Default is 0.</span>
-<span class="sd">        c_max (int) (opt): The maximum value of c to be tested. Can be adjusted to find more accurate results. Default is 12.5.</span>
-<span class="sd">        linspace_N (int) (opt): The number of values of A and c to be checked in the respective ranges. Default is 100.</span>
+<span class="sd">        x (list)                          : The values of x in the distribution.</span>
+<span class="sd">        y (list)                          : The values of y in the distribution.</span>
+<span class="sd">        A_min (:obj:`int`, optional)      : The minimum value of A to be tested.</span>
+<span class="sd">                                            Can be adjusted to find more accurate results. Default is 0.</span>
+<span class="sd">        A_max (:obj:`int`, optional)      : The maximum value of A to be tested.</span>
+<span class="sd">                                            Can be adjusted to find more accurate results. Default is 10000.</span>
+<span class="sd">        c_min (:obj:`int`, optional)      : The minimum value of c to be tested.</span>
+<span class="sd">                                            Can be adjusted to find more accurate results. Default is 0.</span>
+<span class="sd">        c_max (:obj:`int`, optional)      : The maximum value of c to be tested.</span>
+<span class="sd">                                            Can be adjusted to find more accurate results. Default is 12.5.</span>
+<span class="sd">        linspace_N (:obj:`int`, optional) : The number of values of A and c to be checked in the respective ranges.</span>
+<span class="sd">                                            Default is 100.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        best_fit (tuple): The coefficients A and c from the best power law approximation.</span>
-<span class="sd">        best_score (float): The sum of squares regression of this approximation.</span>
+<span class="sd">        (tuple) : A tuple containing a tuple and float, specifically:</span>
+<span class="sd">                    a tuple of the coefficients A and c from the best power law approximation;</span>
+<span class="sd">                    and the sum of squares regression of this approximation.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Initialise empty variables for the best fit (i.e. best A and c) and the best SSR score.</span>
+    <span class="c1"># Initialise empty variables for the best fit (i.e. the best A and c) and the best SSR score.</span>
     <span class="n">best_fit</span> <span class="o">=</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="n">best_score</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="c1"># Iterate through linspace_N values of A in the range [A_min, A_max].</span>
-    <span class="k">for</span> <span class="n">A</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">A_min</span><span class="p">,</span> <span class="n">A_max</span><span class="p">,</span> <span class="mi">100</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">A</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">A_min</span><span class="p">,</span> <span class="n">A_max</span><span class="p">,</span> <span class="n">linspace_N</span><span class="p">):</span>
         <span class="c1"># Iterate through linspace_N values of c in the range [c_min, c_max].</span>
-        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">c_min</span><span class="p">,</span> <span class="n">c_max</span><span class="p">,</span> <span class="mi">100</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">c_min</span><span class="p">,</span> <span class="n">c_max</span><span class="p">,</span> <span class="n">linspace_N</span><span class="p">):</span>
 
             <span class="c1"># Find the values of y according to the power law fractal model with parameters A and c.</span>
             <span class="n">est_y</span> <span class="o">=</span> <span class="p">[</span><span class="n">A</span> <span class="o">*</span> <span class="n">i</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
             <span class="c1"># Calculate the sum of squares regression.</span>
             <span class="n">score</span> <span class="o">=</span> <span class="n">sum_of_squares_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">est_y</span><span class="p">)</span>
 
-            <span class="c1"># If the best score is yet to be updated (i.e. this is the first iteration) then set the current A, c and SSR to the best fit values.</span>
-            <span class="k">if</span> <span class="n">best_score</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># If the best score is yet to be updated (i.e. this is the first iteration)</span>
+            <span class="c1">#   then set the current A, c and SSR to the best fit values.</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">best_score</span><span class="p">:</span>
                 <span class="n">best_score</span> <span class="o">=</span> <span class="n">score</span>
                 <span class="n">best_fit</span> <span class="o">=</span> <span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
-            <span class="c1"># If the new SSR score is smaller than the current best, then update the best score and update the best fit to the current A and c.</span>
+            <span class="c1"># If the new SSR score is smaller than the current best,</span>
+            <span class="c1">#   then update the best score and update the best fit to the current A and c.</span>
             <span class="k">elif</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="n">best_score</span><span class="p">:</span>
                 <span class="n">best_score</span> <span class="o">=</span> <span class="n">score</span>
                 <span class="n">best_fit</span> <span class="o">=</span> <span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
@@ -195,11 +207,11 @@
 <span class="sd">    Finds the value SSR for the sum of squares regression method using a true and model distribution.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        y (list): The true or measured distribution.</span>
-<span class="sd">        est_y (list): The model distribution to be compared.</span>
+<span class="sd">        y (list)     : The true or measured distribution.</span>
+<span class="sd">        est_y (list) : The model distribution to be compared.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        sum_of_squares (float): The sum of squares regression</span>
+<span class="sd">        (float) : The sum of squares regression</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">sum_of_squares</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Initialise the sum as zero.</span>
     <span class="c1"># Iterate for each pair of values in the true/model distributions.</span>
@@ -219,19 +231,26 @@
 <span class="sd">    Removes two randomly chosen edges (a,b) and (c,d) and replaces them with edges (a,d) and (c,b).</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        G (igraph.Graph): The original network.</span>
-<span class="sd">        number_edges_to_swap (int): The number of edges to swap.</span>
+<span class="sd">        G (igraph.Graph)           : The original network.</span>
+<span class="sd">        number_edges_to_swap (int) : The number of edges to swap.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        H (igraph.Graph): The new, uncorrelated network with the same degree distribution as G.</span>
+<span class="sd">        (igraph.Graph) : The new, uncorrelated network with the same degree distribution as G.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Create a copy of the graph</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
     <span class="c1"># Iterate number_edges_to_swap times.</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number_edges_to_swap</span><span class="p">):</span>
 
-        <span class="c1"># Create a copy of the graph</span>
-        <span class="n">H</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="c1"># Reset variables for a, b, c and d.</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="kc">None</span>
 
-        <span class="c1"># There are certain bad swaps we could make, e.g. swapping (a,b), (c,a) would create a self loop and an edge (c,b) might already exist.</span>
+        <span class="c1"># There are certain bad swaps we could make,</span>
+        <span class="c1">#   e.g. swapping (a,b), (c,a) would create a self loop and an edge (c,b) might already exist.</span>
         <span class="c1"># Set this flag to False until we find a good swap.</span>
         <span class="n">good_swap</span> <span class="o">=</span> <span class="kc">False</span>
 
@@ -270,19 +289,19 @@
 <span class="sd">    Plots a comparison of the properties of fractal and non-fractal networks on a scatter graph.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        fractal_attributes (list): A list of an attribute of fractal networks.</span>
-<span class="sd">        non_fractal_attributes (list): A list of an attribute of non-fractal networks.</span>
-<span class="sd">        fractal_Ns (list): A list of fractal network orders.</span>
-<span class="sd">        non_fractal_Ns (list): A list of non-fractal network orders.</span>
-<span class="sd">        y_label (str): Label for the y-axis, i.e. the attribute being plotted.</span>
-<span class="sd">        save_path (str) (opt): The file path to save the figure to, if given. Default is None.</span>
-<span class="sd">        plot (Bool) (opt): If True, display the network. Default is True.</span>
+<span class="sd">        fractal_attribute (list)         : A list of an attribute of fractal networks.</span>
+<span class="sd">        non_fractal_attribute (list)     : A list of an attribute of non-fractal networks.</span>
+<span class="sd">        fractal_Ns (list)                : A list of fractal network orders.</span>
+<span class="sd">        non_fractal_Ns (list)            : A list of non-fractal network orders.</span>
+<span class="sd">        y_label (str)                    : Label for the y-axis, i.e. the attribute being plotted.</span>
+<span class="sd">        save_path (:obj:`str`, optional) : The file path to save the figure to, if given. Default is None.</span>
+<span class="sd">        plot (:obj:`bool`, optional)     : If True, display the network. Default is True.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Find the median of both sets</span>
     <span class="n">fractal_median</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">fractal_attribute</span><span class="p">)</span>
     <span class="n">non_fractal_median</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">non_fractal_attribute</span><span class="p">)</span>
 
-    <span class="c1"># The x axis ranges from the smallest network order N to the largest.</span>
+    <span class="c1"># The x-axis ranges from the smallest network order N to the largest.</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">fractal_Ns</span><span class="p">),</span> <span class="nb">min</span><span class="p">(</span><span class="n">non_fractal_Ns</span><span class="p">)),</span> <span class="nb">max</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">fractal_Ns</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">non_fractal_Ns</span><span class="p">)),</span> <span class="mi">1001</span><span class="p">)</span>
 
     <span class="c1"># Plot the fractal attribute</span>
@@ -316,59 +335,6 @@
 
 
 
-<div class="viewcode-block" id="plot_scatter_graph_random_networks">
-<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.utilities.plot_scatter_graph_random_networks">[docs]</a>
-<span class="k">def</span> <span class="nf">plot_scatter_graph_random_networks</span><span class="p">(</span><span class="n">fractal_attribute</span><span class="p">,</span> <span class="n">random_attribute</span><span class="p">,</span> <span class="n">fractal_Ns</span><span class="p">,</span> <span class="n">random_Ns</span><span class="p">,</span> <span class="n">y_label</span><span class="p">,</span>
-                                       <span class="n">save_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Plots a comparison of the properties of fractal networks and their random counterparts on a scatter graph.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        fractal_attributes (list): A list of an attribute of fractal networks.</span>
-<span class="sd">        random_attributes (list): A list of an attribute of the random networks.</span>
-<span class="sd">        fractal_Ns (list): A list of fractal network orders.</span>
-<span class="sd">        random_Ns (list): A list of random network orders.</span>
-<span class="sd">        y_label (str): Label for the y-axis, i.e. the attribute being plotted.</span>
-<span class="sd">        save_path (str) (opt): The file path to save the figure to, if given. Default is None.</span>
-<span class="sd">        plot (Bool) (opt): If True, display the network. Default is True.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Find the median of both sets</span>
-    <span class="n">fractal_median</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">fractal_attribute</span><span class="p">)</span>
-    <span class="n">random_median</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">random_attribute</span><span class="p">)</span>
-
-    <span class="c1"># The x axis ranges from the smallest network order N to the largest.</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">fractal_Ns</span><span class="p">,</span> <span class="n">random_Ns</span><span class="p">)),</span> <span class="nb">max</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">fractal_Ns</span><span class="p">,</span> <span class="n">random_Ns</span><span class="p">)),</span> <span class="mi">1001</span><span class="p">)</span>
-
-    <span class="c1"># Plot the fractal attribute</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">fractal_Ns</span><span class="p">,</span> <span class="n">fractal_attribute</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">facecolors</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;navy&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Fractal&quot;</span><span class="p">)</span>
-    <span class="c1"># Plot the non-fractal attribute</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">random_Ns</span><span class="p">,</span> <span class="n">random_attribute</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">facecolors</span><span class="o">=</span><span class="s1">&#39;seagreen&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Random&quot;</span><span class="p">)</span>
-
-    <span class="c1"># Plot fractal median</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="n">fractal_median</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;navy&quot;</span><span class="p">)</span>
-    <span class="c1"># Plot non-fractal median</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="n">random_median</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;seagreen&quot;</span><span class="p">)</span>
-
-    <span class="c1"># Label the axes</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$|G|$&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">y_label</span><span class="p">)</span>
-
-    <span class="c1"># Add a legend</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-
-    <span class="c1"># If a save path is given, then save the file in that location.</span>
-    <span class="k">if</span> <span class="n">save_path</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">save_path</span><span class="p">)</span>
-
-    <span class="c1"># If plot is True display the graph</span>
-    <span class="k">if</span> <span class="n">plot</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-    <span class="c1"># Close the figure</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
-
-
-
 <div class="viewcode-block" id="clean_lists_of_NaNs">
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.utilities.clean_lists_of_NaNs">[docs]</a>
 <span class="k">def</span> <span class="nf">clean_lists_of_NaNs</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="n">list2</span><span class="p">):</span>
@@ -376,12 +342,11 @@
 <span class="sd">    Cleans lists of NaN values before plotting.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        list1 (list): The list to be plotted on the x-axis.</span>
-<span class="sd">        list2 (list): The list to be plotted on the y-axis, to be checked for NaN values.</span>
+<span class="sd">        list1 (list) : The list to be plotted on the x-axis.</span>
+<span class="sd">        list2 (list) : The list to be plotted on the y-axis, to be checked for NaN values.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        list1_clean (list): A clean version of list1.</span>
-<span class="sd">        list2_clean (list): A clean version of list2.</span>
+<span class="sd">        (tuple) : A tuple of two lists, specifically a clean version of list1 and a clean version of list2.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Find a list of indexes where the value in the second list is NaN</span>
@@ -403,13 +368,14 @@
 <span class="sd">    Displays a given network.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        G (igraph.Graph): The network to be displayed.</span>
-<span class="sd">        save_path (str) (opt): The filepath to save the figure to, if given. Default is None.</span>
-<span class="sd">        plot (Bool) (opt): If True, the network is displayed inline. Default is True.</span>
+<span class="sd">        G (igraph.Graph)                 : The network to be displayed.</span>
+<span class="sd">        save_path (:obj:`str`, optional) : The filepath to save the figure to, if given. Default is None.</span>
+<span class="sd">        plot (:obj:`bool`, optional)     : If True, the network is displayed inline. Default is True.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Plot the network</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
     <span class="n">igraph</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">G</span><span class="p">,</span>
+                <span class="n">vertex_label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                 <span class="n">vertex_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
                 <span class="n">vertex_color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
                 <span class="n">edge_width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
@@ -438,17 +404,23 @@
 <span class="sd">    Args:</span>
 <span class="sd">        x (list): The values of x in the distribution.</span>
 <span class="sd">        y (list): The values of y in the distribution.</span>
-<span class="sd">        A_min (int) (opt): The minimum value of A to be tested. Can be adjusted to find more accurate results. Default is 0.</span>
-<span class="sd">        A_max (int) (opt): The maximum value of A to be tested. Can be adjusted to find more accurate results. Default is 100.</span>
-<span class="sd">        c_min (int) (opt): The minimum value of c to be tested. Can be adjusted to find more accurate results. Default is 0.</span>
-<span class="sd">        c_max (int) (opt): The maximum value of c to be tested. Can be adjusted to find more accurate results. Default is 2.</span>
-<span class="sd">        linspace_N (int) (opt): The number of values of A and c to be checked in the respective ranges. Default is 100.</span>
+<span class="sd">        A_min (:obj:`int`, optional)      : The minimum value of A to be tested.</span>
+<span class="sd">                                            Can be adjusted to find more accurate results. Default is 0.</span>
+<span class="sd">        A_max (:obj:`int`, optional)      : The maximum value of A to be tested.</span>
+<span class="sd">                                            Can be adjusted to find more accurate results. Default is 100.</span>
+<span class="sd">        c_min (:obj:`int`, optional)      : The minimum value of c to be tested.</span>
+<span class="sd">                                            Can be adjusted to find more accurate results. Default is 0.</span>
+<span class="sd">        c_max (:obj:`int`, optional)      : The maximum value of c to be tested.</span>
+<span class="sd">                                            Can be adjusted to find more accurate results. Default is 2.</span>
+<span class="sd">        linspace_N (:obj:`int`, optional) : The number of values of A and c to be checked in the respective ranges.</span>
+<span class="sd">                                            Default is 100.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        best_fit (tuple): The coefficients A and c from the best exponential approximation.</span>
-<span class="sd">        best_score (float): The sum of squares regression of this approximation.</span>
+<span class="sd">        (tuple) : A tuple containing a tuple and float, specifically:</span>
+<span class="sd">                    the coefficients A and c from the best exponential approximation;</span>
+<span class="sd">                    and the sum of squares regression of this approximation.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Initialise empty variables for the best fit (i.e. best A and c) and the best SSR score.</span>
+    <span class="c1"># Initialise empty variables for the best fit (i.e. the best A and c) and the best SSR score.</span>
     <span class="n">best_fit</span> <span class="o">=</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="n">best_score</span> <span class="o">=</span> <span class="kc">None</span>
 
@@ -462,11 +434,13 @@
             <span class="c1"># Calculate the sum of squares regression.</span>
             <span class="n">score</span> <span class="o">=</span> <span class="n">sum_of_squares_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">est_y</span><span class="p">)</span>
 
-            <span class="c1"># If the best score is yet to be updated (i.e. this is the first iteration) then set the current A, c and SSR to the best fit values.</span>
-            <span class="k">if</span> <span class="n">best_score</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># If the best score is yet to be updated (i.e. this is the first iteration)</span>
+            <span class="c1">#   then set the current A, c and SSR to the best fit values.</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">best_score</span><span class="p">:</span>
                 <span class="n">best_score</span> <span class="o">=</span> <span class="n">score</span>
                 <span class="n">best_fit</span> <span class="o">=</span> <span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
-            <span class="c1"># If the new SSR score is smaller than the current best, then update the best score and update the best fit to the current A and c.</span>
+            <span class="c1"># If the new SSR score is smaller than the current best,</span>
+            <span class="c1">#   then update the best score and update the best fit to the current A and c.</span>
             <span class="k">elif</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="n">best_score</span><span class="p">:</span>
                 <span class="n">best_score</span> <span class="o">=</span> <span class="n">score</span>
                 <span class="n">best_fit</span> <span class="o">=</span> <span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
@@ -483,37 +457,44 @@
 <span class="sd">    Finds the best exponential fit according to the sum of squares deviation of the form y = Ax^{-c}</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        x (list): The values of x in the distribution.</span>
-<span class="sd">        y (list): The values of y in the distribution.</span>
-<span class="sd">        A_min (int) (opt): The minimum value of A to be tested. Can be adjusted to find more accurate results. Default is 0.</span>
-<span class="sd">        A_max (int) (opt): The maximum value of A to be tested. Can be adjusted to find more accurate results. Default is 10000.</span>
-<span class="sd">        c_min (int) (opt): The minimum value of c to be tested. Can be adjusted to find more accurate results. Default is 0.</span>
-<span class="sd">        c_max (int) (opt): The maximum value of c to be tested. Can be adjusted to find more accurate results. Default is 12.5.</span>
-<span class="sd">        linspace_N (int) (opt): The number of values of A and c to be checked in the respective ranges. Default is 100.</span>
+<span class="sd">        x (list)                          : The values of x in the distribution.</span>
+<span class="sd">        y (list)                          : The values of y in the distribution.</span>
+<span class="sd">        A_min (:obj:`int`, optional)      : The minimum value of A to be tested.</span>
+<span class="sd">                                            Can be adjusted to find more accurate results. Default is 0.</span>
+<span class="sd">        A_max (:obj:`int`, optional)      : The maximum value of A to be tested.</span>
+<span class="sd">                                            Can be adjusted to find more accurate results. Default is 10000.</span>
+<span class="sd">        c_min (:obj:`int`, optional)      : The minimum value of c to be tested.</span>
+<span class="sd">                                            Can be adjusted to find more accurate results. Default is 0.</span>
+<span class="sd">        c_max (:obj:`int`, optional)      : The maximum value of c to be tested.</span>
+<span class="sd">                                            Can be adjusted to find more accurate results. Default is 12.5.</span>
+<span class="sd">        linspace_N (:obj:`int`, optional) : The number of values of A and c to be checked in the respective ranges.</span>
+<span class="sd">                                            Default is 100.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        best_fit (tuple): The coefficients A and c from the best power law approximation.</span>
-<span class="sd">        best_score (float): The sum of squares regression of this approximation.</span>
+<span class="sd">        best_fit (tuple)   : The coefficients A and c from the best power law approximation.</span>
+<span class="sd">        best_score (float) : The sum of squares regression of this approximation.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Initialise empty variables for the best fit (i.e. best A and c) and the best SSR score.</span>
+    <span class="c1"># Initialise empty variables for the best fit (i.e. the best A and c) and the best SSR score.</span>
     <span class="n">best_fit</span> <span class="o">=</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="n">best_score</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="c1"># Iterate through linspace_N values of A in the range [A_min, A_max].</span>
-    <span class="k">for</span> <span class="n">A</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">A_min</span><span class="p">,</span> <span class="n">A_max</span><span class="p">,</span> <span class="mi">100</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">A</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">A_min</span><span class="p">,</span> <span class="n">A_max</span><span class="p">,</span> <span class="n">linspace_N</span><span class="p">):</span>
         <span class="c1"># Iterate through linspace_N values of c in the range [c_min, c_max].</span>
-        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">c_min</span><span class="p">,</span> <span class="n">c_max</span><span class="p">,</span> <span class="mi">100</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">c_min</span><span class="p">,</span> <span class="n">c_max</span><span class="p">,</span> <span class="n">linspace_N</span><span class="p">):</span>
 
             <span class="c1"># Find the values of y according to the power law fractal model with parameters A and c.</span>
             <span class="n">est_y</span> <span class="o">=</span> <span class="p">[</span><span class="n">A</span> <span class="o">*</span> <span class="n">i</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
             <span class="c1"># Calculate the sum of squares regression.</span>
             <span class="n">score</span> <span class="o">=</span> <span class="n">sum_of_squares_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">est_y</span><span class="p">)</span>
 
-            <span class="c1"># If the best score is yet to be updated (i.e. this is the first iteration) then set the current A, c and SSR to the best fit values.</span>
-            <span class="k">if</span> <span class="n">best_score</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># If the best score is yet to be updated (i.e. this is the first iteration)</span>
+            <span class="c1">#   then set the current A, c and SSR to the best fit values.</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">best_score</span><span class="p">:</span>
                 <span class="n">best_score</span> <span class="o">=</span> <span class="n">score</span>
                 <span class="n">best_fit</span> <span class="o">=</span> <span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
-            <span class="c1"># If the new SSR score is smaller than the current best, then update the best score and update the best fit to the current A and c.</span>
+            <span class="c1"># If the new SSR score is smaller than the current best,</span>
+            <span class="c1">#   then update the best score and update the best fit to the current A and c.</span>
             <span class="k">elif</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="n">best_score</span><span class="p">:</span>
                 <span class="n">best_score</span> <span class="o">=</span> <span class="n">score</span>
                 <span class="n">best_fit</span> <span class="o">=</span> <span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
@@ -530,19 +511,25 @@
 <span class="sd">    Finds the best exponential fit according to the sum of squares deviation of the form y = Ax^{-c}</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        x (list): The values of x in the distribution.</span>
-<span class="sd">        y (list): The values of y in the distribution.</span>
-<span class="sd">        A_min (int) (opt): The minimum value of A to be tested. Can be adjusted to find more accurate results. Default is 0.</span>
-<span class="sd">        A_max (int) (opt): The maximum value of A to be tested. Can be adjusted to find more accurate results. Default is 10000.</span>
-<span class="sd">        c_min (int) (opt): The minimum value of c to be tested. Can be adjusted to find more accurate results. Default is 0.</span>
-<span class="sd">        c_max (int) (opt): The maximum value of c to be tested. Can be adjusted to find more accurate results. Default is 12.5.</span>
-<span class="sd">        linspace_N (int) (opt): The number of values of A and c to be checked in the respective ranges. Default is 100.</span>
+<span class="sd">        x (list)                          : The values of x in the distribution.</span>
+<span class="sd">        y (list)                          : The values of y in the distribution.</span>
+<span class="sd">        A_min (:obj:`int`, optional)      : The minimum value of A to be tested.</span>
+<span class="sd">                                            Can be adjusted to find more accurate results. Default is 0.</span>
+<span class="sd">        A_max (:obj:`int`, optional)      : The maximum value of A to be tested.</span>
+<span class="sd">                                            Can be adjusted to find more accurate results. Default is 10000.</span>
+<span class="sd">        c_min (:obj:`int`, optional)      : The minimum value of c to be tested.</span>
+<span class="sd">                                            Can be adjusted to find more accurate results. Default is 0.</span>
+<span class="sd">        c_max (:obj:`int`, optional)      : The maximum value of c to be tested.</span>
+<span class="sd">                                            Can be adjusted to find more accurate results. Default is 12.5.</span>
+<span class="sd">        linspace_N (:obj:`int`, optional) : The number of values of A and c to be checked in the respective ranges.</span>
+<span class="sd">                                            Default is 100.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        best_fit (tuple): The coefficients A and c from the best power law approximation.</span>
-<span class="sd">        best_score (float): The sum of squares regression of this approximation.</span>
+<span class="sd">        (tuple) : A tuple containing a tuple and float, specifically:</span>
+<span class="sd">                    the coefficients A and c from the best power law approximation;</span>
+<span class="sd">                    and the sum of squares regression of this approximation.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Initialise empty variables for the best fit (i.e. best A and c) and the best SSR score.</span>
+    <span class="c1"># Initialise empty variables for the best fit (i.e. the best A and c) and the best SSR score.</span>
     <span class="n">best_fit</span> <span class="o">=</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="n">best_score</span> <span class="o">=</span> <span class="kc">None</span>
 
@@ -552,15 +539,17 @@
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">c_min</span><span class="p">,</span> <span class="n">c_max</span><span class="p">,</span> <span class="n">linspace_N</span><span class="p">):</span>
 
             <span class="c1"># Find the values of y according to the power law fractal model with parameters A and c.</span>
-            <span class="n">est_y</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="n">c</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+            <span class="n">est_y</span> <span class="o">=</span> <span class="p">[(</span><span class="o">-</span><span class="n">c</span> <span class="o">*</span> <span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="n">A</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
             <span class="c1"># Calculate the sum of squares regression.</span>
             <span class="n">score</span> <span class="o">=</span> <span class="n">sum_of_squares_error</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">est_y</span><span class="p">)</span>
 
-            <span class="c1"># If the best score is yet to be updated (i.e. this is the first iteration) then set the current A, c and SSR to the best fit values.</span>
-            <span class="k">if</span> <span class="n">best_score</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># If the best score is yet to be updated (i.e. this is the first iteration)</span>
+            <span class="c1">#   then set the current A, c and SSR to the best fit values.</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">best_score</span><span class="p">:</span>
                 <span class="n">best_score</span> <span class="o">=</span> <span class="n">score</span>
                 <span class="n">best_fit</span> <span class="o">=</span> <span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
-            <span class="c1"># If the new SSR score is smaller than the current best, then update the best score and update the best fit to the current A and c.</span>
+            <span class="c1"># If the new SSR score is smaller than the current best,</span>
+            <span class="c1">#   then update the best score and update the best fit to the current A and c.</span>
             <span class="k">elif</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="n">best_score</span><span class="p">:</span>
                 <span class="n">best_score</span> <span class="o">=</span> <span class="n">score</span>
                 <span class="n">best_fit</span> <span class="o">=</span> <span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
@@ -577,24 +566,35 @@
 <span class="sd">    Finds the best fit according to a given model by iteratively reducing the range of values checked for A and c.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        x (list): The values of x in the distribution.</span>
-<span class="sd">        y (list): The values of y in the distribution.</span>
-<span class="sd">        method (func): A function which finds the best fit to the given distribution according to a given model.</span>
-<span class="sd">        linspace_N (int) (opt): The number of values of A and c to be checked in the respective ranges. Default is 100.</span>
-<span class="sd">        A_min (int) (opt): The minimum value of A to be tested. Can be adjusted to find more accurate results. Default is 0.</span>
-<span class="sd">        A_max (int) (opt): The maximum value of A to be tested. Can be adjusted to find more accurate results. Default is 10000.</span>
-<span class="sd">        c_min (int) (opt): The minimum value of c to be tested. Can be adjusted to find more accurate results. Default is 0.</span>
-<span class="sd">        c_max (int) (opt): The maximum value of c to be tested. Can be adjusted to find more accurate results. Default is 12.5.</span>
-<span class="sd">        iter_num (int) (opt): The number of iterations to complete.</span>
+<span class="sd">        x (list)                          : The values of x in the distribution.</span>
+<span class="sd">        y (list)                          : The values of y in the distribution.</span>
+<span class="sd">        method (func)                     : A function which finds the best fit to the given distribution</span>
+<span class="sd">                                                according to a given model.</span>
+<span class="sd">        linspace_N (:obj:`int`, optional) : The number of values of A and c to be checked in the respective ranges.</span>
+<span class="sd">                                            Default is 100.</span>
+<span class="sd">        A_min (:obj:`int`, optional)      : The minimum value of A to be tested.</span>
+<span class="sd">                                            Can be adjusted to find more accurate results. Default is 0.</span>
+<span class="sd">        A_max (:obj:`int`, optional)      : The maximum value of A to be tested.</span>
+<span class="sd">                                            Can be adjusted to find more accurate results. Default is 10000.</span>
+<span class="sd">        c_min (:obj:`int`, optional)      : The minimum value of c to be tested.</span>
+<span class="sd">                                            Can be adjusted to find more accurate results. Default is 0.</span>
+<span class="sd">        c_max (:obj:`int`, optional)      : The maximum value of c to be tested.</span>
+<span class="sd">                                            Can be adjusted to find more accurate results. Default is 12.5.</span>
+<span class="sd">        iter_num (:obj:`int`, optional)   : The number of iterations to complete.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        best_fit (tuple): The coefficients A and c from the best approximation.</span>
-<span class="sd">        best_score (float): The sum of squares regression of this approximation.</span>
+<span class="sd">        (tuple) : A tuple containing a tuple and a float, specifically:</span>
+<span class="sd">            the coefficients A and c from the best approximation;</span>
+<span class="sd">            and the sum of squares regression of this approximation.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Find the current range of the intervals for A and c.</span>
     <span class="n">A_diff</span> <span class="o">=</span> <span class="n">A_max</span> <span class="o">-</span> <span class="n">A_min</span>
     <span class="n">c_diff</span> <span class="o">=</span> <span class="n">c_max</span> <span class="o">-</span> <span class="n">c_min</span>
+
+    <span class="c1"># Reset the variables for best fit and best score</span>
+    <span class="n">best_fit</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">best_score</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="c1"># Iterate as many times as dictated by the iter_num variable.</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iter_num</span><span class="p">):</span>
@@ -629,11 +629,8 @@
 <span class="sd">    Plots the distribution of the optimal number of boxes NB against the diameter of the boxes lB.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        lB (list): List of the values of lB.</span>
-<span class="sd">        NB (list): List of the corresponding values of NB.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        None</span>
+<span class="sd">        lB (list) : List of the values of lB.</span>
+<span class="sd">        NB (list) : List of the corresponding values of NB.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Plots distribution using matplotlib.</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lB</span><span class="p">,</span> <span class="n">NB</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#C00000&#39;</span><span class="p">)</span>
@@ -648,14 +645,11 @@
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.utilities.plot_loglog_lB_NB">[docs]</a>
 <span class="k">def</span> <span class="nf">plot_loglog_lB_NB</span><span class="p">(</span><span class="n">lB</span><span class="p">,</span> <span class="n">NB</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Plots the distribution of the optimal number of boxes NB against the diameter of the boxes lB on a log log scale.</span>
+<span class="sd">    Plots the distribution of the optimal number of boxes NB against the diameter of the boxes lB on a log-log scale.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        lB (list): List of the values of lB.</span>
-<span class="sd">        NB (list): List of the corresponding values of NB.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        None</span>
+<span class="sd">        lB (list) : List of the values of lB.</span>
+<span class="sd">        NB (list) : List of the corresponding values of NB.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Plots distribution on log log scale using matplotlib.</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">lB</span><span class="p">,</span> <span class="n">NB</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#C00000&#39;</span><span class="p">)</span>
@@ -673,14 +667,14 @@
 <span class="sd">    Plots a comparison of the best power law (fractal) and exponential (non-fractal) fit for a given distribution.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        lB (list): List of the values of lB.</span>
-<span class="sd">        NB (list): List of the corresponding values of NB.</span>
-<span class="sd">        exp_A (float): The optimal value of A according to the exponential fit.</span>
-<span class="sd">        exp_c (float): The optimal value of c according to the exponential fit.</span>
-<span class="sd">        exp_score (float): The sum of squares regression for the exponential best fit.</span>
-<span class="sd">        frac_A (float): The optimal value of A according to the power law fit.</span>
-<span class="sd">        frac_c (float): The optimal value of c according to the power law fit.</span>
-<span class="sd">        frac_score (float): The sum of squares regression for the power law best fit.</span>
+<span class="sd">        lB (list)          : List of the values of lB.</span>
+<span class="sd">        NB (list)          : List of the corresponding values of NB.</span>
+<span class="sd">        exp_A (float)      : The optimal value of A according to the exponential fit.</span>
+<span class="sd">        exp_c (float)      : The optimal value of c according to the exponential fit.</span>
+<span class="sd">        exp_score (float)  : The sum of squares regression for the exponential best fit.</span>
+<span class="sd">        frac_A (float)     : The optimal value of A according to the power law fit.</span>
+<span class="sd">        frac_c (float)     : The optimal value of c according to the power law fit.</span>
+<span class="sd">        frac_score (float) : The sum of squares regression for the power law best fit.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># The lists lB and NB need to be converted to numpy arrays.</span>
     <span class="n">lB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lB</span><span class="p">)</span>
@@ -701,8 +695,6 @@
     <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lB</span><span class="p">,</span> <span class="n">NB</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#000066&#39;</span><span class="p">)</span>
     <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lB</span><span class="p">,</span> <span class="n">est_NB_exp</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#C00000&#39;</span><span class="p">)</span>
 
-    <span class="c1"># fig.suptitle(&#39;Non-Fractal Network Model&#39;, fontsize=16) # Title the plot.</span>
-
     <span class="c1"># Find the maximum x and y values.</span>
     <span class="n">max_lB</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">lB</span><span class="p">)</span>
     <span class="n">max_NB</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">NB</span><span class="p">)</span>
@@ -712,14 +704,14 @@
     <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Power-Law Relation&#39;</span><span class="p">)</span>
     <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$N_B$&#39;</span><span class="p">)</span>
     <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.7</span> <span class="o">*</span> <span class="n">max_lB</span><span class="p">,</span> <span class="mf">0.95</span> <span class="o">*</span> <span class="n">max_NB</span><span class="p">,</span>
-                 <span class="sa">r</span><span class="s2">&quot;$SSR \approx $</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">frac_score</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)))</span>  <span class="c1"># Write the SSR score on the plot.</span>
+                 <span class="sa">r</span><span class="s2">&quot;$SSR \approx $</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">frac_score</span><span class="p">,</span> <span class="mi">4</span><span class="p">)))</span>  <span class="c1"># Write the SSR score on the plot.</span>
 
     <span class="c1"># Label the axes and title the subplot.</span>
     <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$\ell_B$&#39;</span><span class="p">)</span>
     <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Exponential Relation&#39;</span><span class="p">)</span>
     <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$N_B$&#39;</span><span class="p">)</span>
     <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.7</span> <span class="o">*</span> <span class="n">max_lB</span><span class="p">,</span> <span class="mf">0.95</span> <span class="o">*</span> <span class="n">max_NB</span><span class="p">,</span>
-                 <span class="sa">r</span><span class="s2">&quot;$SSR \approx $</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">exp_score</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)))</span>  <span class="c1"># Write the SSR score on the plot.</span>
+                 <span class="sa">r</span><span class="s2">&quot;$SSR \approx $</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">exp_score</span><span class="p">,</span> <span class="mi">4</span><span class="p">)))</span>  <span class="c1"># Write the SSR score on the plot.</span>
 
     <span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>  <span class="c1"># Add the legend.</span>
     <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span></div>
@@ -733,14 +725,14 @@
 <span class="sd">    Plots a comparison of the best power law (fractal) and exponential (non-fractal) fit for a given distribution.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        lB (list): List of the values of lB.</span>
-<span class="sd">        NB (list): List of the corresponding values of NB.</span>
-<span class="sd">        exp_A (float): The optimal value of A according to the exponential fit.</span>
-<span class="sd">        exp_c (float): The optimal value of c according to the exponential fit.</span>
-<span class="sd">        exp_score (float): The sum of squares regression for the exponential best fit.</span>
-<span class="sd">        frac_A (float): The optimal value of A according to the power law fit.</span>
-<span class="sd">        frac_c (float): The optimal value of c according to the power law fit.</span>
-<span class="sd">        frac_score (float): The sum of squares regression for the power law best fit.</span>
+<span class="sd">        lB (list)          : List of the values of lB.</span>
+<span class="sd">        NB (list)          : List of the corresponding values of NB.</span>
+<span class="sd">        exp_A (float)      : The optimal value of A according to the exponential fit.</span>
+<span class="sd">        exp_c (float)      : The optimal value of c according to the exponential fit.</span>
+<span class="sd">        exp_score (float)  : The sum of squares regression for the exponential best fit.</span>
+<span class="sd">        frac_A (float)     : The optimal value of A according to the power law fit.</span>
+<span class="sd">        frac_c (float)     : The optimal value of c according to the power law fit.</span>
+<span class="sd">        frac_score (float) : The sum of squares regression for the power law best fit.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">loglB</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">lB</span><span class="p">]</span>
     <span class="n">logNB</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">NB</span><span class="p">]</span>
@@ -766,8 +758,6 @@
     <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">loglB</span><span class="p">,</span> <span class="n">logNB</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#000066&#39;</span><span class="p">)</span>
     <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">loglB</span><span class="p">,</span> <span class="n">est_NB_exp</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#C00000&#39;</span><span class="p">)</span>
 
-    <span class="c1"># fig.suptitle(&#39;Non-Fractal Network Model&#39;, fontsize=16) # Title the plot.</span>
-
     <span class="c1"># Find the maximum x and y values.</span>
     <span class="n">max_lB</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">lB</span><span class="p">)</span>
     <span class="n">max_NB</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">NB</span><span class="p">)</span>
@@ -777,14 +767,14 @@
     <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Power-Law Relation&#39;</span><span class="p">)</span>
     <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$N_B$&#39;</span><span class="p">)</span>
     <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.7</span> <span class="o">*</span> <span class="n">max_lB</span><span class="p">,</span> <span class="mf">0.95</span> <span class="o">*</span> <span class="n">max_NB</span><span class="p">,</span>
-                 <span class="sa">r</span><span class="s2">&quot;$SSR \approx $</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">frac_score</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)))</span>  <span class="c1"># Write the SSR score on the plot.</span>
+                 <span class="sa">r</span><span class="s2">&quot;$SSR \approx $</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">frac_score</span><span class="p">,</span> <span class="mi">4</span><span class="p">)))</span>  <span class="c1"># Write the SSR score on the plot.</span>
 
     <span class="c1"># Label the axes and title the subplot.</span>
     <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$\ell_B$&#39;</span><span class="p">)</span>
     <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Exponential Relation&#39;</span><span class="p">)</span>
     <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$N_B$&#39;</span><span class="p">)</span>
     <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.7</span> <span class="o">*</span> <span class="n">max_lB</span><span class="p">,</span> <span class="mf">0.95</span> <span class="o">*</span> <span class="n">max_NB</span><span class="p">,</span>
-                 <span class="sa">r</span><span class="s2">&quot;$SSR \approx $</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">exp_score</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)))</span>  <span class="c1"># Write the SSR score on the plot.</span>
+                 <span class="sa">r</span><span class="s2">&quot;$SSR \approx $</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">exp_score</span><span class="p">,</span> <span class="mi">4</span><span class="p">)))</span>  <span class="c1"># Write the SSR score on the plot.</span>
 
     <span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>  <span class="c1"># Add the legend.</span>
     <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span></div>
@@ -798,21 +788,18 @@
 <span class="sd">    Displays the network with nodes coloured according to the box covering.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        G (networkx.Graph): The network to be analysed.</span>
-<span class="sd">        nodes_to_boxes (dict): A dictionary with nodes as keys and their corresponding boxes as values.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        None</span>
+<span class="sd">        G (igraph.Graph)    : The network to be analysed.</span>
+<span class="sd">        nodes_to_boxes (dict) : A dictionary with nodes as keys and their corresponding boxes as values.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">G</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">to_networkx</span><span class="p">()</span>
 
-    <span class="c1"># Initialise an empty colour map for the box covering visualiation.</span>
+    <span class="c1"># Initialise an empty colour map for the box covering visualisation.</span>
     <span class="n">colourmap</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="c1"># For each node, assign it the colour of its box ID.</span>
     <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">():</span>
-        <span class="n">colourmap</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nodes_to_boxes</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">node</span><span class="p">)])</span>
+        <span class="n">colourmap</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nodes_to_boxes</span><span class="p">[</span><span class="n">node</span><span class="p">])</span>
 
     <span class="c1"># If draw is True then display the graph with the colours indicating the box the node belongs to.</span>
     <span class="n">nx</span><span class="o">.</span><span class="n">draw_kamada_kawai</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="n">colourmap</span><span class="p">)</span>
@@ -827,20 +814,98 @@
 <span class="sd">    Puts graphs in a format readable to Gephi including attributes for the boxes found under box coverings.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        G (networkx.Graph): The network to be analysed.</span>
-<span class="sd">        nodes_to_boxes (dict): A dictionary with nodes as keys and their corresponding boxes as values.</span>
-<span class="sd">        file_path (str): The path for the gml file to be saved to.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        None</span>
+<span class="sd">        G (igraph.Graph)    : The network to be analysed.</span>
+<span class="sd">        nodes_to_boxes (dict) : A dictionary with nodes as keys and their corresponding boxes as values.</span>
+<span class="sd">        file_path (str)       : The path for the gml file to be saved to.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">H</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>  <span class="c1"># Create a copy of the network.</span>
 
     <span class="c1"># Assign to each node an attribute according to its box given under the box covering.</span>
-    <span class="n">nx</span><span class="o">.</span><span class="n">set_node_attributes</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">nodes_to_boxes</span><span class="p">,</span> <span class="s1">&#39;boxes&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">H</span><span class="o">.</span><span class="n">vs</span><span class="p">():</span>
+        <span class="n">H</span><span class="o">.</span><span class="n">vs</span><span class="p">()[</span><span class="n">node</span><span class="o">.</span><span class="n">index</span><span class="p">][</span><span class="s1">&#39;boxes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nodes_to_boxes</span><span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
 
     <span class="c1"># Write the graph including the box covering attributes to the file path.</span>
-    <span class="n">nx</span><span class="o">.</span><span class="n">write_gml</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">file_path</span><span class="p">)</span></div>
+    <span class="n">H</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;gml&#39;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="chi_squared_error">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.utilities.chi_squared_error">[docs]</a>
+<span class="k">def</span> <span class="nf">chi_squared_error</span><span class="p">(</span><span class="n">observed_y</span><span class="p">,</span> <span class="n">expected_y</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds the chi squared value using a true and model distribution.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        observed_y (list) : The true or measured distribution.</span>
+<span class="sd">        expected_y (list) : The model distribution to be compared.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (float) : The chi squared value.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">chi</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Initialise the sum as zero.</span>
+    <span class="c1"># Iterate for each pair of values in the true/model distributions.</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">observed_yi</span><span class="p">,</span> <span class="n">expected_yi</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">observed_y</span><span class="p">,</span> <span class="n">expected_y</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">expected_yi</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Add to the sum the square of the difference between the two distributions.</span>
+            <span class="n">chi</span> <span class="o">+=</span> <span class="p">(((</span><span class="n">observed_yi</span> <span class="o">-</span> <span class="n">expected_yi</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">expected_yi</span><span class="p">)</span>
+    <span class="c1"># Return the total sum of the squares.</span>
+    <span class="k">return</span> <span class="n">chi</span></div>
+
+
+
+<div class="viewcode-block" id="read_lB_NB_from_csv">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.utilities.read_lB_NB_from_csv">[docs]</a>
+<span class="k">def</span> <span class="nf">read_lB_NB_from_csv</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reads the lB-NB distribution from a csv file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filepath (str) : The filepath to the .csv file.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (tuple) : A tuple of two lists.</span>
+<span class="sd">                    The first contains all box diameters lB, the second contains the corresponding values of NB.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Find csv file.</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
+        <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">csvfile</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">count</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">lB</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">row</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">NB</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">row</span><span class="p">]</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># Return lists</span>
+    <span class="k">return</span> <span class="n">lB</span><span class="p">,</span> <span class="n">NB</span></div>
+
+
+
+<div class="viewcode-block" id="preprocess_network">
+<a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.utilities.preprocess_network">[docs]</a>
+<span class="k">def</span> <span class="nf">preprocess_network</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Preprocesses a network to simplify and take the giant component.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filepath (str)               : The filepath of the network .gml file.</span>
+<span class="sd">        save (:obj:`bool`, optional) : If True, saves the processed network to a new gml file.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        (igraph.Graph) : The processed network.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Find network</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">Graph</span><span class="o">.</span><span class="n">Load</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+    <span class="c1"># Remove multi-edges and self-loops</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span>
+    <span class="c1"># Find the giant component.</span>
+    <span class="n">components</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">connected_components</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;weak&#39;</span><span class="p">)</span>
+    <span class="n">giant_component</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">induced_subgraph</span><span class="p">(</span><span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">save</span><span class="p">:</span>
+        <span class="n">save_path</span> <span class="o">=</span> <span class="n">filepath</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.gml&#39;</span><span class="p">,</span> <span class="s1">&#39;_processed.gml&#39;</span><span class="p">)</span>
+        <span class="n">giant_component</span><span class="o">.</span><span class="n">write_gml</span><span class="p">(</span><span class="n">save_path</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">giant_component</span></div>
 
 </pre></div>
 

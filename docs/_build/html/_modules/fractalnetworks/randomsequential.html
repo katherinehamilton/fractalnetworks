@@ -35,6 +35,7 @@
 <span class="c1"># Mathematics modules</span>
 <span class="kn">import</span> <span class="nn">random</span>
 
+
 <div class="viewcode-block" id="random_sequential">
 <a class="viewcode-back" href="../../fractalnetworks.html#fractalnetworks.randomsequential.random_sequential">[docs]</a>
 <span class="k">def</span> <span class="nf">random_sequential</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">lB</span><span class="p">):</span>
@@ -42,12 +43,13 @@
 <span class="sd">    Implements the random sequential box covering algorithm.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        G (igraph.Graph): The network to be analysed.</span>
-<span class="sd">        lB (int): The diameter of the boxes.</span>
+<span class="sd">        G (igraph.Graph) : The network to be analysed.</span>
+<span class="sd">        lB (int)         : The diameter of the boxes.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        centres (list): A list of centre nodes found by the algorithm.</span>
-<span class="sd">        boxes (list): A list of lists, where each sublist is a box under the box-covering algorithm.</span>
+<span class="sd">        (tuple) : A tuple containing two lists, specifically:</span>
+<span class="sd">                    a list of centre nodes found by the algorithm;</span>
+<span class="sd">                    and a list of lists, where each sublist is a box under the box-covering algorithm.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Find the radius of the boxes</span>
     <span class="n">rB</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">lB</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
