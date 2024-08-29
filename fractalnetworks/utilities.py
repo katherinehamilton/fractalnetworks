@@ -317,6 +317,7 @@ def display_network(G, save_path=None, plot=True):
     # Plot the network
     fig, ax = plt.subplots()
     igraph.plot(G,
+                vertex_label=None,
                 vertex_size=10,
                 vertex_color='black',
                 edge_width=1,
@@ -713,7 +714,7 @@ def draw_box_covering(G, nodes_to_boxes):
 
     # For each node, assign it the colour of its box ID.
     for node in G.nodes():
-        colourmap.append(nodes_to_boxes[str(node)])
+        colourmap.append(nodes_to_boxes[node])
 
     # If draw is True then display the graph with the colours indicating the box the node belongs to.
     nx.draw_kamada_kawai(G, node_color=colourmap)
@@ -725,17 +726,18 @@ def export_to_gephi(G, nodes_to_boxes, file_path):
     Puts graphs in a format readable to Gephi including attributes for the boxes found under box coverings.
 
     Args:
-        G (networkx.Graph)    : The network to be analysed.
+        G (igraph.Graph)    : The network to be analysed.
         nodes_to_boxes (dict) : A dictionary with nodes as keys and their corresponding boxes as values.
         file_path (str)       : The path for the gml file to be saved to.
     """
     H = G.copy()  # Create a copy of the network.
 
     # Assign to each node an attribute according to its box given under the box covering.
-    nx.set_node_attributes(H, nodes_to_boxes, 'boxes')
+    for node in H.vs():
+        H.vs()[node.index]['boxes'] = nodes_to_boxes[node.index]
 
     # Write the graph including the box covering attributes to the file path.
-    nx.write_gml(H, file_path)
+    H.write(file_path, format='gml')
 
 
 def chi_squared_error(observed_y, expected_y):
