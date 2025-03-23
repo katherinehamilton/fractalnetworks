@@ -1,10 +1,15 @@
-"""This module contains code to generate Hub Attraction Dynamical Growth networks"""
+"""Functions to generate Hub Attraction Dynamical Growth networks"""
+
+# Network analysis modules
+import networkx as nx
 
 # Utility modules
 import itertools
+import os
+import random
 
 # Other module imports
-from .SHMmodel import *
+import SHMmodel
 
 
 def generate_HADG_model(m, a, b, T, n, save=False):
@@ -80,9 +85,9 @@ def HADG_iteration(G, m, a, b, T):
     # Iterate through each of the edges in the previous generation.
     for edge in edges:
         # Add m offspring to the source node of the edge.
-        G, source_offspring = add_m_offspring(G, edge[0], m)
+        G, source_offspring = SHMmodel.add_m_offspring(G, edge[0], m)
         # Add m offspring to the target node of the edge.
-        G, target_offspring = add_m_offspring(G, edge[1], m)
+        G, target_offspring = SHMmodel.add_m_offspring(G, edge[1], m)
 
         # Find the degree of the source node in the previous generation.
         deg_x = int(degrees[edge[0]])
@@ -95,11 +100,11 @@ def HADG_iteration(G, m, a, b, T):
         #    rewire the edge with probability = a.
         if deg_x / deg_max > T and deg_y / deg_max > T:
             if random.random() <= a:
-                rewire_offspring(G, edge, source_offspring, target_offspring)
+                SHMmodel.rewire_offspring(G, edge, source_offspring, target_offspring)
         # Otherwise rewire the edge with probability b.
         else:
             if random.random() <= b:
-                rewire_offspring(G, edge, source_offspring, target_offspring)
+                SHMmodel.rewire_offspring(G, edge, source_offspring, target_offspring)
 
         # Update the dictionary of new neighbours for the source node.
         source_neighbours = new_node_dict[edge[0]].copy()

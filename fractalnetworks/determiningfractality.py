@@ -1,9 +1,15 @@
-"""This module contains the functions needed to determine if a given network is fractal or non-fractal"""
+"""Methods to determine if a given network is fractal or non-fractal"""
 
-from .maximumexcludedmassburning import *
-from .utilities import *
+# Other module imports
+import maximumexcludedmassburning 
+import utilities
 from .greedyalgorithm import *
 
+# Mathematics modules imports
+import math
+import matplotlib.pyplot as plt
+
+# Other imports
 from tqdm import tqdm
 from sklearn.linear_model import LinearRegression
 
@@ -64,7 +70,7 @@ def calculate_lB_NB_dist(G, diam=None, normalise=False, lB_min=2, save_path=None
                 N = min(previous_N, N)
         # If l is odd, use the accelerated MEMB method.
         else:
-            centres = accelerated_MEMB(G, l)
+            centres = maximumexcludedmassburning.accelerated_MEMB(G, l)
             N = len(centres)
         # Add the new value of NB to the list
         NB.append(N)
@@ -103,7 +109,7 @@ def is_fractal(results_filepath, plot=False, verbose=False, save_path=None, p_li
         p_list = [1.0]
 
     # Read the lB-NB distribution from the csv file.
-    lB, NB = read_lB_NB_from_csv(results_filepath)
+    lB, NB = utilities.read_lB_NB_from_csv(results_filepath)
 
     # Find the logarithms of the box diameter lB and the number of boxes NB.
     loglB = [math.log(l) for l in lB]

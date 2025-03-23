@@ -1,8 +1,8 @@
-"""This module analyses the properties of known network models."""
+"""Analyses the properties of known network models."""
 
 # Other function imports
-from .modelgenerator import *
-from .utilities import *
+import modelgenerator
+import utilities
 
 # Mathematics modules
 import random
@@ -55,7 +55,7 @@ def check_SHM_no_of_edges(m, n):
     """
     # Generate an SHM network.
     # The number of edges is independent of the probability p, so p is chosen randomly on the interval [0,1]
-    G = generate_SHM_model(m, random.random(), n, save=False)
+    G = modelgenerator.generate_SHM_model(m, random.random(), n, save=False)
 
     eG = len(G.edges())  # Empirical number of edges
     est_eG = SHM_no_of_edges(m, n)  # Estimated number of edges
@@ -77,7 +77,7 @@ def check_SHM_no_of_nodes(m, n):
     """
     # Generate an SHM network.
     # The number of nodes is independent of the probability p, so p is chosen randomly on the interval [0,1]
-    G = generate_SHM_model(m, random.random(), n, save=False)
+    G = modelgenerator.generate_SHM_model(m, random.random(), n, save=False)
 
     N = len(G.nodes())  # Empirical number of nodes
     est_N = SHM_no_of_nodes(m, n)  # Estimated number of nodes
@@ -104,7 +104,7 @@ def SHM_p0_degree_prob(m, d, n):
         return 0
 
     # All degrees in an SHM network with p=0 are powers of (1+m)
-    power, is_power = exact_log(d, (1 + m))  # Check if d is a power of (1+m) and find the exponent.
+    power, is_power = utilities.exact_log(d, (1 + m))  # Check if d is a power of (1+m) and find the exponent.
 
     # If d is a power, then we can find P(d).
     if is_power:
@@ -143,7 +143,7 @@ def check_SHM_p0_degree_prob(m, d, n):
         (bool) : True if the two values agree, and False if they disagree.
     """
     # Generate an SHM network with parameters m, n, p=0.
-    G = generate_SHM_model(m, 0, n, save=False)
+    G = modelgenerator.generate_SHM_model(m, 0, n, save=False)
 
     # Find a list of the degrees in the network.
     degrees = [deg[1] for deg in G.degree()]
@@ -202,7 +202,7 @@ def check_SHM_p0_degree_dist(m, n):
         (bool) : True if the two distributions agree, and False if they disagree.
     """
     # Generate an SHM network with parameters m, N, p=0.
-    G = generate_SHM_model(m, 0, n, save=False)
+    G = modelgenerator.generate_SHM_model(m, 0, n, save=False)
     # Find the degree distribution.
     degrees = [deg[1] for deg in G.degree()]
 
@@ -245,8 +245,8 @@ def SHM_p1_degree_prob(m, d, n):
         return 0
 
     # All degrees in an SHM network are powers of m or 2 times a power of m.
-    power, is_power = exact_log(d, m)  # Check if d is a power of m, and find the exponent.
-    double_power, is_double_power = exact_log(d/2, m)  # Check if 1/2 d is a power of m, and find the exponent.
+    power, is_power = utilities.exact_log(d, m)  # Check if d is a power of m, and find the exponent.
+    double_power, is_double_power = utilities.exact_log(d/2, m)  # Check if 1/2 d is a power of m, and find the exponent.
 
     # The only case where d and 1/2 are both powers of m is when m = 2.
     # In this case, the calculation of the degree distribution is different.
@@ -329,7 +329,7 @@ def check_SHM_p1_degree_prob(m, d, n):
         (bool) : True if the two values agree, and False if they disagree.
     """
     # Generate an SHM network with parameters m, N, p=1.
-    G = generate_SHM_model(m, 1, n, save=False)
+    G = modelgenerator.generate_SHM_model(m, 1, n, save=False)
 
     # Find a list of the degrees in the network.
     degrees = [deg[1] for deg in G.degree()]
@@ -412,7 +412,7 @@ def check_SHM_p1_degree_dist(m, n):
         (bool) : True if the two distributions agree, and False if they disagree.
     """
     # Generate an SHM network with parameters m, N, p=1.
-    G = generate_SHM_model(m, 1, n, save=False)
+    G = modelgenerator.generate_SHM_model(m, 1, n, save=False)
     # Find the degree distribution.
     degrees = [deg[1] for deg in G.degree()]
 
@@ -465,7 +465,7 @@ def check_SHM_p0_lambda(m_max, n, plot=False, verbose=False):
         # Find the degree distribution
         degrees, degree_dist = SHM_p0_degree_dist(m, n)
         # Fit a power law curve to the distribution and find the parameters characterising the best fit
-        best_fit, _ = find_best_power_law_fit(degrees, degree_dist, A_min=0.5, A_max=1.2, c_min=1, c_max=1.5,
+        best_fit, _ = utilities.find_best_power_law_fit(degrees, degree_dist, A_min=0.5, A_max=1.2, c_min=1, c_max=1.5,
                                               linspace_N=1001)
         # Calculate the estimated value of lambda according to analytical results.
         est_lambda = math.log(1 + 2 * m) / math.log(1 + m)
@@ -544,7 +544,7 @@ def check_HADG_no_of_edges(m, n):
     """
     # Generate an SHM network.
     # The number of edges is independent of the parameters a, b and T, so they are chosen randomly on the interval [0,1]
-    G = generate_HADG_model(m, random.random(), random.random(), random.random(), n, save=False)
+    G = modelgenerator.generate_HADG_model(m, random.random(), random.random(), random.random(), n, save=False)
 
     eG = len(G.edges())  # Empirical number of edges
     est_eG = HADG_no_of_edges(m, n)  # Estimated number of edges
@@ -566,7 +566,7 @@ def check_HADG_no_of_nodes(m, n):
     """
     # Generate an SHM network.
     # The number of edges is independent of the parameters a, b and T, so they are chosen randomly on the interval [0,1]
-    G = generate_HADG_model(m, random.random(), random.random(), random.random(), n, save=False)
+    G = modelgenerator.generate_HADG_model(m, random.random(), random.random(), random.random(), n, save=False)
 
     N = len(G.nodes())  # Empirical number of edges
     est_N = HADG_no_of_nodes(m, n)  # Estimated number of edges
@@ -622,7 +622,7 @@ def check_uv_flower_no_of_edges(u, v, n):
         (bool) : True if the analytical and empirical value agree, False otherwise.
     """
     # Generate a (u,v)-flower network
-    G = generate_uv_flower(u, v, n)
+    G = modelgenerator.generate_uv_flower(u, v, n)
 
     eG = len(G.edges())  # Empirical number of edges
     est_eG = uv_flower_no_of_edges(u, v, n)  # Estimated number of edges
@@ -644,7 +644,7 @@ def check_uv_flower_no_of_nodes(u, v, n):
         (bool) : True if the analytical and empirical value agree, False otherwise.
     """
     # Generate a (u,v)-flower network.
-    G = generate_uv_flower(u, v, n)
+    G = modelgenerator.generate_uv_flower(u, v, n)
 
     N = len(G.nodes())  # Empirical number of edges
     est_N = uv_flower_no_of_nodes(u, v, n)  # Estimated number of edges

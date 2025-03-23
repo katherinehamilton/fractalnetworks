@@ -1,4 +1,9 @@
+"""Functions to generate nested Barabasi-Albert networks."""
+
+# Network analysis modules
 import networkx as nx
+
+# Utility module imports
 import random
 import os
 

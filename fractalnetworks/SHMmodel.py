@@ -1,4 +1,4 @@
-"""This module contains code to generate Song-Havlin-Makse networks"""
+"""Functions to generate Song-Havlin-Makse networks"""
 
 # Network analysis modules
 import networkx as nx

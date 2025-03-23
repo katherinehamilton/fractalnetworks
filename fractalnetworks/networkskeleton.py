@@ -1,6 +1,6 @@
-"""This module includes functions to find and analyse the network's skeleton"""
+"""Functions to find and analyse the network's skeleton"""
 
-from .betweennesscentrality import *
+import betweennesscentrality
 
 
 def find_skel(G, ebcs=None):
@@ -19,7 +19,7 @@ def find_skel(G, ebcs=None):
 
     # Find the edge betweenness centralities
     if not ebcs:
-        ebcs = find_edge_betweenness_centralities(G)
+        ebcs = betweennesscentrality.find_edge_betweenness_centralities(G)
 
     # Create a list of tuples of the form (edge ID, edge betweenness centrality)
     edges_to_ebcs = [(G.es()[i].tuple, ebcs[i]) for i in range(G.ecount())]
@@ -94,7 +94,7 @@ def find_skeleton_edge_betweenness(G, H=None, ebcs=None):
 
     # Find the betweenness centrality distribution of the network.
     if not ebcs:
-        ebcs = find_edge_betweenness_centralities(G)
+        ebcs = betweennesscentrality.find_edge_betweenness_centralities(G)
 
     # Find the IDs of edges in the skeleton
     skeleton_edges = find_skeleton_eids(G, H=H, ebcs=ebcs)

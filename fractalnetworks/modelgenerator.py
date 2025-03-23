@@ -1,7 +1,7 @@
-"""This module contains functions to generate instances of known fractal network models"""
+"""Functions to generate instances of known fractal network models"""
 
 # Song-Havlin-Makse Model and Hub Attraction Dynamical Growth Model
-from .HADGmodel import *
+import HADGmodel
 
 # (u,v)-Flowers
 from .uvflowermodel import *

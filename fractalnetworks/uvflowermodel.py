@@ -1,4 +1,4 @@
-"""This module contains functions to generate (u,v)-flowers"""
+"""Functions to generate (u,v)-flowers"""
 
 # Network analysis modules
 import networkx as nx

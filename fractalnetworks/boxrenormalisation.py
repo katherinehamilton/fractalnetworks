@@ -1,16 +1,20 @@
-"""This module contains the code to renormalise a network using a box covering"""
+"""Functions to renormalise a network using a box covering"""
 
 # Network analysis modules
 import igraph
+from igraph import Graph
+import networkx as nx
 
 # Utility modules
 import os
 import datetime
 import operator
+import random
+import matplotlib.pyplot as plt
 
 # Other module imports
-from .maximumexcludedmassburning import *
-from .utilities import *
+import maximumexcludedmassburning 
+import utilities
 
 
 def find_central_distance(G, centres):
@@ -186,7 +190,7 @@ def renormalise_graph(G, boxes, nodes_to_boxes, draw=False):
     return renormalisedG
 
 
-def find_boxes_and_renormalise_iteration(G, lB, iter_count=1, filepath="graph", method=accelerated_MEMB, draw=False):
+def find_boxes_and_renormalise_iteration(G, lB, iter_count=1, filepath="graph", method=maximumexcludedmassburning.accelerated_MEMB, draw=False):
     """
     Performs one iteration of box covering and renormalisation.
     Stores all results in new files.
@@ -245,7 +249,7 @@ def find_boxes_and_renormalise_iteration(G, lB, iter_count=1, filepath="graph", 
         gephi_dict[node] = node
 
     # Export the renormalised graph to gephi.
-    export_to_gephi(renormalisedG, gephi_dict, renormalised_file_path)
+    utilities.export_to_gephi(renormalisedG, gephi_dict, renormalised_file_path)
 
     # If draw is True then display the graphs.
     if draw:
@@ -255,7 +259,7 @@ def find_boxes_and_renormalise_iteration(G, lB, iter_count=1, filepath="graph", 
     return renormalisedG
 
 
-def renormalise_iteratively(filepath, lB, method=accelerated_MEMB, draw=False):
+def renormalise_iteratively(filepath, lB, method=maximumexcludedmassburning.accelerated_MEMB, draw=False):
     """
     Iteratively finds the box covering and then renormalises the network until only one node is left.
 

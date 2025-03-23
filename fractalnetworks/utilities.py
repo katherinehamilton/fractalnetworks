@@ -17,7 +17,6 @@ import csv
 
 # Reading Graphs
 
-
 def read_graph(filepath):
     """
     Checks the filetype and calls the correct function to read the graph.

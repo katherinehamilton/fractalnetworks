@@ -1,8 +1,13 @@
-"""This module contains functions to analyse the properties of networks"""
+"""Functions to analyse the properties of networks"""
 
 # Mathematics modules
-from .hubrepulsion import *
+import numpy as np
 
+# Utility modules
+import itertools
+
+# Other module imports
+import hubrepulsion
 
 def summarise_graph(G, skip_diam=False, skip_aspl=False):
     """
@@ -53,7 +58,7 @@ def find_distances(G):
     return diam, aspl
 
 
-def mean_hub_distance(G, hubs=None, hub_method=identify_hubs, normalised=False, degrees=None):
+def mean_hub_distance(G, hubs=None, hub_method=hubrepulsion.identify_hubs, normalised=False, degrees=None):
     """
     Finds the mean distance between hubs.
     The normalised mean distance is the mean distance between hubs over
@@ -102,7 +107,7 @@ def mean_hub_distance(G, hubs=None, hub_method=identify_hubs, normalised=False, 
     return mean_distance, hub_distances
 
 
-def hub_distance_distribution(G, hubs=None, hub_method=identify_hubs, degrees=None):
+def hub_distance_distribution(G, hubs=None, hub_method=hubrepulsion.identify_hubs, degrees=None):
     """
     Find the distribution of distances between hubs.
 

@@ -1,4 +1,4 @@
-"""This file contains function to analyse the effect of hub-hub repulsion in fractal networks."""
+"""Functions to analyse the effect of hub-hub repulsion in fractal networks."""
 
 # Mathematics modules
 import numpy as np

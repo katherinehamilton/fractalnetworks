@@ -1,4 +1,4 @@
-"""This module contains MEMB algorithms"""
+"""Maximum Excluded Mass Burning algorithms"""
 
 # Mathematics modules
 import random

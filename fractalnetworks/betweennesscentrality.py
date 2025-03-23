@@ -1,13 +1,14 @@
 """
-This module contains functions to analyse the betweenness centralities of nodes and edges in fractal networks.
+Functions to analyse the betweenness centralities of nodes and edges in fractal networks.
 """
 
 # Other module imports
-from .hubrepulsion import *
+import hubrepulsion 
 
-# Mathematics modules
+# Mathematics module imports
 import matplotlib.pyplot as plt
 import pandas as pd
+import numpy as np
 
 
 # Calculating and visualising degree and node betweenness centrality distributions.
@@ -32,7 +33,7 @@ def find_betweenness_centralities(G):
     # Calculate the betweenness centralities.
     bc = G.betweenness()
 
-    # Normalise the betweenness centralities
+    # Normalise the betweenness centralities.
     bc = [v * normalising_constant for v in bc]
 
     return bc
@@ -55,7 +56,7 @@ def plot_degree_distribution(G, degrees=None, save_path=None, plot=True):
 
     # Find the degree distribution of the network.
     if not degrees:
-        degrees = find_degree_distribution(G)
+        degrees = hubrepulsion.find_degree_distribution(G)
 
     # Plot a degree distribution histogram
     plt.hist(degrees, bins=100, color="navy")
@@ -139,7 +140,7 @@ def calc_betweenness_degree_correlation(G, bcs=None, degrees=None):
 
     # Find the degree distribution of the network.
     if not degrees:
-        degrees = find_degree_distribution(G)
+        degrees = hubrepulsion.find_degree_distribution(G)
 
     # Convert both to a Pandas Series
     bc_series = pd.Series(bcs)
@@ -149,7 +150,7 @@ def calc_betweenness_degree_correlation(G, bcs=None, degrees=None):
     return bc_series.corr(dd_series)
 
 
-def calc_betweenness_degree_correlation_non_hubs(G, hubs=None, hub_method=identify_hubs, bcs=None, degrees=None):
+def calc_betweenness_degree_correlation_non_hubs(G, hubs=None, hub_method=hubrepulsion.identify_hubs, bcs=None, degrees=None):
     """
     Calculates the Pearson correlation coefficient for the degree and betweenness centrality of non-hub nodes.
 
@@ -179,7 +180,7 @@ def calc_betweenness_degree_correlation_non_hubs(G, hubs=None, hub_method=identi
 
     # Find the degree distribution of the network.
     if not degrees:
-        degrees = find_degree_distribution(G)
+        degrees = hubrepulsion.find_degree_distribution(G)
 
     # Only consider the betweenness centrality for non hubs
     filtered_bc = [bcs[i] for i in range(G.vcount()) if i not in hubs]
@@ -194,7 +195,7 @@ def calc_betweenness_degree_correlation_non_hubs(G, hubs=None, hub_method=identi
     return bc_series.corr(dd_series)
 
 
-def calc_betweenness_degree_correlation_hubs(G, hubs=None, hub_method=identify_hubs, bcs=None, degrees=None):
+def calc_betweenness_degree_correlation_hubs(G, hubs=None, hub_method=hubrepulsion.identify_hubs, bcs=None, degrees=None):
     """
     Calculates the Pearson correlation coefficient for the degree and betweenness centrality of the hubs in a network.
 
@@ -224,7 +225,7 @@ def calc_betweenness_degree_correlation_hubs(G, hubs=None, hub_method=identify_h
 
     # Find the degree distribution of the network.
     if not degrees:
-        degrees = find_degree_distribution(G)
+        degrees = hubrepulsion.find_degree_distribution(G)
 
     # Only consider the betweenness centrality for non hubs
     filtered_bc = [bcs[i] for i in range(G.vcount()) if i in hubs]
@@ -399,7 +400,7 @@ def edge_betweenness_degree_correlation(G, degrees=None, ebcs=None):
 
     # Find the degrees of nodes
     if not degrees:
-        degrees = find_degree_distribution(G)
+        degrees = hubrepulsion.find_degree_distribution(G)
 
     # Find the edge betweenness centralities
     if not ebcs:
@@ -438,7 +439,7 @@ def edge_betweenness_degree_correlation(G, degrees=None, ebcs=None):
     return edge_bcs_series.corr(node_degrees_series)
 
 
-def find_hub_betweenness(G, hubs=None, hub_method=identify_hubs, bcs=None):
+def find_hub_betweenness(G, hubs=None, hub_method=hubrepulsion.identify_hubs, bcs=None):
     """
     Finds lists of betweenness centralities for the hub and non-hub nodes in the network.
 
@@ -486,7 +487,7 @@ def find_hub_betweenness(G, hubs=None, hub_method=identify_hubs, bcs=None):
 
 # Analysing the paths between hubs.
 
-def hub_hub_path_betweenness(G, bcs=None, degrees=None, hubs=None, hub_method=identify_hubs, hub_hub_path_nodes=None):
+def hub_hub_path_betweenness(G, bcs=None, degrees=None, hubs=None, hub_method=hubrepulsion.identify_hubs, hub_hub_path_nodes=None):
     """
     Analyses the betweenness of nodes on the paths between hubs.
     Returns a list of the betweenness centralities of these nodes.
@@ -520,14 +521,14 @@ def hub_hub_path_betweenness(G, bcs=None, degrees=None, hubs=None, hub_method=id
 
         # Find the degree distribution of the network.
         if not degrees:
-            degrees = find_degree_distribution(G)
+            degrees = hubrepulsion.find_degree_distribution(G)
 
         # Find the hubs of the network
         if not hubs:
             hubs = hub_method(G, degrees=degrees)
 
         # Find the hub path nodes and their occurrences
-        hub_hub_path_nodes = find_hub_hub_path_nodes(G, hubs=hubs, hub_method=hub_method, degrees=degrees)
+        hub_hub_path_nodes = hubrepulsion.find_hub_hub_path_nodes(G, hubs=hubs, hub_method=hub_method, degrees=degrees)
 
     # Find lists of betweenness centralities for the hub path nodes
     bcs_list = [bcs[i] for i in hub_hub_path_nodes]
@@ -536,7 +537,7 @@ def hub_hub_path_betweenness(G, bcs=None, degrees=None, hubs=None, hub_method=id
     return bcs_list
 
 
-def hub_hub_path_betweenness_by_occurrence(G, bcs=None, degrees=None, hubs=None, hub_method=identify_hubs,
+def hub_hub_path_betweenness_by_occurrence(G, bcs=None, degrees=None, hubs=None, hub_method=hubrepulsion.identify_hubs,
                                            hub_hub_path_nodes=None, occurrences=None):
     """
     Analyses the betweenness of nodes on the paths between hubs with the number of their occurrences.
@@ -577,14 +578,14 @@ def hub_hub_path_betweenness_by_occurrence(G, bcs=None, degrees=None, hubs=None,
 
         # Find the degree distribution of the network.
         if not degrees:
-            degrees = find_degree_distribution(G)
+            degrees = hubrepulsion.find_degree_distribution(G)
 
         # Find the hubs of the network
         if not hubs:
             hubs = hub_method(G, degrees=degrees)
 
         # Find the hub path nodes and their occurrences
-        hub_hub_path_nodes, occurrences = find_hub_hub_path_node_occurrences(G, hubs=hubs, hub_method=hub_method,
+        hub_hub_path_nodes, occurrences = hubrepulsion.find_hub_hub_path_node_occurrences(G, hubs=hubs, hub_method=hub_method,
                                                                              degrees=degrees)
 
     # Find lists of the occurrences and betweenness centralities
